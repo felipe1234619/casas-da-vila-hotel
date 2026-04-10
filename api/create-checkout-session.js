@@ -1,7 +1,6 @@
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.mk_1TKkPsGmycrlyOxTnGATFySm);
-
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 function getBaseUrl(req) {
   const proto =
     req.headers['x-forwarded-proto'] ||
