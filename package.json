@@ -1,0 +1,8 @@
+{
+  "name": "casas-da-vila-hotel",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "stripe": "^16.10.0"
+  }
+}
