@@ -1,0 +1,125 @@
+.heroHome{
+  min-height:92svh;
+}
+
+.heroHome .heroGrid{
+  min-height:calc(92svh - var(--header-h) - 18px);
+}
+
+.heroHomeTitle{
+  max-width:780px;
+}
+
+.heroHomeText{
+  max-width:620px;
+}
+
+.eyebrowLight{
+  color:rgba(255,255,255,0.72);
+}
+
+.sectionAfterHero{
+  margin-top:-24px;
+  padding-top:96px;
+}
+
+.sectionHeadNarrow{
+  max-width:920px;
+}
+
+.cardGridHome .card{
+  min-height:100%;
+}
+
+.cardGridHome .cardMedia{
+  aspect-ratio: 4 / 3.2;
+}
+
+.cardGridHome .cardBody{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.sectionBooking{
+  padding-top:80px;
+  padding-bottom:96px;
+}
+
+.splitBooking{
+  gap:42px;
+}
+
+.bookingCopy{
+  max-width:620px;
+}
+
+.bookingPanelHome{
+  padding:30px;
+}
+
+.bookingPreviewBtn{
+  width:100%;
+}
+
+.sectionClosing{
+  padding-top:0;
+  padding-bottom:72px;
+}
+
+.closingPanel{
+  padding:42px;
+  border-radius:32px;
+}
+
+.closingPanel .lead{
+  max-width:860px;
+}
+
+@media (max-width: 1100px){
+  .heroHome{
+    min-height:auto;
+  }
+
+  .heroHome .heroGrid{
+    min-height:calc(88svh - var(--header-h) - 18px);
+  }
+
+  .sectionAfterHero{
+    margin-top:0;
+    padding-top:84px;
+  }
+
+  .splitBooking{
+    gap:28px;
+  }
+}
+
+@media (max-width: 760px){
+  .heroHome .heroGrid{
+    min-height:calc(84svh - var(--header-h) - 18px);
+    padding-bottom:30px;
+  }
+
+  .heroHomeTitle{
+    max-width:none;
+  }
+
+  .sectionAfterHero{
+    padding-top:64px;
+  }
+
+  .sectionBooking{
+    padding-top:56px;
+    padding-bottom:64px;
+  }
+
+  .bookingPanelHome{
+    padding:22px;
+  }
+
+  .closingPanel{
+    padding:26px;
+    border-radius:24px;
+  }
+}

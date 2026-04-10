@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contato | Casas da Vila</title>
+  <meta
+    name="description"
+    content="Entre em contato com as Casas da Vila em Trancoso para reservas, dúvidas e informações sobre a estadia."
+  />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="/assets/css/motion.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <style>
+    .contactHero{
+      position:relative;
+      min-height:68svh;
+      padding-top:calc(var(--header-h) + 18px);
+      overflow:hidden;
+    }
+
+    .contactHeroBg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .contactHeroBg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .contactHeroOverlay{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(24,20,16,0.54) 0%, rgba(24,20,16,0.22) 42%, rgba(24,20,16,0.10) 100%),
+        linear-gradient(180deg, rgba(255,244,228,0.06) 0%, rgba(18,16,14,0.22) 100%);
+    }
+
+    .contactHeroGrid{
+      position:relative;
+      z-index:2;
+      width:min(var(--container), calc(100% - 32px));
+      min-height:calc(68svh - var(--header-h) - 18px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:40px;
+      align-items:end;
+      padding-bottom:34px;
+    }
+
+    .contactHeroContent{
+      max-width:780px;
+    }
+
+    .contactHeroEyebrow{
+      color:rgba(255,255,255,0.72);
+    }
+
+    .contactHeroTitle{
+      color:#fff;
+      text-shadow:0 10px 30px rgba(0,0,0,0.18);
+      max-width:760px;
+    }
+
+    .contactHeroText{
+      margin:22px 0 0;
+      max-width:620px;
+      font-size:18px;
+      line-height:1.8;
+      color:rgba(255,255,255,0.88);
+    }
+
+    .contactHeroCard{
+      max-width:360px;
+      margin-left:auto;
+      padding:24px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.46);
+      box-shadow:var(--shadow-lg);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    .contactHeroCard .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .contactHeroCard p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.74;
+    }
+
+    .contactMain{
+      padding-top:84px;
+      padding-bottom:84px;
+    }
+
+    .contactGrid{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:24px;
+      align-items:start;
+    }
+
+    .contactPanel,
+    .contactInfoPanel{
+      padding:34px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .contactPanel{
+      display:grid;
+      gap:20px;
+    }
+
+    .contactPanel .lead{
+      max-width:760px;
+    }
+
+    .contactMethods{
+      display:grid;
+      gap:16px;
+      margin-top:6px;
+    }
+
+    .contactMethod{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      padding:20px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.72);
+      border:1px solid rgba(92,71,54,0.08);
+    }
+
+    .contactMethodLabel{
+      display:block;
+      margin-bottom:8px;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--text-soft);
+    }
+
+    .contactMethodValue{
+      font-family:var(--font-serif);
+      font-size:28px;
+      line-height:1.08;
+      color:var(--text);
+      word-break:break-word;
+    }
+
+    .contactMethodText{
+      margin:8px 0 0;
+      color:var(--text-soft);
+      line-height:1.72;
+      max-width:520px;
+    }
+
+    .contactMethodAction{
+      flex:0 0 auto;
+    }
+
+    .contactInfoPanel{
+      display:grid;
+      gap:18px;
+    }
+
+    .contactInfoBlock{
+      padding:22px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.68);
+      border:1px solid rgba(92,71,54,0.08);
+    }
+
+    .contactInfoBlock .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .contactInfoBlock p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.78;
+    }
+
+    .contactNote{
+      padding-top:0;
+      padding-bottom:72px;
+    }
+
+    .contactNotePanel{
+      padding:42px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .contactNotePanel .lead{
+      max-width:860px;
+    }
+
+    @media (max-width: 1100px){
+      .contactHeroGrid,
+      .contactGrid{
+        grid-template-columns:1fr;
+      }
+
+      .contactHeroCard{
+        margin-left:0;
+        max-width:460px;
+      }
+    }
+
+    @media (max-width: 760px){
+      .contactHero{
+        min-height:auto;
+      }
+
+      .contactHeroGrid{
+        min-height:calc(70svh - var(--header-h) - 18px);
+        gap:24px;
+        padding-bottom:26px;
+      }
+
+      .contactHeroText{
+        font-size:17px;
+        line-height:1.74;
+      }
+
+      .contactHeroCard,
+      .contactPanel,
+      .contactInfoPanel,
+      .contactInfoBlock,
+      .contactMethod,
+      .contactNotePanel{
+        padding:22px;
+        border-radius:24px;
+      }
+
+      .contactMain{
+        padding-top:60px;
+        padding-bottom:64px;
+      }
+
+      .contactMethod{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .contactMethodAction .btn{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main>
+
+    <section class="contactHero">
+      <div class="contactHeroBg">
+        <img src="/assets/img/home-jardim.jpg" alt="Contato Casas da Vila" />
+        <div class="contactHeroOverlay"></div>
+      </div>
+
+      <div class="contactHeroGrid">
+        <div class="contactHeroContent" data-reveal="left">
+          <p class="eyebrow contactHeroEyebrow shimmerLine">Casas da Vila • Contato</p>
+
+          <h1 class="display contactHeroTitle">
+            Fale conosco<br>
+            sobre a sua estadia<br>
+            em Trancoso.
+          </h1>
+
+          <p class="contactHeroText">
+            Para reservas, dúvidas e informações gerais, nossa equipe pode ajudar por e-mail ou
+            WhatsApp, sempre de forma direta e acolhedora.
+          </p>
+        </div>
+
+        <div class="contactHeroCard heroFloat" data-reveal="right">
+          <p class="eyebrow">Atendimento</p>
+          <p>
+            Se quiser, você pode entrar em contato antes da reserva para esclarecer detalhes sobre
+            casas, período da estadia, disponibilidade e condições gerais.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contactMain">
+      <div class="wrap">
+        <div class="contactGrid">
+
+          <div class="contactPanel" data-reveal="left">
+            <div>
+              <p class="eyebrow">Canais</p>
+              <h2 class="h2">Entre em contato pelo canal que preferir</h2>
+              <p class="lead mt-16">
+                Estamos disponíveis para apoiar sua reserva, esclarecer dúvidas e orientar sua chegada
+                e estadia nas Casas da Vila.
+              </p>
+            </div>
+
+            <div class="contactMethods">
+
+              <div class="contactMethod">
+                <div>
+                  <span class="contactMethodLabel">E-mail</span>
+                  <div class="contactMethodValue">casasdavila@casasdavila.com</div>
+                  <p class="contactMethodText">
+                    Ideal para consultas gerais, informações sobre a estadia e pedidos que não exigem
+                    resposta imediata.
+                  </p>
+                </div>
+
+                <div class="contactMethodAction">
+                  <a class="btn btnGhost" href="mailto:casasdavila@casasdavila.com">Enviar e-mail</a>
+                </div>
+              </div>
+
+              <div class="contactMethod">
+                <div>
+                  <span class="contactMethodLabel">WhatsApp</span>
+                  <div class="contactMethodValue">+55 73 99143-5522</div>
+                  <p class="contactMethodText">
+                    Ideal para atendimento mais rápido, esclarecimentos sobre disponibilidade e apoio
+                    prático antes da chegada.
+                  </p>
+                </div>
+
+                <div class="contactMethodAction">
+                  <a
+                    class="btn btnPrimary"
+                    href="https://wa.me/5573991435522"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Abrir WhatsApp
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <aside class="contactInfoPanel" data-reveal="right">
+            <div class="contactInfoBlock">
+              <p class="eyebrow">Reservas</p>
+              <p>
+                Para consultar disponibilidade, recomendamos começar pela página de reserva e, se
+                necessário, complementar o atendimento por WhatsApp ou e-mail.
+              </p>
+            </div>
+
+            <div class="contactInfoBlock">
+              <p class="eyebrow">Chegada</p>
+              <p>
+                Na próxima etapa, esta página poderá receber também orientações de acesso, localização
+                e apoio de chegada, preservando a mesma linguagem premium do site.
+              </p>
+            </div>
+
+            <div class="contactInfoBlock">
+              <p class="eyebrow">Atendimento</p>
+              <p>
+                O contato pode ser feito antes, durante ou depois da reserva, sempre para facilitar a
+                estadia e tornar a experiência mais fluida e tranquila.
+              </p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section contactNote">
+      <div class="wrap">
+        <div class="contactNotePanel" data-reveal="zoom">
+          <p class="eyebrow">Estadia</p>
+          <h2 class="h2">Uma boa experiência começa também na forma de atender</h2>
+          <p class="lead mt-16">
+            Nas Casas da Vila, o contato deve ser tão simples quanto a estadia: direto, claro e
+            acolhedor — sem excesso e sem fricção.
+          </p>
+
+          <div class="ctaRow mt-26">
+            <a class="btn btnPrimary" href="/pt/reservar/">Ver disponibilidade</a>
+            <a class="btn btnGhost" href="mailto:casasdavila@casasdavila.com">Enviar e-mail</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

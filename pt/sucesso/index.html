@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reserva recebida | Casas da Vila</title>
+  <meta
+    name="description"
+    content="Sua pré-reserva foi recebida pelas Casas da Vila. Nossa equipe entrará em contato para dar sequência à sua estadia em Trancoso."
+  />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="/assets/css/motion.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <style>
+    .successHero{
+      position:relative;
+      min-height:78svh;
+      padding-top:calc(var(--header-h) + 20px);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+    }
+
+    .successHeroBg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .successHeroBg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .successOverlay{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(24,20,16,0.54) 0%, rgba(24,20,16,0.24) 40%, rgba(24,20,16,0.12) 100%),
+        linear-gradient(180deg, rgba(255,244,228,0.08) 0%, rgba(18,16,14,0.26) 100%);
+    }
+
+    .successWrap{
+      position:relative;
+      z-index:2;
+      width:min(var(--container), calc(100% - 32px));
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:40px;
+      align-items:center;
+    }
+
+    .successContent{
+      max-width:780px;
+    }
+
+    .successEyebrow{
+      color:rgba(255,255,255,0.74);
+    }
+
+    .successTitle{
+      color:#fff;
+      text-shadow:0 12px 34px rgba(0,0,0,0.22);
+      max-width:780px;
+    }
+
+    .successText{
+      margin-top:22px;
+      max-width:640px;
+      font-size:18px;
+      line-height:1.82;
+      color:rgba(255,255,255,0.9);
+    }
+
+    .successCard{
+      padding:26px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.82);
+      border:1px solid rgba(255,255,255,0.52);
+      box-shadow:var(--shadow-lg);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      display:grid;
+      gap:16px;
+    }
+
+    .successCard p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.74;
+    }
+
+    .successCard strong{
+      color:var(--text);
+    }
+
+    .successActions{
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .successNext{
+      padding-top:72px;
+      padding-bottom:72px;
+    }
+
+    .successNextPanel{
+      padding:42px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .successNextGrid{
+      margin-top:24px;
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:22px;
+    }
+
+    .successNextItem{
+      padding:24px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.7);
+      border:1px solid rgba(92,71,54,0.08);
+    }
+
+    .successNextItem .eyebrow{
+      margin-bottom:8px;
+    }
+
+    .successNextItem p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.78;
+    }
+
+    @media (max-width: 1100px){
+      .successWrap,
+      .successNextGrid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 760px){
+      .successHero{
+        min-height:auto;
+        padding-bottom:40px;
+      }
+
+      .successWrap{
+        gap:26px;
+      }
+
+      .successText{
+        font-size:17px;
+      }
+
+      .successCard,
+      .successNextPanel,
+      .successNextItem{
+        padding:22px;
+        border-radius:24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+
+  <section class="successHero">
+    <div class="successHeroBg">
+      <img src="/assets/img/home-jardim.jpg" alt="Casas da Vila Trancoso" />
+      <div class="successOverlay"></div>
+    </div>
+
+    <div class="successWrap">
+
+      <div class="successContent" data-reveal="left">
+        <p class="eyebrow successEyebrow shimmerLine">Casas da Vila • Reserva</p>
+
+        <h1 class="display successTitle">
+          Sua pré-reserva<br>
+          foi recebida.
+        </h1>
+
+        <p class="successText">
+          Recebemos suas informações e iniciamos o processo de verificação de disponibilidade.
+          Nossa equipe dará sequência ao atendimento para confirmar os detalhes da sua estadia em Trancoso.
+        </p>
+      </div>
+
+      <div class="successCard heroFloat" data-reveal="right">
+        <p class="eyebrow">Próximo passo</p>
+
+        <p>
+          Você receberá um contato para confirmação da reserva e orientações sobre pagamento e chegada.
+        </p>
+
+        <p>
+          Caso prefira, você pode falar diretamente conosco agora:
+        </p>
+
+        <div class="successActions">
+<a class="btn btnPrimary" id="success-whatsapp-btn" href="https://wa.me/5573991435522" target="_blank" rel="noopener noreferrer">
+  WhatsApp
+</a>
+          <a class="btn btnGhost" href="mailto:casasdavila@casasdavila.com">
+            Enviar e-mail
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section successNext">
+    <div class="wrap">
+      <div class="successNextPanel" data-reveal="zoom">
+
+        <p class="eyebrow">Estadia</p>
+        <h2 class="h2">O que acontece agora</h2>
+
+        <div class="successNextGrid">
+
+          <div class="successNextItem">
+            <p class="eyebrow">1</p>
+            <p>
+              Nossa equipe verifica a disponibilidade da casa escolhida e confirma os detalhes da sua estadia.
+            </p>
+          </div>
+
+          <div class="successNextItem">
+            <p class="eyebrow">2</p>
+            <p>
+              Você recebe orientação para pagamento e garantia da reserva dentro das condições aplicáveis.
+            </p>
+          </div>
+
+          <div class="successNextItem">
+            <p class="eyebrow">3</p>
+            <p>
+              Após confirmação, sua estadia é assegurada e você recebe informações completas para chegada.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="ctaRow mt-26">
+          <a class="btn btnPrimary" href="/pt/casas/">Ver casas</a>
+          <a class="btn btnGhost" href="/pt/">Voltar ao início</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+
+    const whatsappUrl = params.get('whatsapp');
+    const emailUrl = params.get('email');
+
+    const whatsappBtn = document.getElementById('success-whatsapp-btn');
+    const emailBtn = document.getElementById('success-email-btn');
+
+    if (whatsappBtn && whatsappUrl) {
+      whatsappBtn.setAttribute('href', whatsappUrl);
+    }
+
+    if (emailBtn && emailUrl) {
+      emailBtn.setAttribute('href', emailUrl);
+    }
+  })();
+</script>
+</body>
+</html>

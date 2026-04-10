@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sobre | Casas da Vila</title>
+  <meta
+    name="description"
+    content="Conheça a proposta das Casas da Vila em Trancoso: hospitalidade tropical boutique, casas autorais, jardim, silêncio e uma experiência de estadia mais sensível."
+  />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="/assets/css/motion.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <style>
+    .aboutHero{
+      position:relative;
+      min-height:72svh;
+      padding-top:calc(var(--header-h) + 18px);
+      overflow:hidden;
+    }
+
+    .aboutHeroBg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .aboutHeroBg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .aboutHeroOverlay{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(24,20,16,0.54) 0%, rgba(24,20,16,0.22) 42%, rgba(24,20,16,0.10) 100%),
+        linear-gradient(180deg, rgba(255,244,228,0.06) 0%, rgba(18,16,14,0.22) 100%);
+    }
+
+    .aboutHeroGrid{
+      position:relative;
+      z-index:2;
+      width:min(var(--container), calc(100% - 32px));
+      min-height:calc(72svh - var(--header-h) - 18px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:40px;
+      align-items:end;
+      padding-bottom:34px;
+    }
+
+    .aboutHeroContent{
+      max-width:780px;
+    }
+
+    .aboutHeroEyebrow{
+      color:rgba(255,255,255,0.72);
+    }
+
+    .aboutHeroTitle{
+      color:#fff;
+      text-shadow:0 10px 30px rgba(0,0,0,0.18);
+      max-width:820px;
+    }
+
+    .aboutHeroText{
+      margin:22px 0 0;
+      max-width:640px;
+      font-size:18px;
+      line-height:1.8;
+      color:rgba(255,255,255,0.88);
+    }
+
+    .aboutHeroCard{
+      max-width:360px;
+      margin-left:auto;
+      padding:24px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.46);
+      box-shadow:var(--shadow-lg);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    .aboutHeroCard .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .aboutHeroCard p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.74;
+    }
+
+    .aboutIntro{
+      padding-top:84px;
+      padding-bottom:36px;
+    }
+
+    .aboutIntroGrid{
+      display:grid;
+      grid-template-columns:1.06fr .94fr;
+      gap:28px;
+      align-items:start;
+    }
+
+    .aboutIntroText{
+      display:grid;
+      gap:18px;
+      max-width:860px;
+    }
+
+    .aboutStatement{
+      padding:30px;
+      border-radius:30px;
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-md);
+    }
+
+    .aboutStatement p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.8;
+    }
+
+    .aboutValues{
+      padding-top:18px;
+      padding-bottom:84px;
+    }
+
+    .aboutValuesGrid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:24px;
+    }
+
+    .aboutValueCard{
+      padding:28px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-md);
+    }
+
+    .aboutValueCard .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .aboutValueCard h3{
+      margin:0 0 10px;
+      font-family:var(--font-serif);
+      font-size:30px;
+      line-height:1.05;
+      color:var(--text);
+    }
+
+    .aboutValueCard p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.78;
+    }
+
+    .aboutNarrative{
+      padding-top:0;
+      padding-bottom:84px;
+    }
+
+    .aboutNarrativePanel{
+      padding:40px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .aboutNarrativeGrid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:24px;
+      margin-top:26px;
+    }
+
+    .aboutNarrativeItem{
+      padding:24px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.68);
+      border:1px solid rgba(92,71,54,0.08);
+    }
+
+    .aboutNarrativeItem .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .aboutNarrativeItem p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.78;
+    }
+
+    .aboutDifference{
+      padding-top:0;
+      padding-bottom:84px;
+    }
+
+    .aboutDifferenceGrid{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .aboutDifferenceText,
+    .aboutDifferenceImage{
+      padding:34px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-md);
+    }
+
+    .aboutDifferenceText{
+      display:grid;
+      gap:18px;
+    }
+
+    .aboutDifferenceText .body{
+      max-width:820px;
+    }
+
+    .aboutDifferenceImageWrap{
+      position:relative;
+      overflow:hidden;
+      min-height:100%;
+      border-radius:24px;
+    }
+
+    .aboutDifferenceImageWrap img{
+      width:100%;
+      height:100%;
+      min-height:420px;
+      object-fit:cover;
+    }
+
+    .aboutClosing{
+      padding-top:0;
+      padding-bottom:72px;
+    }
+
+    .aboutClosingPanel{
+      padding:42px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .aboutClosingPanel .lead{
+      max-width:860px;
+    }
+
+    @media (max-width: 1100px){
+      .aboutHeroGrid,
+      .aboutIntroGrid,
+      .aboutValuesGrid,
+      .aboutNarrativeGrid,
+      .aboutDifferenceGrid{
+        grid-template-columns:1fr;
+      }
+
+      .aboutHeroCard{
+        margin-left:0;
+        max-width:460px;
+      }
+    }
+
+    @media (max-width: 760px){
+      .aboutHero{
+        min-height:auto;
+      }
+
+      .aboutHeroGrid{
+        min-height:calc(74svh - var(--header-h) - 18px);
+        gap:24px;
+        padding-bottom:26px;
+      }
+
+      .aboutHeroText{
+        font-size:17px;
+        line-height:1.74;
+      }
+
+      .aboutHeroCard,
+      .aboutStatement,
+      .aboutValueCard,
+      .aboutNarrativePanel,
+      .aboutNarrativeItem,
+      .aboutDifferenceText,
+      .aboutDifferenceImage,
+      .aboutClosingPanel{
+        padding:22px;
+        border-radius:24px;
+      }
+
+      .aboutIntro{
+        padding-top:60px;
+      }
+
+      .aboutValues,
+      .aboutNarrative,
+      .aboutDifference{
+        padding-bottom:64px;
+      }
+
+      .aboutDifferenceImageWrap{
+        border-radius:20px;
+      }
+
+      .aboutDifferenceImageWrap img{
+        min-height:280px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main>
+
+    <section class="aboutHero">
+      <div class="aboutHeroBg">
+        <img src="/assets/img/home-casas.jpg" alt="Casas da Vila em Trancoso" />
+        <div class="aboutHeroOverlay"></div>
+      </div>
+
+      <div class="aboutHeroGrid">
+        <div class="aboutHeroContent" data-reveal="left">
+          <p class="eyebrow aboutHeroEyebrow shimmerLine">Casas da Vila • Sobre</p>
+
+          <h1 class="display aboutHeroTitle">
+            Uma forma mais leve,<br>
+            tropical e sensível<br>
+            de hospedar.
+          </h1>
+
+          <p class="aboutHeroText">
+            Casas da Vila nasce da ideia de que hospitalidade pode ser ao mesmo tempo acolhedora,
+            sofisticada e silenciosa — sem peso, sem excesso e sem ruído visual.
+          </p>
+        </div>
+
+        <div class="aboutHeroCard heroFloat" data-reveal="right">
+          <p class="eyebrow">A proposta</p>
+          <p>
+            Mais do que um hotel, Casas da Vila é uma experiência de estadia guiada por escala, jardim,
+            arquitetura autoral, tempo desacelerado e relação sensível com Trancoso.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section aboutIntro">
+      <div class="wrap">
+        <div class="aboutIntroGrid">
+          <div class="aboutIntroText" data-reveal="left">
+            <p class="eyebrow">Hospitalidade</p>
+            <h2 class="h2">Nem hotel urbano, nem pousada genérica</h2>
+            <p class="body">
+              Casas da Vila parte de uma ideia muito específica de hospitalidade: casas autorais,
+              vegetação, luz, privacidade e uma experiência de permanência que respeita o ritmo do lugar.
+            </p>
+            <p class="body">
+              A proposta não é impressionar pelo excesso, mas construir uma estadia que pareça natural,
+              bonita e silenciosa — em sintonia com a paisagem e com o espírito de Trancoso.
+            </p>
+          </div>
+
+          <div class="aboutStatement" data-reveal="right">
+            <p>
+              O que define Casas da Vila é a combinação entre escala humana, atmosfera tropical,
+              conforto sem ostentação e uma linguagem visual que privilegia calor, jardim, textura e
+              permanência.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section aboutValues">
+      <div class="wrap">
+        <div class="aboutValuesGrid">
+          <article class="aboutValueCard" data-reveal="left">
+            <p class="eyebrow">Escala</p>
+            <h3>Casas, não corredores</h3>
+            <p>
+              A experiência começa na própria configuração do hotel: uma coleção de casas com
+              identidades próprias, e não um bloco padronizado de quartos.
+            </p>
+          </article>
+
+          <article class="aboutValueCard" data-reveal="zoom">
+            <p class="eyebrow">Atmosfera</p>
+            <h3>Jardim, sombra e luz</h3>
+            <p>
+              O ambiente foi pensado para transmitir serenidade e calor visual, com vegetação,
+              luminosidade e materiais que fazem sentido dentro da paisagem de Trancoso.
+            </p>
+          </article>
+
+          <article class="aboutValueCard" data-reveal="right">
+            <p class="eyebrow">Ritmo</p>
+            <h3>Uma estadia sem pressa</h3>
+            <p>
+              Casas da Vila valoriza a permanência. O tempo da experiência aqui é mais desacelerado,
+              mais aberto e mais próximo da ideia de refúgio tropical.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section aboutNarrative">
+      <div class="wrap">
+        <div class="aboutNarrativePanel" data-reveal="zoom">
+          <p class="eyebrow">Visão</p>
+          <h2 class="h2">O que queremos que a estadia transmita</h2>
+          <p class="lead mt-16">
+            Casas da Vila foi desenhada para que o hóspede sinta, desde a chegada, uma mudança de
+            ritmo: menos ruído, menos rigidez, mais vegetação, mais espaço e uma relação mais leve com o tempo.
+          </p>
+
+          <div class="aboutNarrativeGrid">
+            <div class="aboutNarrativeItem">
+              <p class="eyebrow">Chegada</p>
+              <p>
+                A chegada deve parecer natural e acolhedora, sem teatralidade, mas com a sensação
+                imediata de estar em um lugar próprio.
+              </p>
+            </div>
+
+            <div class="aboutNarrativeItem">
+              <p class="eyebrow">Estadia</p>
+              <p>
+                Durante a permanência, tudo deve favorecer fluidez: circular entre casa, jardim, vila
+                e praia sem perder a continuidade da experiência.
+              </p>
+            </div>
+
+            <div class="aboutNarrativeItem">
+              <p class="eyebrow">Memória</p>
+              <p>
+                A lembrança que fica não é só de conforto, mas de atmosfera: uma combinação de luz,
+                silêncio, calor e proporção difícil de reproduzir fora dali.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section aboutDifference">
+      <div class="wrap">
+        <div class="aboutDifferenceGrid">
+          <div class="aboutDifferenceText" data-reveal="left">
+            <p class="eyebrow">Diferença</p>
+            <h2 class="h2">Uma linguagem mais autoral e menos previsível</h2>
+            <p class="body">
+              Casas da Vila não tenta reproduzir o luxo urbano em contexto tropical. A proposta é outra:
+              construir sofisticação por meio de sensibilidade, materialidade, vegetação, escala e silêncio.
+            </p>
+            <p class="body">
+              Isso vale para as casas, para a forma de receber e para a narrativa do próprio hotel:
+              tudo procura parecer coerente com Trancoso, e não importado de outro lugar.
+            </p>
+          </div>
+
+          <div class="aboutDifferenceImage" data-reveal="right">
+            <div class="aboutDifferenceImageWrap">
+              <img src="/assets/img/home-jardim.jpg" alt="Jardim e atmosfera das Casas da Vila" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section aboutClosing">
+      <div class="wrap">
+        <div class="aboutClosingPanel" data-reveal="zoom">
+          <p class="eyebrow">Estadia</p>
+          <h2 class="h2">Casas da Vila é a tentativa de hospedar com mais atmosfera e menos ruído</h2>
+          <p class="lead mt-16">
+            Em Trancoso, onde a paisagem já faz muito, a hospitalidade precisa saber não exagerar.
+            É dessa escolha que nasce a identidade das Casas da Vila.
+          </p>
+
+          <div class="ctaRow mt-26">
+            <a class="btn btnPrimary" href="/pt/reservar/">Ver disponibilidade</a>
+            <a class="btn btnGhost" href="/pt/contato/">Fale conosco</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Experiências | Casas da Vila</title>
+  <meta
+    name="description"
+    content="Explore experiências em Trancoso a partir das Casas da Vila: praia, vila, gastronomia, bem-estar e ritmo tropical em uma estadia boutique."
+  />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="/assets/css/motion.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <style>
+    .experiencesHero{
+      position:relative;
+      min-height:72svh;
+      padding-top:calc(var(--header-h) + 18px);
+      overflow:hidden;
+    }
+
+    .experiencesHeroBg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .experiencesHeroBg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .experiencesHeroOverlay{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(24,20,16,0.54) 0%, rgba(24,20,16,0.22) 42%, rgba(24,20,16,0.10) 100%),
+        linear-gradient(180deg, rgba(255,244,228,0.06) 0%, rgba(18,16,14,0.22) 100%);
+    }
+
+    .experiencesHeroGrid{
+      position:relative;
+      z-index:2;
+      width:min(var(--container), calc(100% - 32px));
+      min-height:calc(72svh - var(--header-h) - 18px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:40px;
+      align-items:end;
+      padding-bottom:34px;
+    }
+
+    .experiencesHeroContent{
+      max-width:780px;
+    }
+
+    .experiencesHeroEyebrow{
+      color:rgba(255,255,255,0.72);
+    }
+
+    .experiencesHeroTitle{
+      color:#fff;
+      text-shadow:0 10px 30px rgba(0,0,0,0.18);
+      max-width:800px;
+    }
+
+    .experiencesHeroText{
+      margin:22px 0 0;
+      max-width:640px;
+      font-size:18px;
+      line-height:1.8;
+      color:rgba(255,255,255,0.88);
+    }
+
+    .experiencesHeroCard{
+      max-width:360px;
+      margin-left:auto;
+      padding:24px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.46);
+      box-shadow:var(--shadow-lg);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    .experiencesHeroCard .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .experiencesHeroCard p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.74;
+    }
+
+    .experiencesIntro{
+      padding-top:84px;
+      padding-bottom:28px;
+    }
+
+    .experiencesIntroHead{
+      max-width:920px;
+      display:grid;
+      gap:16px;
+    }
+
+    .experiencesGridSection{
+      padding-top:24px;
+      padding-bottom:84px;
+    }
+
+    .experiencesGrid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:28px;
+    }
+
+    .experienceCard{
+      position:relative;
+      overflow:hidden;
+      border-radius:30px;
+      background:rgba(255,252,248,0.82);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-md);
+      transition:
+        transform .4s var(--ease),
+        box-shadow .4s var(--ease);
+    }
+
+    .experienceCard:hover{
+      transform:translateY(-6px);
+      box-shadow:0 28px 60px rgba(76,52,35,0.16);
+    }
+
+    .experienceCardMedia{
+      aspect-ratio:16 / 10;
+      overflow:hidden;
+    }
+
+    .experienceCardMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform 1.2s var(--ease);
+    }
+
+    .experienceCard:hover .experienceCardMedia img{
+      transform:scale(1.04);
+    }
+
+    .experienceCardBody{
+      padding:24px;
+      display:grid;
+      gap:10px;
+    }
+
+    .experienceCardMeta{
+      margin:0;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--text-soft);
+    }
+
+    .experienceCardTitle{
+      margin:0;
+      font-family:var(--font-serif);
+      font-size:34px;
+      line-height:1.04;
+      letter-spacing:-0.03em;
+      color:var(--text);
+    }
+
+    .experienceCardText{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.78;
+    }
+
+    .experienceCardPills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:8px;
+    }
+
+    .experienceCardPills span{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.74);
+      border:1px solid rgba(92,71,54,0.08);
+      color:var(--text-soft);
+      font-size:13px;
+    }
+
+    .experiencesRhythm{
+      padding-top:0;
+      padding-bottom:84px;
+    }
+
+    .experiencesRhythmPanel{
+      padding:40px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .experiencesRhythmGrid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:24px;
+      margin-top:26px;
+    }
+
+    .experiencesRhythmItem{
+      padding:24px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.68);
+      border:1px solid rgba(92,71,54,0.08);
+    }
+
+    .experiencesRhythmItem .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .experiencesRhythmItem p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.78;
+    }
+
+    .experiencesClosing{
+      padding-top:0;
+      padding-bottom:72px;
+    }
+
+    .experiencesClosingPanel{
+      padding:42px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .experiencesClosingPanel .lead{
+      max-width:860px;
+    }
+
+    @media (max-width: 1100px){
+      .experiencesHeroGrid,
+      .experiencesGrid,
+      .experiencesRhythmGrid{
+        grid-template-columns:1fr;
+      }
+
+      .experiencesHeroCard{
+        margin-left:0;
+        max-width:460px;
+      }
+    }
+
+    @media (max-width: 760px){
+      .experiencesHero{
+        min-height:auto;
+      }
+
+      .experiencesHeroGrid{
+        min-height:calc(74svh - var(--header-h) - 18px);
+        gap:24px;
+        padding-bottom:26px;
+      }
+
+      .experiencesHeroText{
+        font-size:17px;
+        line-height:1.74;
+      }
+
+      .experiencesHeroCard,
+      .experienceCardBody,
+      .experiencesRhythmPanel,
+      .experiencesRhythmItem,
+      .experiencesClosingPanel{
+        padding:22px;
+      }
+
+      .experiencesIntro{
+        padding-top:60px;
+      }
+
+      .experiencesGridSection,
+      .experiencesRhythm{
+        padding-bottom:64px;
+      }
+
+      .experienceCardTitle{
+        font-size:30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main>
+
+    <section class="experiencesHero">
+      <div class="experiencesHeroBg">
+        <img src="/assets/img/home-experiencia.jpg" alt="Experiências em Trancoso" />
+        <div class="experiencesHeroOverlay"></div>
+      </div>
+
+      <div class="experiencesHeroGrid">
+        <div class="experiencesHeroContent" data-reveal="left">
+          <p class="eyebrow experiencesHeroEyebrow shimmerLine">Casas da Vila • Experiências</p>
+
+          <h1 class="display experiencesHeroTitle">
+            Trancoso se vive<br>
+            em ritmo,<br>
+            paisagem e tempo.
+          </h1>
+
+          <p class="experiencesHeroText">
+            A estadia nas Casas da Vila se abre para o que faz Trancoso ser singular: mar, vila,
+            gastronomia, bem-estar, caminhada, natureza e uma experiência tropical mais sensível.
+          </p>
+        </div>
+
+        <div class="experiencesHeroCard heroFloat" data-reveal="right">
+          <p class="eyebrow">A experiência</p>
+          <p>
+            Aqui, o destino não é um pano de fundo. Praia, Quadrado, gastronomia e jardim fazem parte
+            do mesmo desenho de permanência — leve, elegante e desacelerado.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section experiencesIntro">
+      <div class="wrap">
+        <div class="experiencesIntroHead" data-reveal="zoom">
+          <p class="eyebrow">Viver Trancoso</p>
+          <h2 class="h2">Mais do que atividades, uma forma de estar no lugar</h2>
+          <p class="lead">
+            As experiências em Trancoso funcionam melhor quando não parecem “programa”. Elas nascem
+            da combinação entre paisagem, tempo livre, boa comida, mar, vila e uma relação mais aberta
+            com o entorno.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section experiencesGridSection">
+      <div class="wrap">
+        <div class="experiencesGrid">
+
+          <article class="experienceCard" data-reveal="left">
+            <div class="experienceCardMedia">
+              <img src="/assets/img/hero-trancoso.jpg" alt="Praias de Trancoso" />
+            </div>
+            <div class="experienceCardBody">
+              <p class="experienceCardMeta">Praias</p>
+              <h3 class="experienceCardTitle">Mar, falésia e horizonte aberto</h3>
+              <p class="experienceCardText">
+                Trancoso é feito de praia ampla, luz intensa, vento e vegetação costeira. A experiência
+                do mar aqui não é apressada — é uma extensão natural do ritmo da estadia.
+              </p>
+              <div class="experienceCardPills">
+                <span>Pé na areia</span>
+                <span>Caminhadas</span>
+                <span>Tempo aberto</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experienceCard" data-reveal="right">
+            <div class="experienceCardMedia">
+              <img src="/assets/img/home-casas.jpg" alt="Quadrado e vila de Trancoso" />
+            </div>
+            <div class="experienceCardBody">
+              <p class="experienceCardMeta">Vila</p>
+              <h3 class="experienceCardTitle">Quadrado, arquitetura e vida local</h3>
+              <p class="experienceCardText">
+                A experiência da vila passa por caminhar sem pressa, observar a arquitetura, entrar e
+                sair de lojas, galerias, cafés e restaurantes — sempre em uma escala mais humana.
+              </p>
+              <div class="experienceCardPills">
+                <span>Quadrado</span>
+                <span>Caminhar</span>
+                <span>Vida local</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experienceCard" data-reveal="left">
+            <div class="experienceCardMedia">
+              <img src="/assets/img/home-experiencia.jpg" alt="Gastronomia em Trancoso" />
+            </div>
+            <div class="experienceCardBody">
+              <p class="experienceCardMeta">Gastronomia</p>
+              <h3 class="experienceCardTitle">Comer bem como parte da viagem</h3>
+              <p class="experienceCardText">
+                Em Trancoso, gastronomia não é apenas restaurante: é atmosfera, tempo de mesa,
+                luminosidade, conversa e o prazer de estar em um lugar que não exige pressa.
+              </p>
+              <div class="experienceCardPills">
+                <span>Restaurantes</span>
+                <span>Cafés</span>
+                <span>Tempo de mesa</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experienceCard" data-reveal="right">
+            <div class="experienceCardMedia">
+              <img src="/assets/img/home-jardim.jpg" alt="Bem-estar e descanso" />
+            </div>
+            <div class="experienceCardBody">
+              <p class="experienceCardMeta">Bem-estar</p>
+              <h3 class="experienceCardTitle">Descansar também é experiência</h3>
+              <p class="experienceCardText">
+                Muitas vezes, a experiência mais importante é não fazer demais: dormir bem, desacelerar,
+                ler, tomar café sem pressa, ficar no jardim e permitir que o lugar organize o ritmo.
+              </p>
+              <div class="experienceCardPills">
+                <span>Silêncio</span>
+                <span>Jardim</span>
+                <span>Permanência</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section experiencesRhythm">
+      <div class="wrap">
+        <div class="experiencesRhythmPanel" data-reveal="zoom">
+          <p class="eyebrow">Ritmo</p>
+          <h2 class="h2">Uma estadia melhor quando o tempo não está apertado</h2>
+          <p class="lead mt-16">
+            Trancoso se revela com mais intensidade quando o hóspede não tenta transformar tudo em
+            agenda. A experiência funciona melhor entre pausas, deslocamentos leves e escolhas simples.
+          </p>
+
+          <div class="experiencesRhythmGrid">
+            <div class="experiencesRhythmItem">
+              <p class="eyebrow">Manhã</p>
+              <p>
+                Café da manhã sem pressa, luz suave, jardim e um começo de dia que não exige urgência.
+              </p>
+            </div>
+
+            <div class="experiencesRhythmItem">
+              <p class="eyebrow">Tarde</p>
+              <p>
+                Praia, vila, caminhada ou descanso: a melhor tarde em Trancoso é a que não precisa ser
+                excessivamente programada.
+              </p>
+            </div>
+
+            <div class="experiencesRhythmItem">
+              <p class="eyebrow">Noite</p>
+              <p>
+                Gastronomia, conversa, arquitetura iluminada e a sensação de que o dia pode terminar
+                com o mesmo cuidado com que começou.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section experiencesClosing">
+      <div class="wrap">
+        <div class="experiencesClosingPanel" data-reveal="zoom">
+          <p class="eyebrow">Estadia</p>
+          <h2 class="h2">As melhores experiências em Trancoso começam na forma como se fica</h2>
+          <p class="lead mt-16">
+            Casas da Vila parte dessa ideia: a experiência do destino não está separada da forma de
+            hospedar. Ela começa no jardim, continua na vila e se abre para o mar no seu próprio ritmo.
+          </p>
+
+          <div class="ctaRow mt-26">
+            <a class="btn btnPrimary" href="/pt/reservar/">Ver disponibilidade</a>
+            <a class="btn btnGhost" href="/pt/contato/">Fale conosco</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

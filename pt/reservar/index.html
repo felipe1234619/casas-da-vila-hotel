@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reservar | Casas da Vila</title>
+  <meta
+    name="description"
+    content="Consulte disponibilidade nas Casas da Vila e encontre a casa ideal para a sua estadia em Trancoso, com café da manhã e estacionamento incluídos."
+  />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="/assets/css/motion.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <style>
+    .bookingHero{
+      position:relative;
+      min-height:72svh;
+      padding-top:calc(var(--header-h) + 18px);
+      overflow:hidden;
+    }
+
+    .bookingHeroBg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .bookingHeroBg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .bookingHeroOverlay{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(26,20,16,0.52) 0%, rgba(26,20,16,0.22) 42%, rgba(26,20,16,0.10) 100%),
+        linear-gradient(180deg, rgba(255,244,228,0.06) 0%, rgba(22,18,14,0.22) 100%);
+    }
+
+    .bookingHeroGrid{
+      position:relative;
+      z-index:2;
+      width:min(var(--container), calc(100% - 32px));
+      min-height:calc(72svh - var(--header-h) - 18px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:40px;
+      align-items:end;
+      padding-bottom:34px;
+    }
+
+    .bookingHeroContent{
+      max-width:780px;
+    }
+
+    .bookingHeroEyebrow{
+      color:rgba(255,255,255,0.72);
+    }
+
+    .bookingHeroTitle{
+      color:#fff;
+      text-shadow:0 10px 30px rgba(0,0,0,0.18);
+      max-width:760px;
+    }
+
+    .bookingHeroText{
+      margin:22px 0 0;
+      max-width:620px;
+      font-size:18px;
+      line-height:1.8;
+      color:rgba(255,255,255,0.88);
+    }
+
+    .bookingHeroCard{
+      max-width:360px;
+      margin-left:auto;
+      padding:24px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.46);
+      box-shadow:var(--shadow-lg);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    .bookingHeroCard .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .bookingHeroCard p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.74;
+    }
+
+    .bookingSearchSection{
+      padding-top:72px;
+      padding-bottom:24px;
+    }
+
+    .bookingSearchShell{
+      display:grid;
+      gap:22px;
+    }
+
+    .bookingSearchPanel{
+      padding:30px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .bookingSearchTop{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:24px;
+      margin-bottom:20px;
+    }
+
+    .bookingSearchTopText{
+      max-width:760px;
+    }
+
+    .bookingSearchForm{
+      display:grid;
+      grid-template-columns:1.1fr 1.1fr .9fr auto;
+      gap:14px;
+      align-items:end;
+    }
+
+    .bookingSearchBtn{
+      min-width:220px;
+    }
+
+    .bookingResultsSection{
+      padding-top:18px;
+      padding-bottom:84px;
+    }
+
+    .bookingResultsHead{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:24px;
+      margin-bottom:22px;
+    }
+
+    .bookingResultsGrid{
+      display:grid;
+      gap:22px;
+    }
+
+    .stayCard{
+      display:grid;
+      grid-template-columns:360px 1fr;
+      gap:0;
+      overflow:hidden;
+      border-radius:30px;
+      background:rgba(255,252,248,0.84);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-md);
+    }
+
+    .stayCardMedia{
+      min-height:100%;
+      background-size:cover;
+      background-position:center;
+    }
+
+    .stayCardBody{
+      padding:24px;
+      display:grid;
+      gap:18px;
+    }
+
+    .stayCardTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .stayCardMeta{
+      margin:0 0 6px;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--text-soft);
+    }
+
+    .stayCardTitle{
+      margin:0 0 8px;
+      font-family:var(--font-serif);
+      font-size:34px;
+      line-height:1;
+      letter-spacing:-0.03em;
+      color:var(--text);
+    }
+
+    .stayCardDesc{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.76;
+      max-width:760px;
+    }
+
+    .stayCardPrice{
+      display:grid;
+      gap:4px;
+      text-align:right;
+      min-width:180px;
+    }
+
+    .stayCardPrice small{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--text-soft);
+    }
+
+    .stayCardPrice strong{
+      font-family:var(--font-serif);
+      font-size:34px;
+      line-height:1;
+      color:var(--text);
+    }
+
+    .stayCardInclusions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .stayCardInclusions span{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.74);
+      border:1px solid rgba(92,71,54,0.08);
+      color:var(--text-soft);
+      font-size:13px;
+    }
+
+    .stayCardFooter{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding-top:8px;
+      border-top:1px solid rgba(92,71,54,0.08);
+    }
+
+    .stayCardFooterInfo{
+      color:var(--text-soft);
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .emptyState{
+      padding:34px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.72);
+      border:1px solid rgba(255,255,255,0.54);
+      box-shadow:var(--shadow-md);
+    }
+
+    .emptyState h3{
+      margin:0 0 10px;
+      font-family:var(--font-serif);
+      font-size:30px;
+      line-height:1.1;
+    }
+
+    .emptyState p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.76;
+    }
+
+    .bookingCheckoutSection{
+      padding-top:0;
+      padding-bottom:72px;
+    }
+
+    .bookingCheckoutGrid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:24px;
+      align-items:start;
+    }
+
+    .guestPanel,
+    .summaryPanel{
+      padding:30px;
+      border-radius:30px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-md);
+    }
+
+    .guestPanel .formGrid{
+      grid-template-columns:1fr 1fr;
+      margin-top:18px;
+    }
+
+    .fieldFull{
+      grid-column:1 / -1;
+    }
+
+    .summaryPanel{
+      position:sticky;
+      top:calc(var(--header-h) + 20px);
+    }
+
+    .summaryCard{
+      display:grid;
+      gap:16px;
+    }
+
+    .summarySelected{
+      padding:18px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.72);
+      border:1px solid rgba(92,71,54,0.08);
+    }
+
+    .summarySelected p{
+      margin:0;
+    }
+
+    .summarySelected .summaryEyebrow{
+      margin-bottom:6px;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--text-soft);
+    }
+
+    .summarySelected .summaryTitle{
+      margin-bottom:8px;
+      font-family:var(--font-serif);
+      font-size:30px;
+      line-height:1;
+      color:var(--text);
+    }
+
+    .summaryMeta{
+      color:var(--text-soft);
+      line-height:1.7;
+      font-size:14px;
+    }
+
+    .summaryBreakdown{
+      display:grid;
+      gap:12px;
+    }
+
+    .summaryRow{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      padding-bottom:12px;
+      border-bottom:1px solid rgba(92,71,54,0.08);
+      color:var(--text-soft);
+    }
+
+    .summaryRow strong{
+      color:var(--text);
+    }
+
+    .summaryRowTotal{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      padding-top:6px;
+    }
+
+    .summaryRowTotal span{
+      color:var(--text-soft);
+    }
+
+    .summaryRowTotal strong{
+      font-family:var(--font-serif);
+      font-size:32px;
+      line-height:1;
+      color:var(--text);
+    }
+
+    .summaryBtn{
+      width:100%;
+    }
+
+    .summaryHint{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.72;
+      font-size:14px;
+    }
+
+    @media (max-width: 1100px){
+      .bookingHeroGrid,
+      .bookingCheckoutGrid{
+        grid-template-columns:1fr;
+      }
+
+      .bookingHeroCard{
+        max-width:460px;
+        margin-left:0;
+      }
+
+      .bookingSearchForm{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .bookingSearchBtn{
+        min-width:0;
+      }
+
+      .stayCard{
+        grid-template-columns:1fr;
+      }
+
+      .stayCardMedia{
+        min-height:280px;
+      }
+
+      .summaryPanel{
+        position:static;
+      }
+    }
+
+    @media (max-width: 760px){
+      .bookingHero{
+        min-height:auto;
+      }
+
+      .bookingHeroGrid{
+        min-height:calc(74svh - var(--header-h) - 18px);
+        gap:24px;
+        padding-bottom:26px;
+      }
+
+      .bookingHeroText{
+        font-size:17px;
+        line-height:1.74;
+      }
+
+      .bookingHeroCard{
+        max-width:none;
+        width:100%;
+        padding:20px;
+        border-radius:24px;
+      }
+
+      .bookingSearchSection{
+        padding-top:56px;
+      }
+
+      .bookingSearchPanel,
+      .guestPanel,
+      .summaryPanel{
+        padding:22px;
+        border-radius:24px;
+      }
+
+      .bookingSearchTop,
+      .bookingResultsHead,
+      .stayCardTop,
+      .stayCardFooter{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .bookingSearchForm,
+      .guestPanel .formGrid{
+        grid-template-columns:1fr;
+      }
+
+      .bookingSearchBtn,
+      .stayCardFooter .btn,
+      .summaryBtn{
+        width:100%;
+      }
+
+      .stayCardBody{
+        padding:20px 18px;
+      }
+
+      .stayCardTitle{
+        font-size:30px;
+      }
+
+      .stayCardPrice{
+        text-align:left;
+      }
+
+      .stayCardMedia{
+        min-height:240px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main>
+
+    <section class="bookingHero">
+      <div class="bookingHeroBg">
+        <img src="/assets/img/casadende1.jpeg" alt="Reserva nas Casas da Vila" />
+        <div class="bookingHeroOverlay"></div>
+      </div>
+
+      <div class="bookingHeroGrid">
+        <div class="bookingHeroContent" data-reveal="left">
+          <p class="eyebrow bookingHeroEyebrow shimmerLine">Casas da Vila • Reserva</p>
+
+          <h1 class="display bookingHeroTitle">
+            Encontre a casa certa<br>
+            para o seu tempo<br>
+            em Trancoso.
+          </h1>
+
+          <p class="bookingHeroText">
+            Consulte disponibilidade, compare atmosferas e avance para a reserva com café da manhã e
+            estacionamento já incluídos na experiência.
+          </p>
+        </div>
+
+        <div class="bookingHeroCard heroFloat" data-reveal="right">
+          <p class="eyebrow">Condições</p>
+          <p>
+            Estadia mínima de 3 noites na maior parte do ano. Entre 20 de dezembro e 5 de janeiro,
+            aplica-se pacote mínimo de 7 noites.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bookingSearchSection">
+      <div class="wrap bookingSearchShell">
+        <div class="bookingSearchPanel" data-reveal="zoom">
+          <div class="bookingSearchTop">
+            <div class="bookingSearchTopText">
+              <p class="eyebrow">Disponibilidade</p>
+              <h2 class="h2">Escolha datas e número de hóspedes</h2>
+            </div>
+          </div>
+
+          <div class="bookingSearchForm">
+            <div class="field">
+              <label for="check-in">Check-in</label>
+              <input id="check-in" type="date" />
+            </div>
+
+            <div class="field">
+              <label for="check-out">Check-out</label>
+              <input id="check-out" type="date" />
+            </div>
+
+            <div class="field">
+              <label for="guests-count">Hóspedes</label>
+              <select id="guests-count">
+                <option value="1">1 hóspede</option>
+                <option value="2" selected>2 hóspedes</option>
+                <option value="3">3 hóspedes</option>
+                <option value="4">4 hóspedes</option>
+              </select>
+            </div>
+
+            <button id="search-availability-btn" class="btn btnPrimary bookingSearchBtn" type="button">
+              Ver casas disponíveis
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bookingResultsSection">
+      <div class="wrap">
+        <div class="bookingResultsHead" data-reveal="left">
+          <div>
+            <p class="eyebrow">Resultados</p>
+            <h2 class="h2">Casas disponíveis para o período selecionado</h2>
+          </div>
+        </div>
+
+        <div id="booking-results" class="bookingResultsGrid">
+          <div class="emptyState">
+            <h3>Escolha suas datas para começar</h3>
+            <p>
+              Ao selecionar check-in, check-out e número de hóspedes, você verá aqui as casas
+              disponíveis e o valor total da estadia.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bookingCheckoutSection">
+      <div class="wrap bookingCheckoutGrid">
+
+        <div class="guestPanel" data-reveal="left">
+          <p class="eyebrow">Dados do hóspede</p>
+          <h2 class="h2">Finalize sua pré-reserva</h2>
+
+          <div class="formGrid">
+            <div class="field">
+              <label for="guest-name">Nome completo</label>
+              <input id="guest-name" type="text" placeholder="Seu nome completo" />
+            </div>
+
+            <div class="field">
+              <label for="guest-email">E-mail</label>
+              <input id="guest-email" type="email" placeholder="voce@email.com" />
+            </div>
+
+            <div class="field">
+              <label for="guest-phone">Telefone</label>
+              <input id="guest-phone" type="tel" placeholder="+55 11 99999-9999" />
+            </div>
+
+            <div class="field fieldFull">
+              <label for="special-requests">Pedidos especiais</label>
+              <textarea id="special-requests" rows="5" placeholder="Compartilhe aqui qualquer pedido relevante para a sua estadia."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <aside class="summaryPanel" data-reveal="right">
+          <div class="summaryCard">
+            <div>
+              <p class="eyebrow">Resumo</p>
+              <h3 class="h3">Sua estadia</h3>
+            </div>
+
+            <div class="summarySelected" id="summary-selected">
+              <p class="summaryEyebrow">Nenhuma casa selecionada</p>
+              <p class="summaryTitle">Aguardando disponibilidade</p>
+              <p class="summaryMeta">
+                Escolha datas e selecione uma casa disponível para visualizar o resumo da reserva.
+              </p>
+            </div>
+
+            <div class="summaryBreakdown">
+              <div class="summaryRow">
+                <span>Período</span>
+                <strong id="summary-dates">—</strong>
+              </div>
+              <div class="summaryRow">
+                <span>Noites</span>
+                <strong id="summary-nights">—</strong>
+              </div>
+              <div class="summaryRow">
+                <span>Hóspedes</span>
+                <strong id="summary-guests">—</strong>
+              </div>
+              <div class="summaryRow">
+                <span>Inclusões</span>
+                <strong>Café da manhã + estacionamento</strong>
+              </div>
+              <div class="summaryRowTotal">
+                <span>Total da estadia</span>
+                <strong id="summary-total">—</strong>
+              </div>
+            </div>
+
+            <button id="book-now-btn" class="btn btnPrimary summaryBtn" type="button">
+              Ir para pagamento
+            </button>
+
+            <p class="summaryHint">
+              Sua reserva será confirmada após o pagamento. Antes disso, o período fica temporariamente
+              protegido durante a etapa de checkout.
+            </p>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+<div id="site-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/assets/js/supabase.js"></script>
+
+<script>
+  (function () {
+    const selectedState = {
+      unit: null,
+      checkIn: '',
+      checkOut: '',
+      guestsCount: 2
+    };
+
+    function qs(selector) {
+      return document.querySelector(selector);
+    }
+
+    function formatBRL(value) {
+      return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      }).format(Number(value || 0));
+    }
+
+    function calcNights(checkIn, checkOut) {
+      if (!checkIn || !checkOut) return 0;
+      const start = new Date(`${checkIn}T12:00:00Z`);
+      const end = new Date(`${checkOut}T12:00:00Z`);
+      return Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+    }
+
+    function formatDateBR(dateStr) {
+      if (!dateStr) return '—';
+      const [y, m, d] = String(dateStr).split('-');
+      if (!y || !m || !d) return dateStr;
+      return `${d}/${m}/${y}`;
+    }
+
+    function renderEmpty(messageTitle, messageText) {
+      const root = qs('#booking-results');
+      if (!root) return;
+
+      root.innerHTML = `
+        <div class="emptyState">
+          <h3>${messageTitle}</h3>
+          <p>${messageText}</p>
+        </div>
+      `;
+    }
+
+    function renderAvailabilityCards(items) {
+      const root = qs('#booking-results');
+      if (!root) return;
+
+      if (!items || !items.length) {
+        renderEmpty(
+          'Nenhuma casa disponível',
+          'Tente outras datas ou ajuste o número de hóspedes para consultar novas opções.'
+        );
+        return;
+      }
+
+      root.innerHTML = items.map((item) => `
+        <article class="stayCard">
+          <div
+            class="stayCardMedia"
+            style="background-image:url('${item.cover_image_url || ''}')"
+          ></div>
+
+          <div class="stayCardBody">
+            <div class="stayCardTop">
+              <div>
+                <p class="stayCardMeta">${item.size_m2 || '-'} m² • até ${item.max_guests} hóspedes</p>
+                <h3 class="stayCardTitle">${item.name}</h3>
+                <p class="stayCardDesc">${item.short_description || ''}</p>
+              </div>
+
+              <div class="stayCardPrice">
+                <small>Total da estadia</small>
+                <strong>${formatBRL(item.amount_total || 0)}</strong>
+              </div>
+            </div>
+
+            <div class="stayCardInclusions">
+              ${item.breakfast_included ? '<span>Café da manhã incluído</span>' : ''}
+              ${item.parking_included ? '<span>Estacionamento incluído</span>' : ''}
+              <span>Mínimo de ${item.required_min_nights} noites</span>
+            </div>
+
+            <div class="stayCardFooter">
+              <div class="stayCardFooterInfo">
+                Selecione esta casa para preencher o resumo da estadia e avançar para o checkout.
+              </div>
+
+              <button
+                class="btn btnGhost select-stay-btn"
+                type="button"
+                data-unit='${JSON.stringify(item).replace(/'/g, '&#39;')}'
+              >
+                Selecionar esta casa
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      root.querySelectorAll('.select-stay-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const parsed = JSON.parse(btn.dataset.unit.replace(/&#39;/g, "'"));
+          selectedState.unit = parsed;
+          updateSummary();
+          window.scrollTo({
+            top: qs('.bookingCheckoutSection')?.getBoundingClientRect().top + window.scrollY - 100,
+            behavior: 'smooth'
+          });
+        });
+      });
+    }
+
+    function updateSummary() {
+      const selectedBox = qs('#summary-selected');
+      const datesEl = qs('#summary-dates');
+      const nightsEl = qs('#summary-nights');
+      const guestsEl = qs('#summary-guests');
+      const totalEl = qs('#summary-total');
+
+      const nights = calcNights(selectedState.checkIn, selectedState.checkOut);
+
+      if (selectedBox) {
+        if (selectedState.unit) {
+          selectedBox.innerHTML = `
+            <p class="summaryEyebrow">Casa selecionada</p>
+            <p class="summaryTitle">${selectedState.unit.name}</p>
+            <p class="summaryMeta">
+              ${selectedState.unit.size_m2 || '-'} m² • até ${selectedState.unit.max_guests} hóspedes
+            </p>
+          `;
+        } else {
+          selectedBox.innerHTML = `
+            <p class="summaryEyebrow">Nenhuma casa selecionada</p>
+            <p class="summaryTitle">Aguardando disponibilidade</p>
+            <p class="summaryMeta">
+              Escolha datas e selecione uma casa disponível para visualizar o resumo da reserva.
+            </p>
+          `;
+        }
+      }
+
+      if (datesEl) {
+        datesEl.textContent =
+          selectedState.checkIn && selectedState.checkOut
+            ? `${formatDateBR(selectedState.checkIn)} → ${formatDateBR(selectedState.checkOut)}`
+            : '—';
+      }
+
+      if (nightsEl) nightsEl.textContent = nights ? String(nights) : '—';
+      if (guestsEl) guestsEl.textContent = selectedState.guestsCount ? String(selectedState.guestsCount) : '—';
+      if (totalEl) totalEl.textContent = selectedState.unit ? formatBRL(selectedState.unit.amount_total || 0) : '—';
+    }
+
+    async function fetchAvailability(checkIn, checkOut, guestsCount) {
+      try {
+        const response = await fetch('/api/availability', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ checkIn, checkOut, guestsCount })
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data?.error || 'Falha ao consultar disponibilidade.');
+        }
+
+        return data?.items || [];
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    }
+
+    function validateSearch(checkIn, checkOut, guestsCount) {
+      if (!checkIn || !checkOut) {
+        throw new Error('Selecione check-in e check-out.');
+      }
+
+      const nights = calcNights(checkIn, checkOut);
+      if (!nights || nights <= 0) {
+        throw new Error('O período selecionado é inválido.');
+      }
+
+      if (!Number(guestsCount) || Number(guestsCount) < 1) {
+        throw new Error('Quantidade de hóspedes inválida.');
+      }
+    }
+
+    async function handleSearchAvailability() {
+      const checkIn = qs('#check-in')?.value || '';
+      const checkOut = qs('#check-out')?.value || '';
+      const guestsCount = Number(qs('#guests-count')?.value || 1);
+
+      try {
+        validateSearch(checkIn, checkOut, guestsCount);
+
+        selectedState.checkIn = checkIn;
+        selectedState.checkOut = checkOut;
+        selectedState.guestsCount = guestsCount;
+        selectedState.unit = null;
+        updateSummary();
+
+        renderEmpty('Buscando disponibilidade…', 'Estamos consultando as casas disponíveis para o período selecionado.');
+
+        const items = await fetchAvailability(checkIn, checkOut, guestsCount);
+        renderAvailabilityCards(items);
+      } catch (error) {
+        renderEmpty('Não foi possível consultar agora', error.message || 'Tente novamente em instantes.');
+      }
+    }
+
+async function handleCheckout() {
+  if (!selectedState.unit) {
+    alert('Selecione uma casa disponível antes de continuar.');
+    return;
+  }
+
+  const guestName = qs('#guest-name')?.value?.trim() || '';
+  const guestEmail = qs('#guest-email')?.value?.trim() || '';
+  const guestPhone = qs('#guest-phone')?.value?.trim() || '';
+  const specialRequests = qs('#special-requests')?.value?.trim() || '';
+
+  if (!guestName || !guestEmail) {
+    alert('Preencha nome completo e e-mail para continuar.');
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/create-hold', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        unitSlug: selectedState.unit.slug,
+        guestEmail,
+        guestName,
+        guestPhone,
+        checkIn: selectedState.checkIn,
+        checkOut: selectedState.checkOut,
+        guestsCount: selectedState.guestsCount,
+        specialRequests
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data?.error || 'Não foi possível proteger o período selecionado.');
+      return;
+    }
+
+    console.log('hold-criado', data);
+
+    const hold = data.hold;
+
+    const checkoutRes = await fetch('/api/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        holdId: hold.id,
+        unitName: selectedState.unit.name,
+        checkIn: selectedState.checkIn,
+        checkOut: selectedState.checkOut,
+        guestsCount: selectedState.guestsCount,
+        amountTotal: hold.amount_total,
+        guestEmail
+      })
+    });
+
+    const checkoutData = await checkoutRes.json();
+
+    if (!checkoutRes.ok) {
+      alert('Erro ao iniciar pagamento');
+      return;
+    }
+
+    window.location.href = checkoutData.url;
+  } catch (err) {
+    console.error('Falha inesperada ao criar hold:', err);
+    alert('Ocorreu um erro inesperado ao criar a pré-reserva.');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  updateSummary();
+
+  qs('#search-availability-btn')?.addEventListener('click', handleSearchAvailability);
+  qs('#book-now-btn')?.addEventListener('click', handleCheckout);
+
+  const guestsSelect = qs('#guests-count');
+  if (guestsSelect) {
+    guestsSelect.addEventListener('change', () => {
+      selectedState.guestsCount = Number(guestsSelect.value || 1);
+      updateSummary();
+    });
+  }
+});
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/assets/js/supabase.js"></script>
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

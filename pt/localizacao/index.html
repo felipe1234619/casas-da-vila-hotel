@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Localização | Casas da Vila</title>
+  <meta
+    name="description"
+    content="Descubra a localização das Casas da Vila em Trancoso, Bahia — entre o mar, a vila e o jardim, em uma experiência tropical boutique."
+  />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="/assets/css/motion.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <style>
+    .locationHero{
+      position:relative;
+      min-height:72svh;
+      padding-top:calc(var(--header-h) + 18px);
+      overflow:hidden;
+    }
+
+    .locationHeroBg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .locationHeroBg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .locationHeroOverlay{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(24,20,16,0.54) 0%, rgba(24,20,16,0.22) 42%, rgba(24,20,16,0.10) 100%),
+        linear-gradient(180deg, rgba(255,244,228,0.06) 0%, rgba(18,16,14,0.22) 100%);
+    }
+
+    .locationHeroGrid{
+      position:relative;
+      z-index:2;
+      width:min(var(--container), calc(100% - 32px));
+      min-height:calc(72svh - var(--header-h) - 18px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:40px;
+      align-items:end;
+      padding-bottom:34px;
+    }
+
+    .locationHeroContent{
+      max-width:780px;
+    }
+
+    .locationHeroEyebrow{
+      color:rgba(255,255,255,0.72);
+    }
+
+    .locationHeroTitle{
+      color:#fff;
+      text-shadow:0 10px 30px rgba(0,0,0,0.18);
+      max-width:780px;
+    }
+
+    .locationHeroText{
+      margin:22px 0 0;
+      max-width:620px;
+      font-size:18px;
+      line-height:1.8;
+      color:rgba(255,255,255,0.88);
+    }
+
+    .locationHeroCard{
+      max-width:360px;
+      margin-left:auto;
+      padding:24px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.46);
+      box-shadow:var(--shadow-lg);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    .locationHeroCard .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .locationHeroCard p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.74;
+    }
+
+    .locationIntro{
+      padding-top:84px;
+      padding-bottom:32px;
+    }
+
+    .locationIntroHead{
+      max-width:920px;
+      display:grid;
+      gap:16px;
+    }
+
+    .locationHighlights{
+      padding-top:18px;
+      padding-bottom:84px;
+    }
+
+    .locationHighlightsGrid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:24px;
+    }
+
+    .locationCard{
+      padding:28px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-md);
+    }
+
+    .locationCard .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .locationCard h3{
+      margin:0 0 10px;
+      font-family:var(--font-serif);
+      font-size:30px;
+      line-height:1.05;
+      color:var(--text);
+    }
+
+    .locationCard p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.78;
+    }
+
+    .locationSplit{
+      padding-top:0;
+      padding-bottom:84px;
+    }
+
+    .locationSplitGrid{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .locationTextPanel,
+    .locationMapPanel{
+      padding:34px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-md);
+    }
+
+    .locationTextPanel{
+      display:grid;
+      gap:18px;
+    }
+
+    .locationTextPanel .body{
+      max-width:820px;
+    }
+
+    .locationMapMock{
+      position:relative;
+      overflow:hidden;
+      min-height:100%;
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 20% 24%, rgba(143,174,143,0.24), transparent 22%),
+        radial-gradient(circle at 74% 68%, rgba(180,95,75,0.18), transparent 24%),
+        linear-gradient(180deg, #f1e6d8 0%, #eadccc 100%);
+      border:1px solid rgba(92,71,54,0.08);
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:32px;
+    }
+
+    .locationMapMock strong{
+      display:block;
+      margin-bottom:10px;
+      font-family:var(--font-serif);
+      font-size:34px;
+      line-height:1;
+      color:var(--text);
+    }
+
+    .locationMapMock p{
+      margin:0;
+      max-width:380px;
+      color:var(--text-soft);
+      line-height:1.78;
+    }
+
+    .locationAccess{
+      padding-top:0;
+      padding-bottom:84px;
+    }
+
+    .locationAccessGrid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:24px;
+    }
+
+    .locationAccessCard{
+      padding:28px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-md);
+    }
+
+    .locationAccessCard .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .locationAccessCard p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.78;
+    }
+
+    .locationClosing{
+      padding-top:0;
+      padding-bottom:72px;
+    }
+
+    .locationClosingPanel{
+      padding:42px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .locationClosingPanel .lead{
+      max-width:860px;
+    }
+
+    @media (max-width: 1100px){
+      .locationHeroGrid,
+      .locationSplitGrid,
+      .locationHighlightsGrid,
+      .locationAccessGrid{
+        grid-template-columns:1fr;
+      }
+
+      .locationHeroCard{
+        margin-left:0;
+        max-width:460px;
+      }
+    }
+
+    @media (max-width: 760px){
+      .locationHero{
+        min-height:auto;
+      }
+
+      .locationHeroGrid{
+        min-height:calc(74svh - var(--header-h) - 18px);
+        gap:24px;
+        padding-bottom:26px;
+      }
+
+      .locationHeroText{
+        font-size:17px;
+        line-height:1.74;
+      }
+
+      .locationHeroCard,
+      .locationTextPanel,
+      .locationMapPanel,
+      .locationCard,
+      .locationAccessCard,
+      .locationClosingPanel{
+        padding:22px;
+        border-radius:24px;
+      }
+
+      .locationIntro{
+        padding-top:60px;
+      }
+
+      .locationHighlights,
+      .locationSplit,
+      .locationAccess{
+        padding-bottom:64px;
+      }
+
+      .locationMapMock{
+        border-radius:20px;
+        padding:26px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main>
+
+    <section class="locationHero">
+      <div class="locationHeroBg">
+        <img src="/assets/img/hero-trancoso.jpg" alt="Trancoso, Bahia" />
+        <div class="locationHeroOverlay"></div>
+      </div>
+
+      <div class="locationHeroGrid">
+        <div class="locationHeroContent" data-reveal="left">
+          <p class="eyebrow locationHeroEyebrow shimmerLine">Casas da Vila • Localização</p>
+
+          <h1 class="display locationHeroTitle">
+            Entre o mar,<br>
+            a vila e<br>
+            o jardim.
+          </h1>
+
+          <p class="locationHeroText">
+            Estar em Trancoso é viver uma geografia própria: praia, falésia, vegetação, céu aberto e
+            o ritmo desacelerado de uma vila que continua singular.
+          </p>
+        </div>
+
+        <div class="locationHeroCard heroFloat" data-reveal="right">
+          <p class="eyebrow">Trancoso</p>
+          <p>
+            Casas da Vila parte dessa sensibilidade local: luz, natureza, silêncio, textura e um luxo
+            mais leve, sem peso urbano e sem excesso.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section locationIntro">
+      <div class="wrap">
+        <div class="locationIntroHead" data-reveal="zoom">
+          <p class="eyebrow">A vila</p>
+          <h2 class="h2">Uma localização que faz parte da experiência de estadia</h2>
+          <p class="lead">
+            Trancoso não é apenas um destino de praia. É uma experiência de escala, tempo e atmosfera.
+            A localização do hotel participa diretamente dessa sensação de permanência mais sensível.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section locationHighlights">
+      <div class="wrap">
+        <div class="locationHighlightsGrid">
+          <article class="locationCard" data-reveal="left">
+            <p class="eyebrow">Praias</p>
+            <h3>Perto do mar e do horizonte aberto</h3>
+            <p>
+              Trancoso é feito de praias amplas, falésias e vegetação costeira, em uma paisagem que
+              combina calor, vento, luz e silêncio.
+            </p>
+          </article>
+
+          <article class="locationCard" data-reveal="zoom">
+            <p class="eyebrow">Quadrado</p>
+            <h3>Perto da vida da vila</h3>
+            <p>
+              A estadia se conecta ao ritmo do Quadrado: arquitetura, gastronomia, caminhar sem pressa
+              e uma forma de viver Trancoso que vai além da praia.
+            </p>
+          </article>
+
+          <article class="locationCard" data-reveal="right">
+            <p class="eyebrow">Atmosfera</p>
+            <h3>Perto do que faz Trancoso ser Trancoso</h3>
+            <p>
+              Mais do que um ponto no mapa, a localização aqui importa pela sensação: jardim, calor,
+              textura natural e ritmo desacelerado.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section locationSplit">
+      <div class="wrap">
+        <div class="locationSplitGrid">
+          <div class="locationTextPanel" data-reveal="left">
+            <p class="eyebrow">Chegada</p>
+            <h2 class="h2">Chegar faz parte da transição de ritmo</h2>
+            <p class="body">
+              A chegada a Trancoso já altera a percepção do tempo. A viagem vai se tornando mais leve,
+              a paisagem mais aberta e o entorno mais vegetal.
+            </p>
+            <p class="body">
+              Ao se aproximar da vila, a lógica deixa de ser urbana e passa a ser sensorial: terra,
+              mar, céu, jardim e uma presença constante da natureza.
+            </p>
+            <p class="body">
+              Nas Casas da Vila, essa relação com o lugar continua na experiência da hospedagem — sem
+              ruptura, sem excesso e sem rigidez.
+            </p>
+          </div>
+
+          <div class="locationMapPanel" data-reveal="right">
+            <div class="locationMapMock">
+              <div>
+                <strong>Trancoso</strong>
+                <p>
+                  Aqui entra depois o mapa real, o link para rota e a informação precisa de endereço —
+                  sem perder a elegância visual da página.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section locationAccess">
+      <div class="wrap">
+        <div class="locationAccessGrid">
+          <article class="locationAccessCard" data-reveal="left">
+            <p class="eyebrow">Acesso</p>
+            <p>
+              O acesso pode ser feito a partir da região de Porto Seguro e arredores, seguindo em
+              direção a Trancoso por uma viagem que já introduz a paisagem e o ritmo do destino.
+            </p>
+          </article>
+
+          <article class="locationAccessCard" data-reveal="zoom">
+            <p class="eyebrow">Mobilidade</p>
+            <p>
+              Uma vez em Trancoso, a experiência funciona melhor em escala local: percursos curtos,
+              deslocamentos leves e uma relação mais próxima com a vila, as praias e os jardins.
+            </p>
+          </article>
+
+          <article class="locationAccessCard" data-reveal="right">
+            <p class="eyebrow">Orientação</p>
+            <p>
+              Na próxima etapa, esta página receberá endereço, mapa, link de navegação e contato direto
+              para assistência de chegada, mantendo o acabamento premium do site.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section locationClosing">
+      <div class="wrap">
+        <div class="locationClosingPanel" data-reveal="zoom">
+          <p class="eyebrow">Estadia</p>
+          <h2 class="h2">A localização não é só logística — é parte da atmosfera</h2>
+          <p class="lead mt-16">
+            Em Trancoso, onde se fica muda a percepção da viagem. Casas da Vila parte exatamente dessa
+            relação entre destino, natureza, escala e permanência.
+          </p>
+
+          <div class="ctaRow mt-26">
+            <a class="btn btnPrimary" href="/pt/reservar/">Ver disponibilidade</a>
+            <a class="btn btnGhost" href="/pt/contato/">Fale conosco</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

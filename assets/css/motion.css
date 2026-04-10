@@ -1,0 +1,101 @@
+[data-reveal]{
+  opacity:0;
+  transform:translateY(26px) scale(.985);
+  transition:
+    opacity .9s var(--ease),
+    transform .9s var(--ease),
+    filter .9s var(--ease);
+  filter:blur(6px);
+  will-change:transform, opacity, filter;
+}
+
+[data-reveal].is-visible{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+}
+
+[data-reveal="left"]{
+  transform:translateX(-28px);
+}
+
+[data-reveal="right"]{
+  transform:translateX(28px);
+}
+
+[data-reveal="zoom"]{
+  transform:scale(.94);
+}
+
+.heroFloat{
+  animation:heroFloat 8s ease-in-out infinite;
+}
+
+@keyframes heroFloat{
+  0%,100%{
+    transform:translateY(0px);
+  }
+  50%{
+    transform:translateY(-8px);
+  }
+}
+
+.shimmerLine{
+  position:relative;
+  overflow:hidden;
+}
+
+.shimmerLine::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  transform:translateX(-100%);
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.35),
+    transparent
+  );
+  animation:shimmerSweep 5.5s ease-in-out infinite;
+}
+
+@keyframes shimmerSweep{
+  0%{
+    transform:translateX(-120%);
+  }
+  50%,100%{
+    transform:translateX(120%);
+  }
+}
+
+.parallaxSoft{
+  transform:translateY(var(--parallax-offset, 0px));
+  transition:transform .2s linear;
+}
+
+.hoverLift{
+  transition:
+    transform .45s var(--ease),
+    box-shadow .45s var(--ease);
+}
+
+.hoverLift:hover{
+  transform:translateY(-6px);
+  box-shadow:0 26px 60px rgba(76,52,35,0.16);
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition:none !important;
+    scroll-behavior:auto !important;
+  }
+
+  [data-reveal]{
+    opacity:1 !important;
+    transform:none !important;
+    filter:none !important;
+  }
+}
