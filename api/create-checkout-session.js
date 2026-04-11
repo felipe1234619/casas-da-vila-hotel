@@ -1,86 +1,141 @@
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-function getBaseUrl(req) {
+
+function absoluteUrl(req, path) {
   const proto =
     req.headers['x-forwarded-proto'] ||
-    (req.connection && req.connection.encrypted ? 'https' : 'http');
-
+    (req.headers.host && req.headers.host.includes('localhost') ? 'http' : 'https');
   const host = req.headers['x-forwarded-host'] || req.headers.host;
+  return `${proto}://${host}${path}`;
+}
 
-  return `${proto}://${host}`;
+function normalizeUnitName(unitSlug) {
+  const map = {
+    'casa-oca': 'Casa Oca',
+    'casa-dende': 'Casa Dendê',
+    'casa-dos-baloes': 'Casa dos Balões',
+    'casa-grande': 'Casa Grande',
+    'casa-manga': 'Casa Manga',
+    'casa-rosada': 'Casa Rosada',
+    'casa-branca': 'Casa Branca'
+  };
+
+  return map[unitSlug] || unitSlug || 'Casa selecionada';
+}
+
+function diffNights(checkin, checkout) {
+  const start = new Date(`${checkin}T00:00:00`);
+  const end = new Date(`${checkout}T00:00:00`);
+  const ms = end.getTime() - start.getTime();
+  return Math.max(1, Math.round(ms / (1000 * 60 * 60 * 24)));
 }
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).send('Method Not Allowed');
   }
 
   try {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return res.status(500).json({ error: 'Missing STRIPE_SECRET_KEY' });
+    }
+
     const {
-      holdId,
+      unitSlug,
       unitName,
-      checkIn,
-      checkOut,
+      checkin,
+      checkout,
       guestsCount,
+      guestName,
+      guestEmail,
+      guestPhone,
+      specialRequests,
       amountTotal,
-      guestEmail
+      currency,
+      holdId
     } = req.body || {};
 
-    if (!process.env.STRIPE_SECRET_KEY) {
-      return res.status(500).json({ error: 'STRIPE_SECRET_KEY não configurada.' });
+    if (!unitSlug || !checkin || !checkout || !guestName || !guestEmail || !amountTotal) {
+      return res.status(400).json({
+        error: 'Missing required fields',
+        required: [
+          'unitSlug',
+          'checkin',
+          'checkout',
+          'guestName',
+          'guestEmail',
+          'amountTotal'
+        ]
+      });
     }
 
-    if (!holdId || !unitName || !checkIn || !checkOut || !guestsCount || !amountTotal || !guestEmail) {
-      return res.status(400).json({ error: 'Dados obrigatórios ausentes para criar o checkout.' });
+    const finalUnitName = unitName || normalizeUnitName(unitSlug);
+    const finalGuestsCount = Number(guestsCount || 1);
+    const finalAmountTotal = Number(amountTotal);
+    const finalCurrency = (currency || 'brl').toLowerCase();
+    const nights = diffNights(checkin, checkout);
+
+    if (!Number.isFinite(finalAmountTotal) || finalAmountTotal <= 0) {
+      return res.status(400).json({ error: 'Invalid amountTotal' });
     }
 
-    const parsedAmount = Number(amountTotal);
+    const successUrl = absoluteUrl(
+      req,
+      `/pt/sucesso/?session_id={CHECKOUT_SESSION_ID}&unit=${encodeURIComponent(unitSlug)}`
+    );
 
-    if (!Number.isFinite(parsedAmount) || parsedAmount <= 0) {
-      return res.status(400).json({ error: 'Valor total inválido.' });
-    }
-
-    const baseUrl = getBaseUrl(req);
+    const cancelUrl = absoluteUrl(
+      req,
+      `/pt/reservar/?unit=${encodeURIComponent(unitSlug)}&checkin=${encodeURIComponent(
+        checkin
+      )}&checkout=${encodeURIComponent(checkout)}`
+    );
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
-      payment_method_types: ['card'],
       customer_email: guestEmail,
-
+      success_url: successUrl,
+      cancel_url: cancelUrl,
+      payment_method_types: ['card'],
+      billing_address_collection: 'auto',
+      metadata: {
+        unit_slug: unitSlug,
+        unit_name: finalUnitName,
+        guest_name: guestName,
+        guest_email: guestEmail,
+        guest_phone: guestPhone || '',
+        checkin,
+        checkout,
+        guests_count: String(finalGuestsCount),
+        special_requests: specialRequests || '',
+        amount_total: String(finalAmountTotal),
+        hold_id: holdId || ''
+      },
       line_items: [
         {
           quantity: 1,
           price_data: {
-            currency: 'brl',
-            unit_amount: Math.round(parsedAmount * 100),
+            currency: finalCurrency,
+            unit_amount: finalAmountTotal,
             product_data: {
-              name: `Reserva • ${unitName}`,
-              description: `${checkIn} → ${checkOut} • ${guestsCount} hóspede(s)`
+              name: `Reserva • ${finalUnitName}`,
+              description: `${checkin} → ${checkout} • ${nights} noite(s) • ${finalGuestsCount} hóspede(s)`
             }
           }
         }
-      ],
-
-      metadata: {
-        hold_id: String(holdId),
-        unit_name: String(unitName),
-        check_in: String(checkIn),
-        check_out: String(checkOut),
-        guests_count: String(guestsCount)
-      },
-
-      success_url: `${baseUrl}/pt/sucesso/?hold_id=${encodeURIComponent(holdId)}&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/pt/reservar/?hold_id=${encodeURIComponent(holdId)}`
+      ]
     });
 
     return res.status(200).json({
+      id: session.id,
       url: session.url
     });
-  } catch (error) {
-    console.error('stripe-create-checkout-session-error', error);
+  } catch (err) {
+    console.error('create-checkout-session error:', err);
     return res.status(500).json({
-      error: 'Erro ao criar sessão de checkout.'
+      error: 'Internal checkout error',
+      message: err.message
     });
   }
 }
