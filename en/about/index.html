@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About | Casas da Vila</title>
+  <meta
+    name="description"
+    content="A place shaped by light, silence and time. Casas da Vila in Trancoso is a more sensitive way of staying."
+  />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="/assets/css/motion.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <style>
+    .aboutHero{
+      position:relative;
+      min-height:100svh;
+      padding-top:calc(var(--header-h) + 24px);
+      overflow:hidden;
+      isolation:isolate;
+      display:flex;
+      align-items:center;
+    }
+
+    .aboutHeroBg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .aboutHeroBg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center center;
+      transform:scale(1.02);
+    }
+
+    .aboutHeroOverlay{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(16,14,12,0.42) 0%, rgba(16,14,12,0.20) 24%, rgba(16,14,12,0.14) 48%, rgba(16,14,12,0.46) 100%),
+        linear-gradient(90deg, rgba(16,14,12,0.18) 0%, rgba(16,14,12,0.06) 30%, rgba(16,14,12,0.06) 70%, rgba(16,14,12,0.18) 100%);
+    }
+
+    .aboutHeroGrid{
+      position:relative;
+      z-index:2;
+      width:min(1100px, calc(100% - 32px));
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:84px 0 64px;
+    }
+
+    .aboutHeroContent{
+      max-width:980px;
+      margin:0 auto;
+    }
+
+    .aboutHeroEyebrow{
+      color:rgba(255,255,255,0.78);
+      margin-bottom:18px;
+      letter-spacing:.18em;
+    }
+
+    .aboutHeroTitle{
+      max-width:980px;
+      margin:0 auto;
+      color:#fff;
+      text-shadow:0 14px 40px rgba(0,0,0,0.22);
+      line-height:0.94;
+    }
+
+    .aboutHeroText{
+      margin:28px auto 0;
+      max-width:680px;
+      font-size:21px;
+      line-height:1.65;
+      color:rgba(255,255,255,0.92);
+      text-shadow:0 8px 24px rgba(0,0,0,0.18);
+    }
+
+    .aboutHeroCard{
+      margin:34px auto 0;
+      max-width:620px;
+      padding:22px 24px;
+      border-radius:999px;
+      background:rgba(255,252,248,0.14);
+      border:1px solid rgba(255,255,255,0.20);
+      box-shadow:0 10px 30px rgba(0,0,0,0.10);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      text-align:center;
+    }
+
+    .aboutHeroCard .eyebrow{
+      margin:0 0 8px;
+      color:rgba(255,255,255,0.74);
+      letter-spacing:.18em;
+    }
+
+    .aboutHeroCard p:last-child{
+      margin:0;
+      color:rgba(255,255,255,0.92);
+      line-height:1.7;
+    }
+
+    .aboutIntro{
+      padding-top:90px;
+      padding-bottom:38px;
+    }
+
+    .aboutIntroGrid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:26px;
+      justify-items:center;
+      text-align:center;
+    }
+
+    .aboutIntroText{
+      display:grid;
+      gap:18px;
+      max-width:780px;
+      margin:0 auto;
+    }
+
+    .aboutStatement{
+      max-width:720px;
+      margin:0 auto;
+      padding:30px 34px;
+      border-radius:30px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-md);
+      text-align:center;
+    }
+
+    .aboutStatement p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.82;
+    }
+
+    .aboutValues{
+      padding-top:16px;
+      padding-bottom:90px;
+    }
+
+    .aboutValuesGrid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:24px;
+      max-width:1160px;
+      margin:0 auto;
+    }
+
+    .aboutValueCard{
+      padding:30px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-md);
+      text-align:center;
+    }
+
+    .aboutValueCard .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .aboutValueCard h3{
+      margin:0 0 12px;
+      font-family:var(--font-serif);
+      font-size:34px;
+      line-height:1.02;
+      color:var(--text);
+    }
+
+    .aboutValueCard p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.8;
+      max-width:320px;
+      margin-inline:auto;
+    }
+
+    .aboutNarrative{
+      padding-top:0;
+      padding-bottom:90px;
+    }
+
+    .aboutNarrativePanel{
+      max-width:980px;
+      margin:0 auto;
+      padding:42px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+      text-align:center;
+    }
+
+    .aboutNarrativeGrid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:24px;
+      margin-top:34px;
+    }
+
+    .aboutNarrativeItem{
+      padding:26px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.70);
+      border:1px solid rgba(92,71,54,0.08);
+      text-align:center;
+    }
+
+    .aboutNarrativeItem .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .aboutNarrativeItem p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.78;
+    }
+
+    .aboutDifference{
+      padding-top:0;
+      padding-bottom:90px;
+    }
+
+    .aboutDifferenceGrid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:26px;
+      align-items:stretch;
+      justify-items:center;
+    }
+
+    .aboutDifferenceText{
+      max-width:760px;
+      padding:0;
+      text-align:center;
+      display:grid;
+      gap:18px;
+    }
+
+    .aboutDifferenceImage{
+      width:min(980px, 100%);
+      padding:18px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-md);
+    }
+
+    .aboutDifferenceImageWrap{
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+    }
+
+    .aboutDifferenceImageWrap img{
+      width:100%;
+      height:100%;
+      min-height:520px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .aboutClosing{
+      padding-top:0;
+      padding-bottom:76px;
+    }
+
+    .aboutClosingPanel{
+      max-width:860px;
+      margin:0 auto;
+      padding:44px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+      text-align:center;
+    }
+
+    .aboutClosingPanel .lead{
+      max-width:700px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    @media (max-width: 1100px){
+      .aboutValuesGrid,
+      .aboutNarrativeGrid{
+        grid-template-columns:1fr;
+      }
+
+      .aboutValueCard p{
+        max-width:unset;
+      }
+
+      .aboutDifferenceImage{
+        width:100%;
+      }
+    }
+
+    @media (max-width: 760px){
+      .aboutHero{
+        min-height:92svh;
+        padding-top:calc(var(--header-h) + 18px);
+      }
+
+      .aboutHeroGrid{
+        width:min(100%, calc(100% - 24px));
+        padding:62px 0 44px;
+      }
+
+      .aboutHeroTitle{
+        max-width:100%;
+      }
+
+      .aboutHeroText{
+        font-size:18px;
+        max-width:520px;
+      }
+
+      .aboutHeroCard{
+        max-width:100%;
+        border-radius:28px;
+        padding:20px;
+      }
+
+      .aboutStatement,
+      .aboutValueCard,
+      .aboutNarrativePanel,
+      .aboutNarrativeItem,
+      .aboutDifferenceImage,
+      .aboutClosingPanel{
+        padding:22px;
+        border-radius:24px;
+      }
+
+      .aboutIntro{
+        padding-top:64px;
+      }
+
+      .aboutValues,
+      .aboutNarrative,
+      .aboutDifference{
+        padding-bottom:64px;
+      }
+
+      .aboutDifferenceImageWrap{
+        border-radius:20px;
+      }
+
+      .aboutDifferenceImageWrap img{
+        min-height:280px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main>
+
+    <section class="aboutHero">
+      <div class="aboutHeroBg">
+        <img src="/assets/img/hero-trancoso.jpg" alt="Casas da Vila, Trancoso" />
+        <div class="aboutHeroOverlay"></div>
+      </div>
+
+      <div class="aboutHeroGrid">
+        <div class="aboutHeroContent" data-reveal="zoom">
+          <p class="eyebrow aboutHeroEyebrow shimmerLine">Casas da Vila • About</p>
+
+          <h1 class="display aboutHeroTitle">
+            A place shaped<br>
+            by light, silence<br>
+            and time.
+          </h1>
+
+          <p class="aboutHeroText">
+            Not a hotel.<br>
+            Not quite a house.<br>
+            Something in between — quieter, softer, more intentional.
+          </p>
+        </div>
+
+        <div class="aboutHeroCard heroFloat" data-reveal="fade">
+          <p class="eyebrow">Concept</p>
+          <p>
+            A collection of houses, a garden, a slower rhythm —
+            and a way of staying that feels closer to the place itself.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section aboutIntro">
+      <div class="wrap">
+        <div class="aboutIntroGrid">
+
+          <div class="aboutIntroText" data-reveal="up">
+            <p class="eyebrow">Hospitality</p>
+            <h2 class="h2">Less structure, more presence</h2>
+
+            <p class="body">
+              Casas da Vila begins with a simple idea:
+              space should feel natural.
+            </p>
+
+            <p class="body">
+              Light moves freely.<br>
+              Air circulates.<br>
+              Time expands.
+            </p>
+
+            <p class="body">
+              Nothing insists.<br>
+              Everything invites.
+            </p>
+          </div>
+
+          <div class="aboutStatement" data-reveal="up">
+            <p>
+              Hospitality, here, is not built through excess —
+              but through proportion, material and quiet attention.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section aboutValues">
+      <div class="wrap">
+        <div class="aboutValuesGrid">
+
+          <article class="aboutValueCard" data-reveal="up">
+            <p class="eyebrow">Scale</p>
+            <h3>Houses, not rooms</h3>
+            <p>
+              Each space has its own identity.
+              No corridors. No repetition.
+              Just different ways of inhabiting.
+            </p>
+          </article>
+
+          <article class="aboutValueCard" data-reveal="up">
+            <p class="eyebrow">Atmosphere</p>
+            <h3>Garden, shade, texture</h3>
+            <p>
+              Materials soften the light.
+              Vegetation filters the air.
+              The environment settles slowly around you.
+            </p>
+          </article>
+
+          <article class="aboutValueCard" data-reveal="up">
+            <p class="eyebrow">Rhythm</p>
+            <h3>Time, unstructured</h3>
+            <p>
+              No urgency.<br>
+              No fixed pace.<br>
+              Just the possibility of staying longer than expected.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section aboutNarrative">
+      <div class="wrap">
+
+        <div class="aboutNarrativePanel" data-reveal="zoom">
+          <p class="eyebrow">Experience</p>
+
+          <h2 class="h2">
+            A shift, from the moment you arrive
+          </h2>
+
+          <p class="lead mt-16">
+            Something changes almost immediately —
+            the pace, the noise, the way time is perceived.
+          </p>
+
+          <div class="aboutNarrativeGrid">
+
+            <div class="aboutNarrativeItem">
+              <p class="eyebrow">Arrival</p>
+              <p>
+                No staging.<br>
+                Just a quiet transition<br>
+                into another rhythm.
+              </p>
+            </div>
+
+            <div class="aboutNarrativeItem">
+              <p class="eyebrow">Stay</p>
+              <p>
+                House, garden, village, beach —
+                everything connected,
+                without interruption.
+              </p>
+            </div>
+
+            <div class="aboutNarrativeItem">
+              <p class="eyebrow">Memory</p>
+              <p>
+                What remains is not a moment,
+                but a feeling —
+                light, warmth, silence.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section aboutDifference">
+      <div class="wrap">
+
+        <div class="aboutDifferenceGrid">
+
+          <div class="aboutDifferenceText" data-reveal="up">
+            <p class="eyebrow">Difference</p>
+
+            <h2 class="h2">
+              Not imported.<br>
+              Not replicated.
+            </h2>
+
+            <p class="body">
+              Casas da Vila does not reproduce
+              urban luxury in a tropical setting.
+            </p>
+
+            <p class="body">
+              It emerges from the place —
+              from its materials, its light, its scale,
+              its own way of being.
+            </p>
+          </div>
+
+          <div class="aboutDifferenceImage" data-reveal="zoom">
+            <div class="aboutDifferenceImageWrap">
+              <img src="/assets/img/home-jardim.jpg" alt="Casas da Vila garden" />
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section aboutClosing">
+      <div class="wrap">
+
+        <div class="aboutClosingPanel" data-reveal="zoom">
+          <p class="eyebrow">Stay</p>
+
+          <h2 class="h2">
+            Less noise.<br>
+            More atmosphere.
+          </h2>
+
+          <p class="lead mt-16">
+            In Trancoso, the landscape already speaks.
+            Hospitality simply needs to listen.
+          </p>
+
+          <div class="ctaRow mt-26">
+            <a class="btn btnPrimary" href="/en/book/">Check availability</a>
+            <a class="btn btnGhost" href="/en/contact/">Contact us</a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Casa Grande | Casas da Vila</title>
+  <meta
+    name="description"
+    content="Casa Grande at Casas da Vila, in Trancoso. An authorial stay with scale, garden and a tropical atmosphere."
+  />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="/assets/css/motion.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <!-- 🔒 CSS IDENTICAL TO PT VERSION -->
+  <style>
+    /* ⚠️ NÃO ALTERAR — mantém consistência visual entre PT e EN */
+    <style>
+  .houseHero{
+    position:relative;
+    min-height:72svh;
+    padding-top:calc(var(--header-h) + 18px);
+    overflow:hidden;
+  }
+
+  .houseHeroBg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+  }
+
+  .houseHeroBg img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .houseHeroOverlay{
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(90deg, rgba(28,22,17,0.54) 0%, rgba(28,22,17,0.22) 44%, rgba(28,22,17,0.10) 100%),
+      linear-gradient(180deg, rgba(255,245,232,0.06) 0%, rgba(26,20,16,0.22) 100%);
+  }
+
+  .houseHeroGrid{
+    position:relative;
+    z-index:2;
+    width:min(var(--container), calc(100% - 32px));
+    min-height:calc(72svh - var(--header-h) - 18px);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1.08fr .92fr;
+    gap:44px;
+    align-items:end;
+    padding-bottom:38px;
+  }
+
+  .houseHeroContent{
+    max-width:760px;
+  }
+
+  .houseHeroEyebrow{
+    color:rgba(255,255,255,0.72);
+  }
+
+  .houseHeroTitle{
+    color:#fff;
+    text-shadow:0 10px 30px rgba(0,0,0,0.16);
+    max-width:780px;
+    margin:0;
+  }
+
+  .houseHeroText{
+    margin:22px 0 0;
+    max-width:620px;
+    font-size:18px;
+    line-height:1.8;
+    color:rgba(255,255,255,0.88);
+  }
+
+  .houseHeroNote{
+    max-width:360px;
+    padding:24px;
+    border-radius:28px;
+    background:rgba(255,252,248,0.76);
+    border:1px solid rgba(255,255,255,0.48);
+    box-shadow:var(--shadow-lg);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+  }
+
+  .houseHeroNote .eyebrow{
+    margin-bottom:10px;
+  }
+
+  .houseHeroNote p{
+    margin:0;
+    color:var(--text-soft);
+    line-height:1.72;
+  }
+
+  .houseIntro{
+    padding-top:84px;
+    padding-bottom:24px;
+  }
+
+  .houseIntroGrid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:34px;
+    align-items:start;
+  }
+
+  .houseIntroHead{
+    max-width:920px;
+    display:grid;
+    gap:16px;
+  }
+
+  .houseIntroText{
+    display:grid;
+    gap:18px;
+  }
+
+  .houseGallery{
+    padding-top:12px;
+    padding-bottom:88px;
+  }
+
+  .houseGalleryGrid{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:22px;
+    align-items:stretch;
+  }
+
+  .houseGalleryMain{
+    position:relative;
+    overflow:hidden;
+    border-radius:30px;
+    box-shadow:var(--shadow-md);
+  }
+
+  .houseGalleryMain img{
+    width:100%;
+    height:100%;
+    min-height:620px;
+    object-fit:cover;
+    display:block;
+  }
+
+  .houseGallerySide{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+  }
+
+  .houseGallerySide article{
+    position:relative;
+    overflow:hidden;
+    border-radius:24px;
+    box-shadow:var(--shadow-sm);
+  }
+
+  .houseGallerySide img{
+    width:100%;
+    height:100%;
+    min-height:300px;
+    object-fit:cover;
+    display:block;
+  }
+
+  .houseSpecs{
+    padding-top:0;
+    padding-bottom:88px;
+  }
+
+  .houseSpecsHead{
+    max-width:920px;
+    display:grid;
+    gap:16px;
+    margin-bottom:28px;
+  }
+
+  .houseSpecsGrid{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:24px;
+  }
+
+  .houseSpecCard{
+    padding:24px;
+    border-radius:28px;
+    background:rgba(255,252,248,0.84);
+    border:1px solid rgba(255,255,255,0.56);
+    box-shadow:var(--shadow-sm);
+  }
+
+  .houseSpecCard h3{
+    margin:0 0 10px;
+    font-family:var(--font-serif);
+    font-size:28px;
+    line-height:1;
+    letter-spacing:-.03em;
+    color:var(--text);
+  }
+
+  .houseSpecCard p{
+    margin:0;
+    color:var(--text-soft);
+    line-height:1.72;
+  }
+
+  .houseStay{
+    padding-top:0;
+    padding-bottom:72px;
+  }
+
+  .houseStayPanel{
+    padding:42px;
+    border-radius:32px;
+    background:rgba(255,252,248,0.72);
+    border:1px solid rgba(255,255,255,0.54);
+    box-shadow:var(--shadow-md);
+  }
+
+  .houseBookingIntro{
+    display:grid;
+    gap:14px;
+    max-width:720px;
+  }
+
+  .houseBookingIntro h2{
+    margin:0;
+  }
+
+  .houseBookingIntro p{
+    margin:0;
+    color:var(--text-soft);
+    line-height:1.72;
+  }
+
+  .houseBookingForm{
+    display:grid;
+    gap:18px;
+    margin-top:24px;
+  }
+
+  .houseBookingGrid{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:14px;
+  }
+
+  .houseBookingField{
+    display:grid;
+    gap:8px;
+  }
+
+  .houseBookingField label{
+    font-size:13px;
+    color:var(--text-soft);
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+
+  .houseBookingField input,
+  .houseBookingField select{
+    width:100%;
+    min-height:56px;
+    border-radius:18px;
+    border:1px solid rgba(92,71,54,0.10);
+    background:rgba(255,255,255,0.76);
+    color:var(--text);
+    padding:0 16px;
+    font:inherit;
+    outline:none;
+    box-shadow:none;
+  }
+
+  .houseBookingField input:focus,
+  .houseBookingField select:focus{
+    border-color:rgba(57,126,224,0.38);
+    box-shadow:0 0 0 3px rgba(57,126,224,0.08);
+  }
+
+  .houseBookingActions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:center;
+  }
+
+  .houseBookingHint{
+    margin:0;
+    font-size:14px;
+    color:var(--text-soft);
+    line-height:1.6;
+  }
+
+  @media (max-width: 1100px){
+    .houseHeroGrid,
+    .houseIntroGrid,
+    .houseGalleryGrid{
+      grid-template-columns:1fr;
+    }
+
+    .houseGallerySide{
+      grid-template-columns:1fr 1fr;
+    }
+
+    .houseSpecsGrid,
+    .houseBookingGrid{
+      grid-template-columns:1fr;
+    }
+
+    .houseHeroNote{
+      max-width:460px;
+    }
+  }
+
+  @media (max-width: 760px){
+    .houseHero{
+      min-height:auto;
+    }
+
+    .houseHeroGrid{
+      min-height:calc(78svh - var(--header-h) - 18px);
+      gap:24px;
+      padding-bottom:26px;
+    }
+
+    .houseHeroTitle{
+      max-width:none;
+    }
+
+    .houseHeroText{
+      font-size:17px;
+      line-height:1.74;
+    }
+
+    .houseHeroNote{
+      max-width:none;
+      width:100%;
+      padding:20px;
+      border-radius:24px;
+    }
+
+    .houseIntro{
+      padding-top:60px;
+    }
+
+    .houseGallery,
+    .houseSpecs{
+      padding-bottom:64px;
+    }
+
+    .houseGalleryMain img{
+      min-height:380px;
+    }
+
+    .houseGallerySide{
+      grid-template-columns:1fr;
+    }
+
+    .houseGallerySide img{
+      min-height:240px;
+    }
+
+    .houseSpecCard{
+      padding:20px;
+      border-radius:24px;
+    }
+
+    .houseStayPanel{
+      padding:26px;
+      border-radius:24px;
+    }
+
+    .houseBookingActions{
+      flex-direction:column;
+      align-items:stretch;
+    }
+
+    .houseBookingActions .btn{
+      width:100%;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="houseHero">
+      <div class="houseHeroBg">
+        <img src="/assets/img/casa-grande/hero.jpeg" alt="Casa Grande in Trancoso" />
+        <div class="houseHeroOverlay"></div>
+      </div>
+
+      <div class="houseHeroGrid">
+        <div class="houseHeroContent" data-reveal="left">
+          <p class="eyebrow houseHeroEyebrow shimmerLine">Casas da Vila • Trancoso</p>
+
+          <h1 class="display houseHeroTitle">
+            Casa Grande
+          </h1>
+
+          <p class="houseHeroText">
+            The most generous house in the collection, with scale, privacy and architectural presence for a more expansive stay.
+          </p>
+        </div>
+
+        <div class="houseHeroNote heroFloat" data-reveal="right">
+          <p class="eyebrow">The house</p>
+          <p>
+            An authorial residence with strong presence, surrounded by garden and tropical rhythm, with breakfast and parking already included.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="section houseIntro">
+      <div class="wrap houseIntroGrid">
+        <div class="houseIntroHead" data-reveal="zoom">
+          <p class="eyebrow">Casa Grande</p>
+          <h2 class="h2">A stay of scale, breath and permanence.</h2>
+        </div>
+
+        <div class="houseIntroText" data-reveal="zoom">
+          <p class="lead">
+            Casa Grande was designed for more generous and quiet stays, in close contact with vegetation, light and architecture.
+          </p>
+          <p class="lead">
+            The result is a more exclusive experience, defined by comfort, privacy and a tropical atmosphere.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section houseGallery">
+      <div class="wrap">
+        <div class="houseGalleryGrid">
+          <article class="houseGalleryMain" data-reveal="left">
+            <img src="/assets/img/casa-grande/gallery-01.jpeg" alt="Casa Grande" />
+          </article>
+
+          <div class="houseGallerySide">
+            <article data-reveal="right">
+              <img src="/assets/img/casa-grande/gallery-02.jpeg" alt="Casa Grande" />
+            </article>
+            <article data-reveal="right">
+              <img src="/assets/img/casa-grande/gallery-03.jpeg" alt="Casa Grande" />
+            </article>
+            <article data-reveal="right">
+              <img src="/assets/img/casa-grande/gallery-04.jpeg" alt="Casa Grande" />
+            </article>
+            <article data-reveal="right">
+              <img src="/assets/img/casa-grande/gallery-05.jpeg" alt="Casa Grande" />
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECS -->
+    <section class="section houseSpecs">
+      <div class="wrap">
+        <div class="houseSpecsHead" data-reveal="zoom">
+          <p class="eyebrow">Features</p>
+          <h2 class="h2">Scale, comfort and tropical atmosphere</h2>
+        </div>
+
+        <div class="houseSpecsGrid">
+          <div class="houseSpecCard" data-reveal="left">
+            <h3>Scale</h3>
+            <p>Generous spaces designed for longer and more relaxed stays.</p>
+          </div>
+
+          <div class="houseSpecCard" data-reveal="zoom">
+            <h3>Privacy</h3>
+            <p>Integration with the garden and a sense of retreat within the village.</p>
+          </div>
+
+          <div class="houseSpecCard" data-reveal="right">
+            <h3>Comfort</h3>
+            <p>Breakfast and parking already included in the experience.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section class="section houseStay">
+      <div class="wrap">
+        <div class="houseStayPanel" data-reveal="zoom">
+
+          <div class="houseBookingIntro">
+            <p class="eyebrow">Pre-booking</p>
+
+            <h2 class="h2">
+              Your stay at Casa Grande begins here
+            </h2>
+
+            <p>
+              Choose your dates, set the number of guests and continue to booking with breakfast and parking already included.
+            </p>
+          </div>
+
+          <form
+            class="houseBookingForm"
+            data-booking-form
+            data-booking-base="/en/book/"
+            data-booking-home="casa-grande"
+          >
+
+            <div class="houseBookingGrid">
+
+              <div class="houseBookingField">
+                <label for="checkin-en">Check-in</label>
+                <input type="date" id="checkin-en" name="checkin" required />
+              </div>
+
+              <div class="houseBookingField">
+                <label for="checkout-en">Check-out</label>
+                <input type="date" id="checkout-en" name="checkout" required />
+              </div>
+
+              <div class="houseBookingField">
+                <label for="guests-en">Guests</label>
+                <select id="guests-en" name="guests" required>
+                  <option value="2">2 guests</option>
+                  <option value="3">3 guests</option>
+                  <option value="4" selected>4 guests</option>
+                  <option value="5">5 guests</option>
+                  <option value="6">6 guests</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="houseBookingActions">
+              <button type="submit" class="btn btnPrimary">
+                Check availability for Casa Grande
+              </button>
+
+              <a class="btn btnGhost" href="/en/contact/">
+                Contact us
+              </a>
+            </div>
+
+            <p class="houseBookingHint">
+              Breakfast and parking are already included in the experience.
+            </p>
+
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/main.js"></script>
+
+  <!-- SCRIPT ÚNICO (igual PT) -->
+  <script>
+    (function () {
+      const forms = document.querySelectorAll("[data-booking-form]");
+      const isEnglish = window.location.pathname.startsWith("/en/");
+
+      const messages = isEnglish
+        ? {
+            missing: "Please fill in check-in, check-out and number of guests.",
+            invalidDates: "Check-out date must be after check-in.",
+            paramName: "house",
+            defaultBase: "/en/book/"
+          }
+        : {
+            missing: "Por favor, preencha check-in, check-out e hóspedes.",
+            invalidDates: "A data de check-out deve ser posterior ao check-in.",
+            paramName: "casa",
+            defaultBase: "/pt/reservar/"
+          };
+
+      forms.forEach((form) => {
+        const base = form.getAttribute("data-booking-base") || messages.defaultBase;
+        const house = form.getAttribute("data-booking-home") || "";
+
+        const checkin = form.querySelector('input[name="checkin"]');
+        const checkout = form.querySelector('input[name="checkout"]');
+        const guests = form.querySelector('select[name="guests"]');
+
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const dd = String(today.getDate()).padStart(2, "0");
+        const todayStr = `${yyyy}-${mm}-${dd}`;
+
+        if (checkin) checkin.min = todayStr;
+        if (checkout) checkout.min = todayStr;
+
+        function updateCheckoutMin() {
+          if (!checkin || !checkout) return;
+
+          if (checkin.value) {
+            checkout.min = checkin.value;
+
+            if (checkout.value && checkout.value <= checkin.value) {
+              checkout.value = "";
+            }
+          }
+        }
+
+        if (checkin) {
+          checkin.addEventListener("change", updateCheckoutMin);
+        }
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const checkinValue = checkin?.value || "";
+          const checkoutValue = checkout?.value || "";
+          const guestsValue = guests?.value || "";
+
+          if (!checkinValue || !checkoutValue || !guestsValue) {
+            alert(messages.missing);
+            return;
+          }
+
+          if (checkoutValue <= checkinValue) {
+            alert(messages.invalidDates);
+            return;
+          }
+
+          const url = new URL(base, window.location.origin);
+
+          url.searchParams.set(messages.paramName, house);
+          url.searchParams.set("checkin", checkinValue);
+          url.searchParams.set("checkout", checkoutValue);
+          url.searchParams.set("guests", guestsValue);
+
+          window.location.href = url.toString();
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

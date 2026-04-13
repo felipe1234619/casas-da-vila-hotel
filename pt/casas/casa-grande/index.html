@@ -6,7 +6,7 @@
   <title>Casa Grande | Casas da Vila</title>
   <meta
     name="description"
-    content="Casa Grande é a maior casa das Casas da Vila, em Trancoso: 210 m², 2 quartos, jacuzzi, cozinha, área de estar, jardim e uma experiência tropical boutique para até 4 hóspedes."
+    content="Casa Grande nas Casas da Vila, em Trancoso. Uma estadia autoral com jardim, atmosfera tropical e permanência mais ampla."
   />
 
   <link rel="stylesheet" href="/assets/css/global.css" />
@@ -16,7 +16,7 @@
   <style>
     .houseHero{
       position:relative;
-      min-height:88svh;
+      min-height:78svh;
       padding-top:calc(var(--header-h) + 18px);
       overflow:hidden;
     }
@@ -31,31 +31,32 @@
       width:100%;
       height:100%;
       object-fit:cover;
+      display:block;
     }
 
     .houseHeroOverlay{
       position:absolute;
       inset:0;
       background:
-        linear-gradient(90deg, rgba(22,20,18,0.58) 0%, rgba(22,20,18,0.26) 42%, rgba(22,20,18,0.10) 100%),
-        linear-gradient(180deg, rgba(255,244,228,0.06) 0%, rgba(18,16,14,0.24) 100%);
+        linear-gradient(90deg, rgba(28,22,17,0.58) 0%, rgba(28,22,17,0.24) 44%, rgba(28,22,17,0.10) 100%),
+        linear-gradient(180deg, rgba(255,245,232,0.06) 0%, rgba(26,20,16,0.22) 100%);
     }
 
     .houseHeroGrid{
       position:relative;
       z-index:2;
       width:min(var(--container), calc(100% - 32px));
-      min-height:calc(88svh - var(--header-h) - 18px);
+      min-height:calc(78svh - var(--header-h) - 18px);
       margin:0 auto;
       display:grid;
-      grid-template-columns:1.02fr .98fr;
+      grid-template-columns:1.08fr .92fr;
       gap:44px;
       align-items:end;
-      padding-bottom:40px;
+      padding-bottom:38px;
     }
 
     .houseHeroContent{
-      max-width:800px;
+      max-width:760px;
     }
 
     .houseHeroEyebrow{
@@ -64,86 +65,56 @@
 
     .houseHeroTitle{
       color:#fff;
-      text-shadow:0 10px 30px rgba(0,0,0,0.18);
-      max-width:860px;
+      text-shadow:0 10px 30px rgba(0,0,0,0.16);
+      max-width:780px;
+      margin:0;
     }
 
     .houseHeroText{
       margin:22px 0 0;
-      max-width:680px;
+      max-width:620px;
       font-size:18px;
       line-height:1.8;
       color:rgba(255,255,255,0.88);
     }
 
-    .houseHeroMeta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:24px;
-    }
-
-    .houseHeroMeta span{
-      display:inline-flex;
-      align-items:center;
-      min-height:38px;
-      padding:0 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,0.14);
-      color:rgba(255,255,255,0.92);
-      border:1px solid rgba(255,255,255,0.18);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      font-size:13px;
-    }
-
-    .houseHeroCard{
+    .houseHeroNote{
       max-width:360px;
-      margin-left:auto;
       padding:24px;
       border-radius:28px;
-      background:rgba(255,252,248,0.80);
-      border:1px solid rgba(255,255,255,0.46);
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.48);
       box-shadow:var(--shadow-lg);
       backdrop-filter:blur(12px);
       -webkit-backdrop-filter:blur(12px);
     }
 
-    .houseHeroCard .eyebrow{
+    .houseHeroNote .eyebrow{
       margin-bottom:10px;
     }
 
-    .houseHeroCardPrice{
-      display:block;
-      margin-bottom:10px;
-      font-family:var(--font-serif);
-      font-size:34px;
-      line-height:1;
-      color:var(--text);
-    }
-
-    .houseHeroCard p{
+    .houseHeroNote p{
       margin:0;
       color:var(--text-soft);
       line-height:1.72;
     }
 
-    .houseHeroCardActions{
-      display:grid;
-      gap:12px;
-      margin-top:20px;
-    }
-
     .houseIntro{
       padding-top:84px;
-      padding-bottom:36px;
+      padding-bottom:24px;
     }
 
     .houseIntroGrid{
       display:grid;
-      grid-template-columns:1.08fr .92fr;
-      gap:38px;
+      grid-template-columns:1fr 1fr;
+      gap:34px;
       align-items:start;
+    }
+
+    .houseIntroHead{
+      max-width:920px;
+      display:grid;
+      gap:16px;
     }
 
     .houseIntroText{
@@ -151,355 +122,200 @@
       gap:18px;
     }
 
-    .houseFacts{
-      display:grid;
-      gap:14px;
-      padding:26px;
-      border-radius:28px;
-      background:rgba(255,252,248,0.74);
-      border:1px solid rgba(255,255,255,0.54);
-      box-shadow:var(--shadow-md);
-    }
-
-    .houseFactItem{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-      padding-bottom:14px;
-      border-bottom:1px solid rgba(92,71,54,0.08);
-    }
-
-    .houseFactItem:last-child{
-      padding-bottom:0;
-      border-bottom:0;
-    }
-
-    .houseFactLabel{
-      font-size:13px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:var(--text-soft);
-    }
-
-    .houseFactValue{
-      text-align:right;
-      color:var(--text);
-      font-weight:600;
-    }
-
-    .houseAmenities{
-      padding-top:8px;
-      padding-bottom:72px;
-    }
-
-    .houseAmenitiesWrap{
-      padding:34px;
-      border-radius:32px;
-      background:rgba(255,252,248,0.72);
-      border:1px solid rgba(255,255,255,0.54);
-      box-shadow:var(--shadow-md);
-    }
-
-    .houseAmenitiesGrid{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:24px;
-    }
-
-    .houseAmenitiesGrid span{
-      display:inline-flex;
-      align-items:center;
-      min-height:38px;
-      padding:0 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,0.76);
-      border:1px solid rgba(92,71,54,0.08);
-      color:var(--text-soft);
-      font-size:13px;
-    }
-
     .houseGallery{
-      padding-top:0;
-      padding-bottom:84px;
+      padding-top:12px;
+      padding-bottom:88px;
     }
 
     .houseGalleryGrid{
       display:grid;
-      grid-template-columns:1.12fr .88fr;
-      gap:18px;
+      grid-template-columns:1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
     }
 
-    .houseGalleryMain,
-    .houseGallerySide{
-      display:grid;
-      gap:18px;
-    }
-
-    .houseGalleryCard{
+    .houseGalleryMain{
       position:relative;
       overflow:hidden;
       border-radius:30px;
-      background:rgba(255,252,248,0.78);
-      border:1px solid rgba(255,255,255,0.52);
       box-shadow:var(--shadow-md);
     }
 
-    .houseGalleryCard img{
+    .houseGalleryMain img{
       width:100%;
       height:100%;
-      object-fit:cover;
-      transition:transform 1.1s var(--ease);
-    }
-
-    .houseGalleryCard:hover img{
-      transform:scale(1.03);
-    }
-
-    .houseGalleryMain .houseGalleryCard{
       min-height:620px;
+      object-fit:cover;
+      display:block;
     }
 
-    .houseGallerySide .houseGalleryCard{
-      min-height:300px;
+    .houseGallerySide{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
     }
 
-    /* Parallax editorial */
-    .houseParallaxStory{
+    .houseGallerySide article{
       position:relative;
-      padding-top:0;
-      padding-bottom:84px;
-    }
-
-    .houseParallaxFrame{
-      position:relative;
-      min-height:118svh;
-      border-radius:34px;
       overflow:hidden;
-      background:#201b17;
-      border:1px solid rgba(255,255,255,0.34);
-      box-shadow:var(--shadow-lg);
-      isolation:isolate;
+      border-radius:24px;
+      box-shadow:var(--shadow-sm);
     }
 
-    .houseParallaxBg{
-      position:absolute;
-      inset:-4%;
-      z-index:0;
-      will-change:transform;
-      transform:scale(1.16);
-    }
-
-    .houseParallaxBg img{
+    .houseGallerySide img{
       width:100%;
       height:100%;
+      min-height:300px;
       object-fit:cover;
-      filter:blur(28px) saturate(1.02);
-      opacity:.62;
-      transform:scale(1.08);
-    }
-
-    .houseParallaxOverlay{
-      position:absolute;
-      inset:0;
-      z-index:1;
-      background:
-        linear-gradient(180deg, rgba(18,15,12,0.18) 0%, rgba(18,15,12,0.34) 40%, rgba(18,15,12,0.58) 100%),
-        linear-gradient(90deg, rgba(18,15,12,0.44) 0%, rgba(18,15,12,0.08) 45%, rgba(18,15,12,0.30) 100%);
-      pointer-events:none;
-    }
-
-    .houseParallaxInner{
-      position:relative;
-      z-index:2;
-      min-height:118svh;
-      display:grid;
-      grid-template-columns:.92fr 1.08fr;
-      gap:38px;
-      align-items:center;
-      padding:56px;
-    }
-
-    .houseParallaxCopy{
-      max-width:520px;
-      color:#fff;
-    }
-
-    .houseParallaxCopy .eyebrow{
-      color:rgba(255,255,255,0.70);
-      margin-bottom:12px;
-    }
-
-    .houseParallaxTitle{
-      color:#fff;
-      margin:0;
-      text-shadow:0 10px 30px rgba(0,0,0,0.18);
-    }
-
-    .houseParallaxText{
-      margin:20px 0 0;
-      font-size:18px;
-      line-height:1.86;
-      color:rgba(255,255,255,0.86);
-    }
-
-    .houseParallaxNotes{
-      display:grid;
-      gap:12px;
-      margin-top:24px;
-    }
-
-    .houseParallaxNotes span{
-      display:inline-flex;
-      width:max-content;
-      max-width:100%;
-      align-items:center;
-      min-height:38px;
-      padding:0 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,0.12);
-      border:1px solid rgba(255,255,255,0.16);
-      color:rgba(255,255,255,0.92);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      font-size:13px;
-    }
-
-    .houseParallaxVisual{
-      position:relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:100%;
-    }
-
-    .houseParallaxVisualCard{
-      position:relative;
-      width:min(100%, 760px);
-      border-radius:30px;
-      overflow:hidden;
-      background:rgba(255,252,248,0.12);
-      border:1px solid rgba(255,255,255,0.34);
-      box-shadow:0 34px 80px rgba(0,0,0,0.28);
-      will-change:transform;
-    }
-
-    .houseParallaxVisualCard img{
       display:block;
-      width:100%;
-      height:auto;
-      object-fit:cover;
     }
 
-    .houseParallaxCaption{
-      position:absolute;
-      left:20px;
-      right:20px;
-      bottom:18px;
-      padding:14px 16px;
-      border-radius:18px;
-      background:rgba(255,252,248,0.16);
-      border:1px solid rgba(255,255,255,0.20);
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
-      color:#fff;
-      font-size:14px;
-      line-height:1.6;
-    }
-
-    .houseNarrative{
+    .houseSpecs{
       padding-top:0;
-      padding-bottom:84px;
+      padding-bottom:88px;
     }
 
-    .houseNarrativeGrid{
+    .houseSpecsHead{
+      max-width:920px;
+      display:grid;
+      gap:16px;
+      margin-bottom:28px;
+    }
+
+    .houseSpecsGrid{
       display:grid;
       grid-template-columns:repeat(3, minmax(0,1fr));
       gap:24px;
     }
 
-    .houseNarrativeCard{
-      padding:28px;
+    .houseSpecCard{
+      padding:24px;
       border-radius:28px;
+      background:rgba(255,252,248,0.84);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-sm);
+    }
+
+    .houseSpecCard h3{
+      margin:0 0 10px;
+      font-family:var(--font-serif);
+      font-size:28px;
+      line-height:1;
+      letter-spacing:-.03em;
+      color:var(--text);
+    }
+
+    .houseSpecCard p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.72;
+    }
+
+    .houseStay{
+      padding-top:0;
+      padding-bottom:72px;
+    }
+
+    .houseStayPanel{
+      padding:42px;
+      border-radius:32px;
       background:rgba(255,252,248,0.72);
       border:1px solid rgba(255,255,255,0.54);
       box-shadow:var(--shadow-md);
     }
 
-    .houseNarrativeCard .eyebrow{
-      margin-bottom:10px;
+    .houseBookingIntro{
+      display:grid;
+      gap:14px;
+      max-width:720px;
     }
 
-    .houseNarrativeCard p{
+    .houseBookingIntro h2{
+      margin:0;
+    }
+
+    .houseBookingIntro p{
       margin:0;
       color:var(--text-soft);
-      line-height:1.78;
+      line-height:1.72;
     }
 
-    .houseReservation{
-      padding-top:0;
-      padding-bottom:72px;
-    }
-
-    .houseReservationPanel{
-      padding:42px;
-      border-radius:32px;
-      background:rgba(255,252,248,0.76);
-      border:1px solid rgba(255,255,255,0.54);
-      box-shadow:var(--shadow-lg);
-    }
-
-    .houseReservationGrid{
+    .houseBookingForm{
       display:grid;
-      grid-template-columns:1fr auto;
-      gap:28px;
-      align-items:end;
+      gap:18px;
+      margin-top:24px;
     }
 
-    .houseReservationText{
-      max-width:820px;
+    .houseBookingGrid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:14px;
     }
 
-    .houseReservationText .lead{
-      max-width:760px;
+    .houseBookingField{
+      display:grid;
+      gap:8px;
     }
 
-    .houseReservationActions{
+    .houseBookingField label{
+      font-size:13px;
+      color:var(--text-soft);
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .houseBookingField input,
+    .houseBookingField select{
+      width:100%;
+      min-height:56px;
+      border-radius:18px;
+      border:1px solid rgba(92,71,54,0.10);
+      background:rgba(255,255,255,0.76);
+      color:var(--text);
+      padding:0 16px;
+      font:inherit;
+      outline:none;
+      box-shadow:none;
+    }
+
+    .houseBookingField input:focus,
+    .houseBookingField select:focus{
+      border-color:rgba(57,126,224,0.38);
+      box-shadow:0 0 0 3px rgba(57,126,224,0.08);
+    }
+
+    .houseBookingActions{
       display:flex;
-      gap:12px;
       flex-wrap:wrap;
-      justify-content:flex-end;
+      gap:12px;
+      align-items:center;
+    }
+
+    .houseBookingHint{
+      margin:0;
+      font-size:14px;
+      color:var(--text-soft);
+      line-height:1.6;
     }
 
     @media (max-width: 1100px){
       .houseHeroGrid,
       .houseIntroGrid,
-      .houseGalleryGrid,
-      .houseReservationGrid,
-      .houseParallaxInner{
+      .houseGalleryGrid{
         grid-template-columns:1fr;
       }
 
-      .houseNarrativeGrid{
+      .houseGallerySide{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .houseSpecsGrid,
+      .houseBookingGrid{
         grid-template-columns:1fr;
       }
 
-      .houseHeroCard{
-        margin-left:0;
+      .houseHeroNote{
         max-width:460px;
-      }
-
-      .houseReservationActions{
-        justify-content:flex-start;
-      }
-
-      .houseParallaxCopy{
-        max-width:none;
-      }
-
-      .houseParallaxVisual{
-        min-height:auto;
       }
     }
 
@@ -509,7 +325,7 @@
       }
 
       .houseHeroGrid{
-        min-height:calc(82svh - var(--header-h) - 18px);
+        min-height:calc(78svh - var(--header-h) - 18px);
         gap:24px;
         padding-bottom:26px;
       }
@@ -523,7 +339,7 @@
         line-height:1.74;
       }
 
-      .houseHeroCard{
+      .houseHeroNote{
         max-width:none;
         width:100%;
         padding:20px;
@@ -534,83 +350,40 @@
         padding-top:60px;
       }
 
-      .houseFacts{
-        padding:22px;
+      .houseGallery,
+      .houseSpecs{
+        padding-bottom:64px;
+      }
+
+      .houseGalleryMain img{
+        min-height:380px;
+      }
+
+      .houseGallerySide{
+        grid-template-columns:1fr;
+      }
+
+      .houseGallerySide img{
+        min-height:240px;
+      }
+
+      .houseSpecCard{
+        padding:20px;
         border-radius:24px;
       }
 
-      .houseAmenitiesWrap,
-      .houseReservationPanel{
-        padding:24px;
+      .houseStayPanel{
+        padding:26px;
         border-radius:24px;
       }
 
-      .houseGalleryMain .houseGalleryCard,
-      .houseGallerySide .houseGalleryCard{
-        min-height:280px;
-      }
-
-      .houseParallaxFrame{
-        min-height:auto;
-        border-radius:26px;
-      }
-
-      .houseParallaxInner{
-        min-height:auto;
-        gap:22px;
-        padding:22px;
-      }
-
-      .houseParallaxBg{
-        inset:0;
-        transform:none !important;
-      }
-
-      .houseParallaxBg img{
-        filter:blur(12px);
-        opacity:.48;
-      }
-
-      .houseParallaxVisualCard{
-        border-radius:24px;
-      }
-
-      .houseParallaxCaption{
-        position:static;
-        margin:12px;
-        left:auto;
-        right:auto;
-        bottom:auto;
-      }
-
-      .houseParallaxText{
-        font-size:17px;
-        line-height:1.78;
-      }
-
-      .houseNarrativeCard{
-        padding:22px;
-        border-radius:24px;
-      }
-
-      .houseReservationActions{
+      .houseBookingActions{
         flex-direction:column;
         align-items:stretch;
       }
 
-      .houseReservationActions .btn{
+      .houseBookingActions .btn{
         width:100%;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .houseParallaxBg,
-      .houseParallaxVisualCard{
-        transform:none !important;
-      }
-
-      .houseGalleryCard img{
-        transition:none;
       }
     }
   </style>
@@ -623,233 +396,167 @@
 
     <section class="houseHero">
       <div class="houseHeroBg">
-        <img src="/assets/img/casagrande7.jpeg" alt="Casa Grande em Trancoso" />
+        <img src="/assets/img/casa-grande/hero.jpeg" alt="Casa Grande em Trancoso" />
         <div class="houseHeroOverlay"></div>
       </div>
 
       <div class="houseHeroGrid">
         <div class="houseHeroContent" data-reveal="left">
-          <p class="eyebrow houseHeroEyebrow shimmerLine">Casas da Vila • Casa Grande</p>
+          <p class="eyebrow houseHeroEyebrow shimmerLine">Casas da Vila • Trancoso</p>
 
           <h1 class="display houseHeroTitle">
-            A experiência<br>
-            mais ampla,<br>
-            generosa e exclusiva.
+            Casa Grande
           </h1>
 
           <p class="houseHeroText">
-            Com 210 m², dois quartos e jacuzzi, a Casa Grande é a maior casa da vila — pensada para
-            estadias mais amplas, com escala, privacidade e presença arquitetônica.
+            A experiência mais ampla da vila, com escala, privacidade e presença arquitetônica para uma estadia mais generosa.
           </p>
-
-          <div class="houseHeroMeta">
-            <span>210 m²</span>
-            <span>Até 4 hóspedes</span>
-            <span>2 quartos</span>
-            <span>Jacuzzi, cozinha e área de estar</span>
-          </div>
         </div>
 
-        <div class="houseHeroCard heroFloat" data-reveal="right">
-          <p class="eyebrow">Diárias</p>
-          <strong class="houseHeroCardPrice">R$ 3.800</strong>
+        <div class="houseHeroNote heroFloat" data-reveal="right">
+          <p class="eyebrow">A casa</p>
           <p>
-            Diária base da Casa Grande, com café da manhã e estacionamento incluídos. Ideal para
-            famílias ou hóspedes que buscam a estadia mais exclusiva da vila.
+            Uma casa autoral de presença marcante, cercada por jardim e ritmo tropical, com café da manhã e estacionamento já incluídos na estadia.
           </p>
-
-          <div class="houseHeroCardActions">
-            <a class="btn btnPrimary" href="/pt/reservar/?unit=casa-grande">Ver disponibilidade</a>
-            <a class="btn btnGhost" href="/pt/casas/">Voltar para as casas</a>
-          </div>
         </div>
       </div>
     </section>
 
     <section class="section houseIntro">
       <div class="wrap houseIntroGrid">
-        <div class="houseIntroText" data-reveal="left">
-          <p class="eyebrow">A experiência</p>
-          <h2 class="h2">A maior casa da vila, com dois quartos e permanência mais generosa</h2>
-          <p class="body">
-            A Casa Grande foi pensada para hóspedes que desejam mais escala e uma experiência mais
-            ampla, com áreas de convivência, dois quartos e uma relação mais generosa com o tempo da estadia.
-          </p>
-          <p class="body">
-            É uma casa para viver Trancoso com mais liberdade, mais privacidade e um conforto ampliado,
-            sem perder a atmosfera tropical, o jardim e a sensação de refúgio boutique.
-          </p>
+        <div class="houseIntroHead" data-reveal="zoom">
+          <p class="eyebrow">Casa Grande</p>
+          <h2 class="h2">Uma estadia de escala, respiro e permanência.</h2>
         </div>
 
-        <div class="houseFacts" data-reveal="right">
-          <div class="houseFactItem">
-            <span class="houseFactLabel">Área</span>
-            <span class="houseFactValue">210 m²</span>
-          </div>
-          <div class="houseFactItem">
-            <span class="houseFactLabel">Capacidade</span>
-            <span class="houseFactValue">Até 4 hóspedes</span>
-          </div>
-          <div class="houseFactItem">
-            <span class="houseFactLabel">Quartos</span>
-            <span class="houseFactValue">2 quartos</span>
-          </div>
-          <div class="houseFactItem">
-            <span class="houseFactLabel">Banheiros</span>
-            <span class="houseFactValue">2 banheiros</span>
-          </div>
-          <div class="houseFactItem">
-            <span class="houseFactLabel">Configuração</span>
-            <span class="houseFactValue">2 camas king size</span>
-          </div>
-          <div class="houseFactItem">
-            <span class="houseFactLabel">Estadia mínima</span>
-            <span class="houseFactValue">3 noites</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section houseAmenities">
-      <div class="wrap">
-        <div class="houseAmenitiesWrap" data-reveal="zoom">
-          <p class="eyebrow">Comodidades</p>
-          <h2 class="h2">Escala, conforto e a estadia mais ampla da vila</h2>
-
-          <div class="houseAmenitiesGrid">
-            <span>Ar-condicionado</span>
-            <span>Wi-Fi</span>
-            <span>Cofre</span>
-            <span>Varanda</span>
-            <span>Jardim</span>
-            <span>Cozinha</span>
-            <span>Área de estar</span>
-            <span>Jacuzzi</span>
-            <span>2 quartos</span>
-            <span>Café da manhã incluído</span>
-            <span>Estacionamento incluído</span>
-          </div>
+        <div class="houseIntroText" data-reveal="zoom">
+          <p class="lead">
+            A Casa Grande foi pensada para estadias mais amplas, generosas e silenciosas, em contato com a vegetação, a luz e a arquitetura da vila.
+          </p>
+          <p class="lead">
+            O resultado é uma experiência mais exclusiva, marcada por conforto, privacidade e atmosfera tropical.
+          </p>
         </div>
       </div>
     </section>
 
     <section class="section houseGallery">
       <div class="wrap">
-        <div class="sectionHead" data-reveal="zoom">
-          <p class="eyebrow">Galeria</p>
-          <h2 class="h2">Amplitude, jardim e uma presença mais exclusiva</h2>
-        </div>
-
         <div class="houseGalleryGrid">
-          <div class="houseGalleryMain" data-reveal="left">
-            <figure class="houseGalleryCard">
-              <img src="/assets/img/casagrande6.jpeg" alt="Casa Grande - vista principal" />
-            </figure>
-          </div>
+          <article class="houseGalleryMain" data-reveal="left">
+            <img src="/assets/img/casa-grande/gallery-01.jpeg" alt="Casa Grande" />
+          </article>
 
-          <div class="houseGallerySide" data-reveal="right">
-            <figure class="houseGalleryCard">
-              <img src="/assets/img/casagrande10.jpeg" alt="Casa Grande - área externa" />
-            </figure>
-            <figure class="houseGalleryCard">
-              <img src="/assets/img/casagrande7.jpeg" alt="Casa Grande - atmosfera da estadia" />
-            </figure>
+          <div class="houseGallerySide">
+            <article data-reveal="right">
+              <img src="/assets/img/casa-grande/gallery-02.jpeg" alt="Casa Grande" />
+            </article>
+            <article data-reveal="right">
+              <img src="/assets/img/casa-grande/gallery-03.jpeg" alt="Casa Grande" />
+            </article>
+            <article data-reveal="right
+
+            <article data-reveal="right">
+              <img src="/assets/img/casa-grande/gallery-04.jpeg" alt="Casa Grande" />
+            </article>
+            <article data-reveal="right">
+              <img src="/assets/img/casa-grande/gallery-05.jpeg" alt="Casa Grande" />
+            </article>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section houseParallaxStory">
+    <section class="section houseSpecs">
       <div class="wrap">
-        <div class="houseParallaxFrame" data-parallax-story>
-          <div class="houseParallaxBg" aria-hidden="true" data-parallax-bg>
-            <img src="/assets/img/casagrande3.jpeg" alt="" />
+        <div class="houseSpecsHead" data-reveal="zoom">
+          <p class="eyebrow">Características</p>
+          <h2 class="h2">Escala, conforto e atmosfera tropical</h2>
+        </div>
+
+        <div class="houseSpecsGrid">
+          <div class="houseSpecCard" data-reveal="left">
+            <h3>Amplitude</h3>
+            <p>Ambientes generosos que convidam à permanência e ao descanso com mais respiro.</p>
           </div>
 
-          <div class="houseParallaxOverlay"></div>
+          <div class="houseSpecCard" data-reveal="zoom">
+            <h3>Privacidade</h3>
+            <p>Integração com o jardim e sensação de refúgio dentro da vila.</p>
+          </div>
 
-          <div class="houseParallaxInner">
-            <div class="houseParallaxCopy" data-reveal="left">
-              <p class="eyebrow">Entre arquitetura e atmosfera</p>
-              <h2 class="h2 houseParallaxTitle">
-                Uma casa pensada para desacelerar, expandir o tempo e aprofundar a experiência da estadia.
-              </h2>
+          <div class="houseSpecCard" data-reveal="right">
+            <h3>Conforto</h3>
+            <p>Café da manhã e estacionamento já incluídos na experiência.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-              <p class="houseParallaxText">
-                Na Casa Grande, a sensação não vem apenas da metragem ou da configuração. Vem da forma
-                como a luz encontra os volumes, como o jardim prolonga a permanência e como cada ambiente
-                convida a uma estadia mais lenta, mais ampla e mais sensorial.
-              </p>
+    <section class="section houseStay">
+      <div class="wrap">
+        <div class="houseStayPanel" data-reveal="zoom">
 
-              <div class="houseParallaxNotes">
-                <span>Arquitetura tropical com presença</span>
-                <span>Escala generosa para estadias mais longas</span>
-                <span>Uma experiência boutique de ritmo mais amplo</span>
+          <div class="houseBookingIntro">
+            <p class="eyebrow">Pré-reserva</p>
+
+            <h2 class="h2">
+              Sua estadia na Casa Grande começa aqui
+            </h2>
+
+            <p>
+              Escolha as datas, informe o número de hóspedes e siga para a reserva com café da manhã e estacionamento já incluídos na experiência.
+            </p>
+          </div>
+
+          <form
+            class="houseBookingForm"
+            data-booking-form
+            data-booking-base="/pt/reservar/"
+            data-booking-home="casa-grande"
+          >
+
+            <div class="houseBookingGrid">
+
+              <div class="houseBookingField">
+                <label for="checkin-casa-grande">Check-in</label>
+                <input type="date" id="checkin-casa-grande" name="checkin" required />
               </div>
+
+              <div class="houseBookingField">
+                <label for="checkout-casa-grande">Check-out</label>
+                <input type="date" id="checkout-casa-grande" name="checkout" required />
+              </div>
+
+              <div class="houseBookingField">
+                <label for="guests-casa-grande">Hóspedes</label>
+                <select id="guests-casa-grande" name="guests" required>
+                  <option value="2">2 hóspedes</option>
+                  <option value="3">3 hóspedes</option>
+                  <option value="4" selected>4 hóspedes</option>
+                  <option value="5">5 hóspedes</option>
+                  <option value="6">6 hóspedes</option>
+                </select>
+              </div>
+
             </div>
 
-            <div class="houseParallaxVisual" data-reveal="right">
-              <figure class="houseParallaxVisualCard" data-parallax-card>
-                <img src="/assets/img/casagrande3.jpeg" alt="Casa Grande - composição editorial" />
-                <figcaption class="houseParallaxCaption">
-                  A maior casa da vila traduz amplitude com delicadeza: jardim, permanência,
-                  privacidade e uma relação mais sensorial com Trancoso.
-                </figcaption>
-              </figure>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            <div class="houseBookingActions">
+              <button type="submit" class="btn btnPrimary">
+                Ver disponibilidade da Casa Grande
+              </button>
 
-    <section class="section houseNarrative">
-      <div class="wrap">
-        <div class="houseNarrativeGrid">
-          <article class="houseNarrativeCard" data-reveal="left">
-            <p class="eyebrow">Atmosfera</p>
-            <p>
-              A Casa Grande oferece uma experiência de presença. A escala dos ambientes, o jardim e a
-              jacuzzi criam uma estadia mais ampla, confortável e naturalmente exclusiva.
+              <a class="btn btnGhost" href="/pt/contato/">
+                Fale conosco
+              </a>
+            </div>
+
+            <p class="houseBookingHint">
+              Café da manhã e estacionamento já incluídos na experiência.
             </p>
-          </article>
 
-          <article class="houseNarrativeCard" data-reveal="zoom">
-            <p class="eyebrow">Ritmo</p>
-            <p>
-              É uma casa para ficar mais, compartilhar mais e viver Trancoso com maior liberdade de uso,
-              alternando entre convivência, privacidade e tempo de permanência mais generoso.
-            </p>
-          </article>
+          </form>
 
-          <article class="houseNarrativeCard" data-reveal="right">
-            <p class="eyebrow">Perfil da estadia</p>
-            <p>
-              Ideal para famílias, casais viajando juntos ou hóspedes que buscam dois quartos, jacuzzi
-              e a experiência mais ampla e exclusiva dentro da vila.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section houseReservation">
-      <div class="wrap">
-        <div class="houseReservationPanel" data-reveal="zoom">
-          <div class="houseReservationGrid">
-            <div class="houseReservationText">
-              <p class="eyebrow">Reserva</p>
-              <h2 class="h2">Veja disponibilidade da Casa Grande para a sua estadia</h2>
-              <p class="lead mt-16">
-                Consulte datas, confira o período mínimo e avance para a reserva com café da manhã e
-                estacionamento já incluídos na experiência.
-              </p>
-            </div>
-
-            <div class="houseReservationActions">
-              <a class="btn btnPrimary" href="/pt/reservar/?unit=casa-grande">Ver disponibilidade</a>
-              <a class="btn btnGhost" href="/pt/contato/">Fale conosco</a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -861,51 +568,91 @@
   <script src="/assets/js/ui.js"></script>
   <script src="/assets/js/main.js"></script>
 
+  <!-- SCRIPT INTELIGENTE PT + EN -->
   <script>
     (function () {
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const isMobile = window.matchMedia('(max-width: 760px)').matches;
-      if (reduceMotion || isMobile) return;
+      const forms = document.querySelectorAll("[data-booking-form]");
+      const isEnglish = window.location.pathname.startsWith("/en/");
 
-      const stories = document.querySelectorAll('[data-parallax-story]');
+      const messages = isEnglish
+        ? {
+            missing: "Please fill in check-in, check-out and number of guests.",
+            invalidDates: "Check-out date must be after check-in.",
+            paramName: "house",
+            defaultBase: "/en/book/"
+          }
+        : {
+            missing: "Por favor, preencha check-in, check-out e hóspedes.",
+            invalidDates: "A data de check-out deve ser posterior ao check-in.",
+            paramName: "casa",
+            defaultBase: "/pt/reservar/"
+          };
 
-      function updateParallax() {
-        stories.forEach((story) => {
-          const bg = story.querySelector('[data-parallax-bg]');
-          const card = story.querySelector('[data-parallax-card]');
-          if (!bg || !card) return;
+      forms.forEach((form) => {
+        const base = form.getAttribute("data-booking-base") || messages.defaultBase;
+        const house = form.getAttribute("data-booking-home") || "";
 
-          const rect = story.getBoundingClientRect();
-          const vh = window.innerHeight || document.documentElement.clientHeight;
+        const checkin = form.querySelector('input[name="checkin"]');
+        const checkout = form.querySelector('input[name="checkout"]');
+        const guests = form.querySelector('select[name="guests"]');
 
-          if (rect.bottom < 0 || rect.top > vh) return;
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const dd = String(today.getDate()).padStart(2, "0");
+        const todayStr = `${yyyy}-${mm}-${dd}`;
 
-          const progress = (vh - rect.top) / (vh + rect.height);
-          const clamped = Math.max(0, Math.min(1, progress));
+        if (checkin) checkin.min = todayStr;
+        if (checkout) checkout.min = todayStr;
 
-          const bgY = (clamped - 0.5) * 52;
-          const cardY = (clamped - 0.5) * -28;
+        function updateCheckoutMin() {
+          if (!checkin || !checkout) return;
 
-          bg.style.transform = `scale(1.16) translate3d(0, ${bgY}px, 0)`;
-          card.style.transform = `translate3d(0, ${cardY}px, 0)`;
-        });
-      }
+          if (checkin.value) {
+            checkout.min = checkin.value;
 
-      let ticking = false;
-      function onScroll() {
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            updateParallax();
-            ticking = false;
-          });
-          ticking = true;
+            if (checkout.value && checkout.value <= checkin.value) {
+              checkout.value = "";
+            }
+          } else {
+            checkout.min = todayStr;
+          }
         }
-      }
 
-      updateParallax();
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', updateParallax);
+        if (checkin) {
+          checkin.addEventListener("change", updateCheckoutMin);
+        }
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const checkinValue = checkin?.value || "";
+          const checkoutValue = checkout?.value || "";
+          const guestsValue = guests?.value || "";
+
+          if (!checkinValue || !checkoutValue || !guestsValue) {
+            alert(messages.missing);
+            return;
+          }
+
+          if (checkoutValue <= checkinValue) {
+            alert(messages.invalidDates);
+            checkout?.focus();
+            return;
+          }
+
+          const url = new URL(base, window.location.origin);
+
+          url.searchParams.set(messages.paramName, house);
+          url.searchParams.set("checkin", checkinValue);
+          url.searchParams.set("checkout", checkoutValue);
+          url.searchParams.set("guests", guestsValue);
+
+          window.location.href = url.toString();
+        });
+      });
     })();
   </script>
+
 </body>
 </html>

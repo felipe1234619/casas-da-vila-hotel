@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Casas | Casas da Vila</title>
   <meta
     name="description"
-    content="Explore as casas da Vila em Trancoso: acomodações autorais, com atmosferas próprias, jardim, conforto e uma experiência tropical boutique."
+    content="Explore as casas autorais da Casas da Vila em Trancoso. Uma coleção de estadias com identidade própria, atmosfera tropical e permanência boutique."
   />
 
   <link rel="stylesheet" href="/assets/css/global.css" />
@@ -16,75 +17,104 @@
   <style>
     .housesHero{
       position:relative;
-      min-height:72svh;
-      padding-top:calc(var(--header-h) + 18px);
+      min-height:84svh;
       overflow:hidden;
+      isolation:isolate;
     }
 
-    .housesHeroBg{
+    .housesHeroMedia{
       position:absolute;
       inset:0;
       z-index:0;
     }
 
-    .housesHeroBg img{
+    .housesHeroMedia video,
+    .housesHeroMedia img{
       width:100%;
       height:100%;
       object-fit:cover;
+      display:block;
     }
 
-    .housesHeroOverlay{
+    .housesHeroShade,
+    .housesHeroGlow,
+    .housesHeroVignette,
+    .housesHeroGrain{
       position:absolute;
       inset:0;
-      background:
-        linear-gradient(90deg, rgba(28,22,17,0.52) 0%, rgba(28,22,17,0.22) 44%, rgba(28,22,17,0.10) 100%),
-        linear-gradient(180deg, rgba(255,245,232,0.06) 0%, rgba(26,20,16,0.22) 100%);
+      pointer-events:none;
     }
 
-    .housesHeroGrid{
+    .housesHeroShade{
+      background:
+        linear-gradient(90deg, rgba(28,22,17,.62) 0%, rgba(28,22,17,.26) 42%, rgba(28,22,17,.10) 100%),
+        linear-gradient(180deg, rgba(255,245,232,.04) 0%, rgba(26,20,16,.26) 100%);
+    }
+
+    .housesHeroGlow{
+      background:
+        radial-gradient(circle at 18% 30%, rgba(255,248,238,.10) 0%, rgba(255,248,238,0) 34%);
+    }
+
+    .housesHeroVignette{
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,.22) 100%);
+    }
+
+    .housesHeroGrain{
+      opacity:.05;
+      background-image:radial-gradient(rgba(255,255,255,.7) .6px, transparent .7px);
+      background-size:8px 8px;
+      mix-blend-mode:soft-light;
+    }
+
+    .housesHeroInner{
       position:relative;
       z-index:2;
       width:min(var(--container), calc(100% - 32px));
-      min-height:calc(72svh - var(--header-h) - 18px);
+      min-height:84svh;
       margin:0 auto;
       display:grid;
-      grid-template-columns:1.08fr .92fr;
+      grid-template-columns:1.06fr .94fr;
       gap:44px;
       align-items:end;
-      padding-bottom:38px;
+      padding-top:calc(var(--header-h) + 20px);
+      padding-bottom:42px;
     }
 
     .housesHeroContent{
       max-width:760px;
     }
 
-    .housesHeroEyebrow{
-      color:rgba(255,255,255,0.72);
+    .housesHeroKicker{
+      color:rgba(255,255,255,.74);
     }
 
     .housesHeroTitle{
+      margin:0;
       color:#fff;
-      text-shadow:0 10px 30px rgba(0,0,0,0.16);
-      max-width:780px;
+      max-width:10ch;
+      text-shadow:0 10px 30px rgba(0,0,0,.16);
     }
 
     .housesHeroText{
       margin:22px 0 0;
-      max-width:620px;
+      max-width:640px;
       font-size:18px;
-      line-height:1.8;
-      color:rgba(255,255,255,0.88);
+      line-height:1.82;
+      color:rgba(255,255,255,.88);
     }
 
     .housesHeroNote{
-      max-width:360px;
+      max-width:370px;
       padding:24px;
       border-radius:28px;
-      background:rgba(255,252,248,0.76);
-      border:1px solid rgba(255,255,255,0.48);
+      background:rgba(255,252,248,.76);
+      border:1px solid rgba(255,255,255,.48);
       box-shadow:var(--shadow-lg);
       backdrop-filter:blur(12px);
       -webkit-backdrop-filter:blur(12px);
+      justify-self:end;
     }
 
     .housesHeroNote .eyebrow{
@@ -98,19 +128,199 @@
     }
 
     .housesIntro{
-      padding-top:84px;
-      padding-bottom:32px;
+      padding-top:88px;
+      padding-bottom:30px;
+    }
+
+    .housesIntroGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:36px;
+      align-items:start;
     }
 
     .housesIntroHead{
-      max-width:920px;
       display:grid;
+      gap:16px;
+      max-width:900px;
+    }
+
+    .housesIntroText{
+      display:grid;
+      gap:18px;
+      max-width:760px;
+    }
+
+    .housesFeature{
+      padding-top:12px;
+      padding-bottom:42px;
+    }
+
+    .housesFeatureGrid{
+      display:grid;
+      grid-template-columns:1.18fr .82fr;
+      gap:28px;
+      align-items:stretch;
+    }
+
+    .housesFeatureMain,
+    .housesFeatureMini{
+      position:relative;
+      overflow:hidden;
+      border-radius:32px;
+      background:rgba(255,252,248,.84);
+      border:1px solid rgba(255,255,255,.56);
+      box-shadow:var(--shadow-md);
+      transition:
+        transform .45s var(--ease),
+        box-shadow .45s var(--ease);
+    }
+
+    .housesFeatureMain:hover,
+    .housesFeatureMini:hover{
+      transform:translateY(-6px);
+      box-shadow:0 28px 60px rgba(76,52,35,.16);
+    }
+
+    .housesFeatureMain > a,
+    .housesFeatureMini > a{
+      display:block;
+      height:100%;
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .housesFeatureMainMedia{
+      aspect-ratio:16 / 10.8;
+      overflow:hidden;
+    }
+
+    .housesFeatureMiniMedia{
+      aspect-ratio:16 / 10;
+      overflow:hidden;
+    }
+
+    .housesFeatureMainMedia img,
+    .housesFeatureMiniMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transition:transform 1.2s var(--ease);
+    }
+
+    .housesFeatureMain:hover img,
+    .housesFeatureMini:hover img{
+      transform:scale(1.04);
+    }
+
+    .housesFeatureMainBody{
+      padding:28px 28px 24px;
+      display:grid;
+      gap:14px;
+    }
+
+    .housesFeatureMainTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .housesFeatureMainTitle{
+      margin:0;
+      font-family:var(--font-serif);
+      font-size:48px;
+      line-height:1;
+      letter-spacing:-.04em;
+      color:var(--text);
+    }
+
+    .housesFeatureMainMeta{
+      margin:0;
+      padding-top:6px;
+      color:var(--text-soft);
+      font-size:14px;
+      white-space:nowrap;
+    }
+
+    .housesFeatureMainText{
+      margin:0;
+      max-width:54ch;
+      color:var(--text-soft);
+      line-height:1.8;
+    }
+
+    .housesFeatureMainFooter{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding-top:6px;
+    }
+
+    .housesFeaturePill{
+      display:inline-flex;
+      align-items:center;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(92,71,54,.08);
+      color:var(--text-soft);
+      font-size:13px;
+    }
+
+    .housesFeatureStack{
+      display:grid;
+      gap:28px;
+    }
+
+    .housesFeatureMiniBody{
+      padding:22px 22px 20px;
+      display:grid;
+      gap:12px;
+    }
+
+    .housesFeatureMiniTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
       gap:16px;
     }
 
-    .housesCollection{
+    .housesFeatureMiniTitle{
+      margin:0;
+      font-family:var(--font-serif);
+      font-size:30px;
+      line-height:1;
+      letter-spacing:-.03em;
+      color:var(--text);
+    }
+
+    .housesFeatureMiniMeta{
+      margin:0;
+      color:var(--text-soft);
+      font-size:13px;
+      white-space:nowrap;
+    }
+
+    .housesFeatureMiniText{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.76;
+    }
+
+    .housesGridSection{
       padding-top:18px;
-      padding-bottom:88px;
+      padding-bottom:94px;
+    }
+
+    .housesGridHead{
+      max-width:960px;
+      display:grid;
+      gap:16px;
+      margin-bottom:30px;
     }
 
     .housesGrid{
@@ -119,26 +329,33 @@
       gap:28px;
     }
 
-    .houseCardEditorial{
+    .houseCard{
       position:relative;
       overflow:hidden;
       border-radius:30px;
-      background:rgba(255,252,248,0.84);
-      border:1px solid rgba(255,255,255,0.56);
+      background:rgba(255,252,248,.84);
+      border:1px solid rgba(255,255,255,.56);
       box-shadow:var(--shadow-md);
       transition:
         transform .4s var(--ease),
         box-shadow .4s var(--ease);
     }
 
-    .houseCardEditorial:hover{
+    .houseCard:hover{
       transform:translateY(-6px);
-      box-shadow:0 28px 60px rgba(76,52,35,0.16);
+      box-shadow:0 28px 60px rgba(76,52,35,.16);
+    }
+
+    .houseCard > a{
+      display:flex;
+      flex-direction:column;
+      height:100%;
+      color:inherit;
+      text-decoration:none;
     }
 
     .houseCardMedia{
-      position:relative;
-      aspect-ratio: 16 / 10;
+      aspect-ratio:16 / 10;
       overflow:hidden;
     }
 
@@ -146,34 +363,20 @@
       width:100%;
       height:100%;
       object-fit:cover;
+      display:block;
       transition:transform 1.2s var(--ease);
     }
 
-    .houseCardEditorial:hover .houseCardMedia img{
+    .houseCard:hover .houseCardMedia img{
       transform:scale(1.04);
     }
 
-    .houseCardBadge{
-      position:absolute;
-      left:18px;
-      bottom:18px;
-      display:inline-flex;
-      align-items:center;
-      min-height:34px;
-      padding:0 14px;
-      border-radius:999px;
-      background:rgba(255,252,248,0.78);
-      border:1px solid rgba(255,255,255,0.48);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      color:var(--text-soft);
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-    }
-
     .houseCardBody{
+      display:flex;
+      flex-direction:column;
+      flex:1 1 auto;
       padding:24px 24px 22px;
+      gap:12px;
     }
 
     .houseCardTop{
@@ -181,22 +384,21 @@
       align-items:flex-start;
       justify-content:space-between;
       gap:16px;
-      margin-bottom:10px;
     }
 
     .houseCardTitle{
       margin:0;
       font-family:var(--font-serif);
-      font-size:36px;
+      font-size:34px;
       line-height:1;
-      letter-spacing:-0.03em;
+      letter-spacing:-.03em;
       color:var(--text);
     }
 
     .houseCardMeta{
       margin:0;
-      font-size:14px;
       color:var(--text-soft);
+      font-size:14px;
       white-space:nowrap;
     }
 
@@ -204,26 +406,7 @@
       margin:0;
       color:var(--text-soft);
       line-height:1.76;
-    }
-
-    .houseCardAmenities{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:18px;
-      margin-bottom:18px;
-    }
-
-    .houseCardAmenities span{
-      display:inline-flex;
-      align-items:center;
-      min-height:34px;
-      padding:0 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,0.72);
-      border:1px solid rgba(92,71,54,0.08);
-      color:var(--text-soft);
-      font-size:13px;
+      max-width:52ch;
     }
 
     .houseCardFooter{
@@ -231,26 +414,20 @@
       align-items:center;
       justify-content:space-between;
       gap:16px;
-      margin-top:8px;
+      margin-top:auto;
+      padding-top:8px;
     }
 
-    .houseCardPrice{
-      display:grid;
-      gap:4px;
-    }
-
-    .houseCardPrice small{
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
+    .houseCardPill{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(92,71,54,.08);
       color:var(--text-soft);
-    }
-
-    .houseCardPrice strong{
-      font-family:var(--font-serif);
-      font-size:30px;
-      line-height:1;
-      color:var(--text);
+      font-size:13px;
     }
 
     .housesClosing{
@@ -261,8 +438,8 @@
     .housesClosingPanel{
       padding:42px;
       border-radius:32px;
-      background:rgba(255,252,248,0.72);
-      border:1px solid rgba(255,255,255,0.54);
+      background:rgba(255,252,248,.72);
+      border:1px solid rgba(255,255,255,.54);
       box-shadow:var(--shadow-md);
     }
 
@@ -270,30 +447,33 @@
       max-width:860px;
     }
 
-    @media (max-width: 1100px){
-      .housesHeroGrid{
-        grid-template-columns:1fr;
-        align-items:end;
-      }
-
+    @media (max-width:1100px){
+      .housesHeroInner,
+      .housesIntroGrid,
+      .housesFeatureGrid,
       .housesGrid{
         grid-template-columns:1fr;
       }
 
       .housesHeroNote{
         max-width:460px;
+        justify-self:start;
+      }
+
+      .housesFeatureMainTitle{
+        font-size:40px;
       }
     }
 
-    @media (max-width: 760px){
+    @media (max-width:760px){
       .housesHero{
         min-height:auto;
       }
 
-      .housesHeroGrid{
-        min-height:calc(78svh - var(--header-h) - 18px);
+      .housesHeroInner{
+        min-height:calc(82svh - var(--header-h) - 18px);
         gap:24px;
-        padding-bottom:26px;
+        padding-bottom:28px;
       }
 
       .housesHeroTitle{
@@ -316,28 +496,41 @@
         padding-top:60px;
       }
 
-      .housesCollection{
+      .housesFeature,
+      .housesGridSection{
         padding-bottom:64px;
       }
 
-      .houseCardBody{
-        padding:20px 18px 18px;
+      .housesFeatureMainBody{
+        padding:22px 20px 20px;
       }
 
+      .housesFeatureMainTop,
+      .housesFeatureMiniTop,
       .houseCardTop{
         flex-direction:column;
         gap:10px;
+      }
+
+      .housesFeatureMainTitle{
+        font-size:36px;
+      }
+
+      .housesFeatureMiniTitle{
+        font-size:28px;
       }
 
       .houseCardTitle{
         font-size:30px;
       }
 
+      .housesFeatureMainFooter,
       .houseCardFooter{
         flex-direction:column;
         align-items:stretch;
       }
 
+      .housesFeatureMainFooter .btn,
       .houseCardFooter .btn{
         width:100%;
       }
@@ -347,6 +540,160 @@
         border-radius:24px;
       }
     }
+    .housesCollectionV2{
+  padding-top:16px;
+  padding-bottom:94px;
+}
+
+.housesCollectionHead{
+  max-width:960px;
+  display:grid;
+  gap:16px;
+  margin-bottom:34px;
+}
+
+.housesPairs{
+  display:grid;
+  gap:28px;
+}
+
+.housesPair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+  align-items:stretch;
+}
+
+.houseEditorialCard{
+  position:relative;
+  overflow:hidden;
+  border-radius:30px;
+  background:rgba(255,252,248,.84);
+  border:1px solid rgba(255,255,255,.56);
+  box-shadow:var(--shadow-md);
+  transition:
+    transform .4s var(--ease),
+    box-shadow .4s var(--ease);
+}
+
+.houseEditorialCard:hover{
+  transform:translateY(-6px);
+  box-shadow:0 28px 60px rgba(76,52,35,.16);
+}
+
+.houseEditorialCard > a{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  color:inherit;
+  text-decoration:none;
+}
+
+.houseEditorialMedia{
+  aspect-ratio:16 / 10;
+  overflow:hidden;
+}
+
+.houseEditorialMedia img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform 1.2s var(--ease);
+}
+
+.houseEditorialCard:hover .houseEditorialMedia img{
+  transform:scale(1.04);
+}
+
+.houseEditorialBody{
+  display:flex;
+  flex-direction:column;
+  flex:1 1 auto;
+  padding:24px 24px 22px;
+  gap:12px;
+}
+
+.houseEditorialTop{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.houseEditorialTitle{
+  margin:0;
+  font-family:var(--font-serif);
+  font-size:34px;
+  line-height:1;
+  letter-spacing:-.03em;
+  color:var(--text);
+}
+
+.houseEditorialMeta{
+  margin:0;
+  color:var(--text-soft);
+  font-size:14px;
+  white-space:nowrap;
+}
+
+.houseEditorialText{
+  margin:0;
+  color:var(--text-soft);
+  line-height:1.76;
+  max-width:52ch;
+}
+
+.houseEditorialFooter{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-top:auto;
+  padding-top:8px;
+}
+
+.houseEditorialPill{
+  display:inline-flex;
+  align-items:center;
+  min-height:34px;
+  padding:0 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(92,71,54,.08);
+  color:var(--text-soft);
+  font-size:13px;
+}
+
+@media (max-width:1100px){
+  .housesPair{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width:760px){
+  .houseEditorialBody{
+    padding:20px 18px 18px;
+  }
+
+  .houseEditorialTop{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .houseEditorialTitle{
+    font-size:30px;
+  }
+
+  .houseEditorialFooter{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .houseEditorialFooter .btn{
+    width:100%;
+  }
+}
   </style>
 </head>
 <body>
@@ -355,316 +702,300 @@
 
   <main>
 
-    <section class="housesHero">
-      <div class="housesHeroBg">
-        <img src="/assets/img/home-casas.jpg" alt="Casas da Vila em Trancoso" />
-        <div class="housesHeroOverlay"></div>
+    <section class="housesHero" aria-label="Casas da Vila">
+      <div class="housesHeroMedia">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/assets/img/poster-hero.jpeg"
+        >
+          <source src="/assets/video/casas-da-vila-hero.mp4" type="video/mp4" />
+        </video>
+
+        <div class="housesHeroShade"></div>
+        <div class="housesHeroGlow"></div>
+        <div class="housesHeroVignette"></div>
+        <div class="housesHeroGrain"></div>
       </div>
 
-      <div class="housesHeroGrid">
+      <div class="housesHeroInner">
         <div class="housesHeroContent" data-reveal="left">
-          <p class="eyebrow housesHeroEyebrow shimmerLine">Casas da Vila • Trancoso</p>
+          <p class="eyebrow housesHeroKicker shimmerLine">Casas da Vila • Trancoso</p>
 
           <h1 class="display housesHeroTitle">
-            Casas com escala,<br>
-            atmosfera e<br>
-            identidade próprias.
+            Uma coleção de casas com identidade própria.
           </h1>
 
           <p class="housesHeroText">
-            De refúgios intimistas para duas pessoas a casas amplas para quatro hóspedes, cada
-            acomodação foi pensada como uma forma singular de viver a vila.
+            Da permanência mais íntima às casas mais amplas, a vila reúne estadias autorais em que arquitetura, jardim, luz e atmosfera propõem formas distintas de viver Trancoso.
           </p>
         </div>
 
         <div class="housesHeroNote heroFloat" data-reveal="right">
-          <p class="eyebrow">Coleção</p>
+          <p class="eyebrow">A coleção</p>
           <p>
-            O conjunto reúne 8 casas autorais, cercadas por jardim e ritmo tropical, com café da
-            manhã e estacionamento já incluídos na estadia.
+            Cada casa sustenta um ritmo próprio. Juntas, formam um portfólio coerente, tropical e silenciosamente sofisticado.
           </p>
         </div>
       </div>
     </section>
 
     <section class="section housesIntro">
-      <div class="wrap">
+      <div class="wrap housesIntroGrid">
         <div class="housesIntroHead" data-reveal="zoom">
-          <p class="eyebrow">As casas</p>
-          <h2 class="h2">Escolha a experiência que melhor combina com o seu tempo em Trancoso</h2>
+          <p class="eyebrow">Portfólio da vila</p>
+          <h2 class="h2">Casas pensadas como experiências, nunca como unidades repetidas.</h2>
+        </div>
+
+        <div class="housesIntroText" data-reveal="zoom">
           <p class="lead">
-            Cada casa propõe uma combinação própria entre proporção, privacidade, vegetação, luz e
-            permanência. O resultado é uma coleção coerente, mas nunca repetitiva.
+            Algumas casas pedem um tempo mais íntimo e sensorial. Outras, uma estadia mais aberta, mais ampla e compartilhada.
+          </p>
+          <p class="lead">
+            A escolha da casa é também a escolha do modo de estar — entre luz, sombra, jardim, silêncio e a presença tropical da vila.
           </p>
         </div>
       </div>
     </section>
 
-    <section class="section housesCollection">
-      <div class="wrap">
+<section class="section housesCollectionV2">
+  <div class="wrap">
 
-        <div class="housesGrid">
+    <div class="housesCollectionHead" data-reveal="zoom">
+      <p class="eyebrow">As casas</p>
+      <h2 class="h2">Uma coleção de atmosferas para viver a vila de modos distintos.</h2>
+      <p class="lead">
+        Cada casa sustenta uma identidade própria — algumas mais íntimas, outras mais amplas, todas conectadas ao jardim, à arquitetura e ao ritmo tropical de Trancoso.
+      </p>
+    </div>
 
-          <article class="houseCardEditorial" data-reveal="left">
-            <a href="/pt/casas/casa-oca/">
-              <div class="houseCardMedia">
-                <img src="/assets/img/home-casas.jpg" alt="Casa Oca" />
-                <span class="houseCardBadge">55 m² • 2 hóspedes</span>
-              </div>
-              <div class="houseCardBody">
-                <div class="houseCardTop">
-                  <h3 class="houseCardTitle">Casa Oca</h3>
-                  <p class="houseCardMeta">Refúgio íntimo</p>
-                </div>
-                <p class="houseCardText">
-                  Uma casa acolhedora, de atmosfera silenciosa e escala intimista, pensada para uma
-                  estadia a dois em contato com o jardim e o ritmo desacelerado da vila.
-                </p>
-                <div class="houseCardAmenities">
-                  <span>Jardim privativo</span>
-                  <span>Varanda</span>
-                  <span>Cama king size</span>
-                </div>
-                <div class="houseCardFooter">
-                  <div class="houseCardPrice">
-                    <small>Diárias a partir de</small>
-                    <strong>R$ 1.650</strong>
-                  </div>
-                  <span class="btn btnGhost">Ver detalhes</span>
-                </div>
-              </div>
-            </a>
-          </article>
+    <div class="housesPairs">
 
-          <article class="houseCardEditorial" data-reveal="right">
-            <a href="/pt/casas/atelie-azul/">
-              <div class="houseCardMedia">
-                <img src="/assets/img/home-jardim.jpg" alt="Ateliê Azul" />
-                <span class="houseCardBadge">65 m² • 2 hóspedes</span>
-              </div>
-              <div class="houseCardBody">
-                <div class="houseCardTop">
-                  <h3 class="houseCardTitle">Ateliê Azul</h3>
-                  <p class="houseCardMeta">Luz e leveza</p>
-                </div>
-                <p class="houseCardText">
-                  Um espaço de atmosfera autoral, marcado por luz natural, sensação de respiro e
-                  delicadeza estética, ideal para quem busca descanso com identidade.
-                </p>
-                <div class="houseCardAmenities">
-                  <span>Varanda</span>
-                  <span>Jardim</span>
-                  <span>Ar-condicionado</span>
-                </div>
-                <div class="houseCardFooter">
-                  <div class="houseCardPrice">
-                    <small>Diárias a partir de</small>
-                    <strong>R$ 1.850</strong>
-                  </div>
-                  <span class="btn btnGhost">Ver detalhes</span>
-                </div>
-              </div>
-            </a>
-          </article>
+      <!-- PAR 1 -->
+      <div class="housesPair" data-reveal="left">
 
-          <article class="houseCardEditorial" data-reveal="left">
-            <a href="/pt/casas/casa-dos-baloes/">
-              <div class="houseCardMedia">
-                <img src="/assets/img/home-experiencia.jpg" alt="Casa dos Balões" />
-                <span class="houseCardBadge">110 m² • 2 hóspedes</span>
-              </div>
-              <div class="houseCardBody">
-                <div class="houseCardTop">
-                  <h3 class="houseCardTitle">Casa dos Balões</h3>
-                  <p class="houseCardMeta">Amplitude autoral</p>
-                </div>
-                <p class="houseCardText">
-                  Uma casa mais ampla, pensada para estadias com respiro, permanência e conforto,
-                  combinando presença visual e uma atmosfera acolhedora.
-                </p>
-                <div class="houseCardAmenities">
-                  <span>Cozinha</span>
-                  <span>Área de estar</span>
-                  <span>Jardim</span>
-                </div>
-                <div class="houseCardFooter">
-                  <div class="houseCardPrice">
-                    <small>Diárias a partir de</small>
-                    <strong>R$ 2.300</strong>
-                  </div>
-                  <span class="btn btnGhost">Ver detalhes</span>
-                </div>
-              </div>
-            </a>
-          </article>
+        <article class="houseEditorialCard">
+          <a href="/pt/casas/casa-grande/">
+            <div class="houseEditorialMedia">
+              <img src="/assets/img/casa-grande/hero.jpeg" alt="Casa Grande" />
+            </div>
 
-          <article class="houseCardEditorial" data-reveal="right">
-            <a href="/pt/casas/casa-branca/">
-              <div class="houseCardMedia">
-                <img src="/assets/img/IMG_0253.jpeg" alt="Casa Branca" />
-                <span class="houseCardBadge">85 m² • 2 hóspedes</span>
+            <div class="houseEditorialBody">
+              <div class="houseEditorialTop">
+                <h3 class="houseEditorialTitle">Casa Grande</h3>
+                <p class="houseEditorialMeta">Amplitude • 4 hóspedes</p>
               </div>
-              <div class="houseCardBody">
-                <div class="houseCardTop">
-                  <h3 class="houseCardTitle">Casa Branca</h3>
-                  <p class="houseCardMeta">Clareza e calma</p>
-                </div>
-                <p class="houseCardText">
-                  Luminosa e silenciosa, a Casa Branca traduz uma sofisticação leve, com desenho
-                  limpo, integração com o entorno e sensação de descanso imediato.
-                </p>
-                <div class="houseCardAmenities">
-                  <span>Cozinha</span>
-                  <span>Varanda</span>
-                  <span>Jardim</span>
-                </div>
-                <div class="houseCardFooter">
-                  <div class="houseCardPrice">
-                    <small>Diárias a partir de</small>
-                    <strong>R$ 1.850</strong>
-                  </div>
-                  <span class="btn btnGhost">Ver detalhes</span>
-                </div>
-              </div>
-            </a>
-          </article>
 
-          <article class="houseCardEditorial" data-reveal="left">
-            <a href="/pt/casas/casa-rosada/">
-              <div class="houseCardMedia">
-                <img src="/assets/img/IMG_0804.jpeg" alt="Casa Rosada" />
-                <span class="houseCardBadge">85 m² • 2 hóspedes</span>
-              </div>
-              <div class="houseCardBody">
-                <div class="houseCardTop">
-                  <h3 class="houseCardTitle">Casa Rosada</h3>
-                  <p class="houseCardMeta">Charme tropical</p>
-                </div>
-                <p class="houseCardText">
-                  Com personalidade marcante e atmosfera delicada, a Casa Rosada oferece uma estadia
-                  suave, acolhedora e visualmente muito própria.
-                </p>
-                <div class="houseCardAmenities">
-                  <span>Jardim</span>
-                  <span>Cama king size</span>
-                  <span>Varanda</span>
-                </div>
-                <div class="houseCardFooter">
-                  <div class="houseCardPrice">
-                    <small>Diárias a partir de</small>
-                    <strong>R$ 1.850</strong>
-                  </div>
-                  <span class="btn btnGhost">Ver detalhes</span>
-                </div>
-              </div>
-            </a>
-          </article>
+              <p class="houseEditorialText">
+                A experiência mais ampla da vila, com presença arquitetônica, respiro e uma atmosfera de permanência mais exclusiva.
+              </p>
 
-          <article class="houseCardEditorial" data-reveal="right">
-            <a href="/pt/casas/casa-dende/">
-              <div class="houseCardMedia">
-                <img src="/assets/img/IMG_0140.jpeg" alt="Casa Dendê" />
-                <span class="houseCardBadge">110 m² • 4 hóspedes</span>
+              <div class="houseEditorialFooter">
+                <span class="houseEditorialPill">Privacidade • jardim • presença</span>
+                <span class="btn btnGhost">Ver casa</span>
               </div>
-              <div class="houseCardBody">
-                <div class="houseCardTop">
-                  <h3 class="houseCardTitle">Casa Dendê</h3>
-                  <p class="houseCardMeta">Família e convivência</p>
-                </div>
-                <p class="houseCardText">
-                  Pensada para famílias ou pequenos grupos, a Casa Dendê combina duas suítes, áreas
-                  de convivência e integração natural com o jardim.
-                </p>
-                <div class="houseCardAmenities">
-                  <span>2 quartos</span>
-                  <span>Área de estar</span>
-                  <span>Cozinha</span>
-                </div>
-                <div class="houseCardFooter">
-                  <div class="houseCardPrice">
-                    <small>Diárias a partir de</small>
-                    <strong>R$ 2.800</strong>
-                  </div>
-                  <span class="btn btnGhost">Ver detalhes</span>
-                </div>
-              </div>
-            </a>
-          </article>
+            </div>
+          </a>
+        </article>
 
-          <article class="houseCardEditorial" data-reveal="left">
-            <a href="/pt/casas/casa-manga/">
-              <div class="houseCardMedia">
-                <img src="/assets/img/IMG_0054.jpeg" alt="Casa Manga" />
-                <span class="houseCardBadge">85 m² • 2 hóspedes</span>
-              </div>
-              <div class="houseCardBody">
-                <div class="houseCardTop">
-                  <h3 class="houseCardTitle">Casa Manga</h3>
-                  <p class="houseCardMeta">Conforto e jardim</p>
-                </div>
-                <p class="houseCardText">
-                  Uma casa elegante e acolhedora, que equilibra conforto, vegetação e uma sensação de
-                  tranquilidade tropical permanente.
-                </p>
-                <div class="houseCardAmenities">
-                  <span>Cozinha</span>
-                  <span>Jardim</span>
-                  <span>Varanda</span>
-                </div>
-                <div class="houseCardFooter">
-                  <div class="houseCardPrice">
-                    <small>Diárias a partir de</small>
-                    <strong>R$ 1.850</strong>
-                  </div>
-                  <span class="btn btnGhost">Ver detalhes</span>
-                </div>
-              </div>
-            </a>
-          </article>
+        <article class="houseEditorialCard">
+          <a href="/pt/casas/casa-oca/">
+            <div class="houseEditorialMedia">
+              <img src="/assets/img/casa-oca/hero.jpeg" alt="Casa Oca" />
+            </div>
 
-          <article class="houseCardEditorial" data-reveal="right">
-            <a href="/pt/casas/casa-grande/">
-              <div class="houseCardMedia">
-                <img src="/assets/img/IMG_0151.jpeg" alt="Casa Grande" />
-                <span class="houseCardBadge">210 m² • 4 hóspedes</span>
+            <div class="houseEditorialBody">
+              <div class="houseEditorialTop">
+                <h3 class="houseEditorialTitle">Casa Oca</h3>
+                <p class="houseEditorialMeta">Refúgio • 2 hóspedes</p>
               </div>
-              <div class="houseCardBody">
-                <div class="houseCardTop">
-                  <h3 class="houseCardTitle">Casa Grande</h3>
-                  <p class="houseCardMeta">A experiência mais exclusiva</p>
-                </div>
-                <p class="houseCardText">
-                  A maior casa da vila reúne escala, privacidade e presença arquitetônica, com dois
-                  quartos e uma estadia mais ampla, generosa e exclusiva.
-                </p>
-                <div class="houseCardAmenities">
-                  <span>2 quartos</span>
-                  <span>Jacuzzi</span>
-                  <span>Área de estar</span>
-                </div>
-                <div class="houseCardFooter">
-                  <div class="houseCardPrice">
-                    <small>Diárias a partir de</small>
-                    <strong>R$ 3.800</strong>
-                  </div>
-                  <span class="btn btnGhost">Ver detalhes</span>
-                </div>
-              </div>
-            </a>
-          </article>
 
-        </div>
+              <p class="houseEditorialText">
+                Um abrigo mais íntimo e sensorial, em que textura, sombra e silêncio compõem uma estadia profundamente autoral.
+              </p>
+
+              <div class="houseEditorialFooter">
+                <span class="houseEditorialPill">Textura • abrigo • jardim</span>
+                <span class="btn btnGhost">Ver casa</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
       </div>
-    </section>
 
+      <!-- PAR 2 -->
+      <div class="housesPair" data-reveal="right">
+
+        <article class="houseEditorialCard">
+          <a href="/pt/casas/casa-dende/">
+            <div class="houseEditorialMedia">
+              <img src="/assets/img/casa-dende/hero.jpeg" alt="Casa Dendê" />
+            </div>
+
+            <div class="houseEditorialBody">
+              <div class="houseEditorialTop">
+                <h3 class="houseEditorialTitle">Casa Dendê</h3>
+                <p class="houseEditorialMeta">Convívio • 4 hóspedes</p>
+              </div>
+
+              <p class="houseEditorialText">
+                Uma casa mais aberta e generosa, integrada ao jardim, concebida para estadias compartilhadas com conforto e leveza tropical.
+              </p>
+
+              <div class="houseEditorialFooter">
+                <span class="houseEditorialPill">Jardim • convívio • respiro</span>
+                <span class="btn btnGhost">Ver casa</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="houseEditorialCard">
+          <a href="/pt/casas/casa-rosada/">
+            <div class="houseEditorialMedia">
+              <img src="/assets/img/casa-rosada/hero.jpeg" alt="Casa Rosada" />
+            </div>
+
+            <div class="houseEditorialBody">
+              <div class="houseEditorialTop">
+                <h3 class="houseEditorialTitle">Casa Rosada</h3>
+                <p class="houseEditorialMeta">Charme • 2 hóspedes</p>
+              </div>
+
+              <p class="houseEditorialText">
+                Delicadeza, cor e uma presença suave compõem uma casa acolhedora, visualmente encantadora e profundamente tropical.
+              </p>
+
+              <div class="houseEditorialFooter">
+                <span class="houseEditorialPill">Charme • aconchego • jardim</span>
+                <span class="btn btnGhost">Ver casa</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+      </div>
+
+      <!-- PAR 3 -->
+      <div class="housesPair" data-reveal="left">
+
+        <article class="houseEditorialCard">
+          <a href="/pt/casas/casa-manga/">
+            <div class="houseEditorialMedia">
+              <img src="/assets/img/casa-manga/hero.jpeg" alt="Casa Manga" />
+            </div>
+
+            <div class="houseEditorialBody">
+              <div class="houseEditorialTop">
+                <h3 class="houseEditorialTitle">Casa Manga</h3>
+                <p class="houseEditorialMeta">Natureza • 2 hóspedes</p>
+              </div>
+
+              <p class="houseEditorialText">
+                Uma casa orgânica e acolhedora, onde vegetação, sombra e luz filtrada criam uma permanência mais calma e natural.
+              </p>
+
+              <div class="houseEditorialFooter">
+                <span class="houseEditorialPill">Sombra • frescor • ritmo natural</span>
+                <span class="btn btnGhost">Ver casa</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="houseEditorialCard">
+          <a href="/pt/casas/casa-dos-baloes/">
+            <div class="houseEditorialMedia">
+              <img src="/assets/img/casa-dos-baloes/hero.jpeg" alt="Casa dos Balões" />
+            </div>
+
+            <div class="houseEditorialBody">
+              <div class="houseEditorialTop">
+                <h3 class="houseEditorialTitle">Casa dos Balões</h3>
+                <p class="houseEditorialMeta">Escala • 4 hóspedes</p>
+              </div>
+
+              <p class="houseEditorialText">
+                Uma casa de presença generosa, concebida para estadias amplas, abertas e acolhedoras, com um ritmo mais compartilhado.
+              </p>
+
+              <div class="houseEditorialFooter">
+                <span class="houseEditorialPill">Amplitude • fluidez • convívio</span>
+                <span class="btn btnGhost">Ver casa</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+      </div>
+
+      <!-- PAR 4 -->
+      <div class="housesPair" data-reveal="right">
+
+        <article class="houseEditorialCard">
+          <a href="/pt/casas/casa-branca/">
+            <div class="houseEditorialMedia">
+              <img src="/assets/img/casa-branca/hero.jpeg" alt="Casa Branca" />
+            </div>
+
+            <div class="houseEditorialBody">
+              <div class="houseEditorialTop">
+                <h3 class="houseEditorialTitle">Casa Branca</h3>
+                <p class="houseEditorialMeta">Luz • 2 hóspedes</p>
+              </div>
+
+              <p class="houseEditorialText">
+                Uma estadia de serenidade e clareza, marcada por luz natural, silêncio e uma sofisticação mais delicada.
+              </p>
+
+              <div class="houseEditorialFooter">
+                <span class="houseEditorialPill">Luz • jardim • suavidade</span>
+                <span class="btn btnGhost">Ver casa</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="houseEditorialCard">
+          <a href="/pt/casas/atelie-azul/">
+            <div class="houseEditorialMedia">
+              <img src="/assets/img/atelie-azul/hero.jpeg" alt="Ateliê Azul" />
+            </div>
+
+            <div class="houseEditorialBody">
+              <div class="houseEditorialTop">
+                <h3 class="houseEditorialTitle">Ateliê Azul</h3>
+                <p class="houseEditorialMeta">Autoral • 2 hóspedes</p>
+              </div>
+
+              <p class="houseEditorialText">
+                Um espaço de atmosfera mais artística, guiado por luz, delicadeza e uma permanência de escala mais íntima.
+              </p>
+
+              <div class="houseEditorialFooter">
+                <span class="houseEditorialPill">Luz • sensibilidade • intimidade</span>
+                <span class="btn btnGhost">Ver casa</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+      </div>
+
+    </div>
+  </div>
+</section>
     <section class="section housesClosing">
       <div class="wrap">
         <div class="housesClosingPanel" data-reveal="zoom">
-          <p class="eyebrow">Reserva</p>
-          <h2 class="h2">Encontre a casa certa para o seu ritmo em Trancoso</h2>
+          <p class="eyebrow">Reservas</p>
+          <h2 class="h2">Encontre a casa que melhor acompanha seu tempo em Trancoso.</h2>
           <p class="lead mt-16">
-            Consulte disponibilidade, compare as atmosferas de cada casa e siga para a reserva com
-            café da manhã e estacionamento já incluídos na experiência.
+            Explore a coleção, descubra as atmosferas da vila e siga para a reserva com café da manhã e estacionamento já incluídos na experiência.
           </p>
 
           <div class="ctaRow mt-26">

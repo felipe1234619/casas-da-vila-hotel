@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Houses | Casas da Vila</title>
+  <meta
+    name="description"
+    content="Explore the authorial houses of Casas da Vila in Trancoso. A curated collection of stays with distinct identity, tropical atmosphere and boutique permanence."
+  />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="/assets/css/motion.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <style>
+    .housesHero{
+      position:relative;
+      min-height:84svh;
+      overflow:hidden;
+      isolation:isolate;
+    }
+
+    .housesHeroMedia{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .housesHeroMedia video,
+    .housesHeroMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .housesHeroShade,
+    .housesHeroGlow,
+    .housesHeroVignette,
+    .housesHeroGrain{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+    }
+
+    .housesHeroShade{
+      background:
+        linear-gradient(90deg, rgba(28,22,17,.62) 0%, rgba(28,22,17,.26) 42%, rgba(28,22,17,.10) 100%),
+        linear-gradient(180deg, rgba(255,245,232,.04) 0%, rgba(26,20,16,.26) 100%);
+    }
+
+    .housesHeroGlow{
+      background:
+        radial-gradient(circle at 18% 30%, rgba(255,248,238,.10) 0%, rgba(255,248,238,0) 34%);
+    }
+
+    .housesHeroVignette{
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,.22) 100%);
+    }
+
+    .housesHeroGrain{
+      opacity:.05;
+      background-image:radial-gradient(rgba(255,255,255,.7) .6px, transparent .7px);
+      background-size:8px 8px;
+      mix-blend-mode:soft-light;
+    }
+
+    .housesHeroInner{
+      position:relative;
+      z-index:2;
+      width:min(var(--container), calc(100% - 32px));
+      min-height:84svh;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.06fr .94fr;
+      gap:44px;
+      align-items:end;
+      padding-top:calc(var(--header-h) + 20px);
+      padding-bottom:42px;
+    }
+
+    .housesHeroContent{
+      max-width:760px;
+    }
+
+    .housesHeroKicker{
+      color:rgba(255,255,255,.74);
+    }
+
+    .housesHeroTitle{
+      margin:0;
+      color:#fff;
+      max-width:11ch;
+      text-shadow:0 10px 30px rgba(0,0,0,.16);
+    }
+
+    .housesHeroText{
+      margin:22px 0 0;
+      max-width:640px;
+      font-size:18px;
+      line-height:1.82;
+      color:rgba(255,255,255,.88);
+    }
+
+    .housesHeroNote{
+      max-width:370px;
+      padding:24px;
+      border-radius:28px;
+      background:rgba(255,252,248,.76);
+      border:1px solid rgba(255,255,255,.48);
+      box-shadow:var(--shadow-lg);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      justify-self:end;
+    }
+
+    .housesHeroNote .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .housesHeroNote p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.72;
+    }
+
+    .housesIntro{
+      padding-top:88px;
+      padding-bottom:30px;
+    }
+
+    .housesIntroGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:36px;
+      align-items:start;
+    }
+
+    .housesIntroHead{
+      display:grid;
+      gap:16px;
+      max-width:900px;
+    }
+
+    .housesIntroText{
+      display:grid;
+      gap:18px;
+      max-width:760px;
+    }
+
+    .housesCollectionV2{
+      padding-top:16px;
+      padding-bottom:94px;
+    }
+
+    .housesCollectionHead{
+      max-width:960px;
+      display:grid;
+      gap:16px;
+      margin-bottom:34px;
+    }
+
+    .housesPairs{
+      display:grid;
+      gap:28px;
+    }
+
+    .housesPair{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
+      align-items:stretch;
+    }
+
+    .houseEditorialCard{
+      position:relative;
+      overflow:hidden;
+      border-radius:30px;
+      background:rgba(255,252,248,.84);
+      border:1px solid rgba(255,255,255,.56);
+      box-shadow:var(--shadow-md);
+      transition:
+        transform .4s var(--ease),
+        box-shadow .4s var(--ease);
+    }
+
+    .houseEditorialCard:hover{
+      transform:translateY(-6px);
+      box-shadow:0 28px 60px rgba(76,52,35,.16);
+    }
+
+    .houseEditorialCard > a{
+      display:flex;
+      flex-direction:column;
+      height:100%;
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .houseEditorialMedia{
+      aspect-ratio:16 / 10;
+      overflow:hidden;
+    }
+
+    .houseEditorialMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transition:transform 1.2s var(--ease);
+    }
+
+    .houseEditorialCard:hover .houseEditorialMedia img{
+      transform:scale(1.04);
+    }
+
+    .houseEditorialBody{
+      display:flex;
+      flex-direction:column;
+      flex:1 1 auto;
+      padding:24px 24px 22px;
+      gap:12px;
+    }
+
+    .houseEditorialTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .houseEditorialTitle{
+      margin:0;
+      font-family:var(--font-serif);
+      font-size:34px;
+      line-height:1;
+      letter-spacing:-.03em;
+      color:var(--text);
+    }
+
+    .houseEditorialMeta{
+      margin:0;
+      color:var(--text-soft);
+      font-size:14px;
+      white-space:nowrap;
+    }
+
+    .houseEditorialText{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.76;
+      max-width:52ch;
+    }
+
+    .houseEditorialFooter{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-top:auto;
+      padding-top:8px;
+    }
+
+    .houseEditorialPill{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(92,71,54,.08);
+      color:var(--text-soft);
+      font-size:13px;
+    }
+
+    .housesClosing{
+      padding-top:0;
+      padding-bottom:72px;
+    }
+
+    .housesClosingPanel{
+      padding:42px;
+      border-radius:32px;
+      background:rgba(255,252,248,.72);
+      border:1px solid rgba(255,255,255,.54);
+      box-shadow:var(--shadow-md);
+    }
+
+    .housesClosingPanel .lead{
+      max-width:860px;
+    }
+
+    @media (max-width:1100px){
+      .housesHeroInner,
+      .housesIntroGrid,
+      .housesPair{
+        grid-template-columns:1fr;
+      }
+
+      .housesHeroNote{
+        max-width:460px;
+        justify-self:start;
+      }
+    }
+
+    @media (max-width:760px){
+      .housesHero{
+        min-height:auto;
+      }
+
+      .housesHeroInner{
+        min-height:calc(82svh - var(--header-h) - 18px);
+        gap:24px;
+        padding-bottom:28px;
+      }
+
+      .housesHeroTitle{
+        max-width:none;
+      }
+
+      .housesHeroText{
+        font-size:17px;
+        line-height:1.74;
+      }
+
+      .housesHeroNote{
+        max-width:none;
+        width:100%;
+        padding:20px;
+        border-radius:24px;
+      }
+
+      .housesIntro{
+        padding-top:60px;
+      }
+
+      .housesCollectionV2{
+        padding-bottom:64px;
+      }
+
+      .houseEditorialBody{
+        padding:20px 18px 18px;
+      }
+
+      .houseEditorialTop{
+        flex-direction:column;
+        gap:10px;
+      }
+
+      .houseEditorialTitle{
+        font-size:30px;
+      }
+
+      .houseEditorialFooter{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .houseEditorialFooter .btn{
+        width:100%;
+      }
+
+      .housesClosingPanel{
+        padding:26px;
+        border-radius:24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main>
+
+    <section class="housesHero" aria-label="Casas da Vila">
+      <div class="housesHeroMedia">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/assets/img/poster-hero.jpeg"
+        >
+          <source src="/assets/video/casas-da-vila-hero.mp4" type="video/mp4" />
+        </video>
+
+        <div class="housesHeroShade"></div>
+        <div class="housesHeroGlow"></div>
+        <div class="housesHeroVignette"></div>
+        <div class="housesHeroGrain"></div>
+      </div>
+
+      <div class="housesHeroInner">
+        <div class="housesHeroContent" data-reveal="left">
+          <p class="eyebrow housesHeroKicker shimmerLine">Casas da Vila • Trancoso</p>
+
+          <h1 class="display housesHeroTitle">
+            A collection of houses with identities of their own.
+          </h1>
+
+          <p class="housesHeroText">
+            From the most intimate stays to the broadest houses, the village gathers authorial experiences where architecture, garden, light and atmosphere shape distinct ways of living Trancoso.
+          </p>
+        </div>
+
+        <div class="housesHeroNote heroFloat" data-reveal="right">
+          <p class="eyebrow">The collection</p>
+          <p>
+            Each house sustains its own rhythm. Together, they form a coherent, tropical and quietly sophisticated portfolio.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section housesIntro">
+      <div class="wrap housesIntroGrid">
+        <div class="housesIntroHead" data-reveal="zoom">
+          <p class="eyebrow">Village portfolio</p>
+          <h2 class="h2">Houses conceived as experiences, never as repeated units.</h2>
+        </div>
+
+        <div class="housesIntroText" data-reveal="zoom">
+          <p class="lead">
+            Some houses invite a more intimate and sensory time. Others call for a broader, more open and generous permanence.
+          </p>
+          <p class="lead">
+            Choosing the house is also choosing the way of being — between light, shade, garden, quietness and the tropical presence of the village.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section housesCollectionV2">
+      <div class="wrap">
+
+        <div class="housesCollectionHead" data-reveal="zoom">
+          <p class="eyebrow">The houses</p>
+          <h2 class="h2">A collection of atmospheres for living the village in distinct ways.</h2>
+          <p class="lead">
+            Each house sustains an identity of its own — some more intimate, others broader, all connected to the garden, architecture and tropical rhythm of Trancoso.
+          </p>
+        </div>
+
+        <div class="housesPairs">
+
+          <div class="housesPair" data-reveal="left">
+
+            <article class="houseEditorialCard">
+              <a href="/en/houses/casa-grande/">
+                <div class="houseEditorialMedia">
+                  <img src="/assets/img/casa-grande/hero.jpeg" alt="Casa Grande" />
+                </div>
+
+                <div class="houseEditorialBody">
+                  <div class="houseEditorialTop">
+                    <h3 class="houseEditorialTitle">Casa Grande</h3>
+                    <p class="houseEditorialMeta">Scale • 4 guests</p>
+                  </div>
+
+                  <p class="houseEditorialText">
+                    The broadest experience in the village, with architectural presence, breath and a more exclusive atmosphere of permanence.
+                  </p>
+
+                  <div class="houseEditorialFooter">
+                    <span class="houseEditorialPill">Privacy • garden • presence</span>
+                    <span class="btn btnGhost">View house</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+            <article class="houseEditorialCard">
+              <a href="/en/houses/casa-oca/">
+                <div class="houseEditorialMedia">
+                  <img src="/assets/img/casa-oca/hero.jpeg" alt="Casa Oca" />
+                </div>
+
+                <div class="houseEditorialBody">
+                  <div class="houseEditorialTop">
+                    <h3 class="houseEditorialTitle">Casa Oca</h3>
+                    <p class="houseEditorialMeta">Retreat • 2 guests</p>
+                  </div>
+
+                  <p class="houseEditorialText">
+                    A more intimate and sensory refuge, where texture, shade and quietness compose a deeply authorial stay.
+                  </p>
+
+                  <div class="houseEditorialFooter">
+                    <span class="houseEditorialPill">Texture • shelter • garden</span>
+                    <span class="btn btnGhost">View house</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+          </div>
+
+          <div class="housesPair" data-reveal="right">
+
+            <article class="houseEditorialCard">
+              <a href="/en/houses/casa-dende/">
+                <div class="houseEditorialMedia">
+                  <img src="/assets/img/casa-dende/hero.jpeg" alt="Casa Dendê" />
+                </div>
+
+                <div class="houseEditorialBody">
+                  <div class="houseEditorialTop">
+                    <h3 class="houseEditorialTitle">Casa Dendê</h3>
+                    <p class="houseEditorialMeta">Shared living • 4 guests</p>
+                  </div>
+
+                  <p class="houseEditorialText">
+                    A broader and more generous house, integrated with the garden, conceived for shared stays with comfort and tropical lightness.
+                  </p>
+
+                  <div class="houseEditorialFooter">
+                    <span class="houseEditorialPill">Garden • shared living • breath</span>
+                    <span class="btn btnGhost">View house</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+            <article class="houseEditorialCard">
+              <a href="/en/houses/casa-rosada/">
+                <div class="houseEditorialMedia">
+                  <img src="/assets/img/casa-rosada/hero.jpeg" alt="Casa Rosada" />
+                </div>
+
+                <div class="houseEditorialBody">
+                  <div class="houseEditorialTop">
+                    <h3 class="houseEditorialTitle">Casa Rosada</h3>
+                    <p class="houseEditorialMeta">Charm • 2 guests</p>
+                  </div>
+
+                  <p class="houseEditorialText">
+                    Delicacy, colour and a gentle presence compose a welcoming, visually enchanting and deeply tropical house.
+                  </p>
+
+                  <div class="houseEditorialFooter">
+                    <span class="houseEditorialPill">Charm • warmth • garden</span>
+                    <span class="btn btnGhost">View house</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+          </div>
+
+          <div class="housesPair" data-reveal="left">
+
+            <article class="houseEditorialCard">
+              <a href="/en/houses/casa-manga/">
+                <div class="houseEditorialMedia">
+                  <img src="/assets/img/casa-manga/hero.jpeg" alt="Casa Manga" />
+                </div>
+
+                <div class="houseEditorialBody">
+                  <div class="houseEditorialTop">
+                    <h3 class="houseEditorialTitle">Casa Manga</h3>
+                    <p class="houseEditorialMeta">Nature • 2 guests</p>
+                  </div>
+
+                  <p class="houseEditorialText">
+                    An organic and welcoming house where vegetation, shade and filtered light create a calmer, more natural permanence.
+                  </p>
+
+                  <div class="houseEditorialFooter">
+                    <span class="houseEditorialPill">Shade • freshness • natural rhythm</span>
+                    <span class="btn btnGhost">View house</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+            <article class="houseEditorialCard">
+              <a href="/en/houses/casa-dos-baloes/">
+                <div class="houseEditorialMedia">
+                  <img src="/assets/img/casa-dos-baloes/hero.jpeg" alt="Casa dos Balões" />
+                </div>
+
+                <div class="houseEditorialBody">
+                  <div class="houseEditorialTop">
+                    <h3 class="houseEditorialTitle">Casa dos Balões</h3>
+                    <p class="houseEditorialMeta">Scale • 4 guests</p>
+                  </div>
+
+                  <p class="houseEditorialText">
+                    A house of generous presence, conceived for broad, open and welcoming stays, with a more shared rhythm of permanence.
+                  </p>
+
+                  <div class="houseEditorialFooter">
+                    <span class="houseEditorialPill">Scale • fluidity • togetherness</span>
+                    <span class="btn btnGhost">View house</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+          </div>
+
+          <div class="housesPair" data-reveal="right">
+
+            <article class="houseEditorialCard">
+              <a href="/en/houses/casa-branca/">
+                <div class="houseEditorialMedia">
+                  <img src="/assets/img/casa-branca/hero.jpeg" alt="Casa Branca" />
+                </div>
+
+                <div class="houseEditorialBody">
+                  <div class="houseEditorialTop">
+                    <h3 class="houseEditorialTitle">Casa Branca</h3>
+                    <p class="houseEditorialMeta">Light • 2 guests</p>
+                  </div>
+
+                  <p class="houseEditorialText">
+                    A stay of serenity and clarity, marked by natural light, quietness and a more delicate sophistication.
+                  </p>
+
+                  <div class="houseEditorialFooter">
+                    <span class="houseEditorialPill">Light • garden • softness</span>
+                    <span class="btn btnGhost">View house</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+            <article class="houseEditorialCard">
+              <a href="/en/houses/atelie-azul/">
+                <div class="houseEditorialMedia">
+                  <img src="/assets/img/atelie-azul/hero.jpeg" alt="Ateliê Azul" />
+                </div>
+
+                <div class="houseEditorialBody">
+                  <div class="houseEditorialTop">
+                    <h3 class="houseEditorialTitle">Ateliê Azul</h3>
+                    <p class="houseEditorialMeta">Authorial • 2 guests</p>
+                  </div>
+
+                  <p class="houseEditorialText">
+                    A space of more artistic atmosphere, guided by light, delicacy and a permanence of more intimate scale.
+                  </p>
+
+                  <div class="houseEditorialFooter">
+                    <span class="houseEditorialPill">Light • sensibility • intimacy</span>
+                    <span class="btn btnGhost">View house</span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section housesClosing">
+      <div class="wrap">
+        <div class="housesClosingPanel" data-reveal="zoom">
+          <p class="eyebrow">Booking</p>
+          <h2 class="h2">Find the house that best accompanies your time in Trancoso.</h2>
+          <p class="lead mt-16">
+            Explore the collection, discover the atmospheres of the village and continue to booking with breakfast and parking already included in the experience.
+          </p>
+
+          <div class="ctaRow mt-26">
+            <a class="btn btnPrimary" href="/en/book/">Check availability</a>
+            <a class="btn btnGhost" href="/en/contact/">Contact us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>
