@@ -348,24 +348,6 @@
   </url>
 
   <!-- SUCCESS PAGES (LOW PRIORITY) -->
-  <url>
-    <loc>https://casasdavila.com/pt/sucesso/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/sucesso/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/success/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/sucesso/" />
-  </url>
 
-  <url>
-    <loc>https://casasdavila.com/en/success/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/sucesso/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/success/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/success/" />
-  </url>
 
 </urlset>

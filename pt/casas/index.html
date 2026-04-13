@@ -15,141 +15,287 @@
   <link rel="stylesheet" href="/assets/css/responsive.css" />
 
   <style>
-    .housesHero{
-      position:relative;
-      min-height:84svh;
-      overflow:hidden;
-      isolation:isolate;
-    }
+/* =========================================================
+   HOUSES HERO — AMAN REFINED
+========================================================= */
 
-    .housesHeroMedia{
-      position:absolute;
-      inset:0;
-      z-index:0;
-    }
+.housesHero{
+  position:relative;
+  min-height:78svh;
+  overflow:hidden;
+  isolation:isolate;
+}
 
-    .housesHeroMedia video,
-    .housesHeroMedia img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
+.housesHeroMedia{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
 
-    .housesHeroShade,
-    .housesHeroGlow,
-    .housesHeroVignette,
-    .housesHeroGrain{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-    }
+.housesHeroMedia video,
+.housesHeroMedia img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  display:block;
+  transform:scale(1.015);
+}
 
-    .housesHeroShade{
-      background:
-        linear-gradient(90deg, rgba(28,22,17,.62) 0%, rgba(28,22,17,.26) 42%, rgba(28,22,17,.10) 100%),
-        linear-gradient(180deg, rgba(255,245,232,.04) 0%, rgba(26,20,16,.26) 100%);
-    }
+.housesHeroShade,
+.housesHeroGlow,
+.housesHeroVignette,
+.housesHeroGrain{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
 
-    .housesHeroGlow{
-      background:
-        radial-gradient(circle at 18% 30%, rgba(255,248,238,.10) 0%, rgba(255,248,238,0) 34%);
-    }
+.housesHeroShade{
+  background:
+    linear-gradient(
+      to right,
+      rgba(16,14,12,0.56) 0%,
+      rgba(16,14,12,0.24) 40%,
+      rgba(16,14,12,0.06) 72%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(16,14,12,0.18) 0%,
+      rgba(16,14,12,0.10) 34%,
+      rgba(16,14,12,0.30) 100%
+    );
+}
 
-    .housesHeroVignette{
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,.22) 100%);
-    }
+.housesHeroGlow{
+  background:
+    radial-gradient(
+      circle at 18% 30%,
+      rgba(255,244,228,0.08) 0%,
+      rgba(255,244,228,0) 34%
+    );
+  mix-blend-mode:screen;
+}
 
-    .housesHeroGrain{
-      opacity:.05;
-      background-image:radial-gradient(rgba(255,255,255,.7) .6px, transparent .7px);
-      background-size:8px 8px;
-      mix-blend-mode:soft-light;
-    }
+.housesHeroVignette{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.08) 0%,
+      rgba(0,0,0,0) 24%,
+      rgba(0,0,0,.18) 100%
+    );
+}
 
-    .housesHeroInner{
-      position:relative;
-      z-index:2;
-      width:min(var(--container), calc(100% - 32px));
-      min-height:84svh;
-      margin:0 auto;
-      display:grid;
-      grid-template-columns:1.06fr .94fr;
-      gap:44px;
-      align-items:end;
-      padding-top:calc(var(--header-h) + 20px);
-      padding-bottom:42px;
-    }
+.housesHeroGrain{
+  opacity:.035;
+  background-image:radial-gradient(rgba(255,255,255,.7) .6px, transparent .7px);
+  background-size:8px 8px;
+  mix-blend-mode:soft-light;
+}
 
-    .housesHeroContent{
-      max-width:760px;
-    }
+.housesHeroInner{
+  position:relative;
+  z-index:2;
+  width:min(1180px, calc(100% - 40px));
+  min-height:78svh;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(280px, 340px);
+  gap:44px;
+  align-items:end;
+  padding-top:calc(var(--header-h) + 18px);
+  padding-bottom:38px;
+}
 
-    .housesHeroKicker{
-      color:rgba(255,255,255,.74);
-    }
+.housesHeroContent{
+  max-width:640px;
+  align-self:end;
+}
 
-    .housesHeroTitle{
-      margin:0;
-      color:#fff;
-      max-width:10ch;
-      text-shadow:0 10px 30px rgba(0,0,0,.16);
-    }
+.housesHeroKicker{
+  display:block;
+  margin:0 0 14px;
+  font-size:11px;
+  line-height:1;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.72);
+}
 
-    .housesHeroText{
-      margin:22px 0 0;
-      max-width:640px;
-      font-size:18px;
-      line-height:1.82;
-      color:rgba(255,255,255,.88);
-    }
+.housesHeroTitle{
+  margin:0;
+  max-width:7.2ch;
+  font-family:var(--font-sans);
+  font-size:clamp(44px, 6vw, 72px);
+  line-height:1.02;
+  font-weight:300;
+  letter-spacing:-0.028em;
+  color:#fff;
+  text-wrap:balance;
+  text-shadow:0 6px 18px rgba(0,0,0,.20);
+}
 
-    .housesHeroNote{
-      max-width:370px;
-      padding:24px;
-      border-radius:28px;
-      background:rgba(255,252,248,.76);
-      border:1px solid rgba(255,255,255,.48);
-      box-shadow:var(--shadow-lg);
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
-      justify-self:end;
-    }
+.housesHeroText{
+  margin:18px 0 0;
+  max-width:33rem;
+  font-size:16px;
+  line-height:1.72;
+  color:rgba(255,255,255,.86);
+  text-shadow:none;
+}
 
-    .housesHeroNote .eyebrow{
-      margin-bottom:10px;
-    }
+.housesHeroNote{
+  max-width:340px;
+  margin-left:auto;
+  padding:22px 22px 20px;
+  border-radius:26px;
+  background:rgba(255,252,248,.72);
+  border:1px solid rgba(255,255,255,.44);
+  box-shadow:0 14px 34px rgba(0,0,0,.08);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  align-self:center;
+}
 
-    .housesHeroNote p{
-      margin:0;
-      color:var(--text-soft);
-      line-height:1.72;
-    }
+.housesHeroNote .eyebrow{
+  margin:0 0 10px;
+  font-size:10px;
+  line-height:1;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(58,47,39,.58);
+}
 
-    .housesIntro{
-      padding-top:88px;
-      padding-bottom:30px;
-    }
+.housesHeroNote p{
+  margin:0;
+  font-size:15px;
+  line-height:1.7;
+  color:var(--text-soft);
+}
 
-    .housesIntroGrid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:36px;
-      align-items:start;
-    }
+/* =========================
+   TABLET
+========================= */
 
-    .housesIntroHead{
-      display:grid;
-      gap:16px;
-      max-width:900px;
-    }
+@media (max-width:1100px){
+  .housesHero{
+    min-height:auto;
+  }
 
-    .housesIntroText{
-      display:grid;
-      gap:18px;
-      max-width:760px;
-    }
+  .housesHeroInner{
+    width:min(100%, calc(100% - 32px));
+    min-height:calc(82svh - var(--header-h) - 18px);
+    grid-template-columns:1fr;
+    gap:24px;
+    padding-bottom:30px;
+  }
+
+  .housesHeroContent{
+    max-width:640px;
+  }
+
+  .housesHeroNote{
+    max-width:440px;
+    margin-left:0;
+    align-self:start;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:760px){
+  .housesHero{
+    min-height:auto;
+  }
+
+  .housesHeroInner{
+    width:min(100%, calc(100% - 24px));
+    min-height:calc(78svh - var(--header-h) - 14px);
+    gap:20px;
+    padding-top:calc(var(--header-h) + 14px);
+    padding-bottom:24px;
+  }
+
+  .housesHeroContent{
+    max-width:100%;
+  }
+
+  .housesHeroTitle{
+    max-width:8.4ch;
+    font-size:clamp(2.45rem, 10vw, 4rem);
+    line-height:1.02;
+  }
+
+  .housesHeroText{
+    max-width:30ch;
+    font-size:16px;
+    line-height:1.68;
+  }
+
+  .housesHeroNote{
+    max-width:none;
+    width:100%;
+    padding:18px 18px 17px;
+    border-radius:22px;
+  }
+
+  .housesHeroNote p{
+    font-size:14.5px;
+    line-height:1.68;
+  }
+}
+
+  .housesIntroHead,
+  .housesIntroText,
+  .housesCollectionHead .h2,
+  .housesCollectionHead .lead{
+    max-width:760px;
+  }
+
+  .housesIntroHead .h2{
+    max-width:13ch;
+  }
+
+  .housesCollectionHead .h2{
+    max-width:18ch;
+  }
+
+  .housesIntroText,
+  .housesCollectionHead .lead{
+    padding-top:0;
+  }
+
+
+
+  .housesIntroGrid,
+  .housesCollectionHead{
+    row-gap:14px;
+  }
+
+  .housesIntroHead .h2,
+  .housesCollectionHead .h2{
+    max-width:16ch;
+    line-height:0,96;
+  }
+
+  .housesIntroText,
+  .housesCollectionHead .lead{
+    max-width:100%;
+  }
+
+  .housesIntroText .lead,
+  .housesCollectionHead .lead{
+    max-width:30ch;
+    line-height:1.68;
+  }
+
+  .housesCollectionV2{
+    padding-top:2px;
+    padding-bottom:72px;
+  }
 
     .housesFeature{
       padding-top:12px;
@@ -694,6 +840,89 @@
     width:100%;
   }
 }
+/* =========================================================
+   FIX GRID EDITORIAL — ALINHAMENTO ABSOLUTO
+========================================================= */
+
+.housesIntroGrid,
+.housesCollectionHead{
+  display:grid;
+  grid-template-columns: 1.65fr 0.45fr;
+  column-gap:64px;
+  align-items:start;
+}
+
+/* força o texto da direita alinhar com o topo do título */
+.housesIntroText,
+.housesCollectionHead .lead{
+  margin-top:0;
+  padding-top:4px;
+}
+
+/* garante largura editorial consistente */
+.housesIntroText .lead,
+.housesCollectionHead .lead{
+  max-width:32rem;
+  line-height:1.75;
+}
+.housesCollectionHead{
+  max-width:none;
+}
+
+.housesCollectionHead .h2{
+  grid-column:1;
+}
+
+.housesCollectionHead .lead{
+  grid-column:2;
+
+}
+/* =========================================
+   H2 EDITORIAL — CASAS (FIX GLOBAL LIMPO)
+========================================= */
+
+.housesIntroHead .h2,
+.housesCollectionHead .h2{
+
+  margin:0;
+  padding:0;
+
+  font-family:var(--font-serif);
+  font-weight:300;
+
+  font-size:clamp(34px, 3.6vw, 52px);
+  line-height:1.08;
+  letter-spacing:-0.02em;
+
+  color:var(--text);
+
+  max-width:18ch;
+
+  text-wrap:balance;
+}
+
+/* alinhamento com texto lateral */
+.housesIntroGrid,
+.housesCollectionHead{
+  display:grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  column-gap:64px;
+  align-items:start;
+}
+
+/* texto da direita alinhado perfeitamente com topo do H2 */
+.housesIntroText,
+.housesCollectionHead .lead{
+  margin:0;
+  padding:0;
+}
+
+/* largura editorial correta do texto */
+.housesIntroText .lead,
+.housesCollectionHead .lead{
+  max-width:32rem;
+  line-height:1.75;
+}
   </style>
 </head>
 <body>
@@ -702,47 +931,46 @@
 
   <main>
 
-    <section class="housesHero" aria-label="Casas da Vila">
-      <div class="housesHeroMedia">
-        <video
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          poster="/assets/img/poster-hero.jpeg"
-        >
-          <source src="/assets/video/casas-da-vila-hero.mp4" type="video/mp4" />
-        </video>
+<section class="housesHero" aria-label="Casas da Vila">
+  <div class="housesHeroMedia">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="/assets/img/poster-hero.jpeg"
+    >
+      <source src="/assets/video/casas-da-vila-hero.mp4" type="video/mp4" />
+    </video>
 
-        <div class="housesHeroShade"></div>
-        <div class="housesHeroGlow"></div>
-        <div class="housesHeroVignette"></div>
-        <div class="housesHeroGrain"></div>
-      </div>
+    <div class="housesHeroShade"></div>
+    <div class="housesHeroGlow"></div>
+    <div class="housesHeroVignette"></div>
+    <div class="housesHeroGrain"></div>
+  </div>
 
-      <div class="housesHeroInner">
-        <div class="housesHeroContent" data-reveal="left">
-          <p class="eyebrow housesHeroKicker shimmerLine">Casas da Vila • Trancoso</p>
+  <div class="housesHeroInner">
+    <div class="housesHeroContent" data-reveal="left">
+      <p class="housesHeroKicker">Casas da Vila • Trancoso</p>
 
-          <h1 class="display housesHeroTitle">
-            Uma coleção de casas com identidade própria.
-          </h1>
+      <h1 class="housesHeroTitle">
+        Uma coleção de casas com identidade própria.
+      </h1>
 
-          <p class="housesHeroText">
-            Da permanência mais íntima às casas mais amplas, a vila reúne estadias autorais em que arquitetura, jardim, luz e atmosfera propõem formas distintas de viver Trancoso.
-          </p>
-        </div>
+      <p class="housesHeroText">
+        Da permanência mais íntima às casas mais amplas, a vila reúne estadias autorais em que arquitetura, jardim, luz e atmosfera propõem formas distintas de viver Trancoso.
+      </p>
+    </div>
 
-        <div class="housesHeroNote heroFloat" data-reveal="right">
-          <p class="eyebrow">A coleção</p>
-          <p>
-            Cada casa sustenta um ritmo próprio. Juntas, formam um portfólio coerente, tropical e silenciosamente sofisticado.
-          </p>
-        </div>
-      </div>
-    </section>
-
+    <aside class="housesHeroNote heroFloat" data-reveal="right" aria-label="Sobre a coleção">
+      <p class="eyebrow">A coleção</p>
+      <p>
+        Cada casa sustenta um ritmo próprio. Juntas, formam um portfólio coerente, tropical e silenciosamente sofisticado.
+      </p>
+    </aside>
+  </div>
+</section>
     <section class="section housesIntro">
       <div class="wrap housesIntroGrid">
         <div class="housesIntroHead" data-reveal="zoom">

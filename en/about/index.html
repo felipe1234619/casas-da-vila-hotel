@@ -14,79 +14,108 @@
   <link rel="stylesheet" href="/assets/css/responsive.css" />
 
   <style>
-    .aboutHero{
-      position:relative;
-      min-height:100svh;
-      padding-top:calc(var(--header-h) + 24px);
-      overflow:hidden;
-      isolation:isolate;
-      display:flex;
-      align-items:center;
-    }
+.aboutHero{
+  position:relative;
+  min-height:100svh;
+  padding-top:calc(var(--header-h) + 18px);
+  overflow:hidden;
+  isolation:isolate;
+}
 
-    .aboutHeroBg{
-      position:absolute;
-      inset:0;
-      z-index:0;
-    }
+.aboutHeroBg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
 
-    .aboutHeroBg img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      object-position:center center;
-      transform:scale(1.02);
-    }
+.aboutHeroBg img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+}
 
-    .aboutHeroOverlay{
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(16,14,12,0.48) 0%, rgba(16,14,12,0.18) 26%, rgba(16,14,12,0.12) 52%, rgba(16,14,12,0.54) 100%),
-        linear-gradient(90deg, rgba(16,14,12,0.20) 0%, rgba(16,14,12,0.04) 28%, rgba(16,14,12,0.04) 72%, rgba(16,14,12,0.20) 100%);
-    }
+.aboutHeroOverlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg, rgba(18,16,14,0.28) 0%, rgba(18,16,14,0.08) 34%, rgba(18,16,14,0.04) 68%, rgba(18,16,14,0.08) 100%),
+    linear-gradient(180deg, rgba(18,16,14,0.24) 0%, rgba(18,16,14,0.06) 34%, rgba(18,16,14,0.08) 68%, rgba(18,16,14,0.30) 100%);
+}
 
-    .aboutHeroGrid{
-      position:relative;
-      z-index:2;
-      width:min(1160px, calc(100% - 32px));
-      margin:0 auto;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:96px 0 72px;
-    }
+.aboutHeroGrid--homeTone{
+  position:relative;
+  z-index:2;
+  width:min(var(--container), calc(100% - 48px));
+  min-height:calc(100svh - var(--header-h) - 18px);
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  padding:64px 0 44px;
+}
 
-    .aboutHeroContent{
-      max-width:980px;
-      margin:0 auto;
-    }
+.aboutHeroGrid--homeTone .aboutHeroContent{
+  max-width:720px;
+}
 
-    .aboutHeroEyebrow{
-      color:rgba(255,255,255,0.78);
-      margin-bottom:18px;
-      letter-spacing:.18em;
-    }
+.aboutHeroEyebrow{
+  color:rgba(255,255,255,0.78);
+  letter-spacing:.18em;
+  margin-bottom:16px;
+}
 
-    .aboutHeroTitle{
-      max-width:980px;
-      margin:0 auto;
-      color:#fff;
-      text-shadow:0 14px 40px rgba(0,0,0,0.24);
-      line-height:0.94;
-    }
+.aboutHeroTitle--homeTone{
+  margin:0;
+  max-width:8.8ch;
+  font-family:var(--font-sans);
+  font-weight:500;
+  font-size:clamp(3rem, 5vw, 4.9rem);
+  line-height:.96;
+  letter-spacing:-.045em;
+  color:#fff;
+  text-align:left;
+  text-wrap:balance;
+  text-shadow:0 8px 18px rgba(0,0,0,0.10);
+}
 
-    .aboutHeroText{
-      margin:30px auto 0;
-      max-width:700px;
-      font-size:21px;
-      line-height:1.68;
-      color:rgba(255,255,255,0.94);
-      text-shadow:0 8px 24px rgba(0,0,0,0.18);
-    }
+.aboutHeroText--homeTone{
+  margin:22px 0 0;
+  max-width:32rem;
+  font-size:clamp(1rem, 1.12vw, 1.1rem);
+  line-height:1.7;
+  color:rgba(255,255,255,0.90);
+  text-align:left;
+  text-shadow:0 6px 14px rgba(0,0,0,0.08);
+}
 
-    .aboutIntro{
+@media (max-width: 760px){
+  .aboutHero{
+    min-height:88svh;
+  }
+
+  .aboutHeroGrid--homeTone{
+    width:min(100%, calc(100% - 24px));
+    min-height:calc(88svh - var(--header-h) - 18px);
+    padding:52px 0 30px;
+  }
+
+  .aboutHeroGrid--homeTone .aboutHeroContent{
+    max-width:100%;
+  }
+
+  .aboutHeroTitle--homeTone{
+    max-width:9.2ch;
+    font-size:clamp(2.35rem, 8.4vw, 3.5rem);
+    line-height:1.0;
+  }
+
+  .aboutHeroText--homeTone{
+    max-width:29ch;
+    font-size:.98rem;
+    line-height:1.66;
+  }
+}    .aboutIntro{
       padding-top:96px;
       padding-bottom:42px;
     }
@@ -285,26 +314,7 @@
       .aboutDifferenceImage{
         width:100%;
       }
-    }
-
-    @media (max-width: 760px){
-      .aboutHero{
-        min-height:92svh;
-        padding-top:calc(var(--header-h) + 18px);
-      }
-
-      .aboutHeroGrid{
-        width:min(100%, calc(100% - 24px));
-        padding:68px 0 48px;
-      }
-
-      .aboutHeroTitle{
-        max-width:100%;
-      }
-
-      .aboutHeroText{
-        font-size:18px;
-        max-width:520px;
+    
       }
 
       .aboutStatement,
@@ -334,7 +344,7 @@
       .aboutDifferenceImageWrap img{
         min-height:280px;
       }
-    }
+    
   </style>
 </head>
 <body>
@@ -343,31 +353,29 @@
 
   <main>
 
-    <section class="aboutHero">
-      <div class="aboutHeroBg">
-        <img src="/assets/img/hero-trancoso.jpg" alt="Casas da Vila, Trancoso" />
-        <div class="aboutHeroOverlay"></div>
-      </div>
+<section class="aboutHero aboutHero--homeTone">
+  <div class="aboutHeroBg">
+    <img src="/assets/img/hero-trancoso.jpg" alt="Casas da Vila, Trancoso" />
+    <div class="aboutHeroOverlay"></div>
+  </div>
 
-      <div class="aboutHeroGrid">
-        <div class="aboutHeroContent" data-reveal="zoom">
-          <p class="eyebrow aboutHeroEyebrow shimmerLine">Casas da Vila • About</p>
+  <div class="aboutHeroGrid aboutHeroGrid--homeTone">
+    <div class="aboutHeroContent" data-reveal="left">
+      <p class="eyebrow aboutHeroEyebrow shimmerLine">Casas da Vila • About</p>
 
-          <h1 class="display aboutHeroTitle">
-            A place shaped<br>
-            by light, silence<br>
-            and time.
-          </h1>
+      <h1 class="aboutHeroTitle aboutHeroTitle--homeTone">
+        A place shaped by<br>
+        light, silence and time.
+      </h1>
 
-          <p class="aboutHeroText">
-            Not a hotel.<br>
-            Not quite a house.<br>
-            Something in between — quieter, softer, more intentional.
-          </p>
-        </div>
-      </div>
-    </section>
-
+      <p class="aboutHeroText aboutHeroText--homeTone">
+        Not a hotel.<br>
+        Not quite a house.<br>
+        Something in between — quieter, softer, more intentional.
+      </p>
+    </div>
+  </div>
+</section>
     <section class="section aboutIntro">
       <div class="wrap">
         <div class="aboutIntroGrid">
