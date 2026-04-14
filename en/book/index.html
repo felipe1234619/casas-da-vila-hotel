@@ -170,9 +170,17 @@
 
     .stayCardMedia{
       min-height:100%;
-      background-size:cover;
-      background-position:center;
       position:relative;
+      overflow:hidden;
+      background:#e9e2d7;
+    }
+
+    .stayCardMedia img{
+      width:100%;
+      height:100%;
+      min-height:100%;
+      object-fit:cover;
+      display:block;
     }
 
     .stayCardMedia::before{
@@ -181,6 +189,7 @@
       inset:0;
       background:
         linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.18) 100%);
+      pointer-events:none;
     }
 
     .stayCardMedia::after{
@@ -196,6 +205,7 @@
       letter-spacing:.14em;
       text-transform:uppercase;
       color:#5c4736;
+      pointer-events:none;
     }
 
     .stayCardBody{
@@ -767,6 +777,7 @@
   <script>
     (function () {
       const PENDING_BOOKING_KEY = 'casasdavila:pendingBooking';
+      const SITE_ORIGIN = window.location.origin;
 
       const selectedState = {
         unit: null,
@@ -814,6 +825,88 @@
         return new URLSearchParams(window.location.search).get(name) || '';
       }
 
+      function normalizeSlug(value) {
+        return String(value || '')
+          .trim()
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/_/g, '-')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-|-$/g, '');
+      }
+
+      function toAbsoluteAsset(path) {
+        if (!path) return '';
+        if (/^https?:\/\//i.test(path)) return path;
+        if (path.startsWith('/')) return `${SITE_ORIGIN}${path}`;
+        return `${SITE_ORIGIN}/${path}`;
+      }
+
+      function getHouseImageLibrary() {
+        return {
+          'casa-oca': [
+            '/assets/img/casa-oca/gallery-01.jpeg',
+            '/assets/img/casa-oca/gallery-02.jpeg'
+          ],
+          'atelie-azul': [
+            '/assets/img/atelie-azul/gallery-01.jpeg',
+            '/assets/img/atelie-azul/gallery-02.jpeg'
+          ],
+          'casa-branca': [
+            '/assets/img/casa-branca/gallery-01.jpeg',
+            '/assets/img/casa-branca/gallery-02.jpeg'
+          ],
+          'casa-dende': [
+            '/assets/img/casa-dende/gallery-01.jpeg',
+            '/assets/img/casa-dende/gallery-02.jpeg'
+          ],
+          'casa-dos-baloes': [
+            '/assets/img/casa-dos-baloes/gallery-01.jpeg',
+            '/assets/img/casa-dos-baloes/gallery-02.jpeg'
+          ],
+          'casa-grande': [
+            '/assets/img/casa-grande/gallery-04.jpeg',
+            '/assets/img/casa-grande/gallery-01.jpeg'
+          ],
+          'casa-manga': [
+            '/assets/img/casa-manga/gallery-01.jpeg',
+            '/assets/img/casa-manga/gallery-02.jpeg'
+          ],
+          'casa-rosada': [
+            '/assets/img/casa-rosada/gallery-01.jpeg',
+            '/assets/img/casa-rosada/gallery-02.jpeg'
+          ]
+        };
+      }
+
+      function resolveCoverImage(item) {
+        const slug = normalizeSlug(item?.slug);
+        const library = getHouseImageLibrary();
+
+        const remoteCover = String(item?.cover_image_url || '').trim();
+        if (remoteCover) {
+          return toAbsoluteAsset(remoteCover);
+        }
+
+        const localOptions = library[slug];
+        if (Array.isArray(localOptions) && localOptions.length) {
+          return toAbsoluteAsset(localOptions[0]);
+        }
+
+        return toAbsoluteAsset('/assets/img/casa-grande/gallery-04.jpeg');
+      }
+
+      function escapeHtml(value) {
+        return String(value || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
       function getBookingSnapshot() {
         const guestName = qs('#guest-name')?.value?.trim() || '';
         const guestEmail = qs('#guest-email')?.value?.trim() || '';
@@ -850,8 +943,8 @@
 
         root.innerHTML = `
           <div class="emptyState">
-            <h3>${messageTitle}</h3>
-            <p>${messageText}</p>
+            <h3>${escapeHtml(messageTitle)}</h3>
+            <p>${escapeHtml(messageText)}</p>
           </div>
         `;
       }
@@ -871,37 +964,28 @@
         const nights = calcNights(selectedState.checkIn, selectedState.checkOut);
 
         root.innerHTML = items.map((item) => {
-          const fallbackImages = {
-            'casa-oca': '/assets/img/casa-oca/gallery-01.jpeg',
-            'atelie-azul': '/assets/img/atelie-azul/gallery-01.jpeg',
-            'casa-branca': '/assets/img/casa-branca/gallery-01.jpeg',
-            'casa-dende': '/assets/img/casa-dende/gallery-01.jpeg',
-            'casa-dos-baloes': '/assets/img/casa-dos-baloes/gallery-01.jpeg',
-            'casa-grande': '/assets/img/casa-grande/gallery-04.jpeg',
-            'casa-manga': '/assets/img/casa-manga/gallery-01.jpeg',
-            'casa-rosada': '/assets/img/casa-rosada/gallery-01.jpeg'
-          };
-
-          const coverImage = item.cover_image_url && String(item.cover_image_url).trim()
-            ? item.cover_image_url
-            : (fallbackImages[item.slug] || '/assets/img/casa-grande/gallery-04.jpeg');
-
+          const coverImage = resolveCoverImage(item);
           const total = Number(item.amount_total || 0);
           const nightly = nights > 0 ? total / nights : total;
 
           return `
             <article class="stayCard">
-              <div
-                class="stayCardMedia"
-                style="background-image:url('${coverImage}')"
-              ></div>
+              <div class="stayCardMedia">
+                <img
+                  src="${escapeHtml(coverImage)}"
+                  alt="${escapeHtml(item.name || 'Casas da Vila')}"
+                  loading="lazy"
+                  decoding="async"
+                  onerror="this.onerror=null;this.src='${SITE_ORIGIN}/assets/img/casa-grande/gallery-04.jpeg';"
+                />
+              </div>
 
               <div class="stayCardBody">
                 <div class="stayCardTop">
                   <div>
-                    <p class="stayCardMeta">${item.size_m2 || '-'} m² • up to ${item.max_guests} guests</p>
-                    <h3 class="stayCardTitle">${item.name}</h3>
-                    <p class="stayCardDesc">${item.short_description || ''}</p>
+                    <p class="stayCardMeta">${escapeHtml(item.size_m2 || '-')} m² • up to ${escapeHtml(item.max_guests || '-')} guests</p>
+                    <h3 class="stayCardTitle">${escapeHtml(item.name || '')}</h3>
+                    <p class="stayCardDesc">${escapeHtml(item.short_description || '')}</p>
                   </div>
 
                   <div class="stayCardPrice">
@@ -913,7 +997,7 @@
                 <div class="stayCardInclusions">
                   ${item.breakfast_included ? '<span>Breakfast included</span>' : ''}
                   ${item.parking_included ? '<span>Parking included</span>' : ''}
-                  <span>Minimum of ${item.required_min_nights} nights</span>
+                  <span>Minimum of ${escapeHtml(item.required_min_nights || '-')} nights</span>
                   ${nights > 0 ? `<span>${nights} ${nights === 1 ? 'night' : 'nights'}</span>` : ''}
                 </div>
 
@@ -964,9 +1048,9 @@
           if (selectedState.unit) {
             selectedBox.innerHTML = `
               <p class="summaryEyebrow">Selected house</p>
-              <p class="summaryTitle">${selectedState.unit.name}</p>
+              <p class="summaryTitle">${escapeHtml(selectedState.unit.name || '')}</p>
               <p class="summaryMeta">
-                ${selectedState.unit.size_m2 || '-'} m² • up to ${selectedState.unit.max_guests} guests
+                ${escapeHtml(selectedState.unit.size_m2 || '-')} m² • up to ${escapeHtml(selectedState.unit.max_guests || '-')} guests
               </p>
             `;
           } else {
@@ -1000,14 +1084,20 @@
             body: JSON.stringify({ checkIn, checkOut, guestsCount })
           });
 
-          const data = await response.json();
+          const contentType = response.headers.get('content-type') || '';
+          const isJson = contentType.includes('application/json');
+          const data = isJson ? await response.json() : null;
+
           if (!response.ok) {
-            throw new Error(data?.error || 'Failed to check availability.');
+            throw new Error(
+              data?.error ||
+              `Failed to check availability (${response.status}).`
+            );
           }
 
-          return data?.items || [];
+          return Array.isArray(data?.items) ? data.items : [];
         } catch (error) {
-          console.error(error);
+          console.error('availability-error', error);
           throw error;
         }
       }
