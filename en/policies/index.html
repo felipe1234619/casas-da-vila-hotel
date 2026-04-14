@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Policies | Casas da Vila</title>
+  <meta
+    name="description"
+    content="Reservation and stay guidelines at Casas da Vila, Trancoso."
+  />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="/assets/css/motion.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <style>
+    .policyWrap{
+      padding-top:calc(var(--header-h) + 72px);
+      padding-bottom:120px;
+      width:min(980px, calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .policyIntro{
+      max-width:760px;
+      margin:0 auto 72px;
+      text-align:left;
+    }
+
+    .policyIntro .eyebrow{
+      margin-bottom:14px;
+    }
+
+    .policyIntro .display{
+      max-width:12ch;
+      margin-bottom:18px;
+    }
+
+    .policyIntro .lead{
+      max-width:680px;
+      color:var(--text-soft);
+      line-height:1.9;
+    }
+
+    .policyFlow{
+      display:flex;
+      flex-direction:column;
+      gap:0;
+      max-width:760px;
+      margin:0 auto;
+    }
+
+    .policySection{
+      padding:34px 0 38px;
+      border-top:1px solid rgba(60,48,36,0.10);
+      background:none;
+      box-shadow:none;
+      border-radius:0;
+    }
+
+    .policySection:first-child{
+      border-top:1px solid rgba(60,48,36,0.14);
+    }
+
+    .policyKicker{
+      display:block;
+      margin-bottom:10px;
+      font-size:11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(60,48,36,0.48);
+    }
+
+    .policySection h2{
+      margin:0 0 14px;
+      font-family:var(--font-serif);
+      font-size:clamp(28px, 3.4vw, 38px);
+      line-height:1.14;
+      letter-spacing:-0.02em;
+      color:var(--text);
+    }
+
+    .policyBody{
+      max-width:680px;
+    }
+
+    .policySection p{
+      margin:0 0 14px;
+      line-height:1.95;
+      color:var(--text-soft);
+      font-size:16px;
+    }
+
+    .policySection p:last-child{
+      margin-bottom:0;
+    }
+
+    .policySection ul{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:var(--text-soft);
+    }
+
+    .policySection li{
+      margin-bottom:10px;
+      line-height:1.9;
+    }
+
+    .policyHighlight{
+      font-weight:600;
+      color:var(--text);
+    }
+
+    .policyNote{
+      margin-top:18px;
+      padding-left:18px;
+      border-left:1px solid rgba(60,48,36,0.14);
+      color:var(--text-soft);
+      font-style:italic;
+    }
+
+    .policyClosing{
+      margin-top:72px;
+      max-width:760px;
+      margin-left:auto;
+      margin-right:auto;
+      padding-top:28px;
+      border-top:1px solid rgba(60,48,36,0.12);
+    }
+
+    .policyClosing p{
+      max-width:620px;
+      line-height:1.9;
+      color:var(--text-soft);
+      margin:0;
+    }
+
+    @media(max-width:760px){
+      .policyWrap{
+        padding-top:calc(var(--header-h) + 52px);
+        padding-bottom:92px;
+      }
+
+      .policyIntro{
+        margin-bottom:52px;
+      }
+
+      .policySection{
+        padding:28px 0 30px;
+      }
+
+      .policySection h2{
+        font-size:30px;
+      }
+
+      .policySection p,
+      .policySection li{
+        line-height:1.82;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main class="policyWrap">
+
+  <div class="policyIntro">
+    <p class="eyebrow">Casas da Vila • Guidelines</p>
+    <h1 class="display">A quieter way to stay</h1>
+    <p class="lead mt-16">
+      At Casas da Vila, every reservation is prepared with intention and care.
+      These guidelines are designed to keep each stay seamless, calm and well arranged —
+      for you, and for every guest who arrives after you.
+    </p>
+  </div>
+
+  <div class="policyFlow">
+
+    <section class="policySection">
+      <span class="policyKicker">Reservations</span>
+      <h2>Reserved with intention</h2>
+      <div class="policyBody">
+        <p>
+          All stays at Casas da Vila are confirmed on a
+          <span class="policyHighlight">non-refundable basis</span>.
+        </p>
+        <p>
+          Once reserved, each home is held exclusively for your dates and prepared in advance for your arrival.
+          For this reason, cancellations, changes or early departures are not eligible for refunds.
+        </p>
+        <p class="policyNote">
+          We recommend confirming travel arrangements before booking.
+        </p>
+      </div>
+    </section>
+
+    <section class="policySection">
+      <span class="policyKicker">Arrival</span>
+      <h2>On the day of arrival</h2>
+      <div class="policyBody">
+        <p>
+          Should a guest not arrive on the scheduled check-in date, the reservation will be treated as a no-show.
+        </p>
+        <p>
+          In this case, the reserved period remains considered fulfilled, and the home will no longer be held beyond the original arrival date.
+        </p>
+      </div>
+    </section>
+
+    <section class="policySection">
+      <span class="policyKicker">Changes</span>
+      <h2>When plans evolve</h2>
+      <div class="policyBody">
+        <p>
+          We understand that travel plans may shift. Requests to adjust dates, number of guests or house selection are always received with care.
+        </p>
+        <p>
+          Any modification remains subject to availability and, depending on the season, may involve a rate adjustment.
+        </p>
+      </div>
+    </section>
+
+    <section class="policySection">
+      <span class="policyKicker">Confirmation</span>
+      <h2>Securing your stay</h2>
+      <div class="policyBody">
+        <p>
+          Reservations are confirmed upon full payment at the time of booking.
+        </p>
+        <ul>
+          <li>Payment secures the selected house for your dates</li>
+          <li>Rates include breakfast and on-site parking</li>
+          <li>Dates are not held without confirmation</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="policySection">
+      <span class="policyKicker">Stay</span>
+      <h2>During your time here</h2>
+      <div class="policyBody">
+        <p>
+          To preserve comfort, privacy and the rhythm of each house, we kindly ask guests to observe the stay details confirmed at booking.
+        </p>
+        <ul>
+          <li>Check-in and check-out follow the times indicated in the reservation</li>
+          <li>Each home has a defined occupancy intended for comfort and privacy</li>
+          <li>The maximum number of guests per house must be respected</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="policySection">
+      <span class="policyKicker">Care</span>
+      <h2>Caring for the house</h2>
+      <div class="policyBody">
+        <p>
+          Casas da Vila are private homes, shaped with attention to detail and meant to be experienced with the same sense of care.
+        </p>
+        <p>
+          Any damages, extraordinary cleaning needs or improper use of the space may result in additional charges.
+        </p>
+      </div>
+    </section>
+
+    <section class="policySection">
+      <span class="policyKicker">Circumstances</span>
+      <h2>In unforeseen situations</h2>
+      <div class="policyBody">
+        <p>
+          In rare circumstances beyond our control — including natural events, public restrictions or other exceptional situations —
+          we will always seek the most considerate path forward for your stay.
+        </p>
+        <p>
+          Whenever possible, alternative dates may be offered, without obligation of refund.
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="policyClosing">
+    <p>
+      These guidelines may be refined over time as Casas da Vila continues to evolve.
+      For any questions before or during your stay, our team will be pleased to assist.
+    </p>
+  </div>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+</html>

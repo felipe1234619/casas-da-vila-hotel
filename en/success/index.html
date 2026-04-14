@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Request received | Casas da Vila</title>
+  <meta
+    name="description"
+    content="We have received your request at Casas da Vila. Our team will soon follow up with the next details for your stay in Trancoso."
+  />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="/assets/css/motion.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <style>
+    .successHero{
+      position:relative;
+      min-height:72svh;
+      padding-top:calc(var(--header-h) + 18px);
+      overflow:hidden;
+    }
+
+    .successHeroBg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .successHeroBg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .successHeroOverlay{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(24,20,16,0.58) 0%, rgba(24,20,16,0.24) 44%, rgba(24,20,16,0.10) 100%),
+        linear-gradient(180deg, rgba(255,244,228,0.06) 0%, rgba(18,16,14,0.24) 100%);
+    }
+
+    .successHeroGrid{
+      position:relative;
+      z-index:2;
+      width:min(var(--container), calc(100% - 32px));
+      min-height:calc(72svh - var(--header-h) - 18px);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:40px;
+      align-items:end;
+      padding-bottom:34px;
+    }
+
+    .successHeroContent{
+      max-width:800px;
+    }
+
+    .successHeroEyebrow{
+      color:rgba(255,255,255,0.74);
+    }
+
+    .successHeroTitle{
+      color:#fff;
+      text-shadow:0 10px 30px rgba(0,0,0,0.18);
+      max-width:820px;
+    }
+
+    .successHeroText{
+      margin:22px 0 0;
+      max-width:640px;
+      font-size:18px;
+      line-height:1.8;
+      color:rgba(255,255,255,0.88);
+    }
+
+    .successHeroCard{
+      max-width:370px;
+      margin-left:auto;
+      padding:24px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.80);
+      border:1px solid rgba(255,255,255,0.46);
+      box-shadow:var(--shadow-lg);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    .successHeroCard .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .successHeroCard p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.74;
+    }
+
+    .successMain{
+      padding-top:84px;
+      padding-bottom:36px;
+    }
+
+    .successGrid{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:24px;
+      align-items:start;
+    }
+
+    .successPanel,
+    .successSidePanel{
+      padding:34px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.78);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .successPanel{
+      display:grid;
+      gap:22px;
+    }
+
+    .successPanel .lead{
+      max-width:780px;
+    }
+
+    .successSteps{
+      display:grid;
+      gap:16px;
+      margin-top:4px;
+    }
+
+    .successStep{
+      padding:22px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.72);
+      border:1px solid rgba(92,71,54,0.08);
+    }
+
+    .successStep .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .successStep h3{
+      margin:0 0 10px;
+      font-family:var(--font-serif);
+      font-size:30px;
+      line-height:1.05;
+      color:var(--text);
+    }
+
+    .successStep p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.76;
+    }
+
+    .successSidePanel{
+      display:grid;
+      gap:18px;
+    }
+
+    .successInfoBlock{
+      padding:22px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.68);
+      border:1px solid rgba(92,71,54,0.08);
+    }
+
+    .successInfoBlock .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .successInfoBlock p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.78;
+    }
+
+    .successSummary{
+      display:grid;
+      gap:14px;
+      margin-top:4px;
+    }
+
+    .successSummaryItem{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      padding:14px 0;
+      border-bottom:1px solid rgba(92,71,54,0.10);
+    }
+
+    .successSummaryItem:last-child{
+      border-bottom:none;
+      padding-bottom:0;
+    }
+
+    .successSummaryLabel{
+      color:var(--text-soft);
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .successSummaryValue{
+      color:var(--text);
+      text-align:right;
+      font-family:var(--font-serif);
+      font-size:20px;
+      line-height:1.25;
+    }
+
+    .successNote{
+      padding-top:18px;
+      padding-bottom:72px;
+    }
+
+    .successNotePanel{
+      padding:42px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .successNotePanel .lead{
+      max-width:860px;
+    }
+
+    .isHidden{
+      display:none !important;
+    }
+
+    @media (max-width: 1100px){
+      .successHeroGrid,
+      .successGrid{
+        grid-template-columns:1fr;
+      }
+
+      .successHeroCard{
+        margin-left:0;
+        max-width:470px;
+      }
+    }
+
+    @media (max-width: 760px){
+      .successHero{
+        min-height:auto;
+      }
+
+      .successHeroGrid{
+        min-height:calc(74svh - var(--header-h) - 18px);
+        gap:24px;
+        padding-bottom:26px;
+      }
+
+      .successHeroText{
+        font-size:17px;
+        line-height:1.74;
+      }
+
+      .successHeroCard,
+      .successPanel,
+      .successSidePanel,
+      .successInfoBlock,
+      .successStep,
+      .successNotePanel{
+        padding:22px;
+        border-radius:24px;
+      }
+
+      .successMain{
+        padding-top:60px;
+      }
+
+      .successNote{
+        padding-bottom:64px;
+      }
+
+      .successSummaryItem{
+        flex-direction:column;
+        gap:6px;
+      }
+
+      .successSummaryValue{
+        text-align:left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main>
+
+    <section class="successHero">
+      <div class="successHeroBg">
+        <img src="/assets/img/home-jardim.jpg" alt="Request received at Casas da Vila" />
+        <div class="successHeroOverlay"></div>
+      </div>
+
+      <div class="successHeroGrid">
+        <div class="successHeroContent" data-reveal="left">
+          <p class="eyebrow successHeroEyebrow shimmerLine">Casas da Vila • Request received</p>
+
+          <h1 class="display successHeroTitle">
+            We have received<br>
+            your stay<br>
+            request.
+          </h1>
+
+          <p class="successHeroText" id="successHeroText">
+            Thank you for your interest in Casas da Vila. From here, our team will follow up with the
+            next details of your reservation in Trancoso.
+          </p>
+        </div>
+
+        <div class="successHeroCard heroFloat" data-reveal="right">
+          <p class="eyebrow">Next step</p>
+          <p>
+            We will be in touch soon to confirm availability, align the details of your stay and guide
+            the continuation of your reservation with clarity and care.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section successMain">
+      <div class="wrap">
+        <div class="successGrid">
+
+          <div class="successPanel" data-reveal="left">
+            <div>
+              <p class="eyebrow">Confirmation</p>
+              <h2 class="h2">What happens next</h2>
+              <p class="lead mt-16">
+                The experience should begin with the same calm as the stay itself. That is why we
+                continue with direct, clear and unforced assistance.
+              </p>
+            </div>
+
+            <div id="bookingSummaryBlock" class="successStep isHidden">
+              <p class="eyebrow">Request summary</p>
+              <h3>Details received</h3>
+
+              <div class="successSummary">
+                <div class="successSummaryItem" id="summaryGuestRow">
+                  <div class="successSummaryLabel">Guest</div>
+                  <div class="successSummaryValue" id="summaryGuest">—</div>
+                </div>
+
+                <div class="successSummaryItem" id="summaryHouseRow">
+                  <div class="successSummaryLabel">House</div>
+                  <div class="successSummaryValue" id="summaryHouse">—</div>
+                </div>
+
+                <div class="successSummaryItem" id="summaryCheckinRow">
+                  <div class="successSummaryLabel">Check-in</div>
+                  <div class="successSummaryValue" id="summaryCheckin">—</div>
+                </div>
+
+                <div class="successSummaryItem" id="summaryCheckoutRow">
+                  <div class="successSummaryLabel">Check-out</div>
+                  <div class="successSummaryValue" id="summaryCheckout">—</div>
+                </div>
+
+                <div class="successSummaryItem" id="summaryGuestsRow">
+                  <div class="successSummaryLabel">Guests</div>
+                  <div class="successSummaryValue" id="summaryGuests">—</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="successSteps">
+
+              <article class="successStep">
+                <p class="eyebrow">01</p>
+                <h3>Receipt</h3>
+                <p>
+                  Your request has been successfully received. From here, our team reviews the details
+                  submitted and prepares the next reply.
+                </p>
+              </article>
+
+              <article class="successStep">
+                <p class="eyebrow">02</p>
+                <h3>Reply from our team</h3>
+                <p>
+                  We will reach out to confirm availability, clarify any details and guide the next
+                  stage of your reservation.
+                </p>
+              </article>
+
+              <article class="successStep">
+                <p class="eyebrow">03</p>
+                <h3>Stay details</h3>
+                <p>
+                  If your trip is already taking shape, we may also align arrival details, stay dates
+                  and other practical points for a smoother experience.
+                </p>
+              </article>
+
+            </div>
+          </div>
+
+          <aside class="successSidePanel" data-reveal="right">
+            <div class="successInfoBlock">
+              <p class="eyebrow">Email</p>
+              <p>
+                If you would like to add any information, you may write to
+                <a href="mailto:casasdavila@casasdavila.com">casasdavila@casasdavila.com</a>.
+              </p>
+            </div>
+
+            <div class="successInfoBlock">
+              <p class="eyebrow">WhatsApp</p>
+              <p>
+                For a more immediate exchange, you may also contact us on WhatsApp:
+                <a href="https://wa.me/5573991435522" target="_blank" rel="noopener noreferrer">+55 73 99143-5522</a>.
+              </p>
+            </div>
+
+            <div class="successInfoBlock">
+              <p class="eyebrow">Reservation</p>
+              <p>
+                If you wish to review dates or browse the houses again, you may return to the booking
+                page at any time.
+              </p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section successNote">
+      <div class="wrap">
+        <div class="successNotePanel" data-reveal="zoom">
+          <p class="eyebrow">The stay</p>
+          <h2 class="h2">Thank you for considering Casas da Vila</h2>
+          <p class="lead mt-16">
+            In Trancoso, a good experience begins before arrival. We want this first exchange to carry
+            the same atmosphere of calm, attention and simplicity found in the stay itself.
+          </p>
+
+          <div class="ctaRow mt-26">
+            <a class="btn btnPrimary" href="/en/book/">Check availability</a>
+            <a class="btn btnGhost" href="/en/contact/">Contact us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/main.js"></script>
+
+  <script>
+    (function () {
+      const PENDING_BOOKING_KEY = 'casasdavila:pendingBooking';
+
+      const params = new URLSearchParams(window.location.search);
+
+      function getParam(name) {
+        return (params.get(name) || '').trim();
+      }
+
+      function getPendingBooking() {
+        try {
+          const raw = localStorage.getItem(PENDING_BOOKING_KEY);
+          if (!raw) return {};
+          const parsed = JSON.parse(raw);
+          return parsed && typeof parsed === 'object' ? parsed : {};
+        } catch (error) {
+          console.warn('Unable to read the pending booking from localStorage.', error);
+          return {};
+        }
+      }
+
+      const pending = getPendingBooking();
+
+      const guest = getParam('guest') || String(pending.guest || '').trim();
+      const house = getParam('house') || String(pending.house || '').trim();
+      const checkin = getParam('checkin') || String(pending.checkin || '').trim();
+      const checkout = getParam('checkout') || String(pending.checkout || '').trim();
+      const guests = getParam('guests') || String(pending.guests || '').trim();
+
+      const summaryBlock = document.getElementById('bookingSummaryBlock');
+      const heroText = document.getElementById('successHeroText');
+
+      function formatDateEN(value) {
+        if (!value) return '';
+        const date = new Date(value + 'T12:00:00');
+        if (Number.isNaN(date.getTime())) return value;
+        return new Intl.DateTimeFormat('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric'
+        }).format(date);
+      }
+
+      function setRow(rowId, valueId, value) {
+        const row = document.getElementById(rowId);
+        const cell = document.getElementById(valueId);
+        if (!row || !cell) return;
+
+        if (!value) {
+          row.classList.add('isHidden');
+          return;
+        }
+
+        cell.textContent = value;
+      }
+
+      const hasAnyBookingData = Boolean(guest || house || checkin || checkout || guests);
+
+      if (hasAnyBookingData && summaryBlock) {
+        summaryBlock.classList.remove('isHidden');
+      }
+
+      setRow('summaryGuestRow', 'summaryGuest', guest);
+      setRow('summaryHouseRow', 'summaryHouse', house);
+      setRow('summaryCheckinRow', 'summaryCheckin', formatDateEN(checkin));
+      setRow('summaryCheckoutRow', 'summaryCheckout', formatDateEN(checkout));
+      setRow(
+        'summaryGuestsRow',
+        'summaryGuests',
+        guests ? `${guests} ${Number(guests) === 1 ? 'guest' : 'guests'}` : ''
+      );
+
+      if (heroText && guest) {
+        heroText.textContent = `Thank you, ${guest}. We have received your request at Casas da Vila and our team will now follow up with the next details of your reservation in Trancoso.`;
+      }
+
+      if (hasAnyBookingData) {
+        try {
+          localStorage.removeItem(PENDING_BOOKING_KEY);
+        } catch (error) {
+          console.warn('Unable to clear the pending booking from localStorage.', error);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

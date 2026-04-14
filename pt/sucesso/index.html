@@ -4,10 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Reserva recebida | Casas da Vila</title>
-  <meta name="robots" content="noindex, nofollow">
   <meta
     name="description"
-    content="Sua pré-reserva foi recebida pelas Casas da Vila. Nossa equipe entrará em contato para dar sequência à sua estadia em Trancoso."
+    content="Recebemos sua solicitação nas Casas da Vila. Em breve nossa equipe dará sequência com os próximos detalhes da estadia em Trancoso."
   />
 
   <link rel="stylesheet" href="/assets/css/global.css" />
@@ -17,11 +16,9 @@
   <style>
     .successHero{
       position:relative;
-      min-height:78svh;
-      padding-top:calc(var(--header-h) + 20px);
+      min-height:72svh;
+      padding-top:calc(var(--header-h) + 18px);
       overflow:hidden;
-      display:flex;
-      align-items:center;
     }
 
     .successHeroBg{
@@ -36,260 +33,519 @@
       object-fit:cover;
     }
 
-    .successOverlay{
+    .successHeroOverlay{
       position:absolute;
       inset:0;
       background:
-        linear-gradient(90deg, rgba(24,20,16,0.54) 0%, rgba(24,20,16,0.24) 40%, rgba(24,20,16,0.12) 100%),
-        linear-gradient(180deg, rgba(255,244,228,0.08) 0%, rgba(18,16,14,0.26) 100%);
+        linear-gradient(90deg, rgba(24,20,16,0.58) 0%, rgba(24,20,16,0.24) 44%, rgba(24,20,16,0.10) 100%),
+        linear-gradient(180deg, rgba(255,244,228,0.06) 0%, rgba(18,16,14,0.24) 100%);
     }
 
-    .successWrap{
+    .successHeroGrid{
       position:relative;
       z-index:2;
       width:min(var(--container), calc(100% - 32px));
+      min-height:calc(72svh - var(--header-h) - 18px);
       margin:0 auto;
       display:grid;
       grid-template-columns:1.08fr .92fr;
       gap:40px;
-      align-items:center;
+      align-items:end;
+      padding-bottom:34px;
     }
 
-    .successContent{
-      max-width:780px;
+    .successHeroContent{
+      max-width:800px;
     }
 
-    .successEyebrow{
+    .successHeroEyebrow{
       color:rgba(255,255,255,0.74);
     }
 
-    .successTitle{
+    .successHeroTitle{
       color:#fff;
-      text-shadow:0 12px 34px rgba(0,0,0,0.22);
-      max-width:780px;
+      text-shadow:0 10px 30px rgba(0,0,0,0.18);
+      max-width:820px;
     }
 
-    .successText{
-      margin-top:22px;
+    .successHeroText{
+      margin:22px 0 0;
       max-width:640px;
       font-size:18px;
-      line-height:1.82;
-      color:rgba(255,255,255,0.9);
+      line-height:1.8;
+      color:rgba(255,255,255,0.88);
     }
 
-    .successCard{
-      padding:26px;
+    .successHeroCard{
+      max-width:370px;
+      margin-left:auto;
+      padding:24px;
       border-radius:28px;
-      background:rgba(255,252,248,0.82);
-      border:1px solid rgba(255,255,255,0.52);
+      background:rgba(255,252,248,0.80);
+      border:1px solid rgba(255,255,255,0.46);
       box-shadow:var(--shadow-lg);
       backdrop-filter:blur(12px);
       -webkit-backdrop-filter:blur(12px);
-      display:grid;
-      gap:16px;
     }
 
-    .successCard p{
+    .successHeroCard .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .successHeroCard p{
       margin:0;
       color:var(--text-soft);
       line-height:1.74;
     }
 
-    .successCard strong{
-      color:var(--text);
+    .successMain{
+      padding-top:84px;
+      padding-bottom:36px;
     }
 
-    .successActions{
-      margin-top:10px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
+    .successGrid{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:24px;
+      align-items:start;
     }
 
-    .successNext{
-      padding-top:72px;
-      padding-bottom:72px;
-    }
-
-    .successNextPanel{
-      padding:42px;
+    .successPanel,
+    .successSidePanel{
+      padding:34px;
       border-radius:32px;
       background:rgba(255,252,248,0.78);
       border:1px solid rgba(255,255,255,0.56);
       box-shadow:var(--shadow-lg);
     }
 
-    .successNextGrid{
-      margin-top:24px;
+    .successPanel{
       display:grid;
-      grid-template-columns:repeat(3, minmax(0,1fr));
       gap:22px;
     }
 
-    .successNextItem{
-      padding:24px;
+    .successPanel .lead{
+      max-width:780px;
+    }
+
+    .successSteps{
+      display:grid;
+      gap:16px;
+      margin-top:4px;
+    }
+
+    .successStep{
+      padding:22px;
       border-radius:24px;
-      background:rgba(255,255,255,0.7);
+      background:rgba(255,255,255,0.72);
       border:1px solid rgba(92,71,54,0.08);
     }
 
-    .successNextItem .eyebrow{
-      margin-bottom:8px;
+    .successStep .eyebrow{
+      margin-bottom:10px;
     }
 
-    .successNextItem p{
+    .successStep h3{
+      margin:0 0 10px;
+      font-family:var(--font-serif);
+      font-size:30px;
+      line-height:1.05;
+      color:var(--text);
+    }
+
+    .successStep p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.76;
+    }
+
+    .successSidePanel{
+      display:grid;
+      gap:18px;
+    }
+
+    .successInfoBlock{
+      padding:22px;
+      border-radius:24px;
+      background:rgba(255,255,255,0.68);
+      border:1px solid rgba(92,71,54,0.08);
+    }
+
+    .successInfoBlock .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .successInfoBlock p{
       margin:0;
       color:var(--text-soft);
       line-height:1.78;
     }
 
+    .successSummary{
+      display:grid;
+      gap:14px;
+      margin-top:4px;
+    }
+
+    .successSummaryItem{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      padding:14px 0;
+      border-bottom:1px solid rgba(92,71,54,0.10);
+    }
+
+    .successSummaryItem:last-child{
+      border-bottom:none;
+      padding-bottom:0;
+    }
+
+    .successSummaryLabel{
+      color:var(--text-soft);
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .successSummaryValue{
+      color:var(--text);
+      text-align:right;
+      font-family:var(--font-serif);
+      font-size:20px;
+      line-height:1.25;
+    }
+
+    .successNote{
+      padding-top:18px;
+      padding-bottom:72px;
+    }
+
+    .successNotePanel{
+      padding:42px;
+      border-radius:32px;
+      background:rgba(255,252,248,0.76);
+      border:1px solid rgba(255,255,255,0.56);
+      box-shadow:var(--shadow-lg);
+    }
+
+    .successNotePanel .lead{
+      max-width:860px;
+    }
+
+    .isHidden{
+      display:none !important;
+    }
+
     @media (max-width: 1100px){
-      .successWrap,
-      .successNextGrid{
+      .successHeroGrid,
+      .successGrid{
         grid-template-columns:1fr;
+      }
+
+      .successHeroCard{
+        margin-left:0;
+        max-width:470px;
       }
     }
 
     @media (max-width: 760px){
       .successHero{
         min-height:auto;
-        padding-bottom:40px;
       }
 
-      .successWrap{
-        gap:26px;
+      .successHeroGrid{
+        min-height:calc(74svh - var(--header-h) - 18px);
+        gap:24px;
+        padding-bottom:26px;
       }
 
-      .successText{
+      .successHeroText{
         font-size:17px;
+        line-height:1.74;
       }
 
-      .successCard,
-      .successNextPanel,
-      .successNextItem{
+      .successHeroCard,
+      .successPanel,
+      .successSidePanel,
+      .successInfoBlock,
+      .successStep,
+      .successNotePanel{
         padding:22px;
         border-radius:24px;
+      }
+
+      .successMain{
+        padding-top:60px;
+      }
+
+      .successNote{
+        padding-bottom:64px;
+      }
+
+      .successSummaryItem{
+        flex-direction:column;
+        gap:6px;
+      }
+
+      .successSummaryValue{
+        text-align:left;
       }
     }
   </style>
 </head>
 <body>
 
-<div id="site-header"></div>
+  <div id="site-header"></div>
 
-<main>
+  <main>
 
-  <section class="successHero">
-    <div class="successHeroBg">
-      <img src="/assets/img/home-jardim.jpg" alt="Casas da Vila Trancoso" />
-      <div class="successOverlay"></div>
-    </div>
-
-    <div class="successWrap">
-
-      <div class="successContent" data-reveal="left">
-        <p class="eyebrow successEyebrow shimmerLine">Casas da Vila • Reserva</p>
-
-        <h1 class="display successTitle">
-          Sua pré-reserva<br>
-          foi recebida.
-        </h1>
-
-        <p class="successText">
-          Recebemos suas informações e iniciamos o processo de verificação de disponibilidade.
-          Nossa equipe dará sequência ao atendimento para confirmar os detalhes da sua estadia em Trancoso.
-        </p>
+    <section class="successHero">
+      <div class="successHeroBg">
+        <img src="/assets/img/home-jardim.jpg" alt="Reserva recebida nas Casas da Vila" />
+        <div class="successHeroOverlay"></div>
       </div>
 
-      <div class="successCard heroFloat" data-reveal="right">
-        <p class="eyebrow">Próximo passo</p>
+      <div class="successHeroGrid">
+        <div class="successHeroContent" data-reveal="left">
+          <p class="eyebrow successHeroEyebrow shimmerLine">Casas da Vila • Reserva recebida</p>
 
-        <p>
-          Você receberá um contato para confirmação da reserva e orientações sobre pagamento e chegada.
-        </p>
+          <h1 class="display successHeroTitle">
+            Recebemos<br>
+            sua solicitação<br>
+            de estadia.
+          </h1>
 
-        <p>
-          Caso prefira, você pode falar diretamente conosco agora:
-        </p>
+          <p class="successHeroText" id="successHeroText">
+            Obrigado pelo seu interesse nas Casas da Vila. A partir de agora, nossa equipe dará
+            sequência ao atendimento com os próximos detalhes da sua reserva em Trancoso.
+          </p>
+        </div>
 
-        <div class="successActions">
-<a class="btn btnPrimary" id="success-whatsapp-btn" href="https://wa.me/5573991435522" target="_blank" rel="noopener noreferrer">
-  WhatsApp
-</a>
-          <a class="btn btnGhost" href="mailto:casasdavila@casasdavila.com">
-            Enviar e-mail
-          </a>
+        <div class="successHeroCard heroFloat" data-reveal="right">
+          <p class="eyebrow">Próxima etapa</p>
+          <p>
+            Em breve, entraremos em contato para confirmar disponibilidade, alinhar os detalhes da
+            estadia e orientar a continuidade da sua reserva com clareza e cuidado.
+          </p>
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <section class="section successMain">
+      <div class="wrap">
+        <div class="successGrid">
 
-  <section class="section successNext">
-    <div class="wrap">
-      <div class="successNextPanel" data-reveal="zoom">
+          <div class="successPanel" data-reveal="left">
+            <div>
+              <p class="eyebrow">Confirmação</p>
+              <h2 class="h2">O que acontece agora</h2>
+              <p class="lead mt-16">
+                A experiência deve começar com a mesma serenidade da estadia. Por isso, seguimos com
+                um atendimento direto, claro e sem excesso.
+              </p>
+            </div>
 
-        <p class="eyebrow">Estadia</p>
-        <h2 class="h2">O que acontece agora</h2>
+            <div id="bookingSummaryBlock" class="successStep isHidden">
+              <p class="eyebrow">Resumo da solicitação</p>
+              <h3>Detalhes recebidos</h3>
 
-        <div class="successNextGrid">
+              <div class="successSummary">
+                <div class="successSummaryItem" id="summaryGuestRow">
+                  <div class="successSummaryLabel">Hóspede</div>
+                  <div class="successSummaryValue" id="summaryGuest">—</div>
+                </div>
 
-          <div class="successNextItem">
-            <p class="eyebrow">1</p>
-            <p>
-              Nossa equipe verifica a disponibilidade da casa escolhida e confirma os detalhes da sua estadia.
-            </p>
+                <div class="successSummaryItem" id="summaryHouseRow">
+                  <div class="successSummaryLabel">Casa</div>
+                  <div class="successSummaryValue" id="summaryHouse">—</div>
+                </div>
+
+                <div class="successSummaryItem" id="summaryCheckinRow">
+                  <div class="successSummaryLabel">Check-in</div>
+                  <div class="successSummaryValue" id="summaryCheckin">—</div>
+                </div>
+
+                <div class="successSummaryItem" id="summaryCheckoutRow">
+                  <div class="successSummaryLabel">Check-out</div>
+                  <div class="successSummaryValue" id="summaryCheckout">—</div>
+                </div>
+
+                <div class="successSummaryItem" id="summaryGuestsRow">
+                  <div class="successSummaryLabel">Hóspedes</div>
+                  <div class="successSummaryValue" id="summaryGuests">—</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="successSteps">
+
+              <article class="successStep">
+                <p class="eyebrow">01</p>
+                <h3>Recebimento</h3>
+                <p>
+                  Sua solicitação foi recebida com sucesso. A partir daqui, nossa equipe verifica os
+                  dados enviados e organiza o próximo retorno.
+                </p>
+              </article>
+
+              <article class="successStep">
+                <p class="eyebrow">02</p>
+                <h3>Retorno da equipe</h3>
+                <p>
+                  Entraremos em contato para confirmar disponibilidade, esclarecer eventuais detalhes
+                  e orientar a continuidade da reserva.
+                </p>
+              </article>
+
+              <article class="successStep">
+                <p class="eyebrow">03</p>
+                <h3>Próximos detalhes</h3>
+                <p>
+                  Se a sua viagem já estiver definida, também poderemos alinhar chegada, período da
+                  estadia e outros pontos importantes para uma experiência mais fluida.
+                </p>
+              </article>
+
+            </div>
           </div>
 
-          <div class="successNextItem">
-            <p class="eyebrow">2</p>
-            <p>
-              Você recebe orientação para pagamento e garantia da reserva dentro das condições aplicáveis.
-            </p>
-          </div>
+          <aside class="successSidePanel" data-reveal="right">
+            <div class="successInfoBlock">
+              <p class="eyebrow">E-mail</p>
+              <p>
+                Caso prefira complementar alguma informação, você pode escrever para
+                <a href="mailto:casasdavila@casasdavila.com">casasdavila@casasdavila.com</a>.
+              </p>
+            </div>
 
-          <div class="successNextItem">
-            <p class="eyebrow">3</p>
-            <p>
-              Após confirmação, sua estadia é assegurada e você recebe informações completas para chegada.
-            </p>
-          </div>
+            <div class="successInfoBlock">
+              <p class="eyebrow">WhatsApp</p>
+              <p>
+                Para um contato mais imediato, também é possível falar conosco pelo WhatsApp:
+                <a href="https://wa.me/5573991435522" target="_blank" rel="noopener noreferrer">+55 73 99143-5522</a>.
+              </p>
+            </div>
+
+            <div class="successInfoBlock">
+              <p class="eyebrow">Reserva</p>
+              <p>
+                Se desejar revisar datas ou consultar novamente as casas, você pode voltar à página de
+                reserva a qualquer momento.
+              </p>
+            </div>
+          </aside>
 
         </div>
-
-        <div class="ctaRow mt-26">
-          <a class="btn btnPrimary" href="/pt/casas/">Ver casas</a>
-          <a class="btn btnGhost" href="/pt/">Voltar ao início</a>
-        </div>
-
       </div>
-    </div>
-  </section>
+    </section>
 
-</main>
+    <section class="section successNote">
+      <div class="wrap">
+        <div class="successNotePanel" data-reveal="zoom">
+          <p class="eyebrow">Estadia</p>
+          <h2 class="h2">Obrigado por considerar as Casas da Vila</h2>
+          <p class="lead mt-16">
+            Em Trancoso, uma boa experiência começa antes da chegada. Queremos que esse primeiro
+            contato já carregue a mesma atmosfera de calma, atenção e simplicidade da estadia.
+          </p>
 
-<div id="site-footer"></div>
+          <div class="ctaRow mt-26">
+            <a class="btn btnPrimary" href="/pt/reservar/">Ver disponibilidade</a>
+            <a class="btn btnGhost" href="/pt/contato/">Fale conosco</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<script src="/assets/js/ui.js"></script>
-<script src="/assets/js/main.js"></script>
-<script>
-  (function () {
-    const params = new URLSearchParams(window.location.search);
+  </main>
 
-    const whatsappUrl = params.get('whatsapp');
-    const emailUrl = params.get('email');
+  <div id="site-footer"></div>
 
-    const whatsappBtn = document.getElementById('success-whatsapp-btn');
-    const emailBtn = document.getElementById('success-email-btn');
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/main.js"></script>
 
-    if (whatsappBtn && whatsappUrl) {
-      whatsappBtn.setAttribute('href', whatsappUrl);
-    }
+  <script>
+    (function () {
+      const PENDING_BOOKING_KEY = 'casasdavila:pendingBooking';
 
-    if (emailBtn && emailUrl) {
-      emailBtn.setAttribute('href', emailUrl);
-    }
-  })();
-</script>
+      const params = new URLSearchParams(window.location.search);
+
+      function getParam(name) {
+        return (params.get(name) || '').trim();
+      }
+
+      function getPendingBooking() {
+        try {
+          const raw = localStorage.getItem(PENDING_BOOKING_KEY);
+          if (!raw) return {};
+          const parsed = JSON.parse(raw);
+          return parsed && typeof parsed === 'object' ? parsed : {};
+        } catch (error) {
+          console.warn('Não foi possível ler a reserva pendente do localStorage.', error);
+          return {};
+        }
+      }
+
+      const pending = getPendingBooking();
+
+      const guest = getParam('guest') || String(pending.guest || '').trim();
+      const house = getParam('house') || String(pending.house || '').trim();
+      const checkin = getParam('checkin') || String(pending.checkin || '').trim();
+      const checkout = getParam('checkout') || String(pending.checkout || '').trim();
+      const guests = getParam('guests') || String(pending.guests || '').trim();
+
+      const summaryBlock = document.getElementById('bookingSummaryBlock');
+      const heroText = document.getElementById('successHeroText');
+
+      function formatDateBR(value) {
+        if (!value) return '';
+        const parts = value.split('-');
+        if (parts.length !== 3) return value;
+        const [year, month, day] = parts;
+        return `${day}/${month}/${year}`;
+      }
+
+      function setRow(rowId, valueId, value) {
+        const row = document.getElementById(rowId);
+        const cell = document.getElementById(valueId);
+        if (!row || !cell) return;
+
+        if (!value) {
+          row.classList.add('isHidden');
+          return;
+        }
+
+        cell.textContent = value;
+      }
+
+      const hasAnyBookingData = Boolean(guest || house || checkin || checkout || guests);
+
+      if (hasAnyBookingData && summaryBlock) {
+        summaryBlock.classList.remove('isHidden');
+      }
+
+      setRow('summaryGuestRow', 'summaryGuest', guest);
+      setRow('summaryHouseRow', 'summaryHouse', house);
+      setRow('summaryCheckinRow', 'summaryCheckin', formatDateBR(checkin));
+      setRow('summaryCheckoutRow', 'summaryCheckout', formatDateBR(checkout));
+      setRow(
+        'summaryGuestsRow',
+        'summaryGuests',
+        guests ? `${guests} ${Number(guests) === 1 ? 'hóspede' : 'hóspedes'}` : ''
+      );
+
+      if (heroText && guest) {
+        heroText.textContent = `Obrigado, ${guest}. Recebemos sua solicitação nas Casas da Vila e, a partir de agora, nossa equipe dará sequência ao atendimento com os próximos detalhes da sua reserva em Trancoso.`;
+      }
+
+      if (hasAnyBookingData) {
+        try {
+          localStorage.removeItem(PENDING_BOOKING_KEY);
+        } catch (error) {
+          console.warn('Não foi possível limpar a reserva pendente do localStorage.', error);
+        }
+      }
+    })();
+  </script>
 </body>
 </html>

@@ -135,14 +135,18 @@
     }
 
     .contactMethod{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:18px;
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) auto;
+      align-items:start;
+      gap:20px;
       padding:20px;
       border-radius:24px;
       background:rgba(255,255,255,0.72);
       border:1px solid rgba(92,71,54,0.08);
+    }
+
+    .contactMethodMain{
+      min-width:0;
     }
 
     .contactMethodLabel{
@@ -155,11 +159,21 @@
     }
 
     .contactMethodValue{
+      display:block;
+      min-width:0;
+      max-width:100%;
       font-family:var(--font-serif);
       font-size:28px;
       line-height:1.08;
+      letter-spacing:-0.02em;
       color:var(--text);
-      word-break:break-word;
+      text-decoration:none;
+    }
+
+    .contactMethodValue.isEmail{
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
     .contactMethodText{
@@ -170,7 +184,8 @@
     }
 
     .contactMethodAction{
-      flex:0 0 auto;
+      align-self:start;
+      white-space:nowrap;
     }
 
     .contactInfoPanel{
@@ -256,8 +271,23 @@
       }
 
       .contactMethod{
-        flex-direction:column;
-        align-items:flex-start;
+        grid-template-columns:1fr;
+      }
+
+      .contactMethodValue{
+        font-size:24px;
+      }
+
+      .contactMethodValue.isEmail{
+        white-space:normal;
+        overflow:visible;
+        text-overflow:clip;
+        overflow-wrap:anywhere;
+        word-break:break-word;
+      }
+
+      .contactMethodAction{
+        width:100%;
       }
 
       .contactMethodAction .btn{
@@ -283,22 +313,22 @@
           <p class="eyebrow contactHeroEyebrow shimmerLine">Casas da Vila • Contato</p>
 
           <h1 class="display contactHeroTitle">
-            Fale conosco<br>
-            sobre a sua estadia<br>
-            em Trancoso.
+            Sua estadia<br>
+            começa também<br>
+            na forma de receber.
           </h1>
 
           <p class="contactHeroText">
-            Para reservas, dúvidas e informações gerais, nossa equipe pode ajudar por e-mail ou
-            WhatsApp, sempre de forma direta e acolhedora.
+            Para reservas, dúvidas e detalhes da chegada, nossa equipe está disponível por e-mail ou
+            WhatsApp, com atendimento direto, atencioso e sem ruído.
           </p>
         </div>
 
         <div class="contactHeroCard heroFloat" data-reveal="right">
           <p class="eyebrow">Atendimento</p>
           <p>
-            Se quiser, você pode entrar em contato antes da reserva para esclarecer detalhes sobre
-            casas, período da estadia, disponibilidade e condições gerais.
+            Antes da reserva ou já com a viagem em vista, estamos disponíveis para orientar com
+            clareza sobre casas, datas, disponibilidade e detalhes da estadia.
           </p>
         </div>
       </div>
@@ -313,20 +343,22 @@
               <p class="eyebrow">Canais</p>
               <h2 class="h2">Entre em contato pelo canal que preferir</h2>
               <p class="lead mt-16">
-                Estamos disponíveis para apoiar sua reserva, esclarecer dúvidas e orientar sua chegada
-                e estadia nas Casas da Vila.
+                Estamos disponíveis para apoiar sua reserva, esclarecer dúvidas e acompanhar com
+                atenção os detalhes da sua chegada e estadia.
               </p>
             </div>
 
             <div class="contactMethods">
 
               <div class="contactMethod">
-                <div>
+                <div class="contactMethodMain">
                   <span class="contactMethodLabel">E-mail</span>
-                  <div class="contactMethodValue">casasdavila@casasdavila.com</div>
+                  <a class="contactMethodValue isEmail" href="mailto:casasdavila@casasdavila.com">
+                    casasdavila@casasdavila.com
+                  </a>
                   <p class="contactMethodText">
-                    Ideal para consultas gerais, informações sobre a estadia e pedidos que não exigem
-                    resposta imediata.
+                    Ideal para consultas gerais, informações sobre a estadia e mensagens que podem ser
+                    respondidas com calma.
                   </p>
                 </div>
 
@@ -336,11 +368,13 @@
               </div>
 
               <div class="contactMethod">
-                <div>
+                <div class="contactMethodMain">
                   <span class="contactMethodLabel">WhatsApp</span>
-                  <div class="contactMethodValue">+55 73 99143-5522</div>
+                  <a class="contactMethodValue" href="https://wa.me/5573991435522" target="_blank" rel="noopener noreferrer">
+                    +55 73 99143-5522
+                  </a>
                   <p class="contactMethodText">
-                    Ideal para atendimento mais rápido, esclarecimentos sobre disponibilidade e apoio
+                    Melhor opção para um atendimento mais ágil, dúvidas sobre disponibilidade e apoio
                     prático antes da chegada.
                   </p>
                 </div>
@@ -364,24 +398,24 @@
             <div class="contactInfoBlock">
               <p class="eyebrow">Reservas</p>
               <p>
-                Para consultar disponibilidade, recomendamos começar pela página de reserva e, se
-                necessário, complementar o atendimento por WhatsApp ou e-mail.
+                Para consultar disponibilidade, vale começar pela página de reserva e, se necessário,
+                complementar o atendimento por WhatsApp ou e-mail.
               </p>
             </div>
 
             <div class="contactInfoBlock">
               <p class="eyebrow">Chegada</p>
               <p>
-                Na próxima etapa, esta página poderá receber também orientações de acesso, localização
-                e apoio de chegada, preservando a mesma linguagem premium do site.
+                Em breve, esta página poderá reunir também orientações de acesso, localização e apoio
+                de chegada, preservando a mesma linguagem serena do site.
               </p>
             </div>
 
             <div class="contactInfoBlock">
-              <p class="eyebrow">Atendimento</p>
+              <p class="eyebrow">Estadia</p>
               <p>
-                O contato pode ser feito antes, durante ou depois da reserva, sempre para facilitar a
-                estadia e tornar a experiência mais fluida e tranquila.
+                O contato pode acontecer antes, durante ou depois da reserva, sempre para tornar a
+                experiência mais fluida, simples e acolhedora.
               </p>
             </div>
           </aside>
@@ -396,8 +430,8 @@
           <p class="eyebrow">Estadia</p>
           <h2 class="h2">Uma boa experiência começa também na forma de atender</h2>
           <p class="lead mt-16">
-            Nas Casas da Vila, o contato deve ser tão simples quanto a estadia: direto, claro e
-            acolhedor — sem excesso e sem fricção.
+            Nas Casas da Vila, o contato deve ser tão simples quanto a estadia: claro, gentil e sem
+            fricção — como um começo natural da experiência.
           </p>
 
           <div class="ctaRow mt-26">

@@ -1,41 +1,67 @@
 <header class="siteHeaderShell">
-  <div class="siteHeader">
+  <div class="siteHeader" data-header>
     <div class="headerInner">
 
-<a class="brand" href="/pt/" data-link="home" aria-label="Casas da Vila">
-  
-  <span class="brandMark brandMark--flag" aria-hidden="true">
-    <img src="/assets/img/logo.jpeg" alt="" class="brandMarkImg" />
-  </span>
+      <a class="brand" href="/pt/" data-link="home" aria-label="Casas da Vila">
+        <span class="brandMark brandMark--flag" aria-hidden="true">
+          <img src="/assets/img/logo.jpeg" alt="" class="brandMarkImg" />
+        </span>
 
-  <span class="brandText">
-    <span class="brandName">Casas da Vila</span>
-    <span class="brandSub">Trancoso, Bahia</span>
-  </span>
+        <span class="brandText">
+          <span class="brandName">Casas da Vila</span>
+          <span class="brandSub">Trancoso, Bahia</span>
+        </span>
+      </a>
 
-</a>
-      <nav class="nav" aria-label="Principal">
-        <a href="/pt/casas/" data-link="houses" data-i18n="nav_houses">Casas</a>
-        <a href="/pt/experiencias/" data-link="experiences" data-i18n="nav_experiences">Experiências</a>
-        <a href="/pt/localizacao/" data-link="location" data-i18n="nav_location">Localização</a>
-        <a href="/pt/sobre/" data-link="about" data-i18n="nav_about">Sobre</a>
-        <a href="/pt/contato/" data-link="contact" data-i18n="nav_contact">Contato</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/pt/casas/" data-link="houses" data-i18n-pt="Casas" data-i18n-en="Houses">Casas</a>
+        <a href="/pt/experiencias/" data-link="experiences" data-i18n-pt="Experiências" data-i18n-en="Experiences">Experiências</a>
+        <a href="/pt/localizacao/" data-link="location" data-i18n-pt="Localização" data-i18n-en="Location">Localização</a>
+        <a href="/pt/sobre/" data-link="about" data-i18n-pt="Sobre" data-i18n-en="About">Sobre</a>
+        <a href="/pt/contato/" data-link="contact" data-i18n-pt="Contato" data-i18n-en="Contact">Contato</a>
       </nav>
+
       <div class="headerActions">
-        <div class="langSwitch" aria-label="Idioma">
-          <a href="/pt/" data-lang-link="pt">PT</a>
-          <a href="/en/" data-lang-link="en">EN</a>
+        <div class="langSwitch" aria-label="Idioma / Language">
+          <a href="/pt/" data-lang-link="pt" lang="pt">PT</a>
+          <a href="/en/" data-lang-link="en" lang="en">EN</a>
         </div>
 
-        <a class="btn btnPrimary headerReserveBtn" href="/pt/reservar/" data-link="reserve" data-i18n="reserve_cta">
+        <a
+          class="btn btnPrimary headerReserveBtn"
+          href="/pt/reservar/"
+          data-link="reserve"
+          data-i18n-pt="Reservar"
+          data-i18n-en="Book"
+        >
           Reservar
         </a>
+
+        <button
+          class="headerMenuToggle"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-drawer"
+        >
+          <span></span>
+          <span></span>
+        </button>
       </div>
 
     </div>
   </div>
-    </div>
 
+  <div class="mobileDrawer" id="mobile-drawer" aria-hidden="true">
+    <div class="mobileDrawerPanel">
+      <nav class="mobileNav" aria-label="Mobile navigation">
+        <a href="/pt/casas/" data-link="houses" data-i18n-pt="Casas" data-i18n-en="Houses">Casas</a>
+        <a href="/pt/experiencias/" data-link="experiences" data-i18n-pt="Experiências" data-i18n-en="Experiences">Experiências</a>
+        <a href="/pt/localizacao/" data-link="location" data-i18n-pt="Localização" data-i18n-en="Location">Localização</a>
+        <a href="/pt/sobre/" data-link="about" data-i18n-pt="Sobre" data-i18n-en="About">Sobre</a>
+        <a href="/pt/contato/" data-link="contact" data-i18n-pt="Contato" data-i18n-en="Contact">Contato</a>
+        <a href="/pt/reservar/" data-link="reserve" data-i18n-pt="Reservar" data-i18n-en="Book">Reservar</a>
+      </nav>
+    </div>
   </div>
-</div>
 </header>

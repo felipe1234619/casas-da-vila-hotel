@@ -6,7 +6,7 @@
   <title>Políticas | Casas da Vila</title>
   <meta
     name="description"
-    content="Políticas de reserva, cancelamento e estadia das Casas da Vila em Trancoso."
+    content="Diretrizes de reserva e estadia das Casas da Vila, em Trancoso."
   />
 
   <link rel="stylesheet" href="/assets/css/global.css" />
@@ -15,47 +15,54 @@
 
   <style>
     .policyWrap{
-      padding-top:calc(var(--header-h) + 60px);
-      padding-bottom:84px;
-      width:min(var(--container), calc(100% - 32px));
+      padding-top:calc(var(--header-h) + 72px);
+      padding-bottom:120px;
+      width:min(980px, calc(100% - 32px));
       margin:0 auto;
     }
 
     .policyIntro{
-      max-width:860px;
-      margin-bottom:42px;
+      max-width:760px;
+      margin:0 auto 72px;
+    }
+
+    .policyIntro .display{
+      max-width:14ch;
+      margin-bottom:18px;
+    }
+
+    .policyIntro .lead{
+      max-width:680px;
+      color:var(--text-soft);
+      line-height:1.9;
+    }
+
+    .policyFlow{
+      max-width:760px;
+      margin:0 auto;
     }
 
     .policySection{
-      margin-bottom:32px;
-      padding:28px;
-      border-radius:28px;
-      background:rgba(255,252,248,0.78);
-      border:1px solid rgba(255,255,255,0.56);
-      box-shadow:var(--shadow-md);
+      padding:34px 0 38px;
+      border-top:1px solid rgba(60,48,36,0.10);
     }
 
     .policySection h2{
-      margin:0 0 12px;
+      margin:0 0 14px;
       font-family:var(--font-serif);
-      font-size:28px;
+      font-size:clamp(28px, 3.4vw, 38px);
+      line-height:1.14;
     }
 
     .policySection p{
-      margin:0 0 12px;
-      line-height:1.8;
+      margin:0 0 14px;
+      line-height:1.95;
       color:var(--text-soft);
     }
 
     .policySection ul{
-      margin:0;
+      margin:10px 0 0;
       padding-left:18px;
-      color:var(--text-soft);
-    }
-
-    .policySection li{
-      margin-bottom:8px;
-      line-height:1.8;
     }
 
     .policyHighlight{
@@ -63,10 +70,12 @@
       color:var(--text);
     }
 
-    @media(max-width:760px){
-      .policySection{
-        padding:22px;
-      }
+    .policyNote{
+      margin-top:16px;
+      padding-left:16px;
+      border-left:1px solid rgba(60,48,36,0.14);
+      font-style:italic;
+      color:var(--text-soft);
     }
   </style>
 </head>
@@ -77,115 +86,97 @@
 <main class="policyWrap">
 
   <div class="policyIntro">
-    <p class="eyebrow">Casas da Vila • Políticas</p>
-    <h1 class="display">Condições de reserva e estadia</h1>
+    <p class="eyebrow">Casas da Vila • Diretrizes</p>
+    <h1 class="display">Uma forma mais tranquila de se hospedar</h1>
     <p class="lead mt-16">
-      As políticas abaixo regulam as reservas, cancelamentos e condições de estadia nas Casas da Vila.
-      Ao concluir uma reserva, o hóspede declara estar de acordo com estes termos.
+      Cada estadia nas Casas da Vila é preparada com antecedência e atenção aos detalhes.
+      As diretrizes abaixo ajudam a preservar uma experiência fluida, silenciosa e bem organizada para todos os hóspedes.
     </p>
   </div>
 
-  <!-- NÃO REEMBOLSÁVEL -->
-  <section class="policySection">
-    <h2>Política de cancelamento e reembolso</h2>
-    <p>
-      Todas as tarifas praticadas pelas Casas da Vila são classificadas como 
-      <span class="policyHighlight">não reembolsáveis</span>.
-    </p>
-    <p>
-      Em caso de cancelamento, desistência, alteração de datas ou não comparecimento,
-      <span class="policyHighlight">não haverá devolução dos valores pagos</span>.
-    </p>
-    <p>
-      Essa política é informada de forma clara e prévia no momento da reserva, em conformidade com a
-      legislação brasileira aplicável, especialmente o Código de Defesa do Consumidor.
-    </p>
-    <p>
-      Ao concluir a reserva, o hóspede reconhece e aceita expressamente essa condição.
-    </p>
-  </section>
+  <div class="policyFlow">
 
-  <!-- NO SHOW -->
-  <section class="policySection">
-    <h2>Não comparecimento (no-show)</h2>
-    <p>
-      O não comparecimento na data de check-in será considerado como no-show.
-    </p>
-    <ul>
-      <li>A reserva será automaticamente cancelada</li>
-      <li>O valor pago será integralmente retido</li>
-      <li>Não haverá reembolso ou crédito</li>
-    </ul>
-  </section>
+    <section class="policySection">
+      <h2>Reservas</h2>
+      <p>
+        Todas as reservas são realizadas em caráter 
+        <span class="policyHighlight">não reembolsável</span>.
+      </p>
+      <p>
+        Cada casa é preparada e mantida exclusivamente para as datas escolhidas.
+        Por esse motivo, cancelamentos, alterações ou saídas antecipadas não geram devolução de valores.
+      </p>
+      <p class="policyNote">
+        Recomendamos a confirmação dos planos de viagem antes da reserva.
+      </p>
+    </section>
 
-  <!-- ALTERAÇÕES -->
-  <section class="policySection">
-    <h2>Alterações de reserva</h2>
-    <p>
-      Alterações de datas, número de hóspedes ou unidade reservada não são garantidas e estão sujeitas
-      à disponibilidade e eventual ajuste tarifário.
-    </p>
-    <p>
-      As Casas da Vila não têm obrigação de realizar alterações, especialmente em períodos de alta demanda.
-    </p>
-  </section>
+    <section class="policySection">
+      <h2>Chegada</h2>
+      <p>
+        O não comparecimento na data prevista de check-in será considerado como ausência.
+      </p>
+      <p>
+        Nesse caso, o período reservado é considerado utilizado e a casa deixa de ser mantida após a data de chegada.
+      </p>
+    </section>
 
-  <!-- PAGAMENTO -->
-  <section class="policySection">
-    <h2>Pagamento</h2>
-    <p>
-      A reserva é confirmada mediante pagamento integral no momento da contratação.
-    </p>
-    <ul>
-      <li>O pagamento garante a disponibilidade da unidade reservada</li>
-      <li>As tarifas incluem café da manhã e estacionamento</li>
-      <li>Não há bloqueio de datas sem pagamento</li>
-    </ul>
-  </section>
+    <section class="policySection">
+      <h2>Ajustes</h2>
+      <p>
+        Sabemos que planos podem mudar. Solicitações de alteração de datas, número de hóspedes ou casa escolhida são sempre avaliadas com atenção.
+      </p>
+      <p>
+        Eventuais ajustes dependem de disponibilidade e podem envolver atualização de valores, especialmente em períodos de maior demanda.
+      </p>
+    </section>
 
-  <!-- ESTADIA -->
-  <section class="policySection">
-    <h2>Estadia</h2>
-    <ul>
-      <li>Check-in e check-out seguem os horários informados na reserva</li>
-      <li>O número máximo de hóspedes por casa deve ser respeitado</li>
-      <li>Não é permitido exceder a capacidade da unidade</li>
-    </ul>
-  </section>
+    <section class="policySection">
+      <h2>Confirmação</h2>
+      <p>
+        A reserva é confirmada mediante pagamento integral no momento da contratação.
+      </p>
+      <ul>
+        <li>O pagamento garante a disponibilidade da casa escolhida</li>
+        <li>As tarifas incluem café da manhã e estacionamento</li>
+        <li>Não há bloqueio de datas sem confirmação</li>
+      </ul>
+    </section>
 
-  <!-- DANOS -->
-  <section class="policySection">
-    <h2>Danos e responsabilidade</h2>
-    <p>
-      O hóspede é responsável por quaisquer danos causados à propriedade durante a estadia.
-    </p>
-    <p>
-      As Casas da Vila se reservam o direito de cobrar valores adicionais para reparação de danos,
-      limpeza extraordinária ou uso indevido da unidade.
-    </p>
-  </section>
+    <section class="policySection">
+      <h2>Durante a estadia</h2>
+      <p>
+        Para preservar o conforto e a privacidade de cada casa, pedimos a observância das condições informadas na reserva.
+      </p>
+      <ul>
+        <li>Check-in e check-out seguem os horários informados</li>
+        <li>O número máximo de hóspedes deve ser respeitado</li>
+        <li>Não é permitido exceder a capacidade da unidade</li>
+      </ul>
+    </section>
 
-  <!-- FORÇA MAIOR -->
-  <section class="policySection">
-    <h2>Força maior</h2>
-    <p>
-      Em situações excepcionais fora do controle das Casas da Vila (como eventos naturais,
-      restrições governamentais ou outras circunstâncias imprevisíveis),
-      poderão ser avaliadas alternativas de remarcação, sem obrigatoriedade de reembolso.
-    </p>
-  </section>
+    <section class="policySection">
+      <h2>Cuidado com a casa</h2>
+      <p>
+        As Casas da Vila são espaços privativos, concebidos com atenção aos detalhes.
+      </p>
+      <p>
+        Eventuais danos, necessidade de limpeza extraordinária ou uso inadequado poderão ser tratados de forma proporcional.
+      </p>
+    </section>
 
-  <!-- DISPOSIÇÕES -->
-  <section class="policySection">
-    <h2>Disposições gerais</h2>
-    <p>
-      Estas políticas podem ser atualizadas a qualquer momento, sendo aplicáveis às reservas realizadas
-      após sua publicação.
-    </p>
-    <p>
-      Em caso de dúvidas, o hóspede pode entrar em contato pelos canais oficiais das Casas da Vila.
-    </p>
-  </section>
+    <section class="policySection">
+      <h2>Situações excepcionais</h2>
+      <p>
+        Em circunstâncias fora do nosso controle — como eventos naturais ou restrições públicas —
+        buscaremos sempre a alternativa mais adequada para a sua estadia.
+      </p>
+      <p>
+        Quando possível, poderão ser avaliadas opções de remarcação.
+      </p>
+    </section>
+
+  </div>
 
 </main>
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-BR">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -159,110 +159,158 @@
 
     .stayCard{
       display:grid;
-      grid-template-columns:360px 1fr;
+      grid-template-columns:420px 1fr;
       gap:0;
       overflow:hidden;
-      border-radius:30px;
-      background:rgba(255,252,248,0.84);
-      border:1px solid rgba(255,255,255,0.56);
-      box-shadow:var(--shadow-md);
+      border-radius:34px;
+      background:rgba(255,252,248,0.92);
+      border:1px solid rgba(255,255,255,0.7);
+      box-shadow:0 30px 80px rgba(40,30,20,0.12);
     }
 
     .stayCardMedia{
       min-height:100%;
       background-size:cover;
       background-position:center;
+      position:relative;
+    }
+
+    .stayCardMedia::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.18) 100%);
+    }
+
+    .stayCardMedia::after{
+      content:"Casas da Vila";
+      position:absolute;
+      left:22px;
+      bottom:22px;
+      padding:6px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.78);
+      backdrop-filter:blur(6px);
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#5c4736;
     }
 
     .stayCardBody{
-      padding:24px;
+      padding:34px 34px 28px;
       display:grid;
-      gap:18px;
+      gap:22px;
     }
 
     .stayCardTop{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:18px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:24px;
     }
 
     .stayCardMeta{
       margin:0 0 6px;
-      font-size:12px;
-      letter-spacing:.14em;
+      font-size:11px;
+      letter-spacing:.18em;
       text-transform:uppercase;
-      color:var(--text-soft);
+      color:rgba(92,71,54,0.55);
     }
 
     .stayCardTitle{
       margin:0 0 8px;
       font-family:var(--font-serif);
-      font-size:34px;
+      font-size:clamp(34px,3vw,46px);
       line-height:1;
-      letter-spacing:-0.03em;
+      letter-spacing:-0.04em;
       color:var(--text);
     }
 
     .stayCardDesc{
       margin:0;
-      color:var(--text-soft);
-      line-height:1.76;
+      font-size:17px;
+      line-height:1.82;
+      color:rgba(92,71,54,0.78);
       max-width:760px;
     }
 
     .stayCardPrice{
       display:grid;
-      gap:4px;
+      gap:6px;
       text-align:right;
       min-width:180px;
     }
 
     .stayCardPrice small{
-      font-size:12px;
-      letter-spacing:.14em;
+      font-size:11px;
+      letter-spacing:.18em;
       text-transform:uppercase;
-      color:var(--text-soft);
+      color:rgba(92,71,54,0.5);
     }
 
     .stayCardPrice strong{
       font-family:var(--font-serif);
-      font-size:34px;
+      font-size:clamp(36px,3vw,52px);
       line-height:1;
+      letter-spacing:-0.04em;
+      font-weight:500;
       color:var(--text);
     }
 
     .stayCardInclusions{
       display:flex;
       flex-wrap:wrap;
-      gap:8px;
+      gap:10px;
     }
 
     .stayCardInclusions span{
       display:inline-flex;
       align-items:center;
-      min-height:34px;
-      padding:0 12px;
+      min-height:38px;
+      padding:0 14px;
       border-radius:999px;
-      background:rgba(255,255,255,0.74);
-      border:1px solid rgba(92,71,54,0.08);
-      color:var(--text-soft);
+      background:rgba(255,255,255,0.8);
+      border:1px solid rgba(92,71,54,0.06);
       font-size:13px;
+      color:rgba(92,71,54,0.78);
+      box-shadow:0 8px 20px rgba(40,30,20,0.04);
     }
 
     .stayCardFooter{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      padding-top:8px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:20px;
+      align-items:end;
+      padding-top:20px;
       border-top:1px solid rgba(92,71,54,0.08);
     }
 
     .stayCardFooterInfo{
-      color:var(--text-soft);
-      font-size:14px;
-      line-height:1.7;
+      font-size:15px;
+      line-height:1.8;
+      color:rgba(92,71,54,0.72);
+    }
+
+    .stayCardFooterInfo strong{
+      color:var(--text);
+    }
+
+    .stayCardFooter .btn{
+      min-width:230px;
+      height:54px;
+      border-radius:999px;
+      background:transparent;
+      border:1px solid rgba(92,71,54,0.2);
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-size:12px;
+      transition:all .35s ease;
+    }
+
+    .stayCardFooter .btn:hover{
+      background:rgba(92,71,54,0.06);
+      border-color:rgba(92,71,54,0.35);
     }
 
     .emptyState{
@@ -431,8 +479,16 @@
         grid-template-columns:1fr;
       }
 
+      .stayCardTop{
+        grid-template-columns:1fr;
+      }
+
       .stayCardMedia{
         min-height:280px;
+      }
+
+      .stayCardPrice{
+        text-align:left;
       }
 
       .summaryPanel{
@@ -475,9 +531,7 @@
       }
 
       .bookingSearchTop,
-      .bookingResultsHead,
-      .stayCardTop,
-      .stayCardFooter{
+      .bookingResultsHead{
         flex-direction:column;
         align-items:flex-start;
       }
@@ -493,170 +547,6 @@
         width:100%;
       }
 
-      .stayCardBody{
-        padding:20px 18px;
-      }
-
-      .stayCardTitle{
-        font-size:30px;
-      }
-
-      .stayCardPrice{
-        text-align:left;
-      }
-
-      .stayCardMedia{
-        min-height:240px;
-      }
-    }
-
-    /* =========================================
-       BOOKING CARDS — EDITORIAL OVERRIDE FINAL
-       ========================================= */
-
-    .stayCard{
-      grid-template-columns:420px 1fr;
-      border-radius:34px;
-      background:rgba(255,252,248,0.92);
-      border:1px solid rgba(255,255,255,0.7);
-      box-shadow:0 30px 80px rgba(40,30,20,0.12);
-    }
-
-    .stayCardMedia{
-      position:relative;
-    }
-
-    .stayCardMedia::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.18) 100%);
-    }
-
-    .stayCardMedia::after{
-      content:"Casas da Vila";
-      position:absolute;
-      left:22px;
-      bottom:22px;
-      padding:6px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,0.78);
-      backdrop-filter:blur(6px);
-      font-size:11px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:#5c4736;
-    }
-
-    .stayCardBody{
-      padding:34px 34px 28px;
-      gap:22px;
-    }
-
-    .stayCardTop{
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:24px;
-    }
-
-    .stayCardMeta{
-      font-size:11px;
-      letter-spacing:.18em;
-      color:rgba(92,71,54,0.55);
-    }
-
-    .stayCardTitle{
-      font-size:clamp(34px,3vw,46px);
-      letter-spacing:-0.04em;
-    }
-
-    .stayCardDesc{
-      font-size:17px;
-      line-height:1.82;
-      color:rgba(92,71,54,0.78);
-    }
-
-    .stayCardPrice{
-      gap:6px;
-    }
-
-    .stayCardPrice small{
-      font-size:11px;
-      letter-spacing:.18em;
-      color:rgba(92,71,54,0.5);
-    }
-
-    .stayCardPrice strong{
-      font-size:clamp(36px,3vw,52px);
-      letter-spacing:-0.04em;
-      font-weight:500;
-    }
-
-    .stayCardInclusions{
-      gap:10px;
-    }
-
-    .stayCardInclusions span{
-      min-height:38px;
-      padding:0 14px;
-      background:rgba(255,255,255,0.8);
-      border:1px solid rgba(92,71,54,0.06);
-      font-size:13px;
-      color:rgba(92,71,54,0.78);
-      box-shadow:0 8px 20px rgba(40,30,20,0.04);
-    }
-
-    .stayCardFooter{
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:20px;
-      align-items:end;
-      padding-top:20px;
-    }
-
-    .stayCardFooterInfo{
-      font-size:15px;
-      line-height:1.8;
-      color:rgba(92,71,54,0.72);
-    }
-
-    .stayCardFooterInfo strong{
-      color:var(--text);
-    }
-
-    .stayCardFooter .btn{
-      min-width:230px;
-      height:54px;
-      border-radius:999px;
-      background:transparent;
-      border:1px solid rgba(92,71,54,0.2);
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      font-size:12px;
-      transition:all .35s ease;
-    }
-
-    .stayCardFooter .btn:hover{
-      background:rgba(92,71,54,0.06);
-      border-color:rgba(92,71,54,0.35);
-    }
-
-    @media (max-width:1100px){
-      .stayCard{
-        grid-template-columns:1fr;
-      }
-
-      .stayCardTop{
-        grid-template-columns:1fr;
-      }
-
-      .stayCardPrice{
-        text-align:left;
-      }
-    }
-
-    @media (max-width:760px){
       .stayCard{
         border-radius:26px;
       }
@@ -677,8 +567,12 @@
         grid-template-columns:1fr;
       }
 
-      .stayCardFooter .btn{
-        width:100%;
+      .stayCardMedia{
+        min-height:240px;
+      }
+
+      .stayCardPrice{
+        text-align:left;
       }
     }
   </style>
@@ -872,6 +766,8 @@
 
   <script>
     (function () {
+      const PENDING_BOOKING_KEY = 'casasdavila:pendingBooking';
+
       const selectedState = {
         unit: null,
         checkIn: '',
@@ -905,9 +801,47 @@
 
       function formatDateEN(dateStr) {
         if (!dateStr) return '—';
-        const [y, m, d] = String(dateStr).split('-');
-        if (!y || !m || !d) return dateStr;
-        return `${m}/${d}/${y}`;
+        const date = new Date(dateStr + 'T12:00:00');
+        if (Number.isNaN(date.getTime())) return dateStr;
+        return new Intl.DateTimeFormat('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric'
+        }).format(date);
+      }
+
+      function getQueryParam(name) {
+        return new URLSearchParams(window.location.search).get(name) || '';
+      }
+
+      function getBookingSnapshot() {
+        const guestName = qs('#guest-name')?.value?.trim() || '';
+        const guestEmail = qs('#guest-email')?.value?.trim() || '';
+        const guestPhone = qs('#guest-phone')?.value?.trim() || '';
+        const specialRequests = qs('#special-requests')?.value?.trim() || '';
+
+        return {
+          guest: guestName,
+          email: guestEmail,
+          phone: guestPhone,
+          house: selectedState.unit?.name || '',
+          unitSlug: selectedState.unit?.slug || '',
+          checkin: selectedState.checkIn || '',
+          checkout: selectedState.checkOut || '',
+          guests: String(selectedState.guestsCount || ''),
+          specialRequests,
+          amountTotal: Number(selectedState.unit?.amount_total || 0),
+          savedAt: new Date().toISOString()
+        };
+      }
+
+      function persistPendingBooking() {
+        try {
+          const snapshot = getBookingSnapshot();
+          localStorage.setItem(PENDING_BOOKING_KEY, JSON.stringify(snapshot));
+        } catch (error) {
+          console.warn('Unable to save the pending booking to localStorage.', error);
+        }
       }
 
       function renderEmpty(messageTitle, messageText) {
@@ -1007,6 +941,8 @@
             const parsed = JSON.parse(btn.dataset.unit.replace(/&#39;/g, "'"));
             selectedState.unit = parsed;
             updateSummary();
+            persistPendingBooking();
+
             window.scrollTo({
               top: qs('.bookingCheckoutSection')?.getBoundingClientRect().top + window.scrollY - 100,
               behavior: 'smooth'
@@ -1103,7 +1039,9 @@
           selectedState.checkOut = checkOut;
           selectedState.guestsCount = guestsCount;
           selectedState.unit = null;
+
           updateSummary();
+          persistPendingBooking();
 
           renderEmpty('Searching availability…', 'We are checking the available houses for the selected period.');
 
@@ -1130,6 +1068,8 @@
           return;
         }
 
+        persistPendingBooking();
+
         try {
           const response = await fetch('/api/create-hold', {
             method: 'POST',
@@ -1155,24 +1095,45 @@
 
           const hold = data.hold;
 
+          const pendingBooking = getBookingSnapshot();
+          const successQuery = new URLSearchParams({
+            guest: pendingBooking.guest || '',
+            house: pendingBooking.house || '',
+            checkin: pendingBooking.checkin || '',
+            checkout: pendingBooking.checkout || '',
+            guests: pendingBooking.guests || ''
+          }).toString();
+
           const checkoutRes = await fetch('/api/create-checkout-session', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               holdId: hold.id,
               unitName: selectedState.unit.name,
+              unitSlug: selectedState.unit.slug,
               checkIn: selectedState.checkIn,
               checkOut: selectedState.checkOut,
               guestsCount: selectedState.guestsCount,
               amountTotal: hold.amount_total,
-              guestEmail
+              guestEmail,
+              guestName,
+              guestPhone,
+              specialRequests,
+              successPath: `/en/success/${successQuery ? `?${successQuery}` : ''}`,
+              successQuery,
+              pendingBooking
             })
           });
 
           const checkoutData = await checkoutRes.json();
 
           if (!checkoutRes.ok) {
-            alert('Error starting payment');
+            alert(checkoutData?.error || 'Error starting payment.');
+            return;
+          }
+
+          if (!checkoutData?.url) {
+            alert('The payment session did not return a valid URL.');
             return;
           }
 
@@ -1183,15 +1144,14 @@
         }
       }
 
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener('DOMContentLoaded', function () {
         const checkInEl = qs('#check-in');
         const checkOutEl = qs('#check-out');
         const guestsEl = qs('#guests-count');
 
-        const params = new URLSearchParams(window.location.search);
-        const checkInParam = params.get('checkIn') || '';
-        const checkOutParam = params.get('checkOut') || '';
-        const guestsParam = params.get('guestsCount') || '';
+        const checkInParam = getQueryParam('checkin') || getQueryParam('checkIn') || '';
+        const checkOutParam = getQueryParam('checkout') || getQueryParam('checkOut') || '';
+        const guestsParam = getQueryParam('guests') || getQueryParam('guestsCount') || '';
 
         if (checkInEl && checkInParam) checkInEl.value = checkInParam;
         if (checkOutEl && checkOutParam) checkOutEl.value = checkOutParam;
@@ -1229,20 +1189,22 @@
         }
 
         updateSummary();
-
-        qs('#search-availability-btn')?.addEventListener('click', handleSearchAvailability);
-        qs('#book-now-btn')?.addEventListener('click', handleCheckout);
-
-        if (guestsEl) {
-          guestsEl.addEventListener('change', () => {
-            selectedState.guestsCount = Number(guestsEl.value || 1);
-            updateSummary();
-          });
-        }
+        persistPendingBooking();
 
         if (selectedState.checkIn && selectedState.checkOut) {
           handleSearchAvailability();
         }
+
+        qs('#search-availability-btn')?.addEventListener('click', handleSearchAvailability);
+        qs('#book-now-btn')?.addEventListener('click', handleCheckout);
+
+        qs('#guest-name')?.addEventListener('input', persistPendingBooking);
+        qs('#guest-email')?.addEventListener('input', persistPendingBooking);
+        qs('#guest-phone')?.addEventListener('input', persistPendingBooking);
+        qs('#special-requests')?.addEventListener('input', persistPendingBooking);
+        qs('#check-in')?.addEventListener('change', persistPendingBooking);
+        qs('#check-out')?.addEventListener('change', persistPendingBooking);
+        qs('#guests-count')?.addEventListener('change', persistPendingBooking);
       });
     })();
   </script>
