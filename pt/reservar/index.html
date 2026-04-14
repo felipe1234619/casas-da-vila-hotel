@@ -947,42 +947,8 @@ function resolveCoverImage(item) {
     }
   }
 
-  const remoteCover = String(item?.cover_image_url || '').trim();
-  if (remoteCover) {
-    return toAbsoluteAsset(remoteCover);
-  }
-
-  return toAbsoluteAsset('/assets/img/casa-grande/gallery-04.jpeg');
-}
-  const candidates = [
-    slug,
-    nameSlug,
-    slug.replace(/^casa-/, ''),
-    nameSlug.replace(/^casa-/, ''),
-    slug.replace(/^atelier-/, 'atelie-'),
-    nameSlug.replace(/^atelier-/, 'atelie-'),
-    slug.replace(/^atelie-/, 'atelier-'),
-    nameSlug.replace(/^atelie-/, 'atelier-')
-  ].filter(Boolean);
-
-  for (const key of candidates) {
-    const localOptions = library[key];
-    if (Array.isArray(localOptions) && localOptions.length) {
-      return toAbsoluteAsset(localOptions[0]);
-    }
-  }
-
-  return toAbsoluteAsset('/assets/img/casa-grande/gallery-04.jpeg');
-}      function escapeHtml(value) {
-        return String(value || '')
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
-      }
-
-      function getBookingSnapshot() {
+  return '';
+}      function getBookingSnapshot() {
         const guestName = qs('#guest-name')?.value?.trim() || '';
         const guestEmail = qs('#guest-email')?.value?.trim() || '';
         const guestPhone = qs('#guest-phone')?.value?.trim() || '';
@@ -1033,6 +999,11 @@ function renderAvailabilityCards(items) {
       'Nenhuma casa disponível',
       'Tente outras datas ou ajuste o número de hóspedes para consultar novas opções.'
     );
+    console.log('CARD IMAGE', {
+  house: item?.name,
+  slug: item?.slug,
+  resolved: coverImage
+});
     return;
   }
 
@@ -1056,8 +1027,7 @@ function renderAvailabilityCards(items) {
             alt="${escapeHtml(item.name || 'Casas da Vila')}"
             loading="lazy"
             decoding="async"
-            onerror="this.onerror=null;this.src='${SITE_ORIGIN}/assets/img/casa-grande/gallery-04.jpeg';"
-          />
+onerror="this.onerror=null;this.style.opacity='0.25';this.style.filter='grayscale(1)';console.error('IMAGE FAILED', this.src);"          />
         </div>
 
         <div class="stayCardBody">
