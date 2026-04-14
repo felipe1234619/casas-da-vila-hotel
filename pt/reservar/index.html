@@ -929,11 +929,31 @@ function resolveCoverImage(item) {
   const nameSlug = normalizeSlug(item?.name);
   const library = getHouseImageLibrary();
 
+  const candidates = [
+    slug,
+    nameSlug,
+    slug.replace(/^casa-/, ''),
+    nameSlug.replace(/^casa-/, ''),
+    slug.replace(/^atelier-/, 'atelie-'),
+    nameSlug.replace(/^atelier-/, 'atelie-'),
+    slug.replace(/^atelie-/, 'atelier-'),
+    nameSlug.replace(/^atelie-/, 'atelier-')
+  ].filter(Boolean);
+
+  for (const key of candidates) {
+    const localOptions = library[key];
+    if (Array.isArray(localOptions) && localOptions.length) {
+      return toAbsoluteAsset(localOptions[0]);
+    }
+  }
+
   const remoteCover = String(item?.cover_image_url || '').trim();
   if (remoteCover) {
     return toAbsoluteAsset(remoteCover);
   }
 
+  return toAbsoluteAsset('/assets/img/casa-grande/gallery-04.jpeg');
+}
   const candidates = [
     slug,
     nameSlug,
