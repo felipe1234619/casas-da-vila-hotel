@@ -846,288 +846,309 @@
         return `${SITE_ORIGIN}/${path}`;
       }
 
-      function getHouseImageLibrary() {
-        return {
-          'casa-oca': [
-            '/assets/img/casa-oca/gallery-01.jpeg',
-            '/assets/img/casa-oca/gallery-02.jpeg'
-          ],
-          'atelie-azul': [
-            '/assets/img/atelie-azul/gallery-01.jpeg',
-            '/assets/img/atelie-azul/gallery-02.jpeg'
-          ],
-          'casa-branca': [
-            '/assets/img/casa-branca/gallery-01.jpeg',
-            '/assets/img/casa-branca/gallery-02.jpeg'
-          ],
-          'casa-dende': [
-            '/assets/img/casa-dende/gallery-01.jpeg',
-            '/assets/img/casa-dende/gallery-02.jpeg'
-          ],
-          'casa-dos-baloes': [
-            '/assets/img/casa-dos-baloes/gallery-01.jpeg',
-            '/assets/img/casa-dos-baloes/gallery-02.jpeg'
-          ],
-          'casa-grande': [
-            '/assets/img/casa-grande/gallery-04.jpeg',
-            '/assets/img/casa-grande/gallery-01.jpeg'
-          ],
-          'casa-manga': [
-            '/assets/img/casa-manga/gallery-01.jpeg',
-            '/assets/img/casa-manga/gallery-02.jpeg'
-          ],
-          'casa-rosada': [
-            '/assets/img/casa-rosada/gallery-01.jpeg',
-            '/assets/img/casa-rosada/gallery-02.jpeg'
-          ]
-        };
-      }
+function getHouseImageLibrary() {
+  return {
+    'casa-oca': [
+      '/assets/img/casa-oca/gallery-01.jpeg',
+      '/assets/img/casa-oca/gallery-02.jpeg'
+    ],
+    'oca': [
+      '/assets/img/casa-oca/gallery-01.jpeg',
+      '/assets/img/casa-oca/gallery-02.jpeg'
+    ],
 
-      function resolveCoverImage(item) {
-        const slug = normalizeSlug(item?.slug);
-        const library = getHouseImageLibrary();
+    'atelie-azul': [
+      '/assets/img/atelie-azul/gallery-01.jpeg',
+      '/assets/img/atelie-azul/gallery-02.jpeg'
+    ],
+    'atelier-azul': [
+      '/assets/img/atelie-azul/gallery-01.jpeg',
+      '/assets/img/atelie-azul/gallery-02.jpeg'
+    ],
+    'azul': [
+      '/assets/img/atelie-azul/gallery-01.jpeg',
+      '/assets/img/atelie-azul/gallery-02.jpeg'
+    ],
 
-        const remoteCover = String(item?.cover_image_url || '').trim();
-        if (remoteCover) {
-          return toAbsoluteAsset(remoteCover);
-        }
+    'casa-branca': [
+      '/assets/img/casa-branca/gallery-01.jpeg',
+      '/assets/img/casa-branca/gallery-02.jpeg'
+    ],
+    'branca': [
+      '/assets/img/casa-branca/gallery-01.jpeg',
+      '/assets/img/casa-branca/gallery-02.jpeg'
+    ],
 
-        const localOptions = library[slug];
-        if (Array.isArray(localOptions) && localOptions.length) {
-          return toAbsoluteAsset(localOptions[0]);
-        }
+    'casa-dende': [
+      '/assets/img/casa-dende/gallery-01.jpeg',
+      '/assets/img/casa-dende/gallery-03.jpeg'
+    ],
+    'dende': [
+      '/assets/img/casa-dende/gallery-02.jpeg',
+      '/assets/img/casa-dende/gallery-03.jpeg'
+    ],
 
-        return toAbsoluteAsset('/assets/img/casa-grande/gallery-04.jpeg');
-      }
+    'casa-dos-baloes': [
+      '/assets/img/casa-dos-baloes/gallery-01.jpeg',
+      '/assets/img/casa-dos-baloes/gallery-02.jpeg'
+    ],
+    'casa-baloes': [
+      '/assets/img/casa-dos-baloes/gallery-01.jpeg',
+      '/assets/img/casa-dos-baloes/gallery-02.jpeg'
+    ],
+    'baloes': [
+      '/assets/img/casa-dos-baloes/gallery-01.jpeg',
+      '/assets/img/casa-dos-baloes/gallery-02.jpeg'
+    ],
 
-      function escapeHtml(value) {
-        return String(value || '')
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
-      }
+    'casa-grande': [
+      '/assets/img/casa-grande/gallery-04.jpeg',
+      '/assets/img/casa-grande/gallery-01.jpeg'
+    ],
+    'grande': [
+      '/assets/img/casa-grande/gallery-04.jpeg',
+      '/assets/img/casa-grande/gallery-01.jpeg'
+    ],
 
-      function getBookingSnapshot() {
-        const guestName = qs('#guest-name')?.value?.trim() || '';
-        const guestEmail = qs('#guest-email')?.value?.trim() || '';
-        const guestPhone = qs('#guest-phone')?.value?.trim() || '';
-        const specialRequests = qs('#special-requests')?.value?.trim() || '';
+    'casa-manga': [
+      '/assets/img/casa-manga/gallery-01.jpeg',
+      '/assets/img/casa-manga/gallery-02.jpeg'
+    ],
+    'manga': [
+      '/assets/img/casa-manga/gallery-02.jpeg',
+      '/assets/img/casa-manga/gallery-03.jpeg'
+    ],
 
-        return {
-          guest: guestName,
-          email: guestEmail,
-          phone: guestPhone,
-          house: selectedState.unit?.name || '',
-          unitSlug: selectedState.unit?.slug || '',
-          checkin: selectedState.checkIn || '',
-          checkout: selectedState.checkOut || '',
-          guests: String(selectedState.guestsCount || ''),
-          specialRequests,
-          amountTotal: Number(selectedState.unit?.amount_total || 0),
-          savedAt: new Date().toISOString()
-        };
-      }
+    'casa-rosada': [
+      '/assets/img/casa-rosada/gallery-01.jpeg',
+      '/assets/img/casa-rosada/gallery-02.jpeg'
+    ],
+    'rosada': [
+      '/assets/img/casa-rosada/gallery-01.jpeg',
+      '/assets/img/casa-rosada/gallery-02.jpeg'
+    ]
+  };
+}
 
-      function persistPendingBooking() {
-        try {
-          const snapshot = getBookingSnapshot();
-          localStorage.setItem(PENDING_BOOKING_KEY, JSON.stringify(snapshot));
-        } catch (error) {
-          console.warn('Unable to save the pending booking to localStorage.', error);
-        }
-      }
+function resolveCoverImage(item) {
+  const slug = normalizeSlug(item?.slug);
+  const nameSlug = normalizeSlug(item?.name);
+  const library = getHouseImageLibrary();
 
-      function renderEmpty(messageTitle, messageText) {
-        const root = qs('#booking-results');
-        if (!root) return;
+  const candidates = [
+    slug,
+    nameSlug,
+    slug.replace(/^casa-/, ''),
+    nameSlug.replace(/^casa-/, ''),
+    slug.replace(/^atelier-/, 'atelie-'),
+    nameSlug.replace(/^atelier-/, 'atelie-'),
+    slug.replace(/^atelie-/, 'atelier-'),
+    nameSlug.replace(/^atelie-/, 'atelier-')
+  ].filter(Boolean);
 
-        root.innerHTML = `
-          <div class="emptyState">
-            <h3>${escapeHtml(messageTitle)}</h3>
-            <p>${escapeHtml(messageText)}</p>
+  for (const key of candidates) {
+    const localOptions = library[key];
+    if (Array.isArray(localOptions) && localOptions.length) {
+      return toAbsoluteAsset(localOptions[0]);
+    }
+  }
+
+  return '';
+}
+function escapeHtml(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+function getBookingSnapshot() {
+  const guestName = qs('#guest-name')?.value?.trim() || '';
+  const guestEmail = qs('#guest-email')?.value?.trim() || '';
+  const guestPhone = qs('#guest-phone')?.value?.trim() || '';
+  const specialRequests = qs('#special-requests')?.value?.trim() || '';
+
+  return {
+    guest: guestName,
+    email: guestEmail,
+    phone: guestPhone,
+    house: selectedState.unit?.name || '',
+    unitSlug: selectedState.unit?.slug || '',
+    checkin: selectedState.checkIn || '',
+    checkout: selectedState.checkOut || '',
+    guests: String(selectedState.guestsCount || ''),
+    specialRequests,
+    amountTotal: Number(selectedState.unit?.amount_total || 0),
+    savedAt: new Date().toISOString()
+  };
+}
+
+function persistPendingBooking() {
+  try {
+    const snapshot = getBookingSnapshot();
+    localStorage.setItem(PENDING_BOOKING_KEY, JSON.stringify(snapshot));
+  } catch (error) {
+    console.warn('Unable to save the pending booking to localStorage.', error);
+  }
+}
+
+function renderEmpty(messageTitle, messageText) {
+  const root = qs('#booking-results');
+  if (!root) return;
+
+  root.innerHTML = `
+    <div class="emptyState">
+      <h3>${escapeHtml(messageTitle)}</h3>
+      <p>${escapeHtml(messageText)}</p>
+    </div>
+  `;
+}
+
+function renderAvailabilityCards(items) {
+  const root = qs('#booking-results');
+  if (!root) return;
+
+  if (!items || !items.length) {
+    renderEmpty(
+      'No houses available',
+      'Please try different dates or adjust the number of guests to view new options.'
+    );
+    return;
+  }
+
+  const nights = calcNights(selectedState.checkIn, selectedState.checkOut);
+
+  root.innerHTML = items.map((item) => {
+    const coverImage = resolveCoverImage(item);
+    const total = Number(item.amount_total || 0);
+    const nightly = nights > 0 ? total / nights : total;
+    const normalizedHouse = String(item.slug || '').replace(/-/g, '_');
+
+    return `
+      <article
+        class="stayCard"
+        data-house-card
+        data-house="${escapeHtml(normalizedHouse)}"
+      >
+        <div class="stayCardMedia">
+          <img
+            src="${escapeHtml(coverImage)}"
+            alt="${escapeHtml(item.name || 'Casas da Vila')}"
+            loading="lazy"
+            decoding="async"
+            onerror="this.onerror=null;this.style.opacity='0.25';this.style.filter='grayscale(1)';console.error('IMAGE FAILED', this.src);"
+          />
+        </div>
+
+        <div class="stayCardBody">
+          <div class="stayCardTop">
+            <div>
+              <p class="stayCardMeta">${escapeHtml(item.size_m2 || '-')} m² • up to ${escapeHtml(item.max_guests || '-')} guests</p>
+              <h3 class="stayCardTitle">${escapeHtml(item.name || '')}</h3>
+              <p class="stayCardDesc">${escapeHtml(item.short_description || '')}</p>
+            </div>
+
+            <div class="stayCardPrice">
+              <small>Rate per night</small>
+              <strong data-price>${formatCurrency(nightly)}</strong>
+            </div>
           </div>
-        `;
-      }
 
-      const FX_USD_BRL = 5.0;
+          <div class="stayCardInclusions">
+            ${item.breakfast_included ? '<span>Breakfast included</span>' : ''}
+            ${item.parking_included ? '<span>Parking included</span>' : ''}
+            <span data-min-stay>Minimum stay of ${escapeHtml(item.required_min_nights || '-')} nights</span>
+            ${nights > 0 ? `<span>${nights} ${nights === 1 ? 'night' : 'nights'}</span>` : ''}
+            <span data-status></span>
+          </div>
 
-      function formatCurrencyBRL_EN(value) {
-        return new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'BRL',
-          maximumFractionDigits: 0
-        }).format(Number(value || 0));
-      }
+          <div class="stayCardFooter">
+            <div class="stayCardFooterInfo">
+              <div><strong>Total stay:</strong> <span data-total>${formatCurrency(total)}</span></div>
+              <div><strong>Stay length:</strong> ${nights > 0 ? `${nights} ${nights === 1 ? 'night' : 'nights'}` : '—'}</div>
+            </div>
 
-      function formatCurrencyUSD_EST(valueBRL) {
-        const usd = Number(valueBRL || 0) / FX_USD_BRL;
-
-        return new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'USD',
-          maximumFractionDigits: 0
-        }).format(usd);
-      }
-
-      function formatDualCurrency(valueBRL) {
-        return `
-          <div class="priceMain">${formatCurrencyBRL_EN(valueBRL)}</div>
-          <div class="priceUSD">≈ ${formatCurrencyUSD_EST(valueBRL)}</div>
-        `;
-      }
-
-      function renderAvailabilityCards(items) {
-        const root = qs('#booking-results');
-        if (!root) return;
-
-        if (!items || !items.length) {
-          renderEmpty(
-            'No houses available',
-            'Please try different dates or adjust the number of guests to view new options.'
-          );
-          return;
-        }
-
-        const nights = calcNights(selectedState.checkIn, selectedState.checkOut);
-
-        root.innerHTML = items.map((item) => {
-          const coverImage = resolveCoverImage(item);
-          const total = Number(item.amount_total || 0);
-          const nightly = nights > 0 ? total / nights : total;
-          const normalizedHouse = String(item.slug || '').replace(/-/g, '_');
-
-          return `
-            <article
-              class="stayCard"
-              data-house-card
-              data-house="${escapeHtml(normalizedHouse)}"
+            <button
+              class="btn btnGhost select-stay-btn"
+              type="button"
+              data-book-link
+              data-unit='${JSON.stringify(item).replace(/'/g, '&#39;')}'
             >
-              <div class="stayCardMedia">
-                <img
-                  src="${escapeHtml(coverImage)}"
-                  alt="${escapeHtml(item.name || 'Casas da Vila')}"
-                  loading="lazy"
-                  decoding="async"
-                  onerror="this.onerror=null;this.src='${SITE_ORIGIN}/assets/img/casa-grande/gallery-04.jpeg';"
-                />
-              </div>
+              Select this house
+            </button>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
 
-              <div class="stayCardBody">
-                <div class="stayCardTop">
-                  <div>
-                    <p class="stayCardMeta">${escapeHtml(item.size_m2 || '-')} m² • up to ${escapeHtml(item.max_guests || '-')} guests</p>
-                    <h3 class="stayCardTitle">${escapeHtml(item.name || '')}</h3>
-                    <p class="stayCardDesc">${escapeHtml(item.short_description || '')}</p>
-                  </div>
+  root.querySelectorAll('.select-stay-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const parsed = JSON.parse(btn.dataset.unit.replace(/&#39;/g, "'"));
+      selectedState.unit = parsed;
+      updateSummary();
+      persistPendingBooking();
 
-                  <div class="stayCardPrice">
-                    <small>Rate per night</small>
-                    <strong data-price>${formatDualCurrency(nightly)}</strong>
-                  </div>
-                </div>
+      window.scrollTo({
+        top: qs('.bookingCheckoutSection')?.getBoundingClientRect().top + window.scrollY - 100,
+        behavior: 'smooth'
+      });
+    });
+  });
 
-                <div class="stayCardInclusions">
-                  ${item.breakfast_included ? '<span>Breakfast included</span>' : ''}
-                  ${item.parking_included ? '<span>Parking included</span>' : ''}
-                  <span data-min-stay>Minimum stay of ${escapeHtml(item.required_min_nights || '-')} nights</span>
-                  ${nights > 0 ? `<span>${nights} ${nights === 1 ? 'night' : 'nights'}</span>` : ''}
-                  <span data-status></span>
-                </div>
+  if (window.BookingRules && typeof window.BookingRules.refreshBookingCards === 'function') {
+    window.BookingRules.refreshBookingCards({
+      locale: 'en',
+      checkinSelector: '#check-in',
+      checkoutSelector: '#check-out',
+      guestsSelector: '#guests-count',
+      cardSelector: '[data-house-card]',
+      bookBasePath: '/en/book/'
+    });
+  }
+}
 
-                <div class="stayCardFooter">
-                  <div class="stayCardFooterInfo">
-                    <div><strong>Total stay:</strong> <span data-total>${formatDualCurrency(total)}</span></div>
-                    <div><strong>Stay length:</strong> ${nights > 0 ? `${nights} ${nights === 1 ? 'night' : 'nights'}` : '—'}</div>
-                  </div>
+function updateSummary() {
+  const selectedBox = qs('#summary-selected');
+  const datesEl = qs('#summary-dates');
+  const nightsEl = qs('#summary-nights');
+  const guestsEl = qs('#summary-guests');
+  const totalEl = qs('#summary-total');
 
-                  <button
-                    class="btn btnGhost select-stay-btn"
-                    type="button"
-                    data-book-link
-                    data-unit='${JSON.stringify(item).replace(/'/g, '&#39;')}'
-                  >
-                    Select this house
-                  </button>
-                </div>
-              </div>
-            </article>
-          `;
-        }).join('');
+  const nights = calcNights(selectedState.checkIn, selectedState.checkOut);
 
-        root.querySelectorAll('.select-stay-btn').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const parsed = JSON.parse(btn.dataset.unit.replace(/&#39;/g, "'"));
-            selectedState.unit = parsed;
-            updateSummary();
-            persistPendingBooking();
+  if (selectedBox) {
+    if (selectedState.unit) {
+      selectedBox.innerHTML = `
+        <p class="summaryEyebrow">Selected house</p>
+        <p class="summaryTitle">${escapeHtml(selectedState.unit.name || '')}</p>
+        <p class="summaryMeta">
+          ${escapeHtml(selectedState.unit.size_m2 || '-')} m² • up to ${escapeHtml(selectedState.unit.max_guests || '-')} guests
+        </p>
+      `;
+    } else {
+      selectedBox.innerHTML = `
+        <p class="summaryEyebrow">No house selected</p>
+        <p class="summaryTitle">Waiting for availability</p>
+        <p class="summaryMeta">
+          Choose dates and select an available house to view your booking summary.
+        </p>
+      `;
+    }
+  }
 
-            window.scrollTo({
-              top: qs('.bookingCheckoutSection')?.getBoundingClientRect().top + window.scrollY - 100,
-              behavior: 'smooth'
-            });
-          });
-        });
+  if (datesEl) {
+    datesEl.textContent =
+      selectedState.checkIn && selectedState.checkOut
+        ? `${formatDateEN(selectedState.checkIn)} → ${formatDateEN(selectedState.checkOut)}`
+        : '—';
+  }
 
-        if (window.BookingRules && typeof window.BookingRules.refreshBookingCards === 'function') {
-          window.BookingRules.refreshBookingCards({
-            locale: 'en',
-            checkinSelector: '#check-in',
-            checkoutSelector: '#check-out',
-            guestsSelector: '#guests-count',
-            cardSelector: '[data-house-card]',
-            bookBasePath: '/en/book/'
-          });
-        }
-      }
-
-      function updateSummary() {
-        const selectedBox = qs('#summary-selected');
-        const datesEl = qs('#summary-dates');
-        const nightsEl = qs('#summary-nights');
-        const guestsEl = qs('#summary-guests');
-        const totalEl = qs('#summary-total');
-
-        const nights = calcNights(selectedState.checkIn, selectedState.checkOut);
-
-        if (selectedBox) {
-          if (selectedState.unit) {
-            selectedBox.innerHTML = `
-              <p class="summaryEyebrow">Selected house</p>
-              <p class="summaryTitle">${escapeHtml(selectedState.unit.name || '')}</p>
-              <p class="summaryMeta">
-                ${escapeHtml(selectedState.unit.size_m2 || '-')} m² • up to ${escapeHtml(selectedState.unit.max_guests || '-')} guests
-              </p>
-            `;
-          } else {
-            selectedBox.innerHTML = `
-              <p class="summaryEyebrow">No house selected</p>
-              <p class="summaryTitle">Waiting for availability</p>
-              <p class="summaryMeta">
-                Choose dates and select an available house to view your booking summary.
-              </p>
-            `;
-          }
-        }
-
-        if (datesEl) {
-          datesEl.textContent =
-            selectedState.checkIn && selectedState.checkOut
-              ? `${formatDateEN(selectedState.checkIn)} → ${formatDateEN(selectedState.checkOut)}`
-              : '—';
-        }
-
-        if (nightsEl) nightsEl.textContent = nights ? String(nights) : '—';
-        if (guestsEl) guestsEl.textContent = selectedState.guestsCount ? String(selectedState.guestsCount) : '—';
-
-        if (totalEl) {
-          totalEl.innerHTML = selectedState.unit
-            ? formatDualCurrency(selectedState.unit.amount_total || 0)
-            : '—';
-        }
-      }
-
+  if (nightsEl) nightsEl.textContent = nights ? String(nights) : '—';
+  if (guestsEl) guestsEl.textContent = selectedState.guestsCount ? String(selectedState.guestsCount) : '—';
+  if (totalEl) totalEl.textContent = selectedState.unit ? formatCurrency(selectedState.unit.amount_total || 0) : '—';
+}
       async function fetchAvailability(checkIn, checkOut, guestsCount) {
         try {
           const response = await fetch('/api/availability', {
