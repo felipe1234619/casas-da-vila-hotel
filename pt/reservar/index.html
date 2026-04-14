@@ -509,6 +509,201 @@
         min-height:240px;
       }
     }
+    /* =========================================
+   BOOKING CARDS — EDITORIAL OVERRIDE FINAL
+   ========================================= */
+
+.stayCard{
+  grid-template-columns:420px 1fr;
+  border-radius:34px;
+  background:rgba(255,252,248,0.92);
+  border:1px solid rgba(255,255,255,0.7);
+  box-shadow:0 30px 80px rgba(40,30,20,0.12);
+}
+
+/* IMAGE + OVERLAY */
+
+.stayCardMedia{
+  position:relative;
+}
+
+.stayCardMedia::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.18) 100%);
+}
+
+.stayCardMedia::after{
+  content:"Casas da Vila";
+  position:absolute;
+  left:22px;
+  bottom:22px;
+  padding:6px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.78);
+  backdrop-filter:blur(6px);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#5c4736;
+}
+
+/* BODY */
+
+.stayCardBody{
+  padding:34px 34px 28px;
+  gap:22px;
+}
+
+/* TOP LAYOUT */
+
+.stayCardTop{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:24px;
+}
+
+/* META */
+
+.stayCardMeta{
+  font-size:11px;
+  letter-spacing:.18em;
+  color:rgba(92,71,54,0.55);
+}
+
+/* TITLE */
+
+.stayCardTitle{
+  font-size:clamp(34px,3vw,46px);
+  letter-spacing:-0.04em;
+}
+
+/* DESCRIPTION */
+
+.stayCardDesc{
+  font-size:17px;
+  line-height:1.82;
+  color:rgba(92,71,54,0.78);
+}
+
+/* PRICE */
+
+.stayCardPrice{
+  gap:6px;
+}
+
+.stayCardPrice small{
+  font-size:11px;
+  letter-spacing:.18em;
+  color:rgba(92,71,54,0.5);
+}
+
+.stayCardPrice strong{
+  font-size:clamp(36px,3vw,52px);
+  letter-spacing:-0.04em;
+  font-weight:500;
+}
+
+/* INCLUSIONS */
+
+.stayCardInclusions{
+  gap:10px;
+}
+
+.stayCardInclusions span{
+  min-height:38px;
+  padding:0 14px;
+  background:rgba(255,255,255,0.8);
+  border:1px solid rgba(92,71,54,0.06);
+  font-size:13px;
+  color:rgba(92,71,54,0.78);
+  box-shadow:0 8px 20px rgba(40,30,20,0.04);
+}
+
+/* FOOTER */
+
+.stayCardFooter{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:20px;
+  align-items:end;
+  padding-top:20px;
+}
+
+.stayCardFooterInfo{
+  font-size:15px;
+  line-height:1.8;
+  color:rgba(92,71,54,0.72);
+}
+
+.stayCardFooterInfo strong{
+  color:var(--text);
+}
+
+/* BUTTON — LUXURY GHOST */
+
+.stayCardFooter .btn{
+  min-width:230px;
+  height:54px;
+  border-radius:999px;
+  background:transparent;
+  border:1px solid rgba(92,71,54,0.2);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-size:12px;
+  transition:all .35s ease;
+}
+
+.stayCardFooter .btn:hover{
+  background:rgba(92,71,54,0.06);
+  border-color:rgba(92,71,54,0.35);
+}
+
+/* =========================
+   RESPONSIVE REFINEMENT
+   ========================= */
+
+@media (max-width:1100px){
+  .stayCard{
+    grid-template-columns:1fr;
+  }
+
+  .stayCardTop{
+    grid-template-columns:1fr;
+  }
+
+  .stayCardPrice{
+    text-align:left;
+  }
+}
+
+@media (max-width:760px){
+  .stayCard{
+    border-radius:26px;
+  }
+
+  .stayCardBody{
+    padding:22px 20px;
+  }
+
+  .stayCardTitle{
+    font-size:30px;
+  }
+
+  .stayCardDesc{
+    font-size:16px;
+  }
+
+  .stayCardFooter{
+    grid-template-columns:1fr;
+  }
+
+  .stayCardFooter .btn{
+    width:100%;
+  }
+}
   </style>
 </head>
 <body>
@@ -519,7 +714,7 @@
 
     <section class="bookingHero">
       <div class="bookingHeroBg">
-        <img src="/assets/img/casagrande7.jpeg" alt="Reserva nas Casas da Vila" />
+        <img src="/assets/img/casa-grande/gallery-04.jpeg" alt="Reserva nas Casas da Vila" />
         <div class="bookingHeroOverlay"></div>
       </div>
 
@@ -718,13 +913,20 @@
       }).format(Number(value || 0));
     }
 
-    function calcNights(checkIn, checkOut) {
-      if (!checkIn || !checkOut) return 0;
-      const start = new Date(`${checkIn}T12:00:00Z`);
-      const end = new Date(`${checkOut}T12:00:00Z`);
-      return Math.ceil((end - start) / (1000 * 60 * 60 * 24));
-    }
+function calcNights(checkIn, checkOut) {
+  if (!checkIn || !checkOut) return 0;
 
+  const [y1, m1, d1] = checkIn.split('-').map(Number);
+  const [y2, m2, d2] = checkOut.split('-').map(Number);
+
+  // Usa horário local (seguro em TODOS os browsers)
+  const start = new Date(y1, m1 - 1, d1);
+  const end = new Date(y2, m2 - 1, d2);
+
+  const diff = end - start;
+
+  return diff > 0 ? Math.round(diff / (1000 * 60 * 60 * 24)) : 0;
+}
     function formatDateBR(dateStr) {
       if (!dateStr) return '—';
       const [y, m, d] = String(dateStr).split('-');
@@ -744,75 +946,96 @@
       `;
     }
 
-    function renderAvailabilityCards(items) {
-      const root = qs('#booking-results');
-      if (!root) return;
+function renderAvailabilityCards(items) {
+  const root = qs('#booking-results');
+  if (!root) return;
 
-      if (!items || !items.length) {
-        renderEmpty(
-          'Nenhuma casa disponível',
-          'Tente outras datas ou ajuste o número de hóspedes para consultar novas opções.'
-        );
-        return;
-      }
+  if (!items || !items.length) {
+    renderEmpty(
+      'Nenhuma casa disponível',
+      'Tente outras datas ou ajuste o número de hóspedes para consultar novas opções.'
+    );
+    return;
+  }
 
-      root.innerHTML = items.map((item) => `
-        <article class="stayCard">
-          <div
-            class="stayCardMedia"
-            style="background-image:url('${item.cover_image_url || ''}')"
-          ></div>
+  const nights = calcNights(selectedState.checkIn, selectedState.checkOut);
 
-          <div class="stayCardBody">
-            <div class="stayCardTop">
-              <div>
-                <p class="stayCardMeta">${item.size_m2 || '-'} m² • até ${item.max_guests} hóspedes</p>
-                <h3 class="stayCardTitle">${item.name}</h3>
-                <p class="stayCardDesc">${item.short_description || ''}</p>
-              </div>
+  root.innerHTML = items.map((item) => {
+const fallbackImages = {
+  'casa-oca': '/assets/img/casa-oca/gallery-01.jpeg',
+  'atelie-azul': '/assets/img/atelie-azul/gallery-01.jpeg',
+  'casa-branca': '/assets/img/casa-branca/gallery-01.jpeg',
+  'casa-dende': '/assets/img/casa-dende/gallery-01.jpeg',
+  'casa-dos-baloes': '/assets/img/casa-dos-baloes/gallery-01.jpeg',
+  'casa-grande': '/assets/img/casa-grande/gallery-04.jpeg',
+  'casa-manga': '/assets/img/casa-manga/gallery-01.jpeg',
+  'casa-rosada': '/assets/img/casa-rosada/gallery-01.jpeg'
+};
 
-              <div class="stayCardPrice">
-                <small>Total da estadia</small>
-                <strong>${formatBRL(item.amount_total || 0)}</strong>
-              </div>
+const coverImage = item.cover_image_url && String(item.cover_image_url).trim()
+  ? item.cover_image_url
+  : (fallbackImages[item.slug] || '/assets/img/casa-grande/gallery-04.jpeg');    const total = Number(item.amount_total || 0);
+    const nightly = nights > 0 ? total / nights : total;
+
+    return `
+      <article class="stayCard">
+        <div
+          class="stayCardMedia"
+          style="background-image:url('${coverImage}')"
+        ></div>
+
+        <div class="stayCardBody">
+          <div class="stayCardTop">
+            <div>
+              <p class="stayCardMeta">${item.size_m2 || '-'} m² • até ${item.max_guests} hóspedes</p>
+              <h3 class="stayCardTitle">${item.name}</h3>
+              <p class="stayCardDesc">${item.short_description || ''}</p>
             </div>
 
-            <div class="stayCardInclusions">
-              ${item.breakfast_included ? '<span>Café da manhã incluído</span>' : ''}
-              ${item.parking_included ? '<span>Estacionamento incluído</span>' : ''}
-              <span>Mínimo de ${item.required_min_nights} noites</span>
-            </div>
-
-            <div class="stayCardFooter">
-              <div class="stayCardFooterInfo">
-                Selecione esta casa para preencher o resumo da estadia e avançar para o checkout.
-              </div>
-
-              <button
-                class="btn btnGhost select-stay-btn"
-                type="button"
-                data-unit='${JSON.stringify(item).replace(/'/g, '&#39;')}'
-              >
-                Selecionar esta casa
-              </button>
+            <div class="stayCardPrice">
+              <small>Valor por noite</small>
+              <strong>${formatBRL(nightly)}</strong>
             </div>
           </div>
-        </article>
-      `).join('');
 
-      root.querySelectorAll('.select-stay-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const parsed = JSON.parse(btn.dataset.unit.replace(/&#39;/g, "'"));
-          selectedState.unit = parsed;
-          updateSummary();
-          window.scrollTo({
-            top: qs('.bookingCheckoutSection')?.getBoundingClientRect().top + window.scrollY - 100,
-            behavior: 'smooth'
-          });
-        });
+          <div class="stayCardInclusions">
+            ${item.breakfast_included ? '<span>Café da manhã incluído</span>' : ''}
+            ${item.parking_included ? '<span>Estacionamento incluído</span>' : ''}
+            <span>Mínimo de ${item.required_min_nights} noites</span>
+            ${nights > 0 ? `<span>${nights} ${nights === 1 ? 'noite' : 'noites'}</span>` : ''}
+          </div>
+
+          <div class="stayCardFooter">
+            <div class="stayCardFooterInfo">
+              <div><strong>Total da estadia:</strong> ${formatBRL(total)}</div>
+              <div><strong>Período:</strong> ${nights > 0 ? `${nights} ${nights === 1 ? 'noite' : 'noites'}` : '—'}</div>
+            </div>
+
+            <button
+              class="btn btnGhost select-stay-btn"
+              type="button"
+              data-unit='${JSON.stringify(item).replace(/'/g, '&#39;')}'
+            >
+              Selecionar esta casa
+            </button>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  root.querySelectorAll('.select-stay-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const parsed = JSON.parse(btn.dataset.unit.replace(/&#39;/g, "'"));
+      selectedState.unit = parsed;
+      updateSummary();
+      window.scrollTo({
+        top: qs('.bookingCheckoutSection')?.getBoundingClientRect().top + window.scrollY - 100,
+        behavior: 'smooth'
       });
-    }
-
+    });
+  });
+}
     function updateSummary() {
       const selectedBox = qs('#summary-selected');
       const datesEl = qs('#summary-dates');
@@ -983,24 +1206,96 @@ async function handleCheckout() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  updateSummary();
+document.addEventListener("DOMContentLoaded", function () {
 
-  qs('#search-availability-btn')?.addEventListener('click', handleSearchAvailability);
-  qs('#book-now-btn')?.addEventListener('click', handleCheckout);
-
-  const guestsSelect = qs('#guests-count');
-  if (guestsSelect) {
-    guestsSelect.addEventListener('change', () => {
-      selectedState.guestsCount = Number(guestsSelect.value || 1);
-      updateSummary();
-    });
+  function qs(selector) {
+    return document.querySelector(selector);
   }
+
+  const checkInEl = qs('#check-in');
+  const checkOutEl = qs('#check-out');
+  const guestsEl = qs('#guests-count');
+
+  // =========================
+  // 1. Ler parâmetros da URL
+  // =========================
+  const params = new URLSearchParams(window.location.search);
+
+  const checkInParam = params.get('checkIn') || '';
+  const checkOutParam = params.get('checkOut') || '';
+  const guestsParam = params.get('guestsCount') || '';
+
+  // =========================
+  // 2. Preencher inputs
+  // =========================
+  if (checkInEl && checkInParam) {
+    checkInEl.value = checkInParam;
+  }
+
+  if (checkOutEl && checkOutParam) {
+    checkOutEl.value = checkOutParam;
+  }
+
+  if (guestsEl && guestsParam) {
+    guestsEl.value = guestsParam;
+  }
+
+  // =========================
+  // 3. Sincronizar estado
+  // =========================
+  if (checkInParam) selectedState.checkIn = checkInParam;
+  if (checkOutParam) selectedState.checkOut = checkOutParam;
+  if (guestsParam) selectedState.guestsCount = Number(guestsParam || 2);
+
+  // =========================
+  // 4. Fallback (sem params)
+  // =========================
+  function formatISO(date) {
+    return date.toISOString().split('T')[0];
+  }
+
+  if (!selectedState.checkIn || !selectedState.checkOut) {
+    const today = new Date();
+    const checkIn = new Date(today);
+    const checkOut = new Date(today);
+
+    checkIn.setDate(checkIn.getDate() + 7);
+    checkOut.setDate(checkIn.getDate() + 3);
+
+    const ci = formatISO(checkIn);
+    const co = formatISO(checkOut);
+
+    if (checkInEl) checkInEl.value = ci;
+    if (checkOutEl) checkOutEl.value = co;
+
+    selectedState.checkIn = ci;
+    selectedState.checkOut = co;
+  }
+
+  if (!selectedState.guestsCount) {
+    selectedState.guestsCount = 2;
+    if (guestsEl) guestsEl.value = '2';
+  }
+
+  // =========================
+  // 5. Atualizar resumo UI
+  // =========================
+  if (typeof updateSummary === 'function') {
+    updateSummary();
+  }
+
+  // =========================
+  // 6. Buscar automaticamente
+  // =========================
+  if (selectedState.checkIn && selectedState.checkOut) {
+    if (typeof handleSearchAvailability === 'function') {
+      handleSearchAvailability();
+    }
+  }
+
 });
 })();
 </script>
-
-
 <script src="/assets/js/ui.js"></script>
 <script src="/assets/js/main.js"></script>
 </body>

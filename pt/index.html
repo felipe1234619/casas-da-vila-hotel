@@ -126,63 +126,59 @@
       </div>
     </section>
 
-    <!-- BOOKING -->
-    <section class="section sectionBooking">
-      <div class="wrap split splitBooking">
+<!-- BOOKING -->
+<section class="section sectionBooking">
+  <div class="wrap split splitBooking">
 
-        <div class="bookingCopy" data-reveal="left">
-          <p class="eyebrow">Reserva</p>
-          <h2 class="h2">Escolha a casa ideal para a sua estadia em Trancoso</h2>
+    <div class="bookingCopy" data-reveal="left">
+      <p class="eyebrow">Reserva</p>
+      <h2 class="h2">Escolha a casa ideal para a sua estadia em Trancoso</h2>
 
-          <p class="body mt-18">
-            Cada casa foi pensada para oferecer uma forma própria de viver a vila,
-            com diferentes escalas, atmosferas e ritmos de permanência.
-          </p>
+      <p class="body mt-18">
+        Cada casa foi pensada para oferecer uma forma própria de viver a vila,
+        com diferentes escalas, atmosferas e ritmos de permanência.
+      </p>
 
-          <p class="body mt-14">
-            Consulte disponibilidade, selecione suas datas e encontre a estadia ideal
-            — com café da manhã e estacionamento incluídos.
-          </p>
+      <p class="body mt-14">
+        Consulte disponibilidade, compare atmosferas e avance para a reserva
+        com café da manhã e estacionamento já incluídos na experiência.
+      </p>
 
-          <div class="mt-22">
-            <a class="btn btnPrimary" href="/pt/reservar/">Ver disponibilidade</a>
-          </div>
-        </div>
-
-        <div class="bookingPanel bookingPanelHome parallaxSoft" data-reveal="right">
-          <p class="eyebrow">Prévia</p>
-          <h3 class="h3">Sua estadia começa aqui</h3>
-
-          <div class="formGrid mt-18">
-            <div class="field">
-              <label>Check-in</label>
-              <input type="date" />
-            </div>
-
-            <div class="field">
-              <label>Check-out</label>
-              <input type="date" />
-            </div>
-
-            <div class="field">
-              <label>Hóspedes</label>
-              <select>
-                <option>2 hóspedes</option>
-                <option>4 hóspedes</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="mt-18">
-            <button class="btn btnSoft" type="button">
-              Ver casas disponíveis
-            </button>
-          </div>
-        </div>
-
+      <div class="mt-22">
+        <a class="btn btnPrimary" href="/pt/reservar/">Ver disponibilidade</a>
       </div>
-    </section>
+    </div>
 
+    <div class="bookingPanel bookingPanelHome parallaxSoft" data-reveal="right">
+      <p class="eyebrow">Prévia</p>
+      <h3 class="h3">Sua estadia começa aqui</h3>
+
+      <div class="formGrid mt-18">
+        <div class="field">
+          <label>Check-in</label>
+          <input type="text" value="Datas flexíveis" readonly />
+        </div>
+
+        <div class="field">
+          <label>Estadia</label>
+          <input type="text" value="Casas para 2 ou 4 hóspedes" readonly />
+        </div>
+
+        <div class="field">
+          <label>Inclusões</label>
+          <input type="text" value="Café da manhã + estacionamento" readonly />
+        </div>
+      </div>
+
+      <div class="mt-18">
+        <a class="btn btnSoft" href="/pt/reservar/">
+          Ver casas disponíveis
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
     <!-- FECHAMENTO -->
     <section class="section sectionClosing">
       <div class="wrap">
@@ -214,20 +210,19 @@
   <script src="/assets/js/ui.js"></script>
   <script src="/assets/js/main.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function(){
-
+document.addEventListener("DOMContentLoaded", function () {
   const video = document.querySelector(".homeHeroVideo");
 
-  if(video){
+  if (video) {
     video.classList.add("is-drifting");
   }
 
   let ticking = false;
 
-  function handleScroll(){
+  function handleScroll() {
     const scrollY = window.scrollY;
 
-    if(scrollY > 40){
+    if (scrollY > 40) {
       document.body.classList.add("is-scrolled");
     } else {
       document.body.classList.remove("is-scrolled");
@@ -236,13 +231,58 @@ document.addEventListener("DOMContentLoaded", function(){
     ticking = false;
   }
 
-  window.addEventListener("scroll", function(){
-    if(!ticking){
+  window.addEventListener("scroll", function () {
+    if (!ticking) {
       window.requestAnimationFrame(handleScroll);
       ticking = true;
     }
   });
 
+  const checkInEl = document.querySelector("#home-check-in");
+  const checkOutEl = document.querySelector("#home-check-out");
+  const guestsEl = document.querySelector("#home-guests-count");
+  const buttonEl = document.querySelector("#home-availability-btn");
+
+  function formatISODate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function setDefaultDates() {
+    if (!checkInEl || !checkOutEl) return;
+
+    const today = new Date();
+    const checkIn = new Date(today);
+    const checkOut = new Date(today);
+
+    checkIn.setDate(checkIn.getDate() + 7);
+    checkOut.setDate(checkIn.getDate() + 3);
+
+    if (!checkInEl.value) checkInEl.value = formatISODate(checkIn);
+    if (!checkOutEl.value) checkOutEl.value = formatISODate(checkOut);
+  }
+
+  function redirectToBooking() {
+    const checkIn = checkInEl?.value || "";
+    const checkOut = checkOutEl?.value || "";
+    const guestsCount = guestsEl?.value || "2";
+
+    const target = new URL("/pt/reservar/", window.location.origin);
+
+    if (checkIn) target.searchParams.set("checkIn", checkIn);
+    if (checkOut) target.searchParams.set("checkOut", checkOut);
+    if (guestsCount) target.searchParams.set("guestsCount", guestsCount);
+
+    window.location.href = target.toString();
+  }
+
+  setDefaultDates();
+
+  if (buttonEl) {
+    buttonEl.addEventListener("click", redirectToBooking);
+  }
 });
 </script>
 </body>
