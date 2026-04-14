@@ -756,7 +756,9 @@
             <button id="book-now-btn" class="btn btnPrimary summaryBtn" type="button">
               Proceed to payment
             </button>
-
+<p class="summaryHint">
+  Prices are shown in BRL. USD values are approximate for reference.
+</p>
             <p class="summaryHint">
               Your reservation will be confirmed after payment. Until then, the selected period is
               temporarily protected during the checkout step.
@@ -949,6 +951,33 @@
         `;
       }
 
+      const FX_USD_BRL = 5.0;
+
+      function formatCurrencyBRL_EN(value) {
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'BRL',
+          maximumFractionDigits: 0
+        }).format(Number(value || 0));
+      }
+
+      function formatCurrencyUSD_EST(valueBRL) {
+        const usd = Number(valueBRL || 0) / FX_USD_BRL;
+
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          maximumFractionDigits: 0
+        }).format(usd);
+      }
+
+      function formatDualCurrency(valueBRL) {
+        return `
+          <div class="priceMain">${formatCurrencyBRL_EN(valueBRL)}</div>
+          <div class="priceUSD">≈ ${formatCurrencyUSD_EST(valueBRL)}</div>
+        `;
+      }
+
       function renderAvailabilityCards(items) {
         const root = qs('#booking-results');
         if (!root) return;
@@ -956,7 +985,7 @@
         if (!items || !items.length) {
           renderEmpty(
             'No houses available',
-            'Try different dates or adjust the number of guests to explore new options.'
+            'Please try different dates or adjust the number of guests to view new options.'
           );
           return;
         }
@@ -967,9 +996,14 @@
           const coverImage = resolveCoverImage(item);
           const total = Number(item.amount_total || 0);
           const nightly = nights > 0 ? total / nights : total;
+          const normalizedHouse = String(item.slug || '').replace(/-/g, '_');
 
           return `
-            <article class="stayCard">
+            <article
+              class="stayCard"
+              data-house-card
+              data-house="${escapeHtml(normalizedHouse)}"
+            >
               <div class="stayCardMedia">
                 <img
                   src="${escapeHtml(coverImage)}"
@@ -989,27 +1023,29 @@
                   </div>
 
                   <div class="stayCardPrice">
-                    <small>Nightly average</small>
-                    <strong>${formatCurrency(nightly)}</strong>
+                    <small>Rate per night</small>
+                    <strong data-price>${formatDualCurrency(nightly)}</strong>
                   </div>
                 </div>
 
                 <div class="stayCardInclusions">
                   ${item.breakfast_included ? '<span>Breakfast included</span>' : ''}
                   ${item.parking_included ? '<span>Parking included</span>' : ''}
-                  <span>Minimum of ${escapeHtml(item.required_min_nights || '-')} nights</span>
+                  <span data-min-stay>Minimum stay of ${escapeHtml(item.required_min_nights || '-')} nights</span>
                   ${nights > 0 ? `<span>${nights} ${nights === 1 ? 'night' : 'nights'}</span>` : ''}
+                  <span data-status></span>
                 </div>
 
                 <div class="stayCardFooter">
                   <div class="stayCardFooterInfo">
-                    <div><strong>Total stay:</strong> ${formatCurrency(total)}</div>
-                    <div><strong>Period:</strong> ${nights > 0 ? `${nights} ${nights === 1 ? 'night' : 'nights'}` : '—'}</div>
+                    <div><strong>Total stay:</strong> <span data-total>${formatDualCurrency(total)}</span></div>
+                    <div><strong>Stay length:</strong> ${nights > 0 ? `${nights} ${nights === 1 ? 'night' : 'nights'}` : '—'}</div>
                   </div>
 
                   <button
                     class="btn btnGhost select-stay-btn"
                     type="button"
+                    data-book-link
                     data-unit='${JSON.stringify(item).replace(/'/g, '&#39;')}'
                   >
                     Select this house
@@ -1033,6 +1069,17 @@
             });
           });
         });
+
+        if (window.BookingRules && typeof window.BookingRules.refreshBookingCards === 'function') {
+          window.BookingRules.refreshBookingCards({
+            locale: 'en',
+            checkinSelector: '#check-in',
+            checkoutSelector: '#check-out',
+            guestsSelector: '#guests-count',
+            cardSelector: '[data-house-card]',
+            bookBasePath: '/en/book/'
+          });
+        }
       }
 
       function updateSummary() {
@@ -1073,7 +1120,12 @@
 
         if (nightsEl) nightsEl.textContent = nights ? String(nights) : '—';
         if (guestsEl) guestsEl.textContent = selectedState.guestsCount ? String(selectedState.guestsCount) : '—';
-        if (totalEl) totalEl.textContent = selectedState.unit ? formatCurrency(selectedState.unit.amount_total || 0) : '—';
+
+        if (totalEl) {
+          totalEl.innerHTML = selectedState.unit
+            ? formatDualCurrency(selectedState.unit.amount_total || 0)
+            : '—';
+        }
       }
 
       async function fetchAvailability(checkIn, checkOut, guestsCount) {
@@ -1104,16 +1156,23 @@
 
       function validateSearch(checkIn, checkOut, guestsCount) {
         if (!checkIn || !checkOut) {
-          throw new Error('Please select check-in and check-out.');
+          throw new Error('Please select check-in and check-out dates.');
         }
 
         const nights = calcNights(checkIn, checkOut);
         if (!nights || nights <= 0) {
-          throw new Error('The selected period is invalid.');
+          throw new Error('The selected stay is invalid.');
         }
 
         if (!Number(guestsCount) || Number(guestsCount) < 1) {
           throw new Error('Invalid number of guests.');
+        }
+
+        const reveillonStart = '2026-12-15';
+        const reveillonEnd = '2027-01-06';
+
+        if (checkIn >= reveillonStart && checkIn <= reveillonEnd && nights < 7) {
+          throw new Error('During the holiday period, all houses require a minimum stay of 7 nights.');
         }
       }
 
@@ -1297,9 +1356,22 @@
         qs('#guests-count')?.addEventListener('change', persistPendingBooking);
       });
     })();
-  </script>
+      </script>
 
   <script src="/assets/js/ui.js"></script>
   <script src="/assets/js/main.js"></script>
+<script src="/assets/js/booking-rules.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    BookingRules.bindBookingEngine({
+      locale: "en",
+      checkinSelector: "#check-in",
+      checkoutSelector: "#check-out",
+      guestsSelector: "#guests-count",
+      cardSelector: "[data-house-card]",
+      bookBasePath: "/en/book/"
+    });
+  });
+</script>
 </body>
 </html>

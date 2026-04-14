@@ -946,92 +946,109 @@
         `;
       }
 
-      function renderAvailabilityCards(items) {
-        const root = qs('#booking-results');
-        if (!root) return;
+function renderAvailabilityCards(items) {
+  const root = qs('#booking-results');
+  if (!root) return;
 
-        if (!items || !items.length) {
-          renderEmpty(
-            'Nenhuma casa disponível',
-            'Tente outras datas ou ajuste o número de hóspedes para consultar novas opções.'
-          );
-          return;
-        }
+  if (!items || !items.length) {
+    renderEmpty(
+      'Nenhuma casa disponível',
+      'Tente outras datas ou ajuste o número de hóspedes para consultar novas opções.'
+    );
+    return;
+  }
 
-        const nights = calcNights(selectedState.checkIn, selectedState.checkOut);
+  const nights = calcNights(selectedState.checkIn, selectedState.checkOut);
 
-        root.innerHTML = items.map((item) => {
-          const coverImage = resolveCoverImage(item);
-          const total = Number(item.amount_total || 0);
-          const nightly = nights > 0 ? total / nights : total;
+  root.innerHTML = items.map((item) => {
+    const coverImage = resolveCoverImage(item);
+    const total = Number(item.amount_total || 0);
+    const nightly = nights > 0 ? total / nights : total;
+    const normalizedHouse = String(item.slug || '').replace(/-/g, '_');
 
-          return `
-            <article class="stayCard">
-              <div class="stayCardMedia">
-                <img
-                  src="${escapeHtml(coverImage)}"
-                  alt="${escapeHtml(item.name || 'Casas da Vila')}"
-                  loading="lazy"
-                  decoding="async"
-                  onerror="this.onerror=null;this.src='${SITE_ORIGIN}/assets/img/casa-grande/gallery-04.jpeg';"
-                />
-              </div>
+    return `
+      <article
+        class="stayCard"
+        data-house-card
+        data-house="${escapeHtml(normalizedHouse)}"
+      >
+        <div class="stayCardMedia">
+          <img
+            src="${escapeHtml(coverImage)}"
+            alt="${escapeHtml(item.name || 'Casas da Vila')}"
+            loading="lazy"
+            decoding="async"
+            onerror="this.onerror=null;this.src='${SITE_ORIGIN}/assets/img/casa-grande/gallery-04.jpeg';"
+          />
+        </div>
 
-              <div class="stayCardBody">
-                <div class="stayCardTop">
-                  <div>
-                    <p class="stayCardMeta">${escapeHtml(item.size_m2 || '-')} m² • até ${escapeHtml(item.max_guests || '-')} hóspedes</p>
-                    <h3 class="stayCardTitle">${escapeHtml(item.name || '')}</h3>
-                    <p class="stayCardDesc">${escapeHtml(item.short_description || '')}</p>
-                  </div>
+        <div class="stayCardBody">
+          <div class="stayCardTop">
+            <div>
+              <p class="stayCardMeta">${escapeHtml(item.size_m2 || '-')} m² • até ${escapeHtml(item.max_guests || '-')} hóspedes</p>
+              <h3 class="stayCardTitle">${escapeHtml(item.name || '')}</h3>
+              <p class="stayCardDesc">${escapeHtml(item.short_description || '')}</p>
+            </div>
 
-                  <div class="stayCardPrice">
-                    <small>Valor por noite</small>
-                    <strong>${formatBRL(nightly)}</strong>
-                  </div>
-                </div>
+            <div class="stayCardPrice">
+              <small>Valor por noite</small>
+              <strong data-price>${formatBRL(nightly)}</strong>
+            </div>
+          </div>
 
-                <div class="stayCardInclusions">
-                  ${item.breakfast_included ? '<span>Café da manhã incluído</span>' : ''}
-                  ${item.parking_included ? '<span>Estacionamento incluído</span>' : ''}
-                  <span>Mínimo de ${escapeHtml(item.required_min_nights || '-')} noites</span>
-                  ${nights > 0 ? `<span>${nights} ${nights === 1 ? 'noite' : 'noites'}</span>` : ''}
-                </div>
+          <div class="stayCardInclusions">
+            ${item.breakfast_included ? '<span>Café da manhã incluído</span>' : ''}
+            ${item.parking_included ? '<span>Estacionamento incluído</span>' : ''}
+            <span data-min-stay>Mínimo de ${escapeHtml(item.required_min_nights || '-')} noites</span>
+            ${nights > 0 ? `<span>${nights} ${nights === 1 ? 'noite' : 'noites'}</span>` : ''}
+            <span data-status></span>
+          </div>
 
-                <div class="stayCardFooter">
-                  <div class="stayCardFooterInfo">
-                    <div><strong>Total da estadia:</strong> ${formatBRL(total)}</div>
-                    <div><strong>Período:</strong> ${nights > 0 ? `${nights} ${nights === 1 ? 'noite' : 'noites'}` : '—'}</div>
-                  </div>
+          <div class="stayCardFooter">
+            <div class="stayCardFooterInfo">
+              <div><strong>Total da estadia:</strong> <span data-total>${formatBRL(total)}</span></div>
+              <div><strong>Período:</strong> ${nights > 0 ? `${nights} ${nights === 1 ? 'noite' : 'noites'}` : '—'}</div>
+            </div>
 
-                  <button
-                    class="btn btnGhost select-stay-btn"
-                    type="button"
-                    data-unit='${JSON.stringify(item).replace(/'/g, '&#39;')}'
-                  >
-                    Selecionar esta casa
-                  </button>
-                </div>
-              </div>
-            </article>
-          `;
-        }).join('');
+            <button
+              class="btn btnGhost select-stay-btn"
+              type="button"
+              data-book-link
+              data-unit='${JSON.stringify(item).replace(/'/g, '&#39;')}'
+            >
+              Selecionar esta casa
+            </button>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
 
-        root.querySelectorAll('.select-stay-btn').forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const parsed = JSON.parse(btn.dataset.unit.replace(/&#39;/g, "'"));
-            selectedState.unit = parsed;
-            updateSummary();
-            persistPendingBooking();
+  root.querySelectorAll('.select-stay-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const parsed = JSON.parse(btn.dataset.unit.replace(/&#39;/g, "'"));
+      selectedState.unit = parsed;
+      updateSummary();
+      persistPendingBooking();
 
-            window.scrollTo({
-              top: qs('.bookingCheckoutSection')?.getBoundingClientRect().top + window.scrollY - 100,
-              behavior: 'smooth'
-            });
-          });
-        });
-      }
+      window.scrollTo({
+        top: qs('.bookingCheckoutSection')?.getBoundingClientRect().top + window.scrollY - 100,
+        behavior: 'smooth'
+      });
+    });
+  });
 
+  if (window.BookingRules && typeof window.BookingRules.refreshBookingCards === 'function') {
+    window.BookingRules.refreshBookingCards({
+      locale: 'pt',
+      checkinSelector: '#check-in',
+      checkoutSelector: '#check-out',
+      guestsSelector: '#guests-count',
+      cardSelector: '[data-house-card]',
+      bookBasePath: '/pt/reservar/'
+    });
+  }
+}
       function updateSummary() {
         const selectedBox = qs('#summary-selected');
         const datesEl = qs('#summary-dates');
@@ -1099,21 +1116,27 @@
         }
       }
 
-      function validateSearch(checkIn, checkOut, guestsCount) {
-        if (!checkIn || !checkOut) {
-          throw new Error('Selecione check-in e check-out.');
-        }
+function validateSearch(checkIn, checkOut, guestsCount) {
+  if (!checkIn || !checkOut) {
+    throw new Error('Selecione check-in e check-out.');
+  }
 
-        const nights = calcNights(checkIn, checkOut);
-        if (!nights || nights <= 0) {
-          throw new Error('O período selecionado é inválido.');
-        }
+  const nights = calcNights(checkIn, checkOut);
+  if (!nights || nights <= 0) {
+    throw new Error('O período selecionado é inválido.');
+  }
 
-        if (!Number(guestsCount) || Number(guestsCount) < 1) {
-          throw new Error('Quantidade de hóspedes inválida.');
-        }
-      }
+  if (!Number(guestsCount) || Number(guestsCount) < 1) {
+    throw new Error('Quantidade de hóspedes inválida.');
+  }
 
+  const reveillonStart = '2026-12-15';
+  const reveillonEnd = '2027-01-06';
+
+  if (checkIn >= reveillonStart && checkIn <= reveillonEnd && nights < 7) {
+    throw new Error('No período de Réveillon, todas as casas exigem mínimo de 7 noites.');
+  }
+}
       async function handleSearchAvailability() {
         const checkIn = qs('#check-in')?.value || '';
         const checkOut = qs('#check-out')?.value || '';
@@ -1298,5 +1321,18 @@
 
   <script src="/assets/js/ui.js"></script>
   <script src="/assets/js/main.js"></script>
+<script src="/assets/js/booking-rules.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    BookingRules.bindBookingEngine({
+      locale: "pt",
+      checkinSelector: "#check-in",
+      checkoutSelector: "#check-out",
+      guestsSelector: "#guests-count",
+      cardSelector: "[data-house-card]",
+      bookBasePath: "/pt/reservar/"
+    });
+  });
+</script>
 </body>
 </html>

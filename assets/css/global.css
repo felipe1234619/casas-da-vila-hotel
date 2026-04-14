@@ -4718,4 +4718,8 @@ img{
     word-break:break-word;
   }
 }
-
+.is-disabled{
+  pointer-events:none;
+  opacity:.52;
+  cursor:not-allowed;
+}
