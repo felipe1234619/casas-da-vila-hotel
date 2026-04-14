@@ -7,7 +7,26 @@ export default async function handler(req, res) {
     const { checkIn, checkOut, guestsCount } = req.body || {};
 
     if (!checkIn || !checkOut) {
-      return res.status(400).json({ error: 'Check-in e check-out são obrigatórios.' });
+      return res.status(400).json({
+        error: 'Check-in e check-out são obrigatórios.'
+      });
+    }
+
+    // Validação simples do padrão YYYY-MM-DD
+    const isValidDate = (value) => /^\d{4}-\d{2}-\d{2}$/.test(String(value || ''));
+
+    if (!isValidDate(checkIn) || !isValidDate(checkOut)) {
+      return res.status(400).json({
+        error: 'Datas inválidas. Use o formato YYYY-MM-DD.'
+      });
+    }
+
+    const safeGuestsCount = Number(guestsCount || 1);
+
+    if (!Number.isFinite(safeGuestsCount) || safeGuestsCount < 1) {
+      return res.status(400).json({
+        error: 'Quantidade de hóspedes inválida.'
+      });
     }
 
     const response = await fetch(
@@ -22,7 +41,7 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           p_check_in: checkIn,
           p_check_out: checkOut,
-          p_guests_count: Number(guestsCount || 1)
+          p_guests_count: safeGuestsCount
         })
       }
     );
@@ -31,54 +50,21 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       return res.status(response.status).json({
-        error: data?.message || data?.error || 'Falha ao consultar disponibilidade.'
+        error:
+          data?.message ||
+          data?.error_description ||
+          data?.error ||
+          'Falha ao consultar disponibilidade.'
       });
     }
 
-    return res.status(200).json({ items: data || [] });
+    return res.status(200).json({
+      items: Array.isArray(data) ? data : []
+    });
   } catch (error) {
     console.error('availability-error', error);
-    return res.status(500).json({ error: 'Erro interno ao consultar disponibilidade.' });
-  }
-}
-export default async function handler(req, res) {
-  if (req.method !== 'GET') {
-    return res.status(405).send('Method Not Allowed');
-  }
-
-  try {
-    const { unitSlug, checkin, checkout } = req.query;
-
-    if (!unitSlug || !checkin || !checkout) {
-      return res.status(400).json({ error: 'Missing params' });
-    }
-
-    const url =
-      `${process.env.SUPABASE_URL}/rest/v1/availability_blocks` +
-      `?unit_slug=eq.${encodeURIComponent(unitSlug)}` +
-      `&status=eq.active` +
-      `&start_date=lt.${encodeURIComponent(checkout)}` +
-      `&end_date=gt.${encodeURIComponent(checkin)}` +
-      `&select=id`;
-
-    const response = await fetch(url, {
-      headers: {
-        apikey: process.env.SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${process.env.SUPABASE_ANON_KEY}`
-      }
+    return res.status(500).json({
+      error: 'Erro interno ao consultar disponibilidade.'
     });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      return res.status(500).json({ error: data });
-    }
-
-    return res.status(200).json({
-      available: data.length === 0,
-      conflicts: data.length
-    });
-  } catch (err) {
-    return res.status(500).json({ error: err.message });
   }
 }
