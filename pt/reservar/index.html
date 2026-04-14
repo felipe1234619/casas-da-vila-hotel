@@ -924,6 +924,7 @@ function getHouseImageLibrary() {
     ]
   };
 }
+
 function resolveCoverImage(item) {
   const slug = normalizeSlug(item?.slug);
   const nameSlug = normalizeSlug(item?.name);
@@ -948,47 +949,49 @@ function resolveCoverImage(item) {
   }
 
   return '';
-}      function getBookingSnapshot() {
-        const guestName = qs('#guest-name')?.value?.trim() || '';
-        const guestEmail = qs('#guest-email')?.value?.trim() || '';
-        const guestPhone = qs('#guest-phone')?.value?.trim() || '';
-        const specialRequests = qs('#special-requests')?.value?.trim() || '';
+}
 
-        return {
-          guest: guestName,
-          email: guestEmail,
-          phone: guestPhone,
-          house: selectedState.unit?.name || '',
-          unitSlug: selectedState.unit?.slug || '',
-          checkin: selectedState.checkIn || '',
-          checkout: selectedState.checkOut || '',
-          guests: String(selectedState.guestsCount || ''),
-          specialRequests,
-          amountTotal: Number(selectedState.unit?.amount_total || 0),
-          savedAt: new Date().toISOString()
-        };
-      }
+function getBookingSnapshot() {
+  const guestName = qs('#guest-name')?.value?.trim() || '';
+  const guestEmail = qs('#guest-email')?.value?.trim() || '';
+  const guestPhone = qs('#guest-phone')?.value?.trim() || '';
+  const specialRequests = qs('#special-requests')?.value?.trim() || '';
 
-      function persistPendingBooking() {
-        try {
-          const snapshot = getBookingSnapshot();
-          localStorage.setItem(PENDING_BOOKING_KEY, JSON.stringify(snapshot));
-        } catch (error) {
-          console.warn('Não foi possível salvar o resumo da reserva no localStorage.', error);
-        }
-      }
+  return {
+    guest: guestName,
+    email: guestEmail,
+    phone: guestPhone,
+    house: selectedState.unit?.name || '',
+    unitSlug: selectedState.unit?.slug || '',
+    checkin: selectedState.checkIn || '',
+    checkout: selectedState.checkOut || '',
+    guests: String(selectedState.guestsCount || ''),
+    specialRequests,
+    amountTotal: Number(selectedState.unit?.amount_total || 0),
+    savedAt: new Date().toISOString()
+  };
+}
 
-      function renderEmpty(messageTitle, messageText) {
-        const root = qs('#booking-results');
-        if (!root) return;
+function persistPendingBooking() {
+  try {
+    const snapshot = getBookingSnapshot();
+    localStorage.setItem(PENDING_BOOKING_KEY, JSON.stringify(snapshot));
+  } catch (error) {
+    console.warn('Não foi possível salvar o resumo da reserva no localStorage.', error);
+  }
+}
 
-        root.innerHTML = `
-          <div class="emptyState">
-            <h3>${escapeHtml(messageTitle)}</h3>
-            <p>${escapeHtml(messageText)}</p>
-          </div>
-        `;
-      }
+function renderEmpty(messageTitle, messageText) {
+  const root = qs('#booking-results');
+  if (!root) return;
+
+  root.innerHTML = `
+    <div class="emptyState">
+      <h3>${escapeHtml(messageTitle)}</h3>
+      <p>${escapeHtml(messageText)}</p>
+    </div>
+  `;
+}
 
 function renderAvailabilityCards(items) {
   const root = qs('#booking-results');
@@ -999,11 +1002,6 @@ function renderAvailabilityCards(items) {
       'Nenhuma casa disponível',
       'Tente outras datas ou ajuste o número de hóspedes para consultar novas opções.'
     );
-    console.log('CARD IMAGE', {
-  house: item?.name,
-  slug: item?.slug,
-  resolved: coverImage
-});
     return;
   }
 
@@ -1027,7 +1025,8 @@ function renderAvailabilityCards(items) {
             alt="${escapeHtml(item.name || 'Casas da Vila')}"
             loading="lazy"
             decoding="async"
-onerror="this.onerror=null;this.style.opacity='0.25';this.style.filter='grayscale(1)';console.error('IMAGE FAILED', this.src);"          />
+            onerror="this.onerror=null;this.style.opacity='0.25';this.style.filter='grayscale(1)';console.error('IMAGE FAILED', this.src);"
+          />
         </div>
 
         <div class="stayCardBody">
