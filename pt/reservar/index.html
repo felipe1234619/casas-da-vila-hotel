@@ -841,61 +841,119 @@
         return `${SITE_ORIGIN}/${path}`;
       }
 
-      function getHouseImageLibrary() {
-        return {
-          'casa-oca': [
-            '/assets/img/casa-oca/gallery-01.jpeg',
-            '/assets/img/casa-oca/gallery-02.jpeg'
-          ],
-          'atelie-azul': [
-            '/assets/img/atelie-azul/gallery-01.jpeg',
-            '/assets/img/atelie-azul/gallery-02.jpeg'
-          ],
-          'casa-branca': [
-            '/assets/img/casa-branca/gallery-01.jpeg',
-            '/assets/img/casa-branca/gallery-02.jpeg'
-          ],
-          'casa-dende': [
-            '/assets/img/casa-dende/gallery-01.jpeg',
-            '/assets/img/casa-dende/gallery-02.jpeg'
-          ],
-          'casa-dos-baloes': [
-            '/assets/img/casa-dos-baloes/gallery-01.jpeg',
-            '/assets/img/casa-dos-baloes/gallery-02.jpeg'
-          ],
-          'casa-grande': [
-            '/assets/img/casa-grande/gallery-04.jpeg',
-            '/assets/img/casa-grande/gallery-01.jpeg'
-          ],
-          'casa-manga': [
-            '/assets/img/casa-manga/gallery-01.jpeg',
-            '/assets/img/casa-manga/gallery-02.jpeg'
-          ],
-          'casa-rosada': [
-            '/assets/img/casa-rosada/gallery-01.jpeg',
-            '/assets/img/casa-rosada/gallery-02.jpeg'
-          ]
-        };
-      }
+function getHouseImageLibrary() {
+  return {
+    'casa-oca': [
+      '/assets/img/casa-oca/gallery-01.jpeg',
+      '/assets/img/casa-oca/gallery-02.jpeg'
+    ],
+    'oca': [
+      '/assets/img/casa-oca/gallery-01.jpeg',
+      '/assets/img/casa-oca/gallery-02.jpeg'
+    ],
 
-      function resolveCoverImage(item) {
-        const slug = normalizeSlug(item?.slug);
-        const library = getHouseImageLibrary();
+    'atelie-azul': [
+      '/assets/img/atelie-azul/gallery-01.jpeg',
+      '/assets/img/atelie-azul/gallery-02.jpeg'
+    ],
+    'atelier-azul': [
+      '/assets/img/atelie-azul/gallery-01.jpeg',
+      '/assets/img/atelie-azul/gallery-02.jpeg'
+    ],
+    'azul': [
+      '/assets/img/atelie-azul/gallery-01.jpeg',
+      '/assets/img/atelie-azul/gallery-02.jpeg'
+    ],
 
-        const remoteCover = String(item?.cover_image_url || '').trim();
-        if (remoteCover) {
-          return toAbsoluteAsset(remoteCover);
-        }
+    'casa-branca': [
+      '/assets/img/casa-branca/gallery-01.jpeg',
+      '/assets/img/casa-branca/gallery-02.jpeg'
+    ],
+    'branca': [
+      '/assets/img/casa-branca/gallery-01.jpeg',
+      '/assets/img/casa-branca/gallery-02.jpeg'
+    ],
 
-        const localOptions = library[slug];
-        if (Array.isArray(localOptions) && localOptions.length) {
-          return toAbsoluteAsset(localOptions[0]);
-        }
+    'casa-dende': [
+      '/assets/img/casa-dende/gallery-01.jpeg',
+      '/assets/img/casa-dende/gallery-02.jpeg'
+    ],
+    'dende': [
+      '/assets/img/casa-dende/gallery-01.jpeg',
+      '/assets/img/casa-dende/gallery-02.jpeg'
+    ],
 
-        return toAbsoluteAsset('/assets/img/casa-grande/gallery-04.jpeg');
-      }
+    'casa-dos-baloes': [
+      '/assets/img/casa-dos-baloes/gallery-01.jpeg',
+      '/assets/img/casa-dos-baloes/gallery-02.jpeg'
+    ],
+    'casa-baloes': [
+      '/assets/img/casa-dos-baloes/gallery-01.jpeg',
+      '/assets/img/casa-dos-baloes/gallery-02.jpeg'
+    ],
+    'baloes': [
+      '/assets/img/casa-dos-baloes/gallery-01.jpeg',
+      '/assets/img/casa-dos-baloes/gallery-02.jpeg'
+    ],
 
-      function escapeHtml(value) {
+    'casa-grande': [
+      '/assets/img/casa-grande/gallery-04.jpeg',
+      '/assets/img/casa-grande/gallery-01.jpeg'
+    ],
+    'grande': [
+      '/assets/img/casa-grande/gallery-04.jpeg',
+      '/assets/img/casa-grande/gallery-01.jpeg'
+    ],
+
+    'casa-manga': [
+      '/assets/img/casa-manga/gallery-01.jpeg',
+      '/assets/img/casa-manga/gallery-02.jpeg'
+    ],
+    'manga': [
+      '/assets/img/casa-manga/gallery-01.jpeg',
+      '/assets/img/casa-manga/gallery-02.jpeg'
+    ],
+
+    'casa-rosada': [
+      '/assets/img/casa-rosada/gallery-01.jpeg',
+      '/assets/img/casa-rosada/gallery-02.jpeg'
+    ],
+    'rosada': [
+      '/assets/img/casa-rosada/gallery-01.jpeg',
+      '/assets/img/casa-rosada/gallery-02.jpeg'
+    ]
+  };
+}
+function resolveCoverImage(item) {
+  const slug = normalizeSlug(item?.slug);
+  const nameSlug = normalizeSlug(item?.name);
+  const library = getHouseImageLibrary();
+
+  const remoteCover = String(item?.cover_image_url || '').trim();
+  if (remoteCover) {
+    return toAbsoluteAsset(remoteCover);
+  }
+
+  const candidates = [
+    slug,
+    nameSlug,
+    slug.replace(/^casa-/, ''),
+    nameSlug.replace(/^casa-/, ''),
+    slug.replace(/^atelier-/, 'atelie-'),
+    nameSlug.replace(/^atelier-/, 'atelie-'),
+    slug.replace(/^atelie-/, 'atelier-'),
+    nameSlug.replace(/^atelie-/, 'atelier-')
+  ].filter(Boolean);
+
+  for (const key of candidates) {
+    const localOptions = library[key];
+    if (Array.isArray(localOptions) && localOptions.length) {
+      return toAbsoluteAsset(localOptions[0]);
+    }
+  }
+
+  return toAbsoluteAsset('/assets/img/casa-grande/gallery-04.jpeg');
+}      function escapeHtml(value) {
         return String(value || '')
           .replace(/&/g, '&amp;')
           .replace(/</g, '&lt;')
