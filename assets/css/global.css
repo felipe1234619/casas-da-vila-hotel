@@ -4704,7 +4704,29 @@ img{
     width:100%;
     justify-content:center;
   }
+.blogPost{
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
 
+.blogPost h2{
+  margin-top: 42px;
+}
+
+.blogPost h3{
+  margin-top: 22px;
+}
+
+.blogPost p{
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.blogPost ul{
+  margin: 16px 0 24px;
+  padding-left: 18px;
+}
   .contactCard__value,
   .contactMethod__value,
   .contactChannel__value,
