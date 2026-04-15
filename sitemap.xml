@@ -1,353 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml"
->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- HOME / LANGUAGE HUB -->
   <url>
     <loc>https://casasdavila.com/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/" />
   </url>
 
-  <!-- PT HOME -->
   <url>
     <loc>https://casasdavila.com/pt/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/" />
   </url>
 
-  <!-- EN HOME -->
   <url>
     <loc>https://casasdavila.com/en/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/" />
   </url>
 
-  <!-- HOUSES INDEX -->
   <url>
     <loc>https://casasdavila.com/pt/casas/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/casas/" />
   </url>
 
   <url>
     <loc>https://casasdavila.com/en/houses/</loc>
-    <lastmod>2026-04-13</lastmod>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/houses/" />
   </url>
-
-  <!-- CASA ATELIE AZUL -->
-  <url>
-    <loc>https://casasdavila.com/pt/casas/atelie-azul/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/atelie-azul/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/atelie-azul/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/casas/atelie-azul/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/houses/atelie-azul/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/atelie-azul/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/atelie-azul/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/houses/atelie-azul/" />
-  </url>
-
-  <!-- CASA BRANCA -->
-  <url>
-    <loc>https://casasdavila.com/pt/casas/casa-branca/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-branca/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-branca/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/casas/casa-branca/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/houses/casa-branca/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-branca/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-branca/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/houses/casa-branca/" />
-  </url>
-
-  <!-- CASA DENDE -->
-  <url>
-    <loc>https://casasdavila.com/pt/casas/casa-dende/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-dende/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-dende/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/casas/casa-dende/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/houses/casa-dende/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-dende/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-dende/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/houses/casa-dende/" />
-  </url>
-
-  <!-- CASA DOS BALOES -->
-  <url>
-    <loc>https://casasdavila.com/pt/casas/casa-dos-baloes/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-dos-baloes/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-dos-baloes/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/casas/casa-dos-baloes/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/houses/casa-dos-baloes/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-dos-baloes/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-dos-baloes/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/houses/casa-dos-baloes/" />
-  </url>
-
-  <!-- CASA GRANDE -->
-  <url>
-    <loc>https://casasdavila.com/pt/casas/casa-grande/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-grande/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-grande/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/casas/casa-grande/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/houses/casa-grande/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-grande/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-grande/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/houses/casa-grande/" />
-  </url>
-
-  <!-- CASA MANGA -->
-  <url>
-    <loc>https://casasdavila.com/pt/casas/casa-manga/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-manga/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-manga/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/casas/casa-manga/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/houses/casa-manga/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-manga/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-manga/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/houses/casa-manga/" />
-  </url>
-
-  <!-- CASA OCA -->
-  <url>
-    <loc>https://casasdavila.com/pt/casas/casa-oca/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-oca/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-oca/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/casas/casa-oca/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/houses/casa-oca/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-oca/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-oca/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/houses/casa-oca/" />
-  </url>
-
-  <!-- CASA ROSADA -->
-  <url>
-    <loc>https://casasdavila.com/pt/casas/casa-rosada/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-rosada/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-rosada/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/casas/casa-rosada/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/houses/casa-rosada/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/casa-rosada/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/houses/casa-rosada/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/houses/casa-rosada/" />
-  </url>
-
-  <!-- PT PAGES -->
-  <url>
-    <loc>https://casasdavila.com/pt/contato/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/contato/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/contact/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/contato/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/contact/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/contato/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/contact/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/contact/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/pt/experiencias/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/experiencias/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/experiences/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/experiencias/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/experiences/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/experiencias/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/experiences/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/experiences/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/pt/localizacao/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/localizacao/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/location/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/localizacao/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/location/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/localizacao/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/location/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/location/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/pt/politicas/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/politicas/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/policies/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/politicas/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/policies/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/politicas/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/policies/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/policies/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/pt/reservar/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/reservar/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/book/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/reservar/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/book/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/reservar/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/book/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/book/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/pt/sobre/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/sobre/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/about/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/sobre/" />
-  </url>
-
-  <url>
-    <loc>https://casasdavila.com/en/about/</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/sobre/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/about/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/about/" />
-  </url>
-
-  <!-- SUCCESS PAGES (LOW PRIORITY) -->
-
 
 </urlset>
