@@ -1312,8 +1312,18 @@
         const nights = calcNights(selectedState.checkIn, selectedState.checkOut);
 
         root.innerHTML = items.map((item) => {
-          const coverImage = resolveCoverImage(item);
-          const total = Number(item.amount_total || 0);
+let coverImage = resolveCoverImage(item);
+
+// fallback só se não achar nada local
+if (!coverImage && item?.image) {
+  coverImage = toAbsoluteAsset(item.image);
+}
+if (!coverImage && item?.image_url) {
+  coverImage = toAbsoluteAsset(item.image_url);
+}
+if (!coverImage && Array.isArray(item?.images) && item.images.length) {
+  coverImage = toAbsoluteAsset(item.images[0]);
+}          const total = Number(item.amount_total || 0);
           const nightly = nights > 0 ? total / nights : total;
           const normalizedHouse = String(item.slug || '').replace(/-/g, '_');
 
