@@ -1278,7 +1278,7 @@ function validateSearch(checkIn, checkOut, guestsCount) {
               checkIn: selectedState.checkIn,
               checkOut: selectedState.checkOut,
               guestsCount: selectedState.guestsCount,
-              amountTotal: hold.amount_total,
+amountTotal: String(hold.amount_total),
               guestEmail,
               guestName,
               guestPhone,
@@ -1388,10 +1388,5 @@ function validateSearch(checkIn, checkOut, guestsCount) {
     });
   });
 </script>
-<input id="guestName" />
-<input id="guestEmail" />
-<input id="guestPhone" />
-<textarea id="specialRequests"></textarea>
-<button id="reserveButton">...</button>
 </body>
 </html>
