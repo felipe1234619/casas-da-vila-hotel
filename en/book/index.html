@@ -16,8 +16,8 @@
   <style>
     .bookingHero{
       position:relative;
-      min-height:72svh;
-      padding-top:calc(var(--header-h) + 18px);
+      min-height:68svh;
+      padding-top:calc(var(--header-h) + 16px);
       overflow:hidden;
     }
 
@@ -31,71 +31,77 @@
       width:100%;
       height:100%;
       object-fit:cover;
+      transform:scale(1.015);
     }
 
     .bookingHeroOverlay{
       position:absolute;
       inset:0;
       background:
-        linear-gradient(90deg, rgba(26,20,16,0.52) 0%, rgba(26,20,16,0.22) 42%, rgba(26,20,16,0.10) 100%),
-        linear-gradient(180deg, rgba(255,244,228,0.06) 0%, rgba(22,18,14,0.22) 100%);
+        linear-gradient(90deg, rgba(26,20,16,0.44) 0%, rgba(26,20,16,0.18) 42%, rgba(26,20,16,0.08) 100%),
+        linear-gradient(180deg, rgba(255,244,228,0.04) 0%, rgba(22,18,14,0.18) 100%);
     }
 
     .bookingHeroGrid{
       position:relative;
       z-index:2;
       width:min(var(--container), calc(100% - 32px));
-      min-height:calc(72svh - var(--header-h) - 18px);
+      min-height:calc(68svh - var(--header-h) - 16px);
       margin:0 auto;
       display:grid;
-      grid-template-columns:1.08fr .92fr;
-      gap:40px;
+      grid-template-columns:1.12fr .88fr;
+      gap:32px;
       align-items:end;
-      padding-bottom:34px;
+      padding-bottom:30px;
     }
 
     .bookingHeroContent{
-      max-width:780px;
+      max-width:720px;
     }
 
     .bookingHeroEyebrow{
-      color:rgba(255,255,255,0.72);
+      color:rgba(255,255,255,0.70);
     }
 
     .bookingHeroTitle{
       color:#fff;
-      text-shadow:0 10px 30px rgba(0,0,0,0.18);
-      max-width:760px;
+      text-shadow:0 8px 24px rgba(0,0,0,0.14);
+      max-width:680px;
+      font-size:clamp(42px,5vw,76px);
+      line-height:.98;
+      letter-spacing:-0.05em;
     }
 
     .bookingHeroText{
-      margin:22px 0 0;
-      max-width:620px;
-      font-size:18px;
-      line-height:1.8;
-      color:rgba(255,255,255,0.88);
+      margin:18px 0 0;
+      max-width:520px;
+      font-size:16px;
+      line-height:1.76;
+      color:rgba(255,255,255,0.82);
     }
 
     .bookingHeroCard{
-      max-width:360px;
+      max-width:320px;
       margin-left:auto;
-      padding:24px;
-      border-radius:28px;
-      background:rgba(255,252,248,0.78);
-      border:1px solid rgba(255,255,255,0.46);
-      box-shadow:var(--shadow-lg);
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
+      padding:20px 20px 18px;
+      border-radius:24px;
+      background:rgba(255,252,248,0.70);
+      border:1px solid rgba(255,255,255,0.42);
+      box-shadow:0 18px 44px rgba(30,24,18,0.10);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
     }
 
     .bookingHeroCard .eyebrow{
-      margin-bottom:10px;
+      margin-bottom:8px;
+      color:rgba(92,71,54,0.52);
     }
 
     .bookingHeroCard p{
       margin:0;
-      color:var(--text-soft);
-      line-height:1.74;
+      color:rgba(92,71,54,0.74);
+      line-height:1.7;
+      font-size:14px;
     }
 
     .bookingSearchSection{
@@ -116,16 +122,34 @@
       box-shadow:var(--shadow-lg);
     }
 
+    .bookingSearchPanel--editorial{
+      padding:26px 28px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.82);
+      border:1px solid rgba(255,255,255,0.62);
+      box-shadow:0 18px 44px rgba(40,30,20,0.07);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+
     .bookingSearchTop{
       display:flex;
       align-items:end;
       justify-content:space-between;
       gap:24px;
-      margin-bottom:20px;
+      margin-bottom:18px;
     }
 
     .bookingSearchTopText{
       max-width:760px;
+    }
+
+    .bookingSearchIntro{
+      margin:10px 0 0;
+      max-width:560px;
+      font-size:14px;
+      line-height:1.72;
+      color:rgba(92,71,54,0.62);
     }
 
     .bookingSearchForm{
@@ -135,8 +159,69 @@
       align-items:end;
     }
 
+    .bookingSearchForm--editorial{
+      display:grid;
+      grid-template-columns:1.05fr 1.05fr .9fr auto;
+      gap:12px;
+      align-items:end;
+    }
+
     .bookingSearchBtn{
       min-width:220px;
+    }
+
+    .bookingField{
+      display:grid;
+      gap:8px;
+    }
+
+    .bookingField label{
+      font-size:10px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(92,71,54,0.42);
+    }
+
+    .bookingField input,
+    .bookingField select{
+      appearance:none;
+      width:100%;
+      min-height:56px;
+      padding:0 16px;
+      border-radius:18px;
+      border:1px solid rgba(92,71,54,0.10);
+      background:rgba(255,255,255,0.72);
+      color:var(--text);
+      font-size:15px;
+      box-shadow:none;
+      transition:border-color .25s ease, background .25s ease, box-shadow .25s ease;
+    }
+
+    .bookingField input:focus,
+    .bookingField select:focus{
+      outline:none;
+      border-color:rgba(92,71,54,0.24);
+      background:rgba(255,255,255,0.92);
+      box-shadow:0 0 0 4px rgba(92,71,54,0.05);
+    }
+
+    .bookingSearchBtn--editorial{
+      min-width:210px;
+      height:56px;
+      border-radius:999px;
+      background:rgba(92,71,54,0.05);
+      border:1px solid rgba(92,71,54,0.14);
+      color:#5c4736;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-size:10px;
+      transition:all .28s ease;
+    }
+
+    .bookingSearchBtn--editorial:hover{
+      background:rgba(92,71,54,0.08);
+      border-color:rgba(92,71,54,0.24);
+      transform:translateY(-1px);
     }
 
     .bookingResultsSection{
@@ -159,111 +244,116 @@
 
     .stayCard{
       display:grid;
-      grid-template-columns:420px 1fr;
+      grid-template-columns:300px 1fr;
       gap:0;
       overflow:hidden;
-      border-radius:34px;
-      background:rgba(255,252,248,0.92);
-      border:1px solid rgba(255,255,255,0.7);
-      box-shadow:0 30px 80px rgba(40,30,20,0.12);
+      max-width:940px;
+      margin:0 auto;
+      border-radius:24px;
+      background:rgba(255,252,248,0.97);
+      border:1px solid rgba(255,255,255,0.78);
+      box-shadow:0 16px 44px rgba(40,30,20,0.06);
     }
 
     .stayCardMedia{
-      min-height:100%;
       position:relative;
       overflow:hidden;
-      background:#e9e2d7;
+      background:#ece4d9;
     }
 
     .stayCardMedia img{
       width:100%;
       height:100%;
-      min-height:100%;
+      min-height:270px;
       object-fit:cover;
       display:block;
+      transform:scale(1.01);
     }
 
     .stayCardMedia::before{
       content:"";
       position:absolute;
       inset:0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.18) 100%);
+      background:linear-gradient(180deg, rgba(0,0,0,0.015) 0%, rgba(0,0,0,0.08) 100%);
       pointer-events:none;
     }
 
     .stayCardMedia::after{
       content:"Casas da Vila";
       position:absolute;
-      left:22px;
-      bottom:22px;
-      padding:6px 12px;
+      left:14px;
+      bottom:14px;
+      padding:5px 9px;
       border-radius:999px;
-      background:rgba(255,255,255,0.78);
+      background:rgba(255,255,255,0.70);
       backdrop-filter:blur(6px);
-      font-size:11px;
-      letter-spacing:.14em;
+      -webkit-backdrop-filter:blur(6px);
+      font-size:9px;
+      letter-spacing:.18em;
       text-transform:uppercase;
       color:#5c4736;
       pointer-events:none;
     }
 
     .stayCardBody{
-      padding:34px 34px 28px;
+      padding:24px 26px 20px;
       display:grid;
-      gap:22px;
+      gap:14px;
+      align-content:start;
     }
 
     .stayCardTop{
       display:grid;
       grid-template-columns:1fr auto;
-      gap:24px;
+      gap:16px;
+      align-items:start;
     }
 
     .stayCardMeta{
-      margin:0 0 6px;
-      font-size:11px;
-      letter-spacing:.18em;
+      margin:0 0 8px;
+      font-size:10px;
+      letter-spacing:.22em;
       text-transform:uppercase;
-      color:rgba(92,71,54,0.55);
+      color:rgba(92,71,54,0.34);
     }
 
     .stayCardTitle{
-      margin:0 0 8px;
+      margin:0 0 5px;
       font-family:var(--font-serif);
-      font-size:clamp(34px,3vw,46px);
-      line-height:1;
-      letter-spacing:-0.04em;
+      font-size:clamp(26px,2.2vw,36px);
+      line-height:1.02;
+      letter-spacing:-0.045em;
       color:var(--text);
     }
 
     .stayCardDesc{
       margin:0;
-      font-size:17px;
-      line-height:1.82;
-      color:rgba(92,71,54,0.78);
-      max-width:760px;
+      max-width:520px;
+      font-size:13px;
+      line-height:1.65;
+      color:rgba(92,71,54,0.58);
     }
 
     .stayCardPrice{
       display:grid;
-      gap:6px;
+      gap:5px;
+      min-width:150px;
       text-align:right;
-      min-width:180px;
+      align-content:start;
     }
 
     .stayCardPrice small{
-      font-size:11px;
+      font-size:10px;
       letter-spacing:.18em;
       text-transform:uppercase;
-      color:rgba(92,71,54,0.5);
+      color:rgba(92,71,54,0.36);
     }
 
     .stayCardPrice strong{
       font-family:var(--font-serif);
-      font-size:clamp(36px,3vw,52px);
+      font-size:clamp(24px,2vw,32px);
       line-height:1;
-      letter-spacing:-0.04em;
+      letter-spacing:-0.045em;
       font-weight:500;
       color:var(--text);
     }
@@ -271,56 +361,63 @@
     .stayCardInclusions{
       display:flex;
       flex-wrap:wrap;
-      gap:10px;
+      gap:7px;
     }
 
     .stayCardInclusions span{
       display:inline-flex;
       align-items:center;
-      min-height:38px;
-      padding:0 14px;
+      min-height:30px;
+      padding:0 10px;
       border-radius:999px;
-      background:rgba(255,255,255,0.8);
-      border:1px solid rgba(92,71,54,0.06);
-      font-size:13px;
-      color:rgba(92,71,54,0.78);
-      box-shadow:0 8px 20px rgba(40,30,20,0.04);
+      background:rgba(255,255,255,0.80);
+      border:1px solid rgba(92,71,54,0.035);
+      font-size:11px;
+      color:rgba(92,71,54,0.60);
+      box-shadow:none;
     }
 
     .stayCardFooter{
       display:grid;
       grid-template-columns:1fr auto;
-      gap:20px;
+      gap:14px;
       align-items:end;
-      padding-top:20px;
-      border-top:1px solid rgba(92,71,54,0.08);
+      padding-top:14px;
+      border-top:1px solid rgba(92
+
+,71,54,0.06);
     }
 
     .stayCardFooterInfo{
-      font-size:15px;
-      line-height:1.8;
-      color:rgba(92,71,54,0.72);
+      font-size:12px;
+      line-height:1.55;
+      color:rgba(92,71,54,0.56);
+      display:grid;
+      gap:4px;
     }
 
     .stayCardFooterInfo strong{
       color:var(--text);
+      font-weight:600;
     }
 
     .stayCardFooter .btn{
-      min-width:230px;
-      height:54px;
+      min-width:188px;
+      height:44px;
       border-radius:999px;
-      background:transparent;
-      border:1px solid rgba(92,71,54,0.2);
-      letter-spacing:.16em;
+      background:rgba(255,255,255,0.38);
+      border:1px solid rgba(92,71,54,0.10);
+      letter-spacing:.15em;
       text-transform:uppercase;
-      font-size:12px;
-      transition:all .35s ease;
+      font-size:10px;
+      color:rgba(92,71,54,0.72);
+      transition:all .26s ease;
     }
 
     .stayCardFooter .btn:hover{
-      background:rgba(92,71,54,0.06);
-      border-color:rgba(92,71,54,0.35);
+      background:rgba(92,71,54,0.04);
+      border-color:rgba(92,71,54,0.18);
+      color:#5c4736;
     }
 
     .emptyState{
@@ -365,13 +462,87 @@
       box-shadow:var(--shadow-md);
     }
 
+    .guestPanel--editorial{
+      padding:26px 28px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.82);
+      border:1px solid rgba(255,255,255,0.62);
+      box-shadow:0 18px 44px rgba(40,30,20,0.07);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+
+    .guestHeader{
+      display:grid;
+      gap:8px;
+      margin-bottom:18px;
+    }
+
+    .guestLead{
+      margin:0;
+      max-width:520px;
+      font-size:13px;
+      line-height:1.72;
+      color:rgba(92,71,54,0.58);
+    }
+
     .guestPanel .formGrid{
       grid-template-columns:1fr 1fr;
       margin-top:18px;
     }
 
+    .formGrid--editorial{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
     .fieldFull{
       grid-column:1 / -1;
+    }
+
+    .bookingField--soft{
+      display:grid;
+      gap:8px;
+    }
+
+    .bookingField--soft label{
+      font-size:10px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(92,71,54,0.42);
+    }
+
+    .bookingField--soft input,
+    .bookingField--soft textarea{
+      width:100%;
+      border:1px solid rgba(92,71,54,0.10);
+      background:rgba(255,255,255,0.72);
+      color:var(--text);
+      border-radius:18px;
+      padding:16px 16px;
+      font-size:15px;
+      line-height:1.5;
+      box-shadow:none;
+      transition:border-color .25s ease, background .25s ease, box-shadow .25s ease;
+      resize:vertical;
+    }
+
+    .bookingField--soft textarea{
+      min-height:140px;
+    }
+
+    .bookingField--soft input::placeholder,
+    .bookingField--soft textarea::placeholder{
+      color:rgba(92,71,54,0.42);
+    }
+
+    .bookingField--soft input:focus,
+    .bookingField--soft textarea:focus{
+      outline:none;
+      border-color:rgba(92,71,54,0.24);
+      background:rgba(255,255,255,0.92);
+      box-shadow:0 0 0 4px rgba(92,71,54,0.05);
     }
 
     .summaryPanel{
@@ -379,9 +550,32 @@
       top:calc(var(--header-h) + 20px);
     }
 
+    .summaryPanel--editorial{
+      padding:26px 26px 24px;
+      border-radius:28px;
+      background:rgba(255,252,248,0.82);
+      border:1px solid rgba(255,255,255,0.62);
+      box-shadow:0 18px 44px rgba(40,30,20,0.07);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+    }
+
     .summaryCard{
       display:grid;
       gap:16px;
+    }
+
+    .summaryHeader{
+      display:grid;
+      gap:8px;
+    }
+
+    .summaryLead{
+      margin:0;
+      max-width:320px;
+      font-size:13px;
+      line-height:1.7;
+      color:rgba(92,71,54,0.58);
     }
 
     .summarySelected{
@@ -391,30 +585,38 @@
       border:1px solid rgba(92,71,54,0.08);
     }
 
+    .summarySelected--editorial{
+      padding:16px 16px 15px;
+      border-radius:20px;
+      background:rgba(255,255,255,0.74);
+      border:1px solid rgba(92,71,54,0.06);
+    }
+
     .summarySelected p{
       margin:0;
     }
 
     .summarySelected .summaryEyebrow{
       margin-bottom:6px;
-      font-size:12px;
-      letter-spacing:.14em;
+      font-size:10px;
+      letter-spacing:.18em;
       text-transform:uppercase;
-      color:var(--text-soft);
+      color:rgba(92,71,54,0.42);
     }
 
     .summarySelected .summaryTitle{
-      margin-bottom:8px;
+      margin-bottom:6px;
       font-family:var(--font-serif);
-      font-size:30px;
-      line-height:1;
+      font-size:28px;
+      line-height:1.04;
+      letter-spacing:-0.04em;
       color:var(--text);
     }
 
     .summaryMeta{
-      color:var(--text-soft);
-      line-height:1.7;
-      font-size:14px;
+      color:rgba(92,71,54,0.62);
+      line-height:1.65;
+      font-size:13px;
     }
 
     .summaryBreakdown{
@@ -422,18 +624,26 @@
       gap:12px;
     }
 
+    .summaryBreakdown--editorial{
+      display:grid;
+      gap:10px;
+    }
+
     .summaryRow{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
       gap:16px;
-      padding-bottom:12px;
-      border-bottom:1px solid rgba(92,71,54,0.08);
-      color:var(--text-soft);
+      padding-bottom:10px;
+      border-bottom:1px solid rgba(92,71,54,0.06);
+      color:rgba(92,71,54,0.58);
+      font-size:13px;
     }
 
     .summaryRow strong{
       color:var(--text);
+      font-weight:600;
+      text-align:right;
     }
 
     .summaryRowTotal{
@@ -441,29 +651,51 @@
       align-items:flex-start;
       justify-content:space-between;
       gap:16px;
-      padding-top:6px;
+      padding-top:4px;
     }
 
     .summaryRowTotal span{
-      color:var(--text-soft);
+      color:rgba(92,71,54,0.58);
+      font-size:13px;
     }
 
     .summaryRowTotal strong{
       font-family:var(--font-serif);
-      font-size:32px;
+      font-size:30px;
       line-height:1;
+      letter-spacing:-0.04em;
       color:var(--text);
+      text-align:right;
     }
 
     .summaryBtn{
       width:100%;
     }
 
+    .summaryBtn--editorial{
+      width:100%;
+      height:52px;
+      border-radius:999px;
+      background:rgba(92,71,54,0.05);
+      border:1px solid rgba(92,71,54,0.14);
+      color:#5c4736;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-size:10px;
+      transition:all .28s ease;
+    }
+
+    .summaryBtn--editorial:hover{
+      background:rgba(92,71,54,0.08);
+      border-color:rgba(92,71,54,0.24);
+      transform:translateY(-1px);
+    }
+
     .summaryHint{
       margin:0;
-      color:var(--text-soft);
-      line-height:1.72;
-      font-size:14px;
+      color:rgba(92,71,54,0.54);
+      line-height:1.68;
+      font-size:12px;
     }
 
     @media (max-width: 1100px){
@@ -473,11 +705,15 @@
       }
 
       .bookingHeroCard{
-        max-width:460px;
+        max-width:420px;
         margin-left:0;
       }
 
       .bookingSearchForm{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .bookingSearchForm--editorial{
         grid-template-columns:1fr 1fr;
       }
 
@@ -487,6 +723,7 @@
 
       .stayCard{
         grid-template-columns:1fr;
+        max-width:none;
       }
 
       .stayCardTop{
@@ -494,7 +731,11 @@
       }
 
       .stayCardMedia{
-        min-height:280px;
+        min-height:240px;
+      }
+
+      .stayCardMedia img{
+        min-height:240px;
       }
 
       .stayCardPrice{
@@ -512,21 +753,25 @@
       }
 
       .bookingHeroGrid{
-        min-height:calc(74svh - var(--header-h) - 18px);
-        gap:24px;
-        padding-bottom:26px;
+        min-height:calc(70svh - var(--header-h) - 16px);
+        gap:20px;
+        padding-bottom:24px;
+      }
+
+      .bookingHeroTitle{
+        font-size:clamp(38px,11vw,56px);
       }
 
       .bookingHeroText{
-        font-size:17px;
-        line-height:1.74;
+        font-size:15px;
+        line-height:1.72;
       }
 
       .bookingHeroCard{
         max-width:none;
         width:100%;
-        padding:20px;
-        border-radius:24px;
+        padding:18px;
+        border-radius:22px;
       }
 
       .bookingSearchSection{
@@ -540,6 +785,13 @@
         border-radius:24px;
       }
 
+      .bookingSearchPanel--editorial,
+      .guestPanel--editorial,
+      .summaryPanel--editorial{
+        padding:22px;
+        border-radius:24px;
+      }
+
       .bookingSearchTop,
       .bookingResultsHead{
         flex-direction:column;
@@ -547,30 +799,34 @@
       }
 
       .bookingSearchForm,
-      .guestPanel .formGrid{
+      .bookingSearchForm--editorial,
+      .guestPanel .formGrid,
+      .formGrid--editorial{
         grid-template-columns:1fr;
       }
 
       .bookingSearchBtn,
+      .bookingSearchBtn--editorial,
       .stayCardFooter .btn,
       .summaryBtn{
         width:100%;
       }
 
       .stayCard{
-        border-radius:26px;
+        border-radius:22px;
       }
 
       .stayCardBody{
-        padding:22px 20px;
+        padding:20px 18px 18px;
+        gap:13px;
       }
 
       .stayCardTitle{
-        font-size:30px;
+        font-size:27px;
       }
 
       .stayCardDesc{
-        font-size:16px;
+        font-size:13px;
       }
 
       .stayCardFooter{
@@ -578,11 +834,34 @@
       }
 
       .stayCardMedia{
-        min-height:240px;
+        min-height:210px;
+      }
+
+      .stayCardMedia img{
+        min-height:210px;
       }
 
       .stayCardPrice{
         text-align:left;
+      }
+
+      .guestLead{
+        font-size:12px;
+      }
+
+      .summarySelected .summaryTitle{
+        font-size:26px;
+      }
+
+      .summaryRow,
+      .summaryRowTotal span,
+      .summaryHint,
+      .summaryMeta{
+        font-size:12px;
+      }
+
+      .summaryRowTotal strong{
+        font-size:28px;
       }
     }
   </style>
@@ -601,25 +880,24 @@
 
       <div class="bookingHeroGrid">
         <div class="bookingHeroContent" data-reveal="left">
-          <p class="eyebrow bookingHeroEyebrow shimmerLine">Casas da Vila • Booking</p>
+          <p class="eyebrow bookingHeroEyebrow shimmerLine">Casas da Vila · Booking</p>
 
           <h1 class="display bookingHeroTitle">
-            Find the right house<br>
-            for your time<br>
+            A quieter way<br>
+            to choose your stay<br>
             in Trancoso.
           </h1>
 
           <p class="bookingHeroText">
-            Check availability, compare atmospheres, and move forward to booking with breakfast and
-            parking already included in the experience.
+            Explore the houses, compare atmospheres, and proceed at your own pace.
+            Breakfast and parking are already part of the experience.
           </p>
         </div>
 
         <div class="bookingHeroCard heroFloat" data-reveal="right">
-          <p class="eyebrow">Conditions</p>
+          <p class="eyebrow">Private stays</p>
           <p>
-            Minimum stay of 3 nights during most of the year. Between December 20 and January 5,
-            a minimum package of 7 nights applies.
+            Houses designed for slower days, tropical light, and a more private rhythm.
           </p>
         </div>
       </div>
@@ -627,26 +905,29 @@
 
     <section class="section bookingSearchSection">
       <div class="wrap bookingSearchShell">
-        <div class="bookingSearchPanel" data-reveal="zoom">
+        <div class="bookingSearchPanel bookingSearchPanel--editorial" data-reveal="zoom">
           <div class="bookingSearchTop">
             <div class="bookingSearchTopText">
               <p class="eyebrow">Availability</p>
-              <h2 class="h2">Choose dates and number of guests</h2>
+              <h2 class="h2">Find your stay</h2>
+              <p class="bookingSearchIntro">
+                Select your dates and preferred number of guests to view the houses available for your stay.
+              </p>
             </div>
           </div>
 
-          <div class="bookingSearchForm">
-            <div class="field">
-              <label for="check-in">Check-in</label>
+          <div class="bookingSearchForm bookingSearchForm--editorial">
+            <div class="field bookingField">
+              <label for="check-in">Arrival</label>
               <input id="check-in" type="date" />
             </div>
 
-            <div class="field">
-              <label for="check-out">Check-out</label>
+            <div class="field bookingField">
+              <label for="check-out">Departure</label>
               <input id="check-out" type="date" />
             </div>
 
-            <div class="field">
+            <div class="field bookingField">
               <label for="guests-count">Guests</label>
               <select id="guests-count">
                 <option value="1">1 guest</option>
@@ -656,8 +937,8 @@
               </select>
             </div>
 
-            <button id="search-availability-btn" class="btn btnPrimary bookingSearchBtn" type="button">
-              View available houses
+            <button id="search-availability-btn" class="btn bookingSearchBtn bookingSearchBtn--editorial" type="button">
+              Explore availability
             </button>
           </div>
         </div>
@@ -688,41 +969,49 @@
     <section class="section bookingCheckoutSection">
       <div class="wrap bookingCheckoutGrid">
 
-        <div class="guestPanel" data-reveal="left">
-          <p class="eyebrow">Guest details</p>
-          <h2 class="h2">Complete your pre-booking</h2>
+        <div class="guestPanel guestPanel--editorial" data-reveal="left">
+          <div class="guestHeader">
+            <p class="eyebrow">Guest details</p>
+            <h2 class="h2">Complete your pre-booking</h2>
+            <p class="guestLead">
+              A few details to prepare your stay with greater care and clarity.
+            </p>
+          </div>
 
-          <div class="formGrid">
-            <div class="field">
+          <div class="formGrid formGrid--editorial">
+            <div class="field bookingField bookingField--soft">
               <label for="guest-name">Full name</label>
               <input id="guest-name" type="text" placeholder="Your full name" />
             </div>
 
-            <div class="field">
+            <div class="field bookingField bookingField--soft">
               <label for="guest-email">Email</label>
               <input id="guest-email" type="email" placeholder="you@email.com" />
             </div>
 
-            <div class="field">
+            <div class="field bookingField bookingField--soft">
               <label for="guest-phone">Phone</label>
               <input id="guest-phone" type="tel" placeholder="+1 555 555 5555" />
             </div>
 
-            <div class="field fieldFull">
+            <div class="field fieldFull bookingField bookingField--soft">
               <label for="special-requests">Special requests</label>
-              <textarea id="special-requests" rows="5" placeholder="Share any relevant requests for your stay here."></textarea>
+              <textarea id="special-requests" rows="5" placeholder="Share any relevant preferences or requests for your stay."></textarea>
             </div>
           </div>
         </div>
 
-        <aside class="summaryPanel" data-reveal="right">
+        <aside class="summaryPanel summaryPanel--editorial" data-reveal="right">
           <div class="summaryCard">
-            <div>
+            <div class="summaryHeader">
               <p class="eyebrow">Summary</p>
               <h3 class="h3">Your stay</h3>
+              <p class="summaryLead">
+                Selected details, quietly arranged.
+              </p>
             </div>
 
-            <div class="summarySelected" id="summary-selected">
+            <div class="summarySelected summarySelected--editorial" id="summary-selected">
               <p class="summaryEyebrow">No house selected</p>
               <p class="summaryTitle">Waiting for availability</p>
               <p class="summaryMeta">
@@ -730,7 +1019,7 @@
               </p>
             </div>
 
-            <div class="summaryBreakdown">
+            <div class="summaryBreakdown summaryBreakdown--editorial">
               <div class="summaryRow">
                 <span>Period</span>
                 <strong id="summary-dates">—</strong>
@@ -753,13 +1042,15 @@
               </div>
             </div>
 
-            <button id="book-now-btn" class="btn btnPrimary summaryBtn" type="button">
+            <button id="book-now-btn" class="btn summaryBtn summaryBtn--editorial" type="button">
               Proceed to payment
             </button>
 
             <p class="summaryHint">
-              Your reservation will be confirmed after payment. Until then, the selected period is
-              temporarily protected during the checkout step.
+              Prices are shown in BRL.
+            </p>
+            <p class="summaryHint">
+              Your reservation is confirmed after payment. Until then, the selected dates remain temporarily protected during checkout.
             </p>
           </div>
         </aside>
@@ -793,7 +1084,8 @@
       function formatCurrency(value) {
         return new Intl.NumberFormat('en-US', {
           style: 'currency',
-          currency: 'BRL'
+          currency: 'BRL',
+          maximumFractionDigits: 0
         }).format(Number(value || 0));
       }
 
@@ -805,8 +1097,8 @@
 
         const start = new Date(y1, m1 - 1, d1);
         const end = new Date(y2, m2 - 1, d2);
-
         const diff = end - start;
+
         return diff > 0 ? Math.round(diff / (1000 * 60 * 60 * 24)) : 0;
       }
 
@@ -850,31 +1142,78 @@
             '/assets/img/casa-oca/gallery-01.jpeg',
             '/assets/img/casa-oca/gallery-02.jpeg'
           ],
+          'oca': [
+            '/assets/img/casa-oca/gallery-01.jpeg',
+            '/assets/img/casa-oca/gallery-02.jpeg'
+          ],
+
           'atelie-azul': [
+            '/assets/img/atelie-azul/gallery-02.jpeg',
+            '/assets/img/atelie-azul/gallery-03.jpeg'
+          ],
+          'atelier-azul': [
+            '/assets/img/atelie-azul/gallery-02.jpeg',
+            '/assets/img/atelie-azul/gallery-03.jpeg'
+          ],
+          'azul': [
             '/assets/img/atelie-azul/gallery-01.jpeg',
             '/assets/img/atelie-azul/gallery-02.jpeg'
           ],
+
           'casa-branca': [
             '/assets/img/casa-branca/gallery-01.jpeg',
             '/assets/img/casa-branca/gallery-02.jpeg'
           ],
+          'branca': [
+            '/assets/img/casa-branca/gallery-01.jpeg',
+            '/assets/img/casa-branca/gallery-02.jpeg'
+          ],
+
           'casa-dende': [
             '/assets/img/casa-dende/gallery-01.jpeg',
-            '/assets/img/casa-dende/gallery-02.jpeg'
+            '/assets/img/casa-dende/gallery-03.jpeg'
           ],
+          'dende': [
+            '/assets/img/casa-dende/gallery-02.jpeg',
+            '/assets/img/casa-dende/gallery-03.jpeg'
+          ],
+
           'casa-dos-baloes': [
             '/assets/img/casa-dos-baloes/gallery-01.jpeg',
             '/assets/img/casa-dos-baloes/gallery-02.jpeg'
           ],
+          'casa-baloes': [
+            '/assets/img/casa-dos-baloes/gallery-01.jpeg',
+            '/assets/img/casa-dos-baloes/gallery-02.jpeg'
+          ],
+          'baloes': [
+            '/assets/img/casa-dos-baloes/gallery-01.jpeg',
+            '/assets/img/casa-dos-baloes/gallery-02.jpeg'
+          ],
+
           'casa-grande': [
             '/assets/img/casa-grande/gallery-04.jpeg',
             '/assets/img/casa-grande/gallery-01.jpeg'
           ],
+          'grande': [
+            '/assets/img/casa-grande/gallery-04.jpeg',
+            '/assets/img/casa-grande/gallery-01.jpeg'
+          ],
+
           'casa-manga': [
             '/assets/img/casa-manga/gallery-01.jpeg',
             '/assets/img/casa-manga/gallery-02.jpeg'
           ],
+          'manga': [
+            '/assets/img/casa-manga/gallery-02.jpeg',
+            '/assets/img/casa-manga/gallery-03.jpeg'
+          ],
+
           'casa-rosada': [
+            '/assets/img/casa-rosada/gallery-01.jpeg',
+            '/assets/img/casa-rosada/gallery-02.jpeg'
+          ],
+          'rosada': [
             '/assets/img/casa-rosada/gallery-01.jpeg',
             '/assets/img/casa-rosada/gallery-02.jpeg'
           ]
@@ -883,19 +1222,28 @@
 
       function resolveCoverImage(item) {
         const slug = normalizeSlug(item?.slug);
+        const nameSlug = normalizeSlug(item?.name);
         const library = getHouseImageLibrary();
 
-        const remoteCover = String(item?.cover_image_url || '').trim();
-        if (remoteCover) {
-          return toAbsoluteAsset(remoteCover);
+        const candidates = [
+          slug,
+          nameSlug,
+          slug.replace(/^casa-/, ''),
+          nameSlug.replace(/^casa-/, ''),
+          slug.replace(/^atelier-/, 'atelie-'),
+          nameSlug.replace(/^atelier-/, 'atelie-'),
+          slug.replace(/^atelie-/, 'atelier-'),
+          nameSlug.replace(/^atelie-/, 'atelier-')
+        ].filter(Boolean);
+
+        for (const key of candidates) {
+          const localOptions = library[key];
+          if (Array.isArray(localOptions) && localOptions.length) {
+            return toAbsoluteAsset(localOptions[0]);
+          }
         }
 
-        const localOptions = library[slug];
-        if (Array.isArray(localOptions) && localOptions.length) {
-          return toAbsoluteAsset(localOptions[0]);
-        }
-
-        return toAbsoluteAsset('/assets/img/casa-grande/gallery-04.jpeg');
+        return '';
       }
 
       function escapeHtml(value) {
@@ -956,7 +1304,7 @@
         if (!items || !items.length) {
           renderEmpty(
             'No houses available',
-            'Try different dates or adjust the number of guests to explore new options.'
+            'Please try different dates or adjust the number of guests to view new options.'
           );
           return;
         }
@@ -967,52 +1315,59 @@
           const coverImage = resolveCoverImage(item);
           const total = Number(item.amount_total || 0);
           const nightly = nights > 0 ? total / nights : total;
+          const normalizedHouse = String(item.slug || '').replace(/-/g, '_');
 
           return `
-            <article class="stayCard">
+            <article
+              class="stayCard"
+              data-house-card
+              data-house="${escapeHtml(normalizedHouse)}"
+            >
               <div class="stayCardMedia">
                 <img
                   src="${escapeHtml(coverImage)}"
                   alt="${escapeHtml(item.name || 'Casas da Vila')}"
                   loading="lazy"
                   decoding="async"
-                  onerror="this.onerror=null;this.src='${SITE_ORIGIN}/assets/img/casa-grande/gallery-04.jpeg';"
+                  onerror="this.onerror=null;this.style.opacity='0.25';this.style.filter='grayscale(1)';console.error('IMAGE FAILED', this.src);"
                 />
               </div>
 
               <div class="stayCardBody">
                 <div class="stayCardTop">
                   <div>
-                    <p class="stayCardMeta">${escapeHtml(item.size_m2 || '-')} m² • up to ${escapeHtml(item.max_guests || '-')} guests</p>
+                    <p class="stayCardMeta">${escapeHtml(item.size_m2 || '-')} m² · up to ${escapeHtml(item.max_guests || '-')} guests</p>
                     <h3 class="stayCardTitle">${escapeHtml(item.name || '')}</h3>
-                    <p class="stayCardDesc">${escapeHtml(item.short_description || '')}</p>
+                    <p class="stayCardDesc">${escapeHtml(item.short_description_en || item.short_description || '')}</p>
                   </div>
 
                   <div class="stayCardPrice">
-                    <small>Nightly average</small>
-                    <strong>${formatCurrency(nightly)}</strong>
+                    <small>Rate per night</small>
+                    <strong data-price>${formatCurrency(nightly)}</strong>
                   </div>
                 </div>
 
                 <div class="stayCardInclusions">
                   ${item.breakfast_included ? '<span>Breakfast included</span>' : ''}
                   ${item.parking_included ? '<span>Parking included</span>' : ''}
-                  <span>Minimum of ${escapeHtml(item.required_min_nights || '-')} nights</span>
+                  <span data-min-stay>Minimum stay of ${escapeHtml(item.required_min_nights || '-')} nights</span>
                   ${nights > 0 ? `<span>${nights} ${nights === 1 ? 'night' : 'nights'}</span>` : ''}
+                  <span data-status></span>
                 </div>
 
                 <div class="stayCardFooter">
                   <div class="stayCardFooterInfo">
-                    <div><strong>Total stay:</strong> ${formatCurrency(total)}</div>
-                    <div><strong>Period:</strong> ${nights > 0 ? `${nights} ${nights === 1 ? 'night' : 'nights'}` : '—'}</div>
+                    <div><strong>Total stay:</strong> <span data-total>${formatCurrency(total)}</span></div>
+                    <div><strong>Stay length:</strong> ${nights > 0 ? `${nights} ${nights === 1 ? 'night' : 'nights'}` : '—'}</div>
                   </div>
 
                   <button
                     class="btn btnGhost select-stay-btn"
                     type="button"
+                    data-book-link
                     data-unit='${JSON.stringify(item).replace(/'/g, '&#39;')}'
                   >
-                    Select this house
+                    Discover this stay
                   </button>
                 </div>
               </div>
@@ -1033,6 +1388,17 @@
             });
           });
         });
+
+        if (window.BookingRules && typeof window.BookingRules.refreshBookingCards === 'function') {
+          window.BookingRules.refreshBookingCards({
+            locale: 'en',
+            checkinSelector: '#check-in',
+            checkoutSelector: '#check-out',
+            guestsSelector: '#guests-count',
+            cardSelector: '[data-house-card]',
+            bookBasePath: '/en/book/'
+          });
+        }
       }
 
       function updateSummary() {
@@ -1104,16 +1470,23 @@
 
       function validateSearch(checkIn, checkOut, guestsCount) {
         if (!checkIn || !checkOut) {
-          throw new Error('Please select check-in and check-out.');
+          throw new Error('Please select check-in and check-out dates.');
         }
 
         const nights = calcNights(checkIn, checkOut);
         if (!nights || nights <= 0) {
-          throw new Error('The selected period is invalid.');
+          throw new Error('The selected stay is invalid.');
         }
 
         if (!Number(guestsCount) || Number(guestsCount) < 1) {
           throw new Error('Invalid number of guests.');
+        }
+
+        const reveillonStart = '2026-12-15';
+        const reveillonEnd = '2027-01-06';
+
+        if (checkIn >= reveillonStart && checkIn <= reveillonEnd && nights < 7) {
+          throw new Error('During the holiday period, all houses require a minimum stay of 7 nights.');
         }
       }
 
@@ -1301,5 +1674,18 @@
 
   <script src="/assets/js/ui.js"></script>
   <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/booking-rules.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      BookingRules.bindBookingEngine({
+        locale: "en",
+        checkinSelector: "#check-in",
+        checkoutSelector: "#check-out",
+        guestsSelector: "#guests-count",
+        cardSelector: "[data-house-card]",
+        bookBasePath: "/en/book/"
+      });
+    });
+  </script>
 </body>
 </html>
