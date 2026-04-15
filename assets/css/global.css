@@ -4723,3 +4723,17 @@ img{
   opacity:.52;
   cursor:not-allowed;
 }
+.priceMain{
+  font-family:var(--font-serif);
+  font-size:clamp(36px,3vw,52px);
+  line-height:1;
+  letter-spacing:-0.04em;
+  color:var(--text);
+}
+
+.priceUSD{
+  margin-top:6px;
+  font-size:13px;
+  letter-spacing:.08em;
+  color:rgba(92,71,54,0.6);
+}

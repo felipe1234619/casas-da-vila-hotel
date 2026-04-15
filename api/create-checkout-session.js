@@ -88,6 +88,56 @@ function buildDefaultCancelPath({
   return query ? `${base}?${query}` : base;
 }
 
+/**
+ * Recebe preço em vários formatos comuns e devolve centavos para o Stripe.
+ * Exemplos aceitos:
+ * 1759
+ * "1759"
+ * "1759.00"
+ * "1.759"
+ * "1.759,00"
+ * "R$ 1.759,00"
+ */
+function parseAmountToCents(input) {
+  if (input === null || input === undefined || input === '') return 0;
+
+  if (typeof input === 'number') {
+    if (!Number.isFinite(input) || input <= 0) return 0;
+    return Math.round(input * 100);
+  }
+
+  let raw = String(input).trim();
+  if (!raw) return 0;
+
+  // remove moeda, espaços e qualquer caractere que não seja número, vírgula, ponto ou sinal
+  raw = raw.replace(/[^\d.,-]/g, '');
+
+  const hasComma = raw.includes(',');
+  const hasDot = raw.includes('.');
+
+  // Ex.: 1.759,00 -> 1759.00
+  if (hasComma && hasDot) {
+    raw = raw.replace(/\./g, '').replace(',', '.');
+  }
+  // Ex.: 1.759 -> 1759  (assume milhar quando o último bloco tem 3 dígitos)
+  else if (hasDot && !hasComma) {
+    const parts = raw.split('.');
+    if (parts.length > 1 && parts[parts.length - 1].length === 3) {
+      raw = raw.replace(/\./g, '');
+    }
+  }
+  // Ex.: 1759,00 -> 1759.00
+  else if (hasComma && !hasDot) {
+    raw = raw.replace(',', '.');
+  }
+
+  const value = Number(raw);
+
+  if (!Number.isFinite(value) || value <= 0) return 0;
+
+  return Math.round(value * 100);
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).send('Method Not Allowed');
@@ -109,7 +159,8 @@ export default async function handler(req, res) {
     const guestEmail = body.guestEmail || body.guest_email || '';
     const guestPhone = body.guestPhone || body.guest_phone || '';
     const specialRequests = body.specialRequests || body.special_requests || '';
-    const amountTotal = Number(body.amountTotal || body.amount_total || 0);
+    const amountInput = body.amountTotal ?? body.amount_total ?? 0;
+    const amountTotalCents = parseAmountToCents(amountInput);
     const currency = (body.currency || 'brl').toLowerCase();
     const holdId = body.holdId || body.hold_id || '';
     const successPathInput = body.successPath || body.success_path || '';
@@ -122,7 +173,7 @@ export default async function handler(req, res) {
       req.headers.referer?.includes('/en/') ||
       false;
 
-    if (!unitSlug || !checkin || !checkout || !guestName || !guestEmail || !amountTotal) {
+    if (!unitSlug || !checkin || !checkout || !guestName || !guestEmail || !amountTotalCents) {
       return res.status(400).json({
         error: 'Missing required fields',
         required: [
@@ -136,7 +187,7 @@ export default async function handler(req, res) {
       });
     }
 
-    if (!Number.isFinite(amountTotal) || amountTotal <= 0) {
+    if (!Number.isFinite(amountTotalCents) || amountTotalCents <= 0) {
       return res.status(400).json({ error: 'Invalid amountTotal' });
     }
 
@@ -178,7 +229,8 @@ export default async function handler(req, res) {
       checkout,
       guests_count: String(finalGuestsCount),
       special_requests: specialRequests || '',
-      amount_total: String(amountTotal),
+      amount_total_raw: String(amountInput),
+      amount_total_cents: String(amountTotalCents),
       hold_id: holdId || '',
       success_path: sanitizedSuccessPath
     };
@@ -205,7 +257,7 @@ export default async function handler(req, res) {
           quantity: 1,
           price_data: {
             currency,
-            unit_amount: amountTotal,
+            unit_amount: amountTotalCents,
             product_data: {
               name: `Reserva • ${finalUnitName}`,
               description: `${checkin} → ${checkout} • ${nights} night(s) • ${finalGuestsCount} guest(s)`
@@ -219,7 +271,8 @@ export default async function handler(req, res) {
       id: session.id,
       url: session.url,
       successUrl,
-      cancelUrl
+      cancelUrl,
+      amountTotalCents
     });
   } catch (err) {
     console.error('create-checkout-session error:', err);
