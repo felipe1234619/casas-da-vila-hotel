@@ -347,4 +347,26 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/about/" />
   </url>
 
+    <!-- BLOG POST PT -->
+  <url>
+    <loc>https://casasdavila.com/pt/blog/onde-ficar-em-trancoso/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/blog/onde-ficar-em-trancoso/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/blog/where-to-stay-in-trancoso/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/pt/blog/onde-ficar-em-trancoso/" />
+  </url>
+
+  <!-- BLOG POST EN -->
+  <url>
+    <loc>https://casasdavila.com/en/blog/where-to-stay-in-trancoso/</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/blog/onde-ficar-em-trancoso/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/blog/where-to-stay-in-trancoso/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/blog/where-to-stay-in-trancoso/" />
+  </url>
+
 </urlset>
