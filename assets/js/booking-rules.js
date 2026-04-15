@@ -225,16 +225,14 @@
     };
   }
 
-  function formatCurrency(value, locale) {
-    const safeLocale = locale || "pt-BR";
-    const currency = safeLocale === "en-US" ? "USD" : "BRL";
-    return new Intl.NumberFormat(safeLocale, {
-      style: "currency",
-      currency,
-      maximumFractionDigits: 0
-    }).format(value || 0);
-  }
+function formatCurrency(value) {
+  const amount = Number(value || 0);
 
+  return `R$ ${new Intl.NumberFormat("pt-BR", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(amount)}`;
+}
   function getMessages(locale) {
     const isEN = locale === "en";
 
@@ -262,7 +260,7 @@
     const buttonEl = card.querySelector("[data-book-link]");
 
     if (priceEl && config.price) {
-      priceEl.textContent = `${t.from} ${formatCurrency(config.price, locale === "en" ? "en-US" : "pt-BR")} ${t.perNight}`;
+priceEl.textContent = `${t.from} ${formatCurrency(config.price)} ${t.perNight}`;
     }
 
     if (minStayEl && config.minNights) {
@@ -270,7 +268,7 @@
     }
 
     if (totalEl && config.total) {
-      totalEl.textContent = `${t.total}: ${formatCurrency(config.total, locale === "en" ? "en-US" : "pt-BR")}`;
+totalEl.textContent = `${t.total}: ${formatCurrency(config.total)}`;
     }
 
     if (statusEl) {
