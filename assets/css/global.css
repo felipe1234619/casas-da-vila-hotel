@@ -4759,3 +4759,32 @@ img{
   letter-spacing:.08em;
   color:rgba(92,71,54,0.6);
 }
+.footer-blog{
+  margin-top: 24px;
+}
+
+.footer-title{
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 10px;
+}
+
+.footer-blog ul{
+  list-style: none;
+  padding: 0;
+}
+
+.footer-blog li{
+  margin-bottom: 6px;
+}
+
+.footer-blog a{
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.footer-blog a:hover{
+  opacity: 1;
+}
