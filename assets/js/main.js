@@ -320,3 +320,88 @@
     init();
   }
 })();
+(function () {
+  const path = window.location.pathname.toLowerCase();
+  const isEN = path.startsWith('/en/');
+  const lang = isEN ? 'en' : 'pt';
+
+  const routeMap = {
+    '/pt/': '/en/',
+    '/pt/casas/': '/en/houses/',
+    '/pt/experiencias/': '/en/experiences/',
+    '/pt/localizacao/': '/en/location/',
+    '/pt/sobre/': '/en/about/',
+    '/pt/contato/': '/en/contact/',
+    '/pt/reservar/': '/en/book/',
+
+    '/en/': '/pt/',
+    '/en/houses/': '/pt/casas/',
+    '/en/experiences/': '/pt/experiencias/',
+    '/en/location/': '/pt/localizacao/',
+    '/en/about/': '/pt/sobre/',
+    '/en/contact/': '/pt/contato/',
+    '/en/book/': '/pt/reservar/'
+  };
+
+  function applyHeaderI18n(root = document) {
+    root.querySelectorAll('[data-i18n-pt][data-i18n-en]').forEach((el) => {
+      el.textContent = lang === 'en'
+        ? el.getAttribute('data-i18n-en')
+        : el.getAttribute('data-i18n-pt');
+    });
+
+    root.querySelectorAll('[data-href-pt][data-href-en]').forEach((el) => {
+      el.setAttribute(
+        'href',
+        lang === 'en'
+          ? el.getAttribute('data-href-en')
+          : el.getAttribute('data-href-pt')
+      );
+    });
+
+    const ptLink = root.querySelector('[data-lang-link="pt"]');
+    const enLink = root.querySelector('[data-lang-link="en"]');
+    const altPath = routeMap[path] || (isEN ? '/pt/' : '/en/');
+
+    if (ptLink) {
+      ptLink.setAttribute('href', isEN ? altPath : path);
+      ptLink.classList.toggle('is-active', !isEN);
+    }
+
+    if (enLink) {
+      enLink.setAttribute('href', isEN ? path : altPath);
+      enLink.classList.toggle('is-active', isEN);
+    }
+
+    const activeMap = {
+      pt: {
+        '/pt/casas/': 'houses',
+        '/pt/experiencias/': 'experiences',
+        '/pt/localizacao/': 'location',
+        '/pt/sobre/': 'about',
+        '/pt/contato/': 'contact',
+        '/pt/reservar/': 'reserve'
+      },
+      en: {
+        '/en/houses/': 'houses',
+        '/en/experiences/': 'experiences',
+        '/en/location/': 'location',
+        '/en/about/': 'about',
+        '/en/contact/': 'contact',
+        '/en/book/': 'reserve'
+      }
+    };
+
+    const currentKey = activeMap[lang][path];
+
+    root.querySelectorAll('[data-link]').forEach((el) => {
+      el.classList.toggle('is-active', el.getAttribute('data-link') === currentKey);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => applyHeaderI18n(document));
+  } else {
+    applyHeaderI18n(document);
+  }
+})();
