@@ -4788,3 +4788,16 @@ img{
 .footer-blog a:hover{
   opacity: 1;
 }
+/* esconde o botão hamburguer no desktop */
+.headerMenuToggle{
+  display:none;
+}
+
+/* mostra apenas no mobile */
+@media (max-width: 980px){
+  .headerMenuToggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+  }
+}
