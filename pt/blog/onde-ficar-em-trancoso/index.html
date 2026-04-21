@@ -18,6 +18,307 @@
 
   <link rel="stylesheet" href="/assets/css/global.css" />
   <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <style>
+    .articleHero{
+      padding:calc(var(--header-h,96px) + 42px) 0 34px;
+    }
+    .articleWrap{
+      width:min(1120px, calc(100vw - 40px));
+      margin:0 auto;
+    }
+    .articleIntro{
+      display:grid;
+      grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);
+      gap:26px;
+      align-items:end;
+    }
+    .articleKicker{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:.8rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .articleKicker::before{
+      content:"";
+      width:38px;
+      height:1px;
+      background:rgba(111,85,58,.35);
+    }
+    .articleTitle{
+      margin:0;
+      max-width:11ch;
+      font-size:clamp(3rem,7vw,5.8rem);
+      line-height:.94;
+      letter-spacing:-.05em;
+      font-weight:500;
+      font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;
+      text-wrap:balance;
+    }
+    .articleLead{
+      margin:22px 0 0;
+      max-width:58ch;
+      font-size:1.08rem;
+      line-height:1.8;
+      color:var(--muted);
+    }
+    .articleMetaCard{
+      padding:26px;
+      border-radius:26px;
+      background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.44));
+      border:1px solid rgba(255,255,255,.46);
+      box-shadow:var(--shadow-soft);
+    }
+    .articleMetaCard small{
+      display:block;
+      margin-bottom:8px;
+      font-size:.72rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--soft);
+    }
+    .articleMetaCard strong{
+      display:block;
+      font-size:1rem;
+      line-height:1.5;
+      color:var(--ink);
+    }
+    .articleMetaCard span{
+      display:block;
+      margin-top:6px;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:.95rem;
+    }
+    .articleMetaGrid{
+      display:grid;
+      gap:18px;
+    }
+    .articleBody{
+      padding:18px 0 100px;
+    }
+    .articleGrid{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(260px,.34fr);
+      gap:34px;
+      align-items:start;
+    }
+    .articleContent{
+      min-width:0;
+    }
+    .articleContent section + section{
+      margin-top:46px;
+    }
+    .articleContent h2{
+      margin:0 0 16px;
+      font-size:clamp(2rem,4vw,3rem);
+      line-height:1;
+      letter-spacing:-.04em;
+      font-weight:500;
+      font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;
+      text-wrap:balance;
+    }
+    .articleContent h3{
+      margin:22px 0 10px;
+      font-size:1.35rem;
+      line-height:1.12;
+      letter-spacing:-.03em;
+      font-weight:500;
+      font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;
+      color:var(--ink);
+    }
+    .articleContent p{
+      margin:0 0 16px;
+      font-size:1.02rem;
+      line-height:1.86;
+      color:var(--muted);
+      max-width:70ch;
+    }
+    .articleContent ul{
+      margin:0 0 18px 18px;
+      padding:0;
+      color:var(--muted);
+    }
+    .articleContent li{
+      margin:0 0 10px;
+      line-height:1.8;
+    }
+    .articleContent a{
+      color:var(--ink);
+      text-decoration:none;
+      border-bottom:1px solid rgba(32,28,24,.16);
+      transition:border-color .25s ease, color .25s ease;
+    }
+    .articleContent a:hover{
+      color:#000;
+      border-color:rgba(32,28,24,.4);
+    }
+    .articleHighlight{
+      padding:28px;
+      border-radius:28px;
+      background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.46));
+      border:1px solid rgba(255,255,255,.5);
+      box-shadow:var(--shadow-soft);
+    }
+    .articleHighlight h3{
+      margin-top:0;
+    }
+    .articlePull{
+      padding:34px;
+      border-radius:30px;
+      background:linear-gradient(135deg,#1f1915,#43372d 52%,#51645a);
+      color:#fff;
+      box-shadow:0 26px 70px rgba(34,28,23,.22);
+      position:relative;
+      overflow:hidden;
+    }
+    .articlePull::after{
+      content:"";
+      position:absolute;
+      inset:auto -10% -24% auto;
+      width:340px;
+      height:340px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(255,255,255,.16),transparent 68%);
+    }
+    .articlePull > *{
+      position:relative;
+      z-index:2;
+    }
+    .articlePull p{
+      color:rgba(255,255,255,.86);
+      max-width:34ch;
+      margin:0;
+      font-size:1.1rem;
+      line-height:1.72;
+    }
+    .articleAside{
+      position:sticky;
+      top:calc(var(--header-h,96px) + 22px);
+      display:grid;
+      gap:18px;
+    }
+    .articleAsideCard{
+      padding:24px 22px;
+      border-radius:24px;
+      background:linear-gradient(180deg,rgba(255,255,255,.64),rgba(255,255,255,.42));
+      border:1px solid rgba(255,255,255,.46);
+      box-shadow:var(--shadow-soft);
+    }
+    .articleAsideCard h3{
+      margin:0 0 10px;
+      font-size:1.08rem;
+      line-height:1.2;
+      font-weight:600;
+      color:var(--ink);
+    }
+    .articleAsideCard p,
+    .articleAsideCard li{
+      font-size:.95rem;
+      line-height:1.72;
+      color:var(--muted);
+    }
+    .articleAsideCard ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .articleAsideCard .btn{
+      margin-top:8px;
+      width:100%;
+      justify-content:center;
+    }
+    .articleFaq{
+      display:grid;
+      gap:12px;
+      margin-top:10px;
+    }
+    .articleFaq details{
+      padding:18px 18px 16px;
+      border-radius:20px;
+      background:rgba(255,255,255,.58);
+      border:1px solid rgba(255,255,255,.5);
+    }
+    .articleFaq summary{
+      cursor:pointer;
+      list-style:none;
+      font-size:1rem;
+      line-height:1.5;
+      color:var(--ink);
+      font-weight:600;
+    }
+    .articleFaq summary::-webkit-details-marker{display:none;}
+    .articleFaq .answer{
+      margin-top:12px;
+      color:var(--muted);
+      line-height:1.78;
+      font-size:.98rem;
+    }
+    .articleRelated{
+      margin-top:54px;
+      padding:30px;
+      border-radius:30px;
+      background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.46));
+      border:1px solid rgba(255,255,255,.48);
+      box-shadow:var(--shadow-soft);
+    }
+    .articleRelated h2{
+      margin-bottom:14px;
+    }
+    .articleRelatedLinks{
+      display:grid;
+      gap:0;
+      margin-top:18px;
+      border-top:1px solid var(--line);
+    }
+    .articleRelatedLinks a{
+      display:block;
+      padding:16px 0;
+      border-bottom:1px solid var(--line);
+      text-decoration:none;
+      color:var(--ink);
+      line-height:1.6;
+    }
+    .articleRelatedLinks a:last-child{
+      border-bottom:0;
+      padding-bottom:0;
+    }
+    @media (max-width:1080px){
+      .articleIntro,
+      .articleGrid{
+        grid-template-columns:1fr;
+      }
+      .articleAside{
+        position:static;
+      }
+      .articleTitle{
+        max-width:12ch;
+      }
+    }
+    @media (max-width:820px){
+      .articleHero{
+        padding-top:calc(var(--header-h,90px) + 30px);
+      }
+      .articleWrap{
+        width:min(100vw - 28px, 1120px);
+      }
+      .articleTitle{
+        max-width:100%;
+        font-size:clamp(2.4rem,10vw,4rem);
+      }
+      .articleMetaCard,
+      .articleHighlight,
+      .articlePull,
+      .articleAsideCard,
+      .articleRelated{
+        border-radius:22px;
+        padding:22px 18px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -25,76 +326,211 @@
   <div id="site-header"></div>
 
   <main>
-    <article class="blogPost">
+    <section class="articleHero">
+      <div class="articleWrap">
+        <div class="articleIntro">
+          <div>
+            <p class="articleKicker">Hospedagem em Trancoso</p>
+            <h1 class="articleTitle">Onde ficar em Trancoso</h1>
+            <p class="articleLead">
+              Descubra como escolher a melhor hospedagem em Trancoso entre vila, praias, pousadas e casas com mais privacidade, espaço e identidade.
+            </p>
+          </div>
 
-      <h1>Onde ficar em Trancoso: guia completo para escolher sua hospedagem</h1>
+          <div class="articleMetaGrid">
+            <div class="articleMetaCard">
+              <small>Leitura</small>
+              <strong>Guia de hospedagem</strong>
+              <span>Regiões, estilos de estadia e critérios para decidir onde ficar com mais clareza.</span>
+            </div>
+            <div class="articleMetaCard">
+              <small>Foco</small>
+              <strong>Experiência e localização</strong>
+              <span>A hospedagem em Trancoso muda a forma como o destino é vivido, percebido e lembrado.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <p>
-        Escolher onde ficar em Trancoso é uma das decisões mais importantes para quem visita o destino.
-        Mais do que localização, a hospedagem define o ritmo da experiência — entre o mar, o jardim e a atmosfera da vila.
-      </p>
+    <section class="articleBody">
+      <div class="articleWrap">
+        <div class="articleGrid">
+          <div class="articleContent">
 
-      <h2>As principais regiões para se hospedar em Trancoso</h2>
+            <section>
+              <p>
+                Escolher onde ficar em Trancoso é uma das decisões mais importantes para quem visita o destino.
+                Mais do que localização, a hospedagem define o ritmo da experiência — entre o mar, o jardim e a atmosfera da vila.
+              </p>
 
-      <h3>Quadrado</h3>
-      <p>
-        O Quadrado é o coração de Trancoso, com acesso a restaurantes, lojas e à vida local.
-      </p>
+              <div class="articlePull">
+                <p>
+                  Em Trancoso, a hospedagem não é apenas base logística. Ela participa diretamente da qualidade e da atmosfera da viagem.
+                </p>
+              </div>
+            </section>
 
-      <h3>Praias</h3>
-      <p>
-        Hospedar-se próximo ao mar oferece uma experiência mais tranquila e contemplativa.
-      </p>
+            <section>
+              <h2>As principais regiões para se hospedar em Trancoso</h2>
 
-      <h3>Casas privadas</h3>
-      <p>
-        Casas oferecem mais espaço, privacidade e uma experiência mais íntima do destino.
-      </p>
+              <h3>Quadrado</h3>
+              <p>
+                O Quadrado é o coração de Trancoso, com acesso a restaurantes, lojas e à vida local.
+                Para quem quer estar próximo do centro histórico e do movimento da vila, é uma escolha estratégica.
+              </p>
 
-      <h2>Casa ou pousada: qual escolher?</h2>
-      <p>
-        Casas permitem mais liberdade e uma experiência mais personalizada do que hospedagens tradicionais.
-      </p>
+              <h3>Praias</h3>
+              <p>
+                Hospedar-se próximo ao mar oferece uma experiência mais tranquila e contemplativa.
+                É uma boa opção para quem valoriza paisagem, silêncio e maior proximidade com a natureza.
+              </p>
 
-      <h2>Por que escolher uma casa em Trancoso</h2>
+              <h3>Casas privadas</h3>
+              <p>
+                Casas oferecem mais espaço, privacidade e uma experiência mais íntima do destino.
+                Em muitos casos, permitem uma relação mais personalizada com Trancoso.
+              </p>
+            </section>
 
-      <ul>
-        <li>Mais privacidade</li>
-        <li>Espaço e conforto</li>
-        <li>Experiência mais exclusiva</li>
-      </ul>
+            <section>
+              <h2>Casa ou pousada: qual escolher?</h2>
+              <p>
+                A resposta depende do estilo da viagem. Pousadas podem funcionar bem para estadias mais compactas
+                e com dinâmica mais tradicional. Já as casas costumam favorecer estadias com mais liberdade,
+                privacidade e flexibilidade.
+              </p>
+              <p>
+                Para quem busca uma experiência mais autoral e menos padronizada, casas tendem a oferecer
+                uma forma mais sensível de viver o destino.
+              </p>
+            </section>
 
-      <h2>Casas com identidade própria</h2>
+            <section>
+              <h2>Por que escolher uma casa em Trancoso</h2>
 
-      <p>
-        Algumas casas em Trancoso oferecem uma experiência única, combinando arquitetura, natureza e atmosfera.
-      </p>
+              <ul>
+                <li>Mais privacidade</li>
+                <li>Mais espaço e conforto</li>
+                <li>Experiência mais exclusiva</li>
+                <li>Maior autonomia na rotina da estadia</li>
+              </ul>
 
-      <p>
-        <a href="/pt/casas/">Conheça as casas disponíveis</a>
-      </p>
-<p>
-  Além de escolher onde se hospedar, também vale planejar o que fazer em Trancoso ao longo da estadia — entre praias, Quadrado e experiências que revelam o ritmo da vila.
-  <a href="/pt/blog/o-que-fazer-em-trancoso/">Veja também nosso guia sobre o que fazer em Trancoso</a>.
-</p>
-      <h2>Quando ir para Trancoso</h2>
-      <p>
-        Trancoso pode ser visitado o ano inteiro, com maior demanda no verão e réveillon.
-      </p>
+              <div class="articleHighlight">
+                <h3>Quando a casa faz diferença</h3>
+                <p>
+                  Em Trancoso, uma casa bem escolhida pode transformar a viagem em algo mais silencioso,
+                  íntimo e conectado à paisagem e ao ritmo local.
+                </p>
+              </div>
+            </section>
 
-      <h2>Perguntas frequentes</h2>
+            <section>
+              <h2>Casas com identidade própria</h2>
 
-      <h3>Qual a melhor região?</h3>
-      <p>Depende do estilo da viagem.</p>
+              <p>
+                Algumas casas em Trancoso oferecem uma experiência singular, combinando arquitetura,
+                natureza, materialidade e atmosfera.
+              </p>
 
-      <h3>Vale a pena alugar casa?</h3>
-      <p>Sim, para quem busca mais exclusividade.</p>
+              <p>
+                Mais do que acomodação, tornam-se parte da memória da viagem e da maneira como o destino é vivido.
+              </p>
 
-    </article>
+              <p>
+                <a href="/pt/casas/">Conheça as casas disponíveis</a>
+              </p>
+            </section>
+
+            <section>
+              <h2>Planeje também a experiência da estadia</h2>
+              <p>
+                Além de escolher onde se hospedar, também vale planejar o que fazer em Trancoso ao longo da estadia —
+                entre praias, Quadrado e experiências que revelam o ritmo da vila.
+              </p>
+              <p>
+                <a href="/pt/blog/o-que-fazer-em-trancoso/">Veja também nosso guia sobre o que fazer em Trancoso</a>.
+              </p>
+            </section>
+
+            <section>
+              <h2>Quando ir para Trancoso</h2>
+              <p>
+                Trancoso pode ser visitado o ano inteiro, com maior demanda no verão e no réveillon.
+                Em períodos mais tranquilos, o destino tende a revelar ainda melhor seu lado mais silencioso e contemplativo.
+              </p>
+            </section>
+
+            <section>
+              <h2>Perguntas frequentes</h2>
+
+              <div class="articleFaq">
+                <details>
+                  <summary>Qual é a melhor região para ficar em Trancoso?</summary>
+                  <div class="answer">
+                    Depende do estilo da viagem. O Quadrado favorece proximidade com a vida da vila; regiões próximas às praias costumam oferecer uma experiência mais contemplativa.
+                  </div>
+                </details>
+
+                <details>
+                  <summary>Vale a pena alugar casa em Trancoso?</summary>
+                  <div class="answer">
+                    Sim, especialmente para quem busca mais exclusividade, espaço, privacidade e uma experiência menos padronizada.
+                  </div>
+                </details>
+
+                <details>
+                  <summary>Trancoso funciona melhor para poucos dias ou estadias mais longas?</summary>
+                  <div class="answer">
+                    O destino pode funcionar bem em viagens curtas, mas estadias um pouco mais longas costumam permitir uma vivência mais completa e desacelerada.
+                  </div>
+                </details>
+              </div>
+            </section>
+
+            <section class="articleRelated">
+              <h2>Leituras relacionadas</h2>
+              <p>
+                Continue explorando Trancoso com outros conteúdos pensados para orientar a viagem com mais repertório e sensibilidade.
+              </p>
+
+              <div class="articleRelatedLinks">
+                <a href="/pt/blog/o-que-fazer-em-trancoso/">O que fazer em Trancoso: guia completo para viver o destino</a>
+                <a href="/pt/localizacao/">Veja nossa página de localização</a>
+                <a href="/pt/casas/">Conheça as casas</a>
+              </div>
+            </section>
+
+          </div>
+
+          <aside class="articleAside">
+            <div class="articleAsideCard">
+              <h3>Resumo rápido</h3>
+              <ul>
+                <li>Quadrado para vida de vila</li>
+                <li>Praias para atmosfera mais contemplativa</li>
+                <li>Casas para privacidade e espaço</li>
+                <li>Hospedagem influencia toda a viagem</li>
+              </ul>
+            </div>
+
+            <div class="articleAsideCard">
+              <h3>Hospedagem com identidade</h3>
+              <p>
+                Para quem busca uma experiência mais íntima e autoral em Trancoso.
+              </p>
+              <a class="btn btnPrimary" href="/pt/casas/">Conheça as casas</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
   </main>
 
   <div id="site-footer"></div>
 
   <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/seo-meta.js"></script>
+  <script src="/assets/js/seo-schema.js"></script>
 </body>
 </html>

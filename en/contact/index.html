@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-seo-page="contact-en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Contact | Casas da Vila</title>
   <meta
     name="description"
-    content="Contact Casas da Vila in Trancoso for reservations, questions and information about your stay."
+    content="Contact Casas da Vila in Trancoso for reservations, questions and details about your stay."
   />
 
   <link rel="stylesheet" href="/assets/css/global.css" />
@@ -16,432 +16,722 @@
   <style>
     .contactHero{
       position:relative;
-      min-height:68svh;
-      padding-top:calc(var(--header-h) + 18px);
+      min-height:100svh;
+      padding-top:calc(var(--header-h, 88px) + 44px);
+      padding-bottom:84px;
       overflow:hidden;
+      background:
+        linear-gradient(180deg, rgba(14,18,20,.64) 0%, rgba(14,18,20,.44) 26%, rgba(14,18,20,.62) 100%),
+        url("/assets/img/home-jardim.jpg") center center / cover no-repeat;
     }
 
-    .contactHeroBg{
-      position:absolute;
-      inset:0;
-      z-index:0;
-    }
-
-    .contactHeroBg img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .contactHeroOverlay{
+    .contactHero::before{
+      content:"";
       position:absolute;
       inset:0;
       background:
-        linear-gradient(90deg, rgba(24,20,16,0.54) 0%, rgba(24,20,16,0.22) 42%, rgba(24,20,16,0.10) 100%),
-        linear-gradient(180deg, rgba(255,244,228,0.06) 0%, rgba(18,16,14,0.22) 100%);
+        linear-gradient(90deg, rgba(8,10,12,.18) 0%, rgba(8,10,12,.08) 35%, rgba(8,10,12,.24) 100%),
+        radial-gradient(circle at 18% 20%, rgba(214,183,129,.08), transparent 34%),
+        radial-gradient(circle at 82% 76%, rgba(255,255,255,.06), transparent 28%);
+      pointer-events:none;
+    }
+
+    .contactHero::after{
+      content:"";
+      position:absolute;
+      inset:auto 0 0 0;
+      height:140px;
+      background:linear-gradient(180deg, rgba(246,242,235,0) 0%, #f6f2eb 100%);
+      pointer-events:none;
+    }
+
+    .contactHeroInner{
+      position:relative;
+      z-index:2;
     }
 
     .contactHeroGrid{
-      position:relative;
-      z-index:2;
-      width:min(var(--container), calc(100% - 32px));
-      min-height:calc(68svh - var(--header-h) - 18px);
-      margin:0 auto;
       display:grid;
-      grid-template-columns:1.08fr .92fr;
+      grid-template-columns:minmax(320px,.84fr) minmax(620px,1.16fr);
       gap:40px;
-      align-items:end;
-      padding-bottom:34px;
-    }
-
-    .contactHeroContent{
-      max-width:780px;
-    }
-
-    .contactHeroEyebrow{
-      color:rgba(255,255,255,0.72);
-    }
-
-    .contactHeroTitle{
-      color:#fff;
-      text-shadow:0 10px 30px rgba(0,0,0,0.18);
-      max-width:760px;
-    }
-
-    .contactHeroText{
-      margin:22px 0 0;
-      max-width:620px;
-      font-size:18px;
-      line-height:1.8;
-      color:rgba(255,255,255,0.88);
-    }
-
-    .contactHeroCard{
-      max-width:360px;
-      margin-left:auto;
-      padding:24px;
-      border-radius:28px;
-      background:rgba(255,252,248,0.78);
-      border:1px solid rgba(255,255,255,0.46);
-      box-shadow:var(--shadow-lg);
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
-    }
-
-    .contactHeroCard .eyebrow{
-      margin-bottom:10px;
-    }
-
-    .contactHeroCard p{
-      margin:0;
-      color:var(--text-soft);
-      line-height:1.74;
-    }
-
-    .contactMain{
-      padding-top:84px;
-      padding-bottom:84px;
-    }
-
-    .contactGrid{
-      display:grid;
-      grid-template-columns:1.02fr .98fr;
-      gap:24px;
       align-items:start;
     }
 
-    .contactPanel,
-    .contactInfoPanel{
-      padding:34px;
-      border-radius:32px;
-      background:rgba(255,252,248,0.78);
-      border:1px solid rgba(255,255,255,0.56);
-      box-shadow:var(--shadow-lg);
+    .contactIntro{
+      padding-top:18px;
+      color:#f6f1e8;
+    }
+
+    .contactIntro .page-eyebrow{
+      display:inline-block;
+      margin-bottom:18px;
+      color:rgba(255,255,255,.80);
+    }
+
+    .contactIntro .h1{
+      margin:0;
+      max-width:10ch;
+      color:#fff;
+      letter-spacing:-.045em;
+      text-wrap:balance;
+    }
+
+    .contactIntro .page-lead{
+      margin-top:20px;
+      max-width:33ch;
+      color:rgba(255,255,255,.88);
+    }
+
+    .contactIntroText{
+      margin-top:24px;
+      max-width:38ch;
+    }
+
+    .contactIntroText .copy{
+      color:rgba(255,255,255,.78);
+      line-height:1.88;
     }
 
     .contactPanel{
-      display:grid;
-      gap:20px;
-    }
-
-    .contactPanel .lead{
+      position:relative;
+      width:100%;
       max-width:760px;
-    }
-
-    .contactMethods{
-      display:grid;
-      gap:16px;
-      margin-top:6px;
-    }
-
-    .contactMethod{
-      display:grid;
-      grid-template-columns:minmax(0, 1fr) auto;
-      align-items:start;
-      gap:20px;
-      padding:20px;
-      border-radius:24px;
-      background:rgba(255,255,255,0.72);
-      border:1px solid rgba(92,71,54,0.08);
-    }
-
-    .contactMethodMain{
-      min-width:0;
-    }
-
-    .contactMethodLabel{
-      display:block;
-      margin-bottom:8px;
-      font-size:12px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:var(--text-soft);
-    }
-
-    .contactMethodValue{
-      display:block;
-      min-width:0;
-      max-width:100%;
-      font-family:var(--font-serif);
-      font-size:28px;
-      line-height:1.08;
-      letter-spacing:-0.02em;
-      color:var(--text);
-      text-decoration:none;
-    }
-
-    .contactMethodValue.isEmail{
-      white-space:nowrap;
+      margin-left:auto;
+      border:1px solid rgba(236,224,202,.30);
+      background:linear-gradient(180deg, rgba(29,34,35,.66) 0%, rgba(29,34,35,.56) 100%);
+      backdrop-filter:blur(22px);
+      -webkit-backdrop-filter:blur(22px);
+      border-radius:34px;
+      padding:32px 30px 28px;
+      box-shadow:
+        0 28px 80px rgba(0,0,0,.22),
+        inset 0 1px 0 rgba(255,255,255,.08);
       overflow:hidden;
-      text-overflow:ellipsis;
     }
 
-    .contactMethodText{
-      margin:8px 0 0;
-      color:var(--text-soft);
-      line-height:1.72;
-      max-width:520px;
+    .contactPanel::before{
+      content:"";
+      position:absolute;
+      inset:0 0 auto 0;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+      pointer-events:none;
     }
 
-    .contactMethodAction{
-      align-self:start;
-      white-space:nowrap;
+    .contactPanelHead{
+      text-align:center;
+      margin-bottom:24px;
     }
 
-    .contactInfoPanel{
+    .contactKicker,
+    .contactSuccessKicker{
+      display:inline-block;
+      margin-bottom:12px;
+      font-size:.72rem;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      color:rgba(246,241,232,.76);
+    }
+
+    .contactPanelIntro{
+      margin:0 auto;
+      max-width:36ch;
+      color:rgba(255,255,255,.90);
+      font-size:1rem;
+      line-height:1.84;
+      text-wrap:balance;
+    }
+
+    .contactFormGrid{
       display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
       gap:18px;
     }
 
-    .contactInfoBlock{
-      padding:22px;
-      border-radius:24px;
-      background:rgba(255,255,255,0.68);
-      border:1px solid rgba(92,71,54,0.08);
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
 
-    .contactInfoBlock .eyebrow{
-      margin-bottom:10px;
+    .fieldMessage{
+      margin-top:18px;
     }
 
-    .contactInfoBlock p{
-      margin:0;
-      color:var(--text-soft);
-      line-height:1.78;
+    .label{
+      font-size:.74rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(246,241,232,.82);
+    }
+
+    .premiumInput{
+      width:100%;
+      min-height:60px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.94);
+      color:#1e2327;
+      padding:0 18px;
+      outline:none;
+      appearance:none;
+      font-size:1rem;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.65),
+        0 4px 14px rgba(0,0,0,.04);
+      transition:
+        border-color .28s ease,
+        background .28s ease,
+        transform .28s ease,
+        box-shadow .28s ease;
+    }
+
+    .premiumInput::placeholder,
+    .premiumTextarea::placeholder{
+      color:rgba(60,65,70,.46);
+    }
+
+    .premiumInput:focus,
+    .premiumTextarea:focus{
+      border-color:rgba(200,163,109,.82);
+      background:#fff;
+      box-shadow:
+        0 0 0 4px rgba(216,182,129,.12),
+        0 10px 24px rgba(0,0,0,.06);
+      transform:translateY(-1px);
+    }
+
+    select.premiumInput{
+      padding-right:50px;
+      background-image:
+        linear-gradient(45deg, transparent 50%, rgba(40,42,44,.60) 50%),
+        linear-gradient(135deg, rgba(40,42,44,.60) 50%, transparent 50%);
+      background-position:
+        calc(100% - 24px) calc(50% - 3px),
+        calc(100% - 18px) calc(50% - 3px);
+      background-size:6px 6px, 6px 6px;
+      background-repeat:no-repeat;
+    }
+
+    select.premiumInput option{
+      color:#15181a;
+    }
+
+    .premiumTextarea{
+      min-height:154px;
+      padding:18px;
+      resize:vertical;
+    }
+
+    .contactActions{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      margin-top:24px;
+      text-align:center;
+    }
+
+    .contactSubmit{
+      min-width:240px;
+      min-height:58px;
+      padding:0 28px;
+      border-radius:999px;
+      border:none;
+      cursor:pointer;
+      background:linear-gradient(180deg, #d8b681 0%, #c8a36d 100%);
+      color:#1b1a18;
+      font-size:.92rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-weight:600;
+      box-shadow:
+        0 14px 32px rgba(168,122,56,.22),
+        inset 0 1px 0 rgba(255,255,255,.26);
+      transition:transform .28s ease, box-shadow .28s ease, filter .28s ease, opacity .28s ease;
+    }
+
+    .contactSubmit:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.02);
+      box-shadow:
+        0 18px 36px rgba(168,122,56,.28),
+        inset 0 1px 0 rgba(255,255,255,.26);
+    }
+
+    .contactSubmit:disabled{
+      opacity:.65;
+      cursor:wait;
+    }
+
+    .contactPrivacy{
+      margin:2px 0 0;
+      max-width:48ch;
+      font-size:.9rem;
+      line-height:1.75;
+      color:rgba(255,255,255,.74);
+    }
+
+    .contactPrivacy a{
+      color:#efe2c9;
+      text-decoration:underline;
+      text-underline-offset:3px;
     }
 
     .contactNote{
-      padding-top:0;
-      padding-bottom:72px;
+      margin:0;
+      font-size:.9rem;
+      line-height:1.7;
+      color:rgba(255,255,255,.66);
     }
 
-    .contactNotePanel{
-      padding:42px;
-      border-radius:32px;
-      background:rgba(255,252,248,0.76);
-      border:1px solid rgba(255,255,255,0.56);
-      box-shadow:var(--shadow-lg);
+    .contactError{
+      display:none;
+      margin:8px 0 0;
+      font-size:.92rem;
+      line-height:1.7;
+      color:#ffe0d2;
     }
 
-    .contactNotePanel .lead{
-      max-width:860px;
+    .contactError.is-visible{
+      display:block;
     }
 
-    @media (max-width: 1100px){
-      .contactHeroGrid,
-      .contactGrid{
-        grid-template-columns:1fr;
-      }
-
-      .contactHeroCard{
-        margin-left:0;
-        max-width:460px;
-      }
+    .contactSuccess{
+      position:relative;
+      border:1px solid rgba(236,224,202,.30);
+      background:linear-gradient(180deg, rgba(29,34,35,.72) 0%, rgba(29,34,35,.62) 100%);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-radius:28px;
+      padding:34px 28px 30px;
+      text-align:center;
+      opacity:0;
+      transform:translateY(10px) scale(.985);
+      pointer-events:none;
+      transition:opacity .6s ease, transform .6s ease;
     }
 
-    @media (max-width: 760px){
-      .contactHero{
-        min-height:auto;
-      }
+    .contactSuccess.is-visible{
+      opacity:1;
+      transform:translateY(0) scale(1);
+      pointer-events:auto;
+    }
 
+    .contactSuccess::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(216,182,129,.18), transparent 42%);
+      pointer-events:none;
+    }
+
+    .contactSuccess h3{
+      margin:0 0 12px;
+      font-size:1.7rem;
+      line-height:1.14;
+      letter-spacing:-.03em;
+      color:#fff;
+      font-weight:500;
+    }
+
+    .contactSuccess p{
+      margin:0 auto;
+      max-width:39ch;
+      color:rgba(255,255,255,.80);
+      line-height:1.82;
+    }
+
+    .contactSuccessActions{
+      margin-top:22px;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .contactSuccessActions .btn{
+      min-height:50px;
+      padding:0 20px;
+      border-radius:999px;
+    }
+
+    .contactClosing{
+      position:relative;
+      padding:0 0 96px;
+      background:#f6f2eb;
+    }
+
+    .contactClosingCard{
+      max-width:980px;
+      margin:0 auto;
+      padding:54px 40px;
+      border-radius:34px;
+      background:linear-gradient(180deg, #ffffff 0%, #f7f4ee 100%);
+      box-shadow:
+        0 30px 70px rgba(41,34,24,.08),
+        inset 0 1px 0 rgba(255,255,255,.82);
+      text-align:center;
+    }
+
+    .contactClosingCard .eyebrow{
+      color:rgba(26,27,28,.46);
+    }
+
+    .contactClosingCard .h2{
+      max-width:11ch;
+      margin:18px auto 0;
+      color:#1e2327;
+      letter-spacing:-.045em;
+      text-wrap:balance;
+    }
+
+    .contactClosingCard .copy{
+      max-width:56ch;
+      margin:18px auto 0;
+      color:#5c6064;
+      line-height:1.9;
+    }
+
+    [data-reveal]{
+      opacity:0;
+      transform:translate3d(0,12px,0);
+      filter:blur(12px);
+      will-change:opacity, transform, filter;
+      transition:
+        opacity .9s cubic-bezier(.22,.61,.36,1),
+        transform .9s cubic-bezier(.22,.61,.36,1),
+        filter .9s cubic-bezier(.22,.61,.36,1);
+    }
+
+    [data-reveal].is-visible{
+      opacity:1;
+      transform:translate3d(0,0,0);
+      filter:blur(0);
+    }
+
+    .contactIntro[data-reveal]{ transition-delay:.05s; }
+    .contactPanel[data-reveal]{ transition-delay:.12s; }
+    .contactClosingCard[data-reveal]{ transition-delay:.08s; }
+
+    .hp-wrap{
+      position:absolute !important;
+      left:-9999px !important;
+      width:1px !important;
+      height:1px !important;
+      overflow:hidden !important;
+      opacity:0 !important;
+      pointer-events:none !important;
+    }
+
+    @media (max-width:1100px){
       .contactHeroGrid{
-        min-height:calc(70svh - var(--header-h) - 18px);
-        gap:24px;
-        padding-bottom:26px;
+        grid-template-columns:1fr;
+        gap:28px;
       }
 
-      .contactHeroText{
-        font-size:17px;
-        line-height:1.74;
+      .contactIntro{
+        padding-top:0;
+        max-width:760px;
       }
 
-      .contactHeroCard,
-      .contactPanel,
-      .contactInfoPanel,
-      .contactInfoBlock,
-      .contactMethod,
-      .contactNotePanel{
-        padding:22px;
+      .contactIntro .h1{
+        max-width:11ch;
+      }
+
+      .contactPanel{
+        margin-left:0;
+        max-width:100%;
+      }
+    }
+
+    @media (max-width:860px){
+      .contactHero{
+        padding-top:calc(var(--header-h, 88px) + 34px);
+        padding-bottom:72px;
+      }
+
+      .contactIntro .h1{
+        max-width:none;
+      }
+
+      .contactPanel{
         border-radius:24px;
+        padding:24px 18px 22px;
       }
 
-      .contactMain{
-        padding-top:60px;
-        padding-bottom:64px;
-      }
-
-      .contactMethod{
+      .contactFormGrid{
         grid-template-columns:1fr;
       }
 
-      .contactMethodValue{
-        font-size:24px;
+      .premiumInput{
+        min-height:56px;
+        border-radius:16px;
       }
 
-      .contactMethodValue.isEmail{
-        white-space:normal;
-        overflow:visible;
-        text-overflow:clip;
-        overflow-wrap:anywhere;
-        word-break:break-word;
+      .premiumTextarea{
+        min-height:140px;
       }
 
-      .contactMethodAction{
+      .contactSubmit{
         width:100%;
       }
 
-      .contactMethodAction .btn{
-        width:100%;
+      .contactClosing{
+        padding-bottom:72px;
+      }
+
+      .contactClosingCard{
+        padding:36px 22px;
+        border-radius:26px;
+      }
+
+      .contactClosingCard .h2{
+        max-width:none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      [data-reveal]{
+        opacity:1 !important;
+        transform:none !important;
+        filter:none !important;
+        transition:none !important;
+      }
+
+      .contactSuccess{
+        transition:none !important;
       }
     }
   </style>
 </head>
-<body>
 
+<body>
   <div id="site-header"></div>
 
   <main>
-
     <section class="contactHero">
-      <div class="contactHeroBg">
-        <img src="/assets/img/home-jardim.jpg" alt="Contact Casas da Vila" />
-        <div class="contactHeroOverlay"></div>
-      </div>
+      <div class="container contactHeroInner">
+        <div class="contactHeroGrid">
 
-      <div class="contactHeroGrid">
-        <div class="contactHeroContent" data-reveal="left">
-          <p class="eyebrow contactHeroEyebrow shimmerLine">Casas da Vila • Contact</p>
+          <div class="contactIntro" data-reveal>
+            <span class="eyebrow page-eyebrow">Contact & Reservations</span>
 
-          <h1 class="display contactHeroTitle">
-            A stay begins<br>
-            with the way<br>
-            one is received.
-          </h1>
+            <h1 class="h1">
+              Plan your stay with our team.
+            </h1>
 
-          <p class="contactHeroText">
-            For reservations, questions and arrival details, our team is available by email or
-            WhatsApp, offering thoughtful, direct assistance throughout.
-          </p>
-        </div>
+            <p class="page-lead lead">
+              For reservations, questions and arrival details, our team follows each contact with clarity,
+              care and the same calm language that defines the Casas da Vila experience.
+            </p>
 
-        <div class="contactHeroCard heroFloat" data-reveal="right">
-          <p class="eyebrow">Assistance</p>
-          <p>
-            Before booking or once your trip is already taking shape, we are here to guide you with
-            clarity on houses, dates, availability and stay details.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section contactMain">
-      <div class="wrap">
-        <div class="contactGrid">
-
-          <div class="contactPanel" data-reveal="left">
-            <div>
-              <p class="eyebrow">Contact</p>
-              <h2 class="h2">Reach us through the channel you prefer</h2>
-              <p class="lead mt-16">
-                We are available to support your reservation, answer questions and assist with the
-                details of your arrival and stay.
+            <div class="contactIntroText">
+              <p class="copy">
+                After you send your message, we will reply with guidance on availability, houses,
+                number of guests, dates and the details that matter most for a smooth decision and arrival.
               </p>
             </div>
+          </div>
 
-            <div class="contactMethods">
-
-              <div class="contactMethod">
-                <div class="contactMethodMain">
-                  <span class="contactMethodLabel">Email</span>
-                  <a class="contactMethodValue isEmail" href="mailto:casasdavila@casasdavila.com">
-                    casasdavila@casasdavila.com
-                  </a>
-                  <p class="contactMethodText">
-                    Ideal for general enquiries, stay information and messages that do not require an
-                    immediate reply.
-                  </p>
-                </div>
-
-                <div class="contactMethodAction">
-                  <a class="btn btnGhost" href="mailto:casasdavila@casasdavila.com">Send email</a>
-                </div>
+          <div class="contactPanel" data-reveal>
+            <form class="amanContactForm" id="contact-form" novalidate>
+              <div class="hp-wrap" aria-hidden="true">
+                <label for="contact-company">Company</label>
+                <input type="text" id="contact-company" name="company" tabindex="-1" autocomplete="off" />
               </div>
 
-              <div class="contactMethod">
-                <div class="contactMethodMain">
-                  <span class="contactMethodLabel">WhatsApp</span>
-                  <a class="contactMethodValue" href="https://wa.me/5573991435522" target="_blank" rel="noopener noreferrer">
-                    +55 73 99143-5522
-                  </a>
-                  <p class="contactMethodText">
-                    Best for quicker assistance, availability questions and practical support before
-                    arrival.
-                  </p>
+              <div class="hp-wrap" aria-hidden="true">
+                <label for="contact-website">Website</label>
+                <input type="text" id="contact-website" name="website" tabindex="-1" autocomplete="off" />
+              </div>
+
+              <input type="hidden" id="contact-started-at" name="formStartedAt" value="" />
+
+              <div class="contactPanelHead">
+                <span class="contactKicker">Direct assistance</span>
+                <p class="contactPanelIntro">
+                  Share your question, booking intent or preferred dates. Our team will reply with availability,
+                  practical guidance and the next steps for your stay.
+                </p>
+              </div>
+
+              <div class="contactFormGrid">
+                <div class="field">
+                  <label class="label" for="contact-name">Name</label>
+                  <input
+                    class="premiumInput"
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    placeholder="Your full name"
+                    required
+                  />
                 </div>
 
-                <div class="contactMethodAction">
-                  <a
-                    class="btn btnPrimary"
-                    href="https://wa.me/5573991435522"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <div class="field">
+                  <label class="label" for="contact-email">Email</label>
+                  <input
+                    class="premiumInput"
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    placeholder="you@email.com"
+                    required
+                  />
+                </div>
+
+                <div class="field">
+                  <label class="label" for="contact-phone">Phone</label>
+                  <input
+                    class="premiumInput"
+                    id="contact-phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="+55 11 99999 9999"
+                  />
+                </div>
+
+                <div class="field">
+                  <label class="label" for="contact-interest">Subject</label>
+                  <select
+                    class="premiumInput"
+                    id="contact-interest"
+                    name="interest"
+                    required
                   >
-                    Open WhatsApp
-                  </a>
+                    <option value="">Select</option>
+                    <option value="Reservation">Reservation</option>
+                    <option value="Availability">Availability</option>
+                    <option value="Question about houses">Question about houses</option>
+                    <option value="Arrival and access">Arrival and access</option>
+                    <option value="Stay and services">Stay and services</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
               </div>
 
+              <div class="contactFormGrid">
+                <div class="field">
+                  <label class="label" for="contact-checkin">Check-in</label>
+                  <input
+                    class="premiumInput"
+                    id="contact-checkin"
+                    name="checkin"
+                    type="date"
+                  />
+                </div>
+
+                <div class="field">
+                  <label class="label" for="contact-checkout">Check-out</label>
+                  <input
+                    class="premiumInput"
+                    id="contact-checkout"
+                    name="checkout"
+                    type="date"
+                  />
+                </div>
+
+                <div class="field">
+                  <label class="label" for="contact-guests">Guests</label>
+                  <select
+                    class="premiumInput"
+                    id="contact-guests"
+                    name="guests"
+                  >
+                    <option value="">Select</option>
+                    <option value="1">1 guest</option>
+                    <option value="2">2 guests</option>
+                    <option value="3">3 guests</option>
+                    <option value="4">4 guests</option>
+                    <option value="5+">5 or more</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label class="label" for="contact-house">House of interest</label>
+                  <select
+                    class="premiumInput"
+                    id="contact-house"
+                    name="house_interest"
+                  >
+                    <option value="">Select</option>
+                    <option value="Casa Rosada">Casa Rosada</option>
+                    <option value="Ateliê Azul">Ateliê Azul</option>
+                    <option value="Casa Grande">Casa Grande</option>
+                    <option value="Other / still deciding">Other / still deciding</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field fieldMessage">
+                <label class="label" for="contact-message">Message</label>
+                <textarea
+                  class="premiumInput premiumTextarea"
+                  id="contact-message"
+                  name="message"
+                  placeholder="Tell us a bit about your preferred dates, number of guests or any important detail for your stay."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="contactActions">
+                <button class="contactSubmit" id="contact-submit" type="submit">
+                  Send message
+                </button>
+
+                <p class="contactPrivacy">
+                  By sending this form, you confirm that you have read our
+                  <a href="/en/privacy-policy/">Privacy Policy</a>.
+                </p>
+
+                <p class="contactNote">
+                  Your message will be received by our team and can also be followed up via
+                  <strong>WhatsApp: +55 73 99143-5522</strong>.
+                </p>
+
+                <p class="contactError" id="contact-error">
+                  We could not send your message right now. Please try again in a moment.
+                </p>
+              </div>
+            </form>
+
+            <div class="contactSuccess" id="contact-success" aria-live="polite" hidden>
+              <span class="contactSuccessKicker">Thank you</span>
+              <h3>Your message has been received.</h3>
+              <p>
+                Our team will reply with care and clarity to guide your booking, availability
+                and the next details of your stay.
+              </p>
+
+              <div class="contactSuccessActions">
+                <a class="btn btnPrimary" href="/en/book/">See availability</a>
+                <a class="btn btnGhost" href="/en/houses/">View houses</a>
+              </div>
             </div>
           </div>
-
-          <aside class="contactInfoPanel" data-reveal="right">
-            <div class="contactInfoBlock">
-              <p class="eyebrow">Reservations</p>
-              <p>
-                To check availability, it is best to begin with the booking page and, if needed,
-                complement the process through WhatsApp or email.
-              </p>
-            </div>
-
-            <div class="contactInfoBlock">
-              <p class="eyebrow">Arrival</p>
-              <p>
-                In time, this page may also gather directions, access details and arrival support,
-                while preserving the same calm tone found across the site.
-              </p>
-            </div>
-
-            <div class="contactInfoBlock">
-              <p class="eyebrow">The stay</p>
-              <p>
-                You may reach out before, during or after booking, always with the purpose of making
-                the experience feel smoother, simpler and more welcoming.
-              </p>
-            </div>
-          </aside>
 
         </div>
       </div>
     </section>
 
-    <section class="section contactNote">
-      <div class="wrap">
-        <div class="contactNotePanel" data-reveal="zoom">
-          <p class="eyebrow">Stay</p>
-          <h2 class="h2">A good experience also begins in the way it is welcomed</h2>
-          <p class="lead mt-16">
-            At Casas da Vila, contact should feel as simple as the stay itself: clear, warm and free
-            of friction — a natural beginning to the experience.
+    <section class="contactClosing">
+      <div class="container">
+        <div class="contactClosingCard" data-reveal>
+          <span class="eyebrow">Hospitality</span>
+
+          <h2 class="h2">
+            A good stay begins in the way you are welcomed.
+          </h2>
+
+          <p class="copy">
+            At Casas da Vila, contact should feel as simple as the stay itself: clear, kind,
+            direct and without friction — a natural beginning to your time in Trancoso.
           </p>
-
-          <div class="ctaRow mt-26">
-            <a class="btn btnPrimary" href="/en/book/">Check availability</a>
-            <a class="btn btnGhost" href="mailto:casasdavila@casasdavila.com">Send email</a>
-          </div>
         </div>
       </div>
     </section>
-
   </main>
 
   <div id="site-footer"></div>
@@ -449,5 +739,129 @@
   <script src="/assets/js/ui.js"></script>
   <script src="/assets/js/main.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script src="/assets/js/seo-meta.js"></script>
+  <script src="/assets/js/seo-schema.js"></script>
+
+  <script>
+    (function () {
+      const elements = document.querySelectorAll('[data-reveal]');
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.18,
+          rootMargin: '0px 0px -10% 0px'
+        });
+
+        elements.forEach((el) => observer.observe(el));
+      } else {
+        elements.forEach((el) => el.classList.add('is-visible'));
+      }
+
+      const form = document.getElementById('contact-form');
+      const submitButton = document.getElementById('contact-submit');
+      const errorBox = document.getElementById('contact-error');
+      const successBox = document.getElementById('contact-success');
+      const startedAtField = document.getElementById('contact-started-at');
+      const checkinField = document.getElementById('contact-checkin');
+      const checkoutField = document.getElementById('contact-checkout');
+
+      if (startedAtField) {
+        startedAtField.value = String(Date.now());
+      }
+
+      function formatToday() {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        return `${yyyy}-${mm}-${dd}`;
+      }
+
+      function addDays(dateStr, days) {
+        const date = new Date(dateStr + 'T12:00:00');
+        date.setDate(date.getDate() + days);
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const d = String(date.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+      }
+
+      if (checkinField && checkoutField) {
+        const today = formatToday();
+        checkinField.min = today;
+        checkoutField.min = addDays(today, 1);
+
+        checkinField.addEventListener('change', function () {
+          if (!checkinField.value) return;
+          const minCheckout = addDays(checkinField.value, 1);
+          checkoutField.min = minCheckout;
+
+          if (!checkoutField.value || checkoutField.value <= checkinField.value) {
+            checkoutField.value = minCheckout;
+          }
+        });
+      }
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        errorBox.classList.remove('is-visible');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+
+        const formData = new FormData(form);
+
+        const payload = {
+          locale: 'en',
+          page: window.location.pathname,
+          name: formData.get('name'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          interest: formData.get('interest'),
+          checkin: formData.get('checkin'),
+          checkout: formData.get('checkout'),
+          guests: formData.get('guests'),
+          house_interest: formData.get('house_interest'),
+          message: formData.get('message'),
+          company: formData.get('company'),
+          website: formData.get('website'),
+          formStartedAt: formData.get('formStartedAt')
+        };
+
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          const result = await response.json();
+
+          if (!response.ok || !result.ok) {
+            throw new Error(result.error || 'Failed to send');
+          }
+
+          form.style.display = 'none';
+          successBox.hidden = false;
+
+          requestAnimationFrame(() => {
+            successBox.classList.add('is-visible');
+          });
+        } catch (error) {
+          errorBox.classList.add('is-visible');
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Send message';
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

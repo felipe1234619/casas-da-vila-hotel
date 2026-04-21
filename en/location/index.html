@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-seo-page="location-en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -245,8 +245,7 @@
       margin:0;
       overflow:hidden;
       border-radius:30px;
-      background:
-        linear-gradient(180deg, rgba(247,229,178,0.96) 0%, rgba(241,218,164,0.96) 100%);
+      background:linear-gradient(180deg, rgba(247,229,178,0.96) 0%, rgba(241,218,164,0.96) 100%);
       border:1px solid rgba(92,71,54,0.08);
       box-shadow:
         0 24px 60px rgba(35,24,12,0.10),
@@ -256,88 +255,113 @@
     .locationMapMedia{
       position:relative;
       padding:16px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 100%);
+      background:linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 100%);
     }
 
-.mapFrame{
-  position:relative;
-  border-radius:32px;
-  overflow:hidden;
-  background:#f1ddaa;
-  box-shadow:
-    0 40px 80px rgba(0,0,0,.18),
-    inset 0 1px 0 rgba(255,255,255,.2);
-  transition:box-shadow .35s ease;
-  will-change:auto;
-}
-
-.mapFrame:hover{
-  box-shadow:
-    0 50px 95px rgba(0,0,0,.22),
-    inset 0 1px 0 rgba(255,255,255,.22);
-}
-.mapDynamicImage{
-  width:100%;
-  height:auto;
-  display:block;
-  object-fit:contain;
-  aspect-ratio:auto;
-  transform:none;
-  transition:opacity .6s ease;
-  will-change:opacity;
-}
-
-.mapFrame:hover .mapDynamicImage{
-  transform:none;
-}
-    .mapPin{
-      position:absolute;
-      top:41%;
-      left:24%;
-      transform:translate(-50%, -50%) translateZ(42px);
-      z-index:3;
-    }
-
-    .mapPin span{
+    .mapFrame{
       position:relative;
-      display:block;
-      width:18px;
-      height:18px;
-      border-radius:50%;
-      background:#fff;
+      border-radius:32px;
+      overflow:hidden;
+      background:#f1ddaa;
       box-shadow:
-        0 0 0 0 rgba(255,255,255,.46),
-        0 10px 24px rgba(0,0,0,.16);
-      animation:mapPulseSoft 2.8s infinite;
+        0 40px 80px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.2);
+      transition:box-shadow .35s ease, transform .22s ease;
+      will-change:transform;
     }
 
-    .mapPin span::after{
-      content:"";
+    .mapFrame:hover{
+      box-shadow:
+        0 50px 95px rgba(0,0,0,.22),
+        inset 0 1px 0 rgba(255,255,255,.22);
+    }
+
+    .mapDynamicImage{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit:contain;
+      aspect-ratio:auto;
+      transform:none;
+      transition:opacity .6s ease;
+      will-change:opacity;
+    }
+
+    .mapFrame:hover .mapDynamicImage{
+      transform:none;
+    }
+
+    .mapHotspot{
       position:absolute;
-      inset:4px;
-      border-radius:50%;
-      background:rgba(200,99,59,.92);
+      z-index:4;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border:1px solid rgba(255,255,255,0.62);
+      border-radius:999px;
+      background:rgba(255,252,248,0.88);
+      color:var(--text);
+      font:inherit;
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      cursor:pointer;
+      box-shadow:
+        0 10px 24px rgba(0,0,0,.14),
+        inset 0 1px 0 rgba(255,255,255,.42);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        background .22s ease,
+        border-color .22s ease;
     }
 
-    @keyframes mapPulseSoft{
-      0%{
-        box-shadow:
-          0 0 0 0 rgba(255,255,255,.46),
-          0 10px 24px rgba(0,0,0,.16);
-      }
-      70%{
-        box-shadow:
-          0 0 0 20px rgba(255,255,255,0),
-          0 16px 30px rgba(0,0,0,.14);
-      }
-      100%{
-        box-shadow:
-          0 0 0 0 rgba(255,255,255,0),
-          0 10px 24px rgba(0,0,0,.16);
-      }
+    .mapHotspot:hover,
+    .mapHotspot[aria-expanded="true"]{
+      background:rgba(255,255,255,0.96);
+      border-color:rgba(255,255,255,0.86);
+      box-shadow:
+        0 14px 30px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.5);
     }
 
+    .hotspot-casa{
+      top:36%;
+      left:21%;
+      transform:translate(-50%, -50%);
+    }
+
+    .hotspot-casa:hover,
+    .hotspot-casa[aria-expanded="true"]{
+      transform:translate(-50%, calc(-50% - 1px));
+    }
+
+    .hotspot-quadrado{
+      top:44%;
+      left:64%;
+      transform:translate(-50%, -50%);
+    }
+
+    .hotspot-quadrado:hover,
+    .hotspot-quadrado[aria-expanded="true"]{
+      transform:translate(-50%, calc(-50% - 1px));
+    }
+
+    .hotspot-praia{
+      top:66%;
+      left:19%;
+      transform:translate(-50%, -50%);
+    }
+
+    .hotspot-praia:hover,
+    .hotspot-praia[aria-expanded="true"]{
+      transform:translate(-50%, calc(-50% - 1px));
+    }
 
     .mapPopover{
       position:absolute;
@@ -353,7 +377,6 @@
       backdrop-filter:blur(12px);
       -webkit-backdrop-filter:blur(12px);
       opacity:0;
-      transform:translateY(8px) scale(.985);
       pointer-events:none;
       transition:
         opacity .32s ease,
@@ -362,7 +385,6 @@
 
     .mapPopover.is-open{
       opacity:1;
-      transform:translateY(0) scale(1);
       pointer-events:auto;
     }
 
@@ -383,8 +405,8 @@
     }
 
     .popover-casa{
-      top:45%;
-      left:28%;
+      top:40%;
+      left:24%;
       transform:translate(10px, 18px) scale(.985);
     }
 
@@ -393,8 +415,8 @@
     }
 
     .popover-quadrado{
-      top:50%;
-      left:58%;
+      top:47%;
+      left:56%;
       transform:translateY(8px) scale(.985);
     }
 
@@ -403,8 +425,8 @@
     }
 
     .popover-praia{
-      top:76%;
-      left:22%;
+      top:69%;
+      left:20%;
       transform:translateY(8px) scale(.985);
     }
 
@@ -643,33 +665,34 @@
       margin-top:18px;
     }
 
-    ..locationBookingGrid{
-  display:grid;
-  grid-template-columns:repeat(3, minmax(180px,1fr));
-  gap:14px;
-  align-items:end;
-}
+    .locationBookingGrid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(180px,1fr));
+      gap:14px;
+      align-items:end;
+    }
 
-.locationBookingField{
-  display:grid;
-  gap:8px;
-}
+    .locationBookingField{
+      display:grid;
+      gap:8px;
+    }
 
-.locationBookingField input,
-.locationBookingField select{
-  width:100%;
-  min-height:56px;
-  border-radius:18px;
-  border:1px solid rgba(92,71,54,0.10);
-  background:rgba(255,255,255,0.88);
-  color:var(--text);
-  padding:0 16px;
-  font:inherit;
-  outline:none;
-  box-shadow:none;
-  appearance:none;
-  -webkit-appearance:none;
-}
+    .locationBookingField input,
+    .locationBookingField select{
+      width:100%;
+      min-height:56px;
+      border-radius:18px;
+      border:1px solid rgba(92,71,54,0.10);
+      background:rgba(255,255,255,0.88);
+      color:var(--text);
+      padding:0 16px;
+      font:inherit;
+      outline:none;
+      box-shadow:none;
+      appearance:none;
+      -webkit-appearance:none;
+    }
+
     .locationBookingField input:focus,
     .locationBookingField select:focus{
       border-color:rgba(57,126,224,0.38);
@@ -813,32 +836,6 @@
         transform:none !important;
       }
 
-      .mapRouteTrigger{
-        left:14px;
-        bottom:14px;
-        min-height:36px;
-        padding:0 14px;
-        font-size:11px;
-        letter-spacing:.06em;
-      }
-
-      .mapRouteLabel{
-        left:50%;
-        top:60%;
-        transform:translate(-50%, 10px) scale(.985);
-        min-width:124px;
-        padding:11px 12px;
-        border-radius:16px;
-      }
-
-      .mapRouteLabel.is-visible{
-        transform:translate(-50%, 0) scale(1);
-      }
-
-      .mapRouteLabel strong{
-        font-size:19px;
-      }
-
       .mapHotspot{
         padding:7px 12px;
         font-size:11px;
@@ -926,52 +923,6 @@
         border-radius:18px;
       }
     }
-.hotspot-casa{
-  top:36%;
-  left:21%;
-  transform:translate(-50%, -50%);
-}
-
-.hotspot-quadrado{
-  top:44%;
-  left:64%;
-  transform:translate(-50%, -50%);
-}
-
-.hotspot-praia{
-  top:66%;
-  left:19%;
-  transform:translate(-50%, -50%);
-}
-.popover-casa{
-  top:40%;
-  left:24%;
-  transform:translate(10px, 18px) scale(.985);
-}
-
-.popover-casa.is-open{
-  transform:translate(10px, 10px) scale(1);
-}
-
-.popover-quadrado{
-  top:47%;
-  left:56%;
-  transform:translateY(8px) scale(.985);
-}
-
-.popover-quadrado.is-open{
-  transform:translateY(0) scale(1);
-}
-
-.popover-praia{
-  top:69%;
-  left:20%;
-  transform:translateY(8px) scale(.985);
-}
-
-.popover-praia.is-open{
-  transform:translateY(0) scale(1);
-}
   </style>
 </head>
 <body>
@@ -1097,10 +1048,35 @@
                       loading="lazy"
                     />
 
-                    <div class="mapPin">
-                      <span></span>
-                    </div>
+                    <button
+                      type="button"
+                      class="mapHotspot hotspot-casa"
+                      data-hotspot="casa"
+                      aria-expanded="false"
+                      aria-label="Show Casas da Vila on map"
+                    >
+                      Casas da Vila
+                    </button>
 
+                    <button
+                      type="button"
+                      class="mapHotspot hotspot-quadrado"
+                      data-hotspot="quadrado"
+                      aria-expanded="false"
+                      aria-label="Show Quadrado on map"
+                    >
+                      Quadrado
+                    </button>
+
+                    <button
+                      type="button"
+                      class="mapHotspot hotspot-praia"
+                      data-hotspot="praia"
+                      aria-expanded="false"
+                      aria-label="Show beach on map"
+                    >
+                      Beach
+                    </button>
 
                     <div class="mapPopover popover-casa" data-popover="casa" hidden>
                       <strong>Casas da Vila</strong>
@@ -1286,11 +1262,11 @@
                 are already included in the experience.
               </p>
 
-<form
-  class="locationBookingForm"
-  data-booking-form
-  data-booking-base="/en/book/"
->
+              <form
+                class="locationBookingForm"
+                data-booking-form
+                data-booking-base="/en/book/"
+              >
                 <div class="locationBookingGrid">
                   <div class="locationBookingField">
                     <label for="checkin-location-en">Check-in</label>
@@ -1381,7 +1357,19 @@
         frame.style.transform =
           `perspective(1400px) rotateX(${currentY * 0.9}deg) rotateY(${currentX * 0.9}deg) translateZ(0)`;
 
+        if (Math.abs(targetX - currentX) < 0.01 && Math.abs(targetY - currentY) < 0.01) {
+          if (targetX === 0 && targetY === 0) {
+            frame.style.transform = 'perspective(1400px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+            rafId = null;
+            return;
+          }
+        }
+
         rafId = requestAnimationFrame(animate);
+      }
+
+      function startAnimation() {
+        if (!rafId) animate();
       }
 
       function onMove(event) {
@@ -1391,13 +1379,13 @@
 
         targetX = (px - 0.5) * 6;
         targetY = (0.5 - py) * 6;
-
-        if (!rafId) animate();
+        startAnimation();
       }
 
       function reset() {
         targetX = 0;
         targetY = 0;
+        startAnimation();
       }
 
       if (window.matchMedia('(hover: hover)').matches) {
@@ -1482,83 +1470,82 @@
     })();
   </script>
 
-  </script>
+  <script>
+    (function () {
+      const forms = document.querySelectorAll('[data-booking-form]');
 
-<script>
-  (function () {
-    const forms = document.querySelectorAll("[data-booking-form]");
+      forms.forEach((form) => {
+        const base = form.getAttribute('data-booking-base') || '/en/book/';
 
-    forms.forEach((form) => {
-      const base = form.getAttribute("data-booking-base") || "/en/book/";
+        const checkin = form.querySelector('input[name="checkin"]');
+        const checkout = form.querySelector('input[name="checkout"]');
+        const guests = form.querySelector('select[name="guests"]');
 
-      const checkin = form.querySelector('input[name="checkin"]');
-      const checkout = form.querySelector('input[name="checkout"]');
-      const guests = form.querySelector('select[name="guests"]');
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const todayStr = `${yyyy}-${mm}-${dd}`;
 
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      const mm = String(today.getMonth() + 1).padStart(2, "0");
-      const dd = String(today.getDate()).padStart(2, "0");
-      const todayStr = `${yyyy}-${mm}-${dd}`;
+        function addDays(dateStr, days) {
+          const date = new Date(dateStr + 'T12:00:00');
+          date.setDate(date.getDate() + days);
+          const y = date.getFullYear();
+          const m = String(date.getMonth() + 1).padStart(2, '0');
+          const d = String(date.getDate()).padStart(2, '0');
+          return `${y}-${m}-${d}`;
+        }
 
-      function addDays(dateStr, days) {
-        const date = new Date(dateStr + "T12:00:00");
-        date.setDate(date.getDate() + days);
-        const y = date.getFullYear();
-        const m = String(date.getMonth() + 1).padStart(2, "0");
-        const d = String(date.getDate()).padStart(2, "0");
-        return `${y}-${m}-${d}`;
-      }
+        if (checkin) checkin.min = todayStr;
+        if (checkout) checkout.min = addDays(todayStr, 1);
 
-      if (checkin) checkin.min = todayStr;
-      if (checkout) checkout.min = addDays(todayStr, 1);
+        function updateCheckoutMin() {
+          if (!checkin || !checkout) return;
 
-      function updateCheckoutMin() {
-        if (!checkin || !checkout) return;
+          if (checkin.value) {
+            const minCheckout = addDays(checkin.value, 1);
+            checkout.min = minCheckout;
 
-        if (checkin.value) {
-          const minCheckout = addDays(checkin.value, 1);
-          checkout.min = minCheckout;
-
-          if (!checkout.value || checkout.value <= checkin.value) {
-            checkout.value = minCheckout;
+            if (!checkout.value || checkout.value <= checkin.value) {
+              checkout.value = minCheckout;
+            }
           }
         }
-      }
 
-      if (checkin) {
-        checkin.addEventListener("change", updateCheckoutMin);
-      }
-
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const checkinValue = checkin?.value || "";
-        const checkoutValue = checkout?.value || "";
-        const guestsValue = guests?.value || "";
-
-        if (!checkinValue || !checkoutValue || !guestsValue) {
-          alert("Please fill in check-in, check-out and number of guests.");
-          return;
+        if (checkin) {
+          checkin.addEventListener('change', updateCheckoutMin);
         }
 
-        if (checkoutValue <= checkinValue) {
-          alert("Check-out date must be at least one day after check-in.");
-          return;
-        }
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
 
-        const url = new URL(base, window.location.origin);
-        url.searchParams.set("checkin", checkinValue);
-        url.searchParams.set("checkout", checkoutValue);
-        url.searchParams.set("guests", guestsValue);
+          const checkinValue = checkin?.value || '';
+          const checkoutValue = checkout?.value || '';
+          const guestsValue = guests?.value || '';
 
-        window.location.href = url.toString();
+          if (!checkinValue || !checkoutValue || !guestsValue) {
+            alert('Please fill in check-in, check-out and number of guests.');
+            return;
+          }
+
+          if (checkoutValue <= checkinValue) {
+            alert('Check-out date must be at least one day after check-in.');
+            return;
+          }
+
+          const url = new URL(base, window.location.origin);
+          url.searchParams.set('checkin', checkinValue);
+          url.searchParams.set('checkout', checkoutValue);
+          url.searchParams.set('guests', guestsValue);
+
+          window.location.href = url.toString();
+        });
+
+        updateCheckoutMin();
       });
+    })();
+  </script>
 
-      updateCheckoutMin();
-    });
-  })();
-</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1583,6 +1570,7 @@
     ]
   }
   </script>
-
+<script src="/assets/js/seo-meta.js"></script>
+<script src="/assets/js/seo-schema.js"></script>
 </body>
 </html>

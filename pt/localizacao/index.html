@@ -1,29 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR" data-seo-page="location-pt">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>Location | Casas da Vila</title>
+  <title>Localização | Casas da Vila</title>
   <meta
     name="description"
-    content="Discover the location of Casas da Vila in Trancoso, Bahia — between the sea, the village and the garden, in a tropical boutique experience."
+    content="Descubra a localização das Casas da Vila em Trancoso, Bahia — entre o mar, a vila e o jardim, em uma experiência tropical boutique."
   />
 
-  <link rel="canonical" href="https://casasdavila.com/en/location/" />
-  <link rel="alternate" hreflang="en" href="https://casasdavila.com/en/location/" />
+  <link rel="canonical" href="https://casasdavila.com/pt/localizacao/" />
   <link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/localizacao/" />
+  <link rel="alternate" hreflang="en" href="https://casasdavila.com/en/location/" />
   <link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/location/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Location | Casas da Vila" />
-  <meta property="og:description" content="Discover Casas da Vila in Trancoso — between the sea, the village and the garden." />
-  <meta property="og:url" content="https://casasdavila.com/en/location/" />
+  <meta property="og:title" content="Localização | Casas da Vila" />
+  <meta property="og:description" content="Descubra as Casas da Vila em Trancoso — entre o mar, a vila e o jardim." />
+  <meta property="og:url" content="https://casasdavila.com/pt/localizacao/" />
   <meta property="og:image" content="https://casasdavila.com/assets/img/hero-trancoso.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Location | Casas da Vila" />
-  <meta name="twitter:description" content="Discover Casas da Vila in Trancoso — between the sea, the village and the garden." />
+  <meta name="twitter:title" content="Localização | Casas da Vila" />
+  <meta name="twitter:description" content="Descubra as Casas da Vila em Trancoso — entre o mar, a vila e o jardim." />
   <meta name="twitter:image" content="https://casasdavila.com/assets/img/hero-trancoso.jpg" />
 
   <link rel="stylesheet" href="/assets/css/global.css" />
@@ -245,8 +245,7 @@
       margin:0;
       overflow:hidden;
       border-radius:30px;
-      background:
-        linear-gradient(180deg, rgba(247,229,178,0.96) 0%, rgba(241,218,164,0.96) 100%);
+      background:linear-gradient(180deg, rgba(247,229,178,0.96) 0%, rgba(241,218,164,0.96) 100%);
       border:1px solid rgba(92,71,54,0.08);
       box-shadow:
         0 24px 60px rgba(35,24,12,0.10),
@@ -256,88 +255,113 @@
     .locationMapMedia{
       position:relative;
       padding:16px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 100%);
+      background:linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 100%);
     }
 
-.mapFrame{
-  position:relative;
-  border-radius:32px;
-  overflow:hidden;
-  background:#f1ddaa;
-  box-shadow:
-    0 40px 80px rgba(0,0,0,.18),
-    inset 0 1px 0 rgba(255,255,255,.2);
-  transition:box-shadow .35s ease;
-  will-change:auto;
-}
-
-.mapFrame:hover{
-  box-shadow:
-    0 50px 95px rgba(0,0,0,.22),
-    inset 0 1px 0 rgba(255,255,255,.22);
-}
-.mapDynamicImage{
-  width:100%;
-  height:auto;
-  display:block;
-  object-fit:contain;
-  aspect-ratio:auto;
-  transform:none;
-  transition:opacity .6s ease;
-  will-change:opacity;
-}
-
-.mapFrame:hover .mapDynamicImage{
-  transform:none;
-}
-    .mapPin{
-      position:absolute;
-      top:41%;
-      left:24%;
-      transform:translate(-50%, -50%) translateZ(42px);
-      z-index:3;
-    }
-
-    .mapPin span{
+    .mapFrame{
       position:relative;
-      display:block;
-      width:18px;
-      height:18px;
-      border-radius:50%;
-      background:#fff;
+      border-radius:32px;
+      overflow:hidden;
+      background:#f1ddaa;
       box-shadow:
-        0 0 0 0 rgba(255,255,255,.46),
-        0 10px 24px rgba(0,0,0,.16);
-      animation:mapPulseSoft 2.8s infinite;
+        0 40px 80px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.2);
+      transition:box-shadow .35s ease, transform .22s ease;
+      will-change:transform;
     }
 
-    .mapPin span::after{
-      content:"";
+    .mapFrame:hover{
+      box-shadow:
+        0 50px 95px rgba(0,0,0,.22),
+        inset 0 1px 0 rgba(255,255,255,.22);
+    }
+
+    .mapDynamicImage{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit:contain;
+      aspect-ratio:auto;
+      transform:none;
+      transition:opacity .6s ease;
+      will-change:opacity;
+    }
+
+    .mapFrame:hover .mapDynamicImage{
+      transform:none;
+    }
+
+    .mapHotspot{
       position:absolute;
-      inset:4px;
-      border-radius:50%;
-      background:rgba(200,99,59,.92);
+      z-index:4;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:34px;
+      padding:0 12px;
+      border:1px solid rgba(255,255,255,0.62);
+      border-radius:999px;
+      background:rgba(255,252,248,0.88);
+      color:var(--text);
+      font:inherit;
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      cursor:pointer;
+      box-shadow:
+        0 10px 24px rgba(0,0,0,.14),
+        inset 0 1px 0 rgba(255,255,255,.42);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        background .22s ease,
+        border-color .22s ease;
     }
 
-    @keyframes mapPulseSoft{
-      0%{
-        box-shadow:
-          0 0 0 0 rgba(255,255,255,.46),
-          0 10px 24px rgba(0,0,0,.16);
-      }
-      70%{
-        box-shadow:
-          0 0 0 20px rgba(255,255,255,0),
-          0 16px 30px rgba(0,0,0,.14);
-      }
-      100%{
-        box-shadow:
-          0 0 0 0 rgba(255,255,255,0),
-          0 10px 24px rgba(0,0,0,.16);
-      }
+    .mapHotspot:hover,
+    .mapHotspot[aria-expanded="true"]{
+      background:rgba(255,255,255,0.96);
+      border-color:rgba(255,255,255,0.86);
+      box-shadow:
+        0 14px 30px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.5);
     }
 
+    .hotspot-casa{
+      top:36%;
+      left:21%;
+      transform:translate(-50%, -50%);
+    }
+
+    .hotspot-casa:hover,
+    .hotspot-casa[aria-expanded="true"]{
+      transform:translate(-50%, calc(-50% - 1px));
+    }
+
+    .hotspot-quadrado{
+      top:44%;
+      left:64%;
+      transform:translate(-50%, -50%);
+    }
+
+    .hotspot-quadrado:hover,
+    .hotspot-quadrado[aria-expanded="true"]{
+      transform:translate(-50%, calc(-50% - 1px));
+    }
+
+    .hotspot-praia{
+      top:66%;
+      left:19%;
+      transform:translate(-50%, -50%);
+    }
+
+    .hotspot-praia:hover,
+    .hotspot-praia[aria-expanded="true"]{
+      transform:translate(-50%, calc(-50% - 1px));
+    }
 
     .mapPopover{
       position:absolute;
@@ -353,7 +377,6 @@
       backdrop-filter:blur(12px);
       -webkit-backdrop-filter:blur(12px);
       opacity:0;
-      transform:translateY(8px) scale(.985);
       pointer-events:none;
       transition:
         opacity .32s ease,
@@ -362,7 +385,6 @@
 
     .mapPopover.is-open{
       opacity:1;
-      transform:translateY(0) scale(1);
       pointer-events:auto;
     }
 
@@ -383,8 +405,8 @@
     }
 
     .popover-casa{
-      top:45%;
-      left:28%;
+      top:40%;
+      left:24%;
       transform:translate(10px, 18px) scale(.985);
     }
 
@@ -393,8 +415,8 @@
     }
 
     .popover-quadrado{
-      top:50%;
-      left:58%;
+      top:47%;
+      left:56%;
       transform:translateY(8px) scale(.985);
     }
 
@@ -403,8 +425,8 @@
     }
 
     .popover-praia{
-      top:76%;
-      left:22%;
+      top:69%;
+      left:20%;
       transform:translateY(8px) scale(.985);
     }
 
@@ -644,32 +666,33 @@
     }
 
     .locationBookingGrid{
-  display:grid;
-  grid-template-columns:repeat(3, minmax(180px,1fr));
-  gap:14px;
-  align-items:end;
-}
+      display:grid;
+      grid-template-columns:repeat(3, minmax(180px,1fr));
+      gap:14px;
+      align-items:end;
+    }
 
-.locationBookingField{
-  display:grid;
-  gap:8px;
-}
+    .locationBookingField{
+      display:grid;
+      gap:8px;
+    }
 
-.locationBookingField input,
-.locationBookingField select{
-  width:100%;
-  min-height:56px;
-  border-radius:18px;
-  border:1px solid rgba(92,71,54,0.10);
-  background:rgba(255,255,255,0.88);
-  color:var(--text);
-  padding:0 16px;
-  font:inherit;
-  outline:none;
-  box-shadow:none;
-  appearance:none;
-  -webkit-appearance:none;
-}
+    .locationBookingField input,
+    .locationBookingField select{
+      width:100%;
+      min-height:56px;
+      border-radius:18px;
+      border:1px solid rgba(92,71,54,0.10);
+      background:rgba(255,255,255,0.88);
+      color:var(--text);
+      padding:0 16px;
+      font:inherit;
+      outline:none;
+      box-shadow:none;
+      appearance:none;
+      -webkit-appearance:none;
+    }
+
     .locationBookingField input:focus,
     .locationBookingField select:focus{
       border-color:rgba(57,126,224,0.38);
@@ -681,7 +704,7 @@
       flex-wrap:wrap;
       gap:12px;
       align-items:center;
-    }
+    }M
 
     .locationBookingHint{
       margin:0;
@@ -813,32 +836,6 @@
         transform:none !important;
       }
 
-      .mapRouteTrigger{
-        left:14px;
-        bottom:14px;
-        min-height:36px;
-        padding:0 14px;
-        font-size:11px;
-        letter-spacing:.06em;
-      }
-
-      .mapRouteLabel{
-        left:50%;
-        top:60%;
-        transform:translate(-50%, 10px) scale(.985);
-        min-width:124px;
-        padding:11px 12px;
-        border-radius:16px;
-      }
-
-      .mapRouteLabel.is-visible{
-        transform:translate(-50%, 0) scale(1);
-      }
-
-      .mapRouteLabel strong{
-        font-size:19px;
-      }
-
       .mapHotspot{
         padding:7px 12px;
         font-size:11px;
@@ -926,52 +923,6 @@
         border-radius:18px;
       }
     }
-.hotspot-casa{
-  top:36%;
-  left:21%;
-  transform:translate(-50%, -50%);
-}
-
-.hotspot-quadrado{
-  top:44%;
-  left:64%;
-  transform:translate(-50%, -50%);
-}
-
-.hotspot-praia{
-  top:66%;
-  left:19%;
-  transform:translate(-50%, -50%);
-}
-.popover-casa{
-  top:40%;
-  left:24%;
-  transform:translate(10px, 18px) scale(.985);
-}
-
-.popover-casa.is-open{
-  transform:translate(10px, 10px) scale(1);
-}
-
-.popover-quadrado{
-  top:47%;
-  left:56%;
-  transform:translateY(8px) scale(.985);
-}
-
-.popover-quadrado.is-open{
-  transform:translateY(0) scale(1);
-}
-
-.popover-praia{
-  top:69%;
-  left:20%;
-  transform:translateY(8px) scale(.985);
-}
-
-.popover-praia.is-open{
-  transform:translateY(0) scale(1);
-}
   </style>
 </head>
 <body>
@@ -992,18 +943,20 @@
 
           <h1 class="display locationHeroTitle">
             Entre o mar,<br>
-            a Vila e <br>
+            a Vila e<br>
             o jardim.
           </h1>
 
           <p class="locationHeroText">
-Estar em Trancoso é viver uma geografia própria: praia, falésias, vegetação, céu aberto e o ritmo mais lento de uma vila que permanece singular.          </p>
+            Estar em Trancoso é viver uma geografia própria: praia, falésias, vegetação, céu aberto e o ritmo mais lento de uma vila que permanece singular.
+          </p>
         </div>
 
         <div class="locationHeroCard heroFloat" data-reveal="right">
           <p class="eyebrow">Trancoso</p>
           <p>
-Casas da Vila nasce dessa sensibilidade local: luz, natureza, silêncio, textura e uma forma de luxo mais leve — sem peso urbano e sem excesso.          </p>
+            Casas da Vila nasce dessa sensibilidade local: luz, natureza, silêncio, textura e uma forma de luxo mais leve — sem peso urbano e sem excesso.
+          </p>
 
           <div class="locationHeroMeta">
             <span>Quadrado</span>
@@ -1020,7 +973,8 @@ Casas da Vila nasce dessa sensibilidade local: luz, natureza, silêncio, textura
           <p class="eyebrow">A vila</p>
           <h2 class="h2">Uma localização que se torna parte da própria estadia</h2>
           <p class="lead">
-Trancoso não é apenas um destino de praia. É uma experiência de escala, tempo e atmosfera. A localização das Casas da Vila participa diretamente dessa sensação de permanência mais sensível, mais bonita e mais desacelerada.          </p>
+            Trancoso não é apenas um destino de praia. É uma experiência de escala, tempo e atmosfera. A localização das Casas da Vila participa diretamente dessa sensação de permanência mais sensível, mais bonita e mais desacelerada.
+          </p>
         </div>
       </div>
     </section>
@@ -1032,21 +986,24 @@ Trancoso não é apenas um destino de praia. É uma experiência de escala, temp
             <p class="eyebrow">Praias</p>
             <h3>Próximo ao mar e ao horizonte aberto</h3>
             <p>
-Trancoso é feito de praias amplas, falésias e vegetação costeira — uma paisagem que combina calor, vento, luz e silêncio.            </p>
+              Trancoso é feito de praias amplas, falésias e vegetação costeira — uma paisagem que combina calor, vento, luz e silêncio.
+            </p>
           </article>
 
           <article class="locationCard" data-reveal="zoom">
             <p class="eyebrow">Quadrado</p>
-            <h3>Proximo à vida da Vila</h3>
+            <h3>Próximo à vida da Vila</h3>
             <p>
-A estadia se conecta ao ritmo do Quadrado: arquitetura, gastronomia, caminhadas sem pressa e uma forma de viver Trancoso que vai além da praia.            </p>
+              A estadia se conecta ao ritmo do Quadrado: arquitetura, gastronomia, caminhadas sem pressa e uma forma de viver Trancoso que vai além da praia.
+            </p>
           </article>
 
           <article class="locationCard" data-reveal="right">
             <p class="eyebrow">Atmosfera</p>
             <h3>Próximo ao que faz Trancoso ser Trancoso</h3>
             <p>
-Mais do que um ponto no mapa, a localização importa aqui pela sensação: jardim, calor, textura natural e um ritmo mais lento.            </p>
+              Mais do que um ponto no mapa, a localização importa aqui pela sensação: jardim, calor, textura natural e um ritmo mais lento.
+            </p>
           </article>
         </div>
       </div>
@@ -1059,11 +1016,14 @@ Mais do que um ponto no mapa, a localização importa aqui pela sensação: jard
             <p class="eyebrow">Chegada</p>
             <h2 class="h2">A chegada faz parte da mudança de ritmo</h2>
             <p class="body">
-Chegar a Trancoso já transforma a percepção do tempo. O percurso se torna mais leve, a paisagem mais aberta e o entorno mais vegetal.            </p>
+              Chegar a Trancoso já transforma a percepção do tempo. O percurso se torna mais leve, a paisagem mais aberta e o entorno mais vegetal.
+            </p>
             <p class="body">
-À medida que se aproxima da vila, a lógica deixa de ser urbana e passa a ser sensorial: terra, mar, céu, jardim e a presença constante da natureza.            </p>
+              À medida que se aproxima da vila, a lógica deixa de ser urbana e passa a ser sensorial: terra, mar, céu, jardim e a presença constante da natureza.
+            </p>
             <p class="body">
-Nas Casas da Vila, essa relação com o lugar continua ao longo da estadia — sem ruptura, sem excesso e sem rigidez.            </p>
+              Nas Casas da Vila, essa relação com o lugar continua ao longo da estadia — sem ruptura, sem excesso e sem rigidez.
+            </p>
           </div>
 
           <div class="locationMapPanel" data-reveal="right">
@@ -1073,34 +1033,59 @@ Nas Casas da Vila, essa relação com o lugar continua ao longo da estadia — s
                   <div class="mapFrame">
                     <img
                       src="/assets/img/mapa.jpeg"
-                      alt="Mapa ilustrado das Casas da Vila e do Quadrado embed Trancoso"
+                      alt="Mapa ilustrado das Casas da Vila e do Quadrado em Trancoso"
                       class="mapDynamicImage"
                       loading="lazy"
                     />
 
-                    <div class="mapPin">
-                      <span></span>
-                    </div>
+                    <button
+                      type="button"
+                      class="mapHotspot hotspot-casa"
+                      data-hotspot="casa"
+                      aria-expanded="false"
+                      aria-label="Mostrar Casas da Vila no mapa"
+                    >
+                      Casas da Vila
+                    </button>
 
+                    <button
+                      type="button"
+                      class="mapHotspot hotspot-quadrado"
+                      data-hotspot="quadrado"
+                      aria-expanded="false"
+                      aria-label="Mostrar Quadrado no mapa"
+                    >
+                      Quadrado
+                    </button>
+
+                    <button
+                      type="button"
+                      class="mapHotspot hotspot-praia"
+                      data-hotspot="praia"
+                      aria-expanded="false"
+                      aria-label="Mostrar praia no mapa"
+                    >
+                      Praia
+                    </button>
 
                     <div class="mapPopover popover-casa" data-popover="casa" hidden>
                       <strong>Casas da Vila</strong>
                       <p>
-                        A place of stay shaped by garden, silence and proximity to village life.
+                        Uma estadia moldada por jardim, silêncio e proximidade com a vida da vila.
                       </p>
                     </div>
 
                     <div class="mapPopover popover-quadrado" data-popover="quadrado" hidden>
                       <strong>Quadrado</strong>
                       <p>
-                        The cultural heart of Trancoso, around 10 minutes on foot from Casas da Vila.
+                        O coração cultural de Trancoso, a cerca de 10 minutos a pé das Casas da Vila.
                       </p>
                     </div>
 
                     <div class="mapPopover popover-praia" data-popover="praia" hidden>
-                      <strong>Beach</strong>
+                      <strong>Praia</strong>
                       <p>
-                        The sea remains part of the experience, reached from the village scale rather than directly at the doorstep.
+                        O mar permanece parte da experiência, acessado a partir da escala da vila e não diretamente à porta.
                       </p>
                     </div>
 
@@ -1111,8 +1096,8 @@ Nas Casas da Vila, essa relação com o lugar continua ao longo da estadia — s
                 <figcaption class="locationMapCaption">
                   <div class="locationMapCaptionTop">
                     <div>
-                      <p class="eyebrow">Illustrated map</p>
-                      <strong>Trancoso em escala de Vila</strong>
+                      <p class="eyebrow">Mapa ilustrado</p>
+                      <strong>Trancoso em escala de vila</strong>
                     </div>
 
                     <a
@@ -1121,11 +1106,13 @@ Nas Casas da Vila, essa relação com o lugar continua ao longo da estadia — s
                       rel="noopener noreferrer"
                       class="locationMapLink"
                     >
-Ver rotas                    </a>
+                      Ver rotas
+                    </a>
                   </div>
 
                   <p>
-Uma leitura mais quente e humana de Trancoso — mostrando Casas da Vila, a relação com o Quadrado e a atmosfera da vila que define a experiência.                  </p>
+                    Uma leitura mais quente e humana de Trancoso — mostrando as Casas da Vila, a relação com o Quadrado e a atmosfera da vila que define a experiência.
+                  </p>
                 </figcaption>
               </figure>
 
@@ -1136,7 +1123,7 @@ Uma leitura mais quente e humana de Trancoso — mostrando Casas da Vila, a rela
                 </div>
                 <div class="locationMiniItem">
                   <span>Vila</span>
-                  <strong>area verde envolvente</strong>
+                  <strong>entorno verde</strong>
                 </div>
                 <div class="locationMiniItem">
                   <span>Praias</span>
@@ -1149,7 +1136,7 @@ Uma leitura mais quente e humana de Trancoso — mostrando Casas da Vila, a rela
 
                 <div class="locationEmbedShell">
                   <iframe
-                    title="Casas da Vila on Google Maps"
+                    title="Casas da Vila no Google Maps"
                     src="https://www.google.com/maps?q=Rua%20Piri%2C%2025%2C%20Trancoso%2C%20Porto%20Seguro%2C%20Bahia&z=16&output=embed"
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
@@ -1169,19 +1156,22 @@ Uma leitura mais quente e humana de Trancoso — mostrando Casas da Vila, a rela
           <article class="locationAccessCard" data-reveal="left">
             <p class="eyebrow">Acesso</p>
             <p>
-A chegada acontece pela região de Porto Seguro e pela estrada até Trancoso, em um percurso que já introduz a paisagem e o ritmo do destino.            </p>
+              A chegada acontece pela região de Porto Seguro e pela estrada até Trancoso, em um percurso que já introduz a paisagem e o ritmo do destino.
+            </p>
           </article>
 
           <article class="locationAccessCard" data-reveal="zoom">
             <p class="eyebrow">Mobilidade</p>
             <p>
-Uma vez em Trancoso, a experiência funciona melhor em escala local: distâncias curtas, deslocamentos leves e maior proximidade com a vila, os jardins e as praias.            </p>
+              Uma vez em Trancoso, a experiência funciona melhor em escala local: distâncias curtas, deslocamentos leves e maior proximidade com a vila, os jardins e as praias.
+            </p>
           </article>
 
           <article class="locationAccessCard" data-reveal="right">
             <p class="eyebrow">Orientação</p>
             <p>
-As Casas da Vila estão em uma área mais tranquila e verde da vila, ainda próxima do que realmente importa em Trancoso.            </p>
+              As Casas da Vila estão em uma área mais tranquila e verde da vila, ainda próxima do que realmente importa em Trancoso.
+            </p>
           </article>
         </div>
       </div>
@@ -1194,7 +1184,8 @@ As Casas da Vila estão em uma área mais tranquila e verde da vila, ainda próx
             <p class="eyebrow">Chegada & contato</p>
             <h2 class="h2">Tudo pensado para uma chegada simples, bonita e bem orientada</h2>
             <p class="lead mt-16">
-Localização não é apenas logística. Ela molda a experiência desde o percurso até a forma como Trancoso é vivido: mais calmo, mais próximo e mais fluido.            </p>
+              Localização não é apenas logística. Ela molda a experiência desde o percurso até a forma como Trancoso é vivido: mais calmo, mais próximo e mais fluido.
+            </p>
           </div>
 
           <div class="locationPracticalGrid">
@@ -1205,10 +1196,11 @@ Localização não é apenas logística. Ela molda a experiência desde o percur
               <div class="locationAddress">
                 <p>
                   Rua Piri, 25<br>
-                  Trancoso • Porto Seguro • Bahia • Brazil
+                  Trancoso • Porto Seguro • Bahia • Brasil
                 </p>
                 <p>
-Uma base tranquila para viver Trancoso entre o Quadrado, o mar e a atmosfera de jardim da vila.                </p>
+                  Uma base tranquila para viver Trancoso entre o Quadrado, o mar e a atmosfera de jardim da vila.
+                </p>
               </div>
             </div>
 
@@ -1216,7 +1208,8 @@ Uma base tranquila para viver Trancoso entre o Quadrado, o mar e a atmosfera de 
               <p class="eyebrow">Assistência na chegada</p>
               <h3>Fale conosco</h3>
               <p class="locationContactText">
-Nossa equipe pode auxiliar com rotas, chegada, referências locais e detalhes práticos antes do check-in.              </p>
+                Nossa equipe pode auxiliar com rotas, chegada, referências locais e detalhes práticos antes do check-in.
+              </p>
 
               <div class="locationActions">
                 <a
@@ -1234,88 +1227,84 @@ Nossa equipe pode auxiliar com rotas, chegada, referências locais e detalhes pr
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Veja direções
+                  Ver direções
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="locationPracticalGrid">
+            <div class="locationBookingCard">
+              <p class="eyebrow">Pré-reserva</p>
+              <h3>Comece sua estadia por aqui</h3>
+              <p class="locationBookingText">
+                Escolha suas datas, defina o número de hóspedes e continue para a reserva. Café da manhã e estacionamento já estão incluídos na experiência.
+              </p>
+
+              <form
+                class="locationBookingForm"
+                data-booking-form
+                data-booking-base="/pt/reservar/"
+              >
+                <div class="locationBookingGrid">
+                  <div class="locationBookingField">
+                    <label for="checkin-location-pt">Check-in</label>
+                    <input type="date" id="checkin-location-pt" name="checkin" required />
+                  </div>
+
+                  <div class="locationBookingField">
+                    <label for="checkout-location-pt">Check-out</label>
+                    <input type="date" id="checkout-location-pt" name="checkout" required />
+                  </div>
+
+                  <div class="locationBookingField">
+                    <label for="guests-location-pt">Hóspedes</label>
+                    <select id="guests-location-pt" name="guests" required>
+                      <option value="1">1 hóspede</option>
+                      <option value="2" selected>2 hóspedes</option>
+                      <option value="3">3 hóspedes</option>
+                      <option value="4">4 hóspedes</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="locationBookingActions">
+                  <button type="submit" class="btn btnPrimary">
+                    Ver disponibilidade
+                  </button>
+
+                  <a class="btn btnGhost" href="/pt/contato/">
+                    Fale conosco
+                  </a>
+                </div>
+
+                <p class="locationBookingHint">
+                  Café da manhã e estacionamento já estão incluídos na sua estadia.
+                </p>
+              </form>
+            </div>
+
+            <div class="locationContactCard">
+              <p class="eyebrow">Nota de reserva</p>
+              <h3>Viva o ritmo da vila</h3>
+              <p class="locationContactText">
+                A partir das Casas da Vila, Trancoso se revela em escala humana: o caminho até o Quadrado, a direção do mar, o jardim, o calor, a luz e o ritmo mais lento do lugar.
+              </p>
+
+              <div class="locationActions">
+                <a class="btn btnPrimary" href="/pt/reservar/">
+                  Ver reservas completas
+                </a>
+                <a class="btn btnGhost" href="/pt/casas/">
+                  Explorar casas
                 </a>
               </div>
 
               <p class="locationFineNote">
-                Replace the WhatsApp link with the official number used by the operation.
+                Esta página integra localização e orientação. Para detalhes de cada casa, veja as páginas individuais.
               </p>
             </div>
           </div>
-
-<div class="locationPracticalGrid">
-  <div class="locationBookingCard">
-    <p class="eyebrow">Pré-reserva</p>
-    <h3>Comece sua estadia por aqui</h3>
-    <p class="locationBookingText">
-      Escolha suas datas, defina o número de hóspedes e continue para a reserva. Café da manhã e estacionamento já estão incluídos na experiência.
-    </p>
-
-    <form
-      class="locationBookingForm"
-      data-booking-form
-      data-booking-base="/pt/reservar/"
-    >
-      <div class="locationBookingGrid">
-        <div class="locationBookingField">
-          <label for="checkin-location-pt">Check-in</label>
-          <input type="date" id="checkin-location-pt" name="checkin" required />
-        </div>
-
-        <div class="locationBookingField">
-          <label for="checkout-location-pt">Check-out</label>
-          <input type="date" id="checkout-location-pt" name="checkout" required />
-        </div>
-
-        <div class="locationBookingField">
-          <label for="guests-location-pt">Hóspedes</label>
-          <select id="guests-location-pt" name="guests" required>
-            <option value="1">1 hóspede</option>
-            <option value="2" selected>2 hóspedes</option>
-            <option value="3">3 hóspedes</option>
-            <option value="4">4 hóspedes</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="locationBookingActions">
-        <button type="submit" class="btn btnPrimary">
-          Ver disponibilidade
-        </button>
-
-        <a class="btn btnGhost" href="/pt/contato/">
-          Fale conosco
-        </a>
-      </div>
-
-      <p class="locationBookingHint">
-        Café da manhã e estacionamento já estão incluídos na sua estadia.
-      </p>
-    </form>
-  </div>
-
-  <div class="locationContactCard">
-    <p class="eyebrow">Nota de reserva</p>
-    <h3>Viva o ritmo da vila</h3>
-    <p class="locationContactText">
-      A partir das Casas da Vila, Trancoso se revela em escala humana: o caminho até o Quadrado, a direção do mar, o jardim, o calor, a luz e o ritmo mais lento do lugar.
-    </p>
-
-    <div class="locationActions">
-      <a class="btn btnPrimary" href="/pt/reservar/">
-        Ver reservas completas
-      </a>
-      <a class="btn btnGhost" href="/pt/casas/">
-        Explorar casas
-      </a>
-    </div>
-
-    <p class="locationFineNote">
-      Esta página integra localização e orientação. Para detalhes de cada casa, veja as páginas individuais.
-    </p>
-  </div>
-</div>
         </div>
       </div>
     </section>
@@ -1345,7 +1334,19 @@ Nossa equipe pode auxiliar com rotas, chegada, referências locais e detalhes pr
         frame.style.transform =
           `perspective(1400px) rotateX(${currentY * 0.9}deg) rotateY(${currentX * 0.9}deg) translateZ(0)`;
 
+        if (Math.abs(targetX - currentX) < 0.01 && Math.abs(targetY - currentY) < 0.01) {
+          if (targetX === 0 && targetY === 0) {
+            frame.style.transform = 'perspective(1400px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+            rafId = null;
+            return;
+          }
+        }
+
         rafId = requestAnimationFrame(animate);
+      }
+
+      function startAnimation() {
+        if (!rafId) animate();
       }
 
       function onMove(event) {
@@ -1355,13 +1356,13 @@ Nossa equipe pode auxiliar com rotas, chegada, referências locais e detalhes pr
 
         targetX = (px - 0.5) * 6;
         targetY = (0.5 - py) * 6;
-
-        if (!rafId) animate();
+        startAnimation();
       }
 
       function reset() {
         targetX = 0;
         targetY = 0;
+        startAnimation();
       }
 
       if (window.matchMedia('(hover: hover)').matches) {
@@ -1446,95 +1447,94 @@ Nossa equipe pode auxiliar com rotas, chegada, referências locais e detalhes pr
     })();
   </script>
 
-  </script>
+  <script>
+    (function () {
+      const forms = document.querySelectorAll('[data-booking-form]');
 
-<script>
-  (function () {
-    const forms = document.querySelectorAll("[data-booking-form]");
+      forms.forEach((form) => {
+        const base = form.getAttribute('data-booking-base') || '/pt/reservar/';
 
-    forms.forEach((form) => {
-      const base = form.getAttribute("data-booking-base") || "/pt/reservar/";
+        const checkin = form.querySelector('input[name="checkin"]');
+        const checkout = form.querySelector('input[name="checkout"]');
+        const guests = form.querySelector('select[name="guests"]');
 
-      const checkin = form.querySelector('input[name="checkin"]');
-      const checkout = form.querySelector('input[name="checkout"]');
-      const guests = form.querySelector('select[name="guests"]');
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const todayStr = `${yyyy}-${mm}-${dd}`;
 
-      const today = new Date();
-      const yyyy = today.getFullYear();
-      const mm = String(today.getMonth() + 1).padStart(2, "0");
-      const dd = String(today.getDate()).padStart(2, "0");
-      const todayStr = `${yyyy}-${mm}-${dd}`;
+        function addDays(dateStr, days) {
+          const date = new Date(dateStr + 'T12:00:00');
+          date.setDate(date.getDate() + days);
+          const y = date.getFullYear();
+          const m = String(date.getMonth() + 1).padStart(2, '0');
+          const d = String(date.getDate()).padStart(2, '0');
+          return `${y}-${m}-${d}`;
+        }
 
-      function addDays(dateStr, days) {
-        const date = new Date(dateStr + "T12:00:00");
-        date.setDate(date.getDate() + days);
-        const y = date.getFullYear();
-        const m = String(date.getMonth() + 1).padStart(2, "0");
-        const d = String(date.getDate()).padStart(2, "0");
-        return `${y}-${m}-${d}`;
-      }
+        if (checkin) checkin.min = todayStr;
+        if (checkout) checkout.min = addDays(todayStr, 1);
 
-      if (checkin) checkin.min = todayStr;
-      if (checkout) checkout.min = addDays(todayStr, 1);
+        function updateCheckoutMin() {
+          if (!checkin || !checkout) return;
 
-      function updateCheckoutMin() {
-        if (!checkin || !checkout) return;
+          if (checkin.value) {
+            const minCheckout = addDays(checkin.value, 1);
+            checkout.min = minCheckout;
 
-        if (checkin.value) {
-          const minCheckout = addDays(checkin.value, 1);
-          checkout.min = minCheckout;
-
-          if (!checkout.value || checkout.value <= checkin.value) {
-            checkout.value = minCheckout;
+            if (!checkout.value || checkout.value <= checkin.value) {
+              checkout.value = minCheckout;
+            }
           }
         }
-      }
 
-      if (checkin) {
-        checkin.addEventListener("change", updateCheckoutMin);
-      }
-
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const checkinValue = checkin?.value || "";
-        const checkoutValue = checkout?.value || "";
-        const guestsValue = guests?.value || "";
-
-        if (!checkinValue || !checkoutValue || !guestsValue) {
-          alert("Por favor, preencha check-in, check-out e hóspedes.");
-          return;
+        if (checkin) {
+          checkin.addEventListener('change', updateCheckoutMin);
         }
 
-        if (checkoutValue <= checkinValue) {
-          alert("A data de check-out deve ser pelo menos um dia após o check-in.");
-          return;
-        }
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
 
-        const url = new URL(base, window.location.origin);
-        url.searchParams.set("checkin", checkinValue);
-        url.searchParams.set("checkout", checkoutValue);
-        url.searchParams.set("guests", guestsValue);
+          const checkinValue = checkin?.value || '';
+          const checkoutValue = checkout?.value || '';
+          const guestsValue = guests?.value || '';
 
-        window.location.href = url.toString();
+          if (!checkinValue || !checkoutValue || !guestsValue) {
+            alert('Por favor, preencha check-in, check-out e hóspedes.');
+            return;
+          }
+
+          if (checkoutValue <= checkinValue) {
+            alert('A data de check-out deve ser pelo menos um dia após o check-in.');
+            return;
+          }
+
+          const url = new URL(base, window.location.origin);
+          url.searchParams.set('checkin', checkinValue);
+          url.searchParams.set('checkout', checkoutValue);
+          url.searchParams.set('guests', guestsValue);
+
+          window.location.href = url.toString();
+        });
+
+        updateCheckoutMin();
       });
+    })();
+  </script>
 
-      updateCheckoutMin();
-    });
-  })();
-</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     "name": "Casas da Vila",
-    "url": "https://casasdavila.com/en/location/",
+    "url": "https://casasdavila.com/pt/localizacao/",
     "image": [
       "https://casasdavila.com/assets/img/hero-trancoso.jpg",
       "https://casasdavila.com/assets/img/mapa.jpeg"
     ],
-    "description": "Casas da Vila is a tropical boutique stay in Trancoso, Bahia, between the village, the beaches and the garden.",
-    "telephone": "+55-00-00000-0000",
+    "description": "Casas da Vila é uma estadia boutique tropical em Trancoso, Bahia, entre a vila, as praias e o jardim.",
+    "telephone": "+55-73-99143-5522",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Rua Piri, 25",
@@ -1547,6 +1547,7 @@ Nossa equipe pode auxiliar com rotas, chegada, referências locais e detalhes pr
     ]
   }
   </script>
-
+<script src="/assets/js/seo-meta.js"></script>
+<script src="/assets/js/seo-schema.js"></script>
 </body>
 </html>
