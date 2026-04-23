@@ -165,8 +165,9 @@
       const res = await fetch('/assets/components/footer.html', { cache: 'no-cache' });
       if (!res.ok) throw new Error(`Footer load failed: ${res.status}`);
 
-      mount.innerHTML = await res.text();
-      hydrateFooterLanguage();
+mount.innerHTML = await res.text();
+hydrateFooterLanguage();
+highlightSeasonalFooterLinks();
     } catch (err) {
       console.error('Erro ao carregar footer global:', err);
     }
@@ -199,10 +200,11 @@
         instagram_cta: 'Acompanhar',
         copyright: '© 2026 Casas da Vila',
         bottom_location: 'Trancoso, Bahia, Brasil',
-        blog_title: 'Guia de Trancoso',
-        blog_where: 'Onde ficar em Trancoso',
-        blog_what: 'O que fazer em Trancoso'
-      },
+blog_title: 'Guia de Trancoso',
+blog_where: 'Onde ficar em Trancoso',
+blog_what: 'O que fazer em Trancoso',
+blog_nye: 'Réveillon 2027 em Trancoso',
+landing_nye: 'Réveillon 2027'      },
       en: {
         brand_eyebrow: 'Casas da Vila',
         brand_title: 'A tropical stay in Trancoso',
@@ -223,10 +225,11 @@
         instagram_cta: 'Follow',
         copyright: '© 2026 Casas da Vila',
         bottom_location: 'Trancoso, Bahia, Brazil',
-        blog_title: 'Trancoso Guide',
-        blog_where: 'Where to stay in Trancoso',
-        blog_what: 'What to do in Trancoso'
-      }
+blog_title: 'Trancoso Guide',
+blog_where: 'Where to stay in Trancoso',
+blog_what: 'What to do in Trancoso',
+blog_nye: 'NYE 2027 in Trancoso',
+landing_nye: 'NYE 2027'      }
     };
 
     const links = {
@@ -238,8 +241,10 @@
         policies: '/pt/politicas/',
         reserve: '/pt/reservar/',
         contact: '/pt/contato/',
-        blog_where: '/pt/blog/onde-ficar-em-trancoso/',
-        blog_what: '/pt/blog/o-que-fazer-em-trancoso/'
+blog_where: '/pt/blog/onde-ficar-em-trancoso/',
+blog_what: '/pt/blog/o-que-fazer-em-trancoso/',
+blog_nye: '/pt/blog/reveillon-2027-trancoso/',
+landing_nye: '/pt/reveillon-2027/'
       },
       en: {
         houses: '/en/houses/',
@@ -250,9 +255,10 @@
         reserve: '/en/book/',
         contact: '/en/contact/',
         blog_where: '/en/blog/where-to-stay-in-trancoso/',
-        blog_what: '/en/blog/what-to-do-in-trancoso/'
-      }
-    };
+blog_what: '/en/blog/what-to-do-in-trancoso/',
+blog_nye: '/en/blog/new-years-eve-2027-trancoso/',
+landing_nye: '/en/nye-2027/'
+    }};
 
     footer.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.getAttribute('data-i18n');
@@ -264,7 +270,41 @@
       if (links[lang][key]) el.setAttribute('href', links[lang][key]);
     });
   }
+function highlightSeasonalFooterLinks() {
+  const footer = document.querySelector('.siteFooter');
+  if (!footer) return;
 
+  const now = new Date();
+
+  // Ajuste aqui a janela de destaque
+  // Exemplo:
+  // destaque suave: de 1 de setembro de 2026 até 14 de dezembro de 2026
+  // destaque forte: de 15 de dezembro de 2026 até 6 de janeiro de 2027
+  const softStart = new Date('2026-09-01T00:00:00');
+  const hotStart = new Date('2026-12-15T00:00:00');
+  const endDate   = new Date('2027-01-07T00:00:00');
+
+  const seasonalLinks = footer.querySelectorAll('[data-seasonal-link="nye"], [data-seasonal-link="nye-blog"]');
+  if (!seasonalLinks.length) return;
+
+  seasonalLinks.forEach((link) => {
+    link.classList.remove('is-season-highlight', 'is-season-hot');
+    link.removeAttribute('data-badge');
+  });
+
+  if (now >= softStart && now < endDate) {
+    seasonalLinks.forEach((link) => {
+      link.classList.add('is-season-highlight');
+    });
+  }
+
+  if (now >= hotStart && now < endDate) {
+    seasonalLinks.forEach((link) => {
+      link.classList.remove('is-season-highlight');
+      link.classList.add('is-season-hot');
+    });
+  }
+}
   document.addEventListener('DOMContentLoaded', () => {
     loadGlobalHeader();
     loadGlobalFooter();

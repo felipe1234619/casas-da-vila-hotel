@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/voucher/:ref",
+      "destination": "/voucher.html?ref=:ref"
+    }
+  ]
+}

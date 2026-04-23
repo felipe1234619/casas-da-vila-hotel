@@ -547,5 +547,36 @@
       }
     })();
   </script>
+  <script>
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref');
+
+    if (!ref) return;
+
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.justifyContent = 'center';
+    container.style.marginTop = '24px';
+
+    const link = document.createElement('a');
+    link.href = `/voucher/${encodeURIComponent(ref)}`;
+    link.textContent = 'Ver voucher';
+    link.style.display = 'inline-flex';
+    link.style.alignItems = 'center';
+    link.style.justifyContent = 'center';
+    link.style.padding = '14px 22px';
+    link.style.borderRadius = '999px';
+    link.style.textDecoration = 'none';
+    link.style.border = '1px solid rgba(0,0,0,.12)';
+    link.style.background = '#fff';
+    link.style.color = '#111';
+
+    container.appendChild(link);
+
+    const main = document.querySelector('main') || document.body;
+    main.appendChild(container);
+  })();
+</script>
 </body>
 </html>

@@ -1,6 +1,9 @@
 import Stripe from 'stripe';
+import crypto from 'crypto';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2025-03-31.basil'
+});
 
 function absoluteUrl(req, path) {
   const proto =
@@ -47,6 +50,7 @@ function sanitizePath(path, fallback) {
 
 function buildDefaultSuccessPath({
   isEN,
+  bookingReference,
   unitSlug,
   guestName,
   unitName,
@@ -57,6 +61,7 @@ function buildDefaultSuccessPath({
   const base = isEN ? '/en/success/' : '/pt/sucesso/';
   const params = new URLSearchParams();
 
+  if (bookingReference) params.set('ref', bookingReference);
   if (guestName) params.set('guest', guestName);
   if (unitName || unitSlug) params.set('house', unitName || normalizeUnitName(unitSlug));
   if (checkin) params.set('checkin', checkin);
@@ -109,25 +114,19 @@ function parseAmountToCents(input) {
   let raw = String(input).trim();
   if (!raw) return 0;
 
-  // remove moeda, espaços e qualquer caractere que não seja número, vírgula, ponto ou sinal
   raw = raw.replace(/[^\d.,-]/g, '');
 
   const hasComma = raw.includes(',');
   const hasDot = raw.includes('.');
 
-  // Ex.: 1.759,00 -> 1759.00
   if (hasComma && hasDot) {
     raw = raw.replace(/\./g, '').replace(',', '.');
-  }
-  // Ex.: 1.759 -> 1759  (assume milhar quando o último bloco tem 3 dígitos)
-  else if (hasDot && !hasComma) {
+  } else if (hasDot && !hasComma) {
     const parts = raw.split('.');
     if (parts.length > 1 && parts[parts.length - 1].length === 3) {
       raw = raw.replace(/\./g, '');
     }
-  }
-  // Ex.: 1759,00 -> 1759.00
-  else if (hasComma && !hasDot) {
+  } else if (hasComma && !hasDot) {
     raw = raw.replace(',', '.');
   }
 
@@ -136,6 +135,10 @@ function parseAmountToCents(input) {
   if (!Number.isFinite(value) || value <= 0) return 0;
 
   return Math.round(value * 100);
+}
+
+function makeBookingReference() {
+  return `CDV-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
 }
 
 export default async function handler(req, res) {
@@ -194,9 +197,11 @@ export default async function handler(req, res) {
     const finalUnitName = unitName || normalizeUnitName(unitSlug);
     const finalGuestsCount = Number.isFinite(guestsCount) && guestsCount > 0 ? guestsCount : 1;
     const nights = diffNights(checkin, checkout);
+    const bookingReference = makeBookingReference();
 
     const defaultSuccessPath = buildDefaultSuccessPath({
       isEN,
+      bookingReference,
       unitSlug,
       guestName,
       unitName: finalUnitName,
@@ -220,6 +225,7 @@ export default async function handler(req, res) {
     const cancelUrl = absoluteUrl(req, sanitizedCancelPath);
 
     const metadata = {
+      booking_reference: bookingReference,
       unit_slug: unitSlug,
       unit_name: finalUnitName,
       guest_name: guestName,
@@ -228,11 +234,13 @@ export default async function handler(req, res) {
       checkin,
       checkout,
       guests_count: String(finalGuestsCount),
+      nights: String(nights),
       special_requests: specialRequests || '',
       amount_total_raw: String(amountInput),
       amount_total_cents: String(amountTotalCents),
       hold_id: holdId || '',
-      success_path: sanitizedSuccessPath
+      success_path: sanitizedSuccessPath,
+      locale: isEN ? 'en' : 'pt'
     };
 
     if (pendingBooking && typeof pendingBooking === 'object') {
@@ -272,7 +280,8 @@ export default async function handler(req, res) {
       url: session.url,
       successUrl,
       cancelUrl,
-      amountTotalCents
+      amountTotalCents,
+      bookingReference
     });
   } catch (err) {
     console.error('create-checkout-session error:', err);

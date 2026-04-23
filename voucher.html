@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Voucher | Casas da Vila</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    body{
+      margin:0;
+      background:#efebe5;
+      font-family:Arial,Helvetica,sans-serif;
+      color:#111;
+    }
+    .top-actions{
+      position:sticky;
+      top:0;
+      z-index:30;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      padding:14px;
+      background:rgba(239,235,229,.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(0,0,0,.08);
+    }
+    .btn{
+      appearance:none;
+      border:1px solid rgba(0,0,0,.12);
+      background:#fff;
+      color:#111;
+      padding:12px 18px;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:180px;
+    }
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+    #state{
+      max-width:880px;
+      margin:26px auto;
+      text-align:center;
+      color:#574f47;
+    }
+    #voucher-root{
+      min-height:50vh;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-actions">
+    <a id="downloadBtn" class="btn" href="#" style="display:none;">Download PDF</a>
+    <button id="printBtn" class="btn" type="button" style="display:none;">Imprimir voucher</button>
+  </div>
+
+  <div id="state">Carregando voucher…</div>
+  <div id="voucher-root"></div>
+
+  <script>
+    (async function () {
+      const params = new URLSearchParams(window.location.search);
+      const ref = params.get('ref');
+      const stateEl = document.getElementById('state');
+      const root = document.getElementById('voucher-root');
+      const downloadBtn = document.getElementById('downloadBtn');
+      const printBtn = document.getElementById('printBtn');
+
+      if (!ref) {
+        stateEl.textContent = 'Voucher não encontrado.';
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/voucher-by-ref?ref=${encodeURIComponent(ref)}`);
+        const data = await res.json();
+
+        if (!res.ok || !data?.voucher_html) {
+          throw new Error(data?.error || 'Voucher não encontrado');
+        }
+
+        stateEl.style.display = 'none';
+        root.innerHTML = data.voucher_html;
+
+        if (data.download_url) {
+          downloadBtn.href = data.download_url;
+          downloadBtn.style.display = 'inline-flex';
+        }
+
+        printBtn.style.display = 'inline-flex';
+        printBtn.addEventListener('click', () => window.print());
+      } catch (err) {
+        stateEl.textContent = 'Não foi possível carregar o voucher.';
+        console.error(err);
+      }
+    })();
+  </script>
+</body>
+</html>
