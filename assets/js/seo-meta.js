@@ -6,15 +6,12 @@
   const PROJECT_OG = `${ORIGIN}/assets/meta/og/og-project.jpg`;
 
   const SEO = {
-    /* =========================
-       HOME
-    ========================= */
     'home-pt': {
       canonical: `${ORIGIN}/pt/`,
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/`,
         'en': `${ORIGIN}/en/`,
-        'x-default': `${ORIGIN}/`
+        'x-default': `${ORIGIN}/pt/`
       },
       robots: 'index, follow',
       ogTitle: 'Casas da Vila | Hospedagem boutique em Trancoso',
@@ -28,7 +25,7 @@
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/`,
         'en': `${ORIGIN}/en/`,
-        'x-default': `${ORIGIN}/`
+        'x-default': `${ORIGIN}/pt/`
       },
       robots: 'index, follow',
       ogTitle: 'Casas da Vila | Tropical boutique stay in Trancoso',
@@ -37,15 +34,12 @@
       ogLocale: 'en_US'
     },
 
-    /* =========================
-       HOUSES INDEX
-    ========================= */
     'houses-pt': {
       canonical: `${ORIGIN}/pt/casas/`,
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/casas/`,
         'en': `${ORIGIN}/en/houses/`,
-        'x-default': `${ORIGIN}/pt/casas/`
+        'x-default': `${ORIGIN}/en/houses/`
       },
       robots: 'index, follow',
       ogTitle: 'Casas em Trancoso | Casas da Vila',
@@ -68,15 +62,12 @@
       ogLocale: 'en_US'
     },
 
-    /* =========================
-       BOOKING
-    ========================= */
     'book-pt': {
       canonical: `${ORIGIN}/pt/reservar/`,
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/reservar/`,
         'en': `${ORIGIN}/en/book/`,
-        'x-default': `${ORIGIN}/pt/reservar/`
+        'x-default': `${ORIGIN}/en/book/`
       },
       robots: 'index, follow',
       ogTitle: 'Reservar | Casas da Vila',
@@ -99,15 +90,12 @@
       ogLocale: 'en_US'
     },
 
-    /* =========================
-       CONTACT
-    ========================= */
     'contact-pt': {
       canonical: `${ORIGIN}/pt/contato/`,
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/contato/`,
         'en': `${ORIGIN}/en/contact/`,
-        'x-default': `${ORIGIN}/pt/contato/`
+        'x-default': `${ORIGIN}/en/contact/`
       },
       robots: 'index, follow',
       ogTitle: 'Contato | Casas da Vila',
@@ -130,15 +118,12 @@
       ogLocale: 'en_US'
     },
 
-    /* =========================
-       LOCATION
-    ========================= */
     'location-pt': {
       canonical: `${ORIGIN}/pt/localizacao/`,
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/localizacao/`,
         'en': `${ORIGIN}/en/location/`,
-        'x-default': `${ORIGIN}/pt/localizacao/`
+        'x-default': `${ORIGIN}/en/location/`
       },
       robots: 'index, follow',
       ogTitle: 'Localização em Trancoso | Casas da Vila',
@@ -161,15 +146,12 @@
       ogLocale: 'en_US'
     },
 
-    /* =========================
-       EXPERIENCES
-    ========================= */
     'experiences-pt': {
       canonical: `${ORIGIN}/pt/experiencias/`,
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/experiencias/`,
         'en': `${ORIGIN}/en/experiences/`,
-        'x-default': `${ORIGIN}/pt/experiencias/`
+        'x-default': `${ORIGIN}/en/experiences/`
       },
       robots: 'index, follow',
       ogTitle: 'Experiências em Trancoso | Casas da Vila',
@@ -192,15 +174,12 @@
       ogLocale: 'en_US'
     },
 
-    /* =========================
-       POLICIES
-    ========================= */
     'policies-pt': {
       canonical: `${ORIGIN}/pt/politicas/`,
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/politicas/`,
         'en': `${ORIGIN}/en/policies/`,
-        'x-default': `${ORIGIN}/pt/politicas/`
+        'x-default': `${ORIGIN}/en/policies/`
       },
       robots: 'index, follow',
       ogTitle: 'Políticas | Casas da Vila',
@@ -223,15 +202,124 @@
       ogLocale: 'en_US'
     },
 
-    /* =========================
-       INDIVIDUAL HOUSES PT
-    ========================= */
+    'nye-pt': {
+      canonical: `${ORIGIN}/pt/reveillon-2027/`,
+      hreflang: {
+        'pt-BR': `${ORIGIN}/pt/reveillon-2027/`,
+        'en': `${ORIGIN}/en/nye-2027/`,
+        'x-default': `${ORIGIN}/en/nye-2027/`
+      },
+      robots: 'index, follow',
+      ogTitle: 'Réveillon 2027 em Trancoso | Casas da Vila',
+      ogDescription: 'Hospedagem boutique para o Réveillon 2027 em Trancoso, com atmosfera tropical, casas autorais e estadia especial.',
+      ogImage: BOOKING_OG,
+      ogLocale: 'pt_BR'
+    },
+
+    'nye-en': {
+      canonical: `${ORIGIN}/en/nye-2027/`,
+      hreflang: {
+        'pt-BR': `${ORIGIN}/pt/reveillon-2027/`,
+        'en': `${ORIGIN}/en/nye-2027/`,
+        'x-default': `${ORIGIN}/en/nye-2027/`
+      },
+      robots: 'index, follow',
+      ogTitle: 'NYE 2027 in Trancoso | Casas da Vila',
+      ogDescription: 'Boutique stay for New Year’s Eve 2027 in Trancoso, with tropical atmosphere, authorial houses and special season planning.',
+      ogImage: BOOKING_OG,
+      ogLocale: 'en_US'
+    },
+
+    'blog-pt-onde-ficar': {
+      canonical: `${ORIGIN}/pt/blog/onde-ficar-em-trancoso/`,
+      hreflang: {
+        'pt-BR': `${ORIGIN}/pt/blog/onde-ficar-em-trancoso/`,
+        'en': `${ORIGIN}/en/blog/where-to-stay-in-trancoso/`,
+        'x-default': `${ORIGIN}/en/blog/where-to-stay-in-trancoso/`
+      },
+      robots: 'index, follow',
+      ogTitle: 'Onde ficar em Trancoso | Casas da Vila',
+      ogDescription: 'Guia sobre onde ficar em Trancoso, com foco em atmosfera, localização e experiência de hospedagem.',
+      ogImage: DEFAULT_OG,
+      ogLocale: 'pt_BR'
+    },
+
+    'blog-en-where-to-stay': {
+      canonical: `${ORIGIN}/en/blog/where-to-stay-in-trancoso/`,
+      hreflang: {
+        'pt-BR': `${ORIGIN}/pt/blog/onde-ficar-em-trancoso/`,
+        'en': `${ORIGIN}/en/blog/where-to-stay-in-trancoso/`,
+        'x-default': `${ORIGIN}/en/blog/where-to-stay-in-trancoso/`
+      },
+      robots: 'index, follow',
+      ogTitle: 'Where to stay in Trancoso | Casas da Vila',
+      ogDescription: 'A guide to where to stay in Trancoso, focused on atmosphere, location and boutique hospitality.',
+      ogImage: DEFAULT_OG,
+      ogLocale: 'en_US'
+    },
+
+    'blog-pt-o-que-fazer': {
+      canonical: `${ORIGIN}/pt/blog/o-que-fazer-em-trancoso/`,
+      hreflang: {
+        'pt-BR': `${ORIGIN}/pt/blog/o-que-fazer-em-trancoso/`,
+        'en': `${ORIGIN}/en/blog/what-to-do-in-trancoso/`,
+        'x-default': `${ORIGIN}/en/blog/what-to-do-in-trancoso/`
+      },
+      robots: 'index, follow',
+      ogTitle: 'O que fazer em Trancoso | Casas da Vila',
+      ogDescription: 'Guia com o que fazer em Trancoso entre praia, gastronomia, natureza e ritmo local.',
+      ogImage: PROJECT_OG,
+      ogLocale: 'pt_BR'
+    },
+
+    'blog-en-what-to-do': {
+      canonical: `${ORIGIN}/en/blog/what-to-do-in-trancoso/`,
+      hreflang: {
+        'pt-BR': `${ORIGIN}/pt/blog/o-que-fazer-em-trancoso/`,
+        'en': `${ORIGIN}/en/blog/what-to-do-in-trancoso/`,
+        'x-default': `${ORIGIN}/en/blog/what-to-do-in-trancoso/`
+      },
+      robots: 'index, follow',
+      ogTitle: 'What to do in Trancoso | Casas da Vila',
+      ogDescription: 'A guide to what to do in Trancoso through beaches, food, nature and local rhythm.',
+      ogImage: PROJECT_OG,
+      ogLocale: 'en_US'
+    },
+
+    'blog-pt-reveillon-2027': {
+      canonical: `${ORIGIN}/pt/blog/reveillon-2027-trancoso/`,
+      hreflang: {
+        'pt-BR': `${ORIGIN}/pt/blog/reveillon-2027-trancoso/`,
+        'en': `${ORIGIN}/en/blog/new-years-eve-2027-trancoso/`,
+        'x-default': `${ORIGIN}/en/blog/new-years-eve-2027-trancoso/`
+      },
+      robots: 'index, follow',
+      ogTitle: 'Réveillon 2027 em Trancoso | Casas da Vila',
+      ogDescription: 'Guia editorial sobre o Réveillon 2027 em Trancoso, com foco em atmosfera, estadia e planejamento.',
+      ogImage: BOOKING_OG,
+      ogLocale: 'pt_BR'
+    },
+
+    'blog-en-nye-2027': {
+      canonical: `${ORIGIN}/en/blog/new-years-eve-2027-trancoso/`,
+      hreflang: {
+        'pt-BR': `${ORIGIN}/pt/blog/reveillon-2027-trancoso/`,
+        'en': `${ORIGIN}/en/blog/new-years-eve-2027-trancoso/`,
+        'x-default': `${ORIGIN}/en/blog/new-years-eve-2027-trancoso/`
+      },
+      robots: 'index, follow',
+      ogTitle: 'New Year’s Eve 2027 in Trancoso | Casas da Vila',
+      ogDescription: 'Editorial guide to New Year’s Eve 2027 in Trancoso, focused on atmosphere, stay and planning.',
+      ogImage: BOOKING_OG,
+      ogLocale: 'en_US'
+    },
+
     'house-pt-atelie-azul': {
       canonical: `${ORIGIN}/pt/casas/atelie-azul/`,
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/casas/atelie-azul/`,
         'en': `${ORIGIN}/en/houses/atelie-azul/`,
-        'x-default': `${ORIGIN}/pt/casas/atelie-azul/`
+        'x-default': `${ORIGIN}/en/houses/atelie-azul/`
       },
       robots: 'index, follow',
       ogTitle: 'Ateliê Azul | Casas da Vila',
@@ -245,7 +333,7 @@
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/casas/casa-branca/`,
         'en': `${ORIGIN}/en/houses/casa-branca/`,
-        'x-default': `${ORIGIN}/pt/casas/casa-branca/`
+        'x-default': `${ORIGIN}/en/houses/casa-branca/`
       },
       robots: 'index, follow',
       ogTitle: 'Casa Branca | Casas da Vila',
@@ -259,7 +347,7 @@
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/casas/casa-dende/`,
         'en': `${ORIGIN}/en/houses/casa-dende/`,
-        'x-default': `${ORIGIN}/pt/casas/casa-dende/`
+        'x-default': `${ORIGIN}/en/houses/casa-dende/`
       },
       robots: 'index, follow',
       ogTitle: 'Casa Dendê | Casas da Vila',
@@ -273,7 +361,7 @@
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/casas/casa-dos-baloes/`,
         'en': `${ORIGIN}/en/houses/casa-dos-baloes/`,
-        'x-default': `${ORIGIN}/pt/casas/casa-dos-baloes/`
+        'x-default': `${ORIGIN}/en/houses/casa-dos-baloes/`
       },
       robots: 'index, follow',
       ogTitle: 'Casa dos Balões | Casas da Vila',
@@ -287,7 +375,7 @@
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/casas/casa-grande/`,
         'en': `${ORIGIN}/en/houses/casa-grande/`,
-        'x-default': `${ORIGIN}/pt/casas/casa-grande/`
+        'x-default': `${ORIGIN}/en/houses/casa-grande/`
       },
       robots: 'index, follow',
       ogTitle: 'Casa Grande | Casas da Vila',
@@ -301,7 +389,7 @@
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/casas/casa-manga/`,
         'en': `${ORIGIN}/en/houses/casa-manga/`,
-        'x-default': `${ORIGIN}/pt/casas/casa-manga/`
+        'x-default': `${ORIGIN}/en/houses/casa-manga/`
       },
       robots: 'index, follow',
       ogTitle: 'Casa Manga | Casas da Vila',
@@ -315,7 +403,7 @@
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/casas/casa-oca/`,
         'en': `${ORIGIN}/en/houses/casa-oca/`,
-        'x-default': `${ORIGIN}/pt/casas/casa-oca/`
+        'x-default': `${ORIGIN}/en/houses/casa-oca/`
       },
       robots: 'index, follow',
       ogTitle: 'Casa Oca | Casas da Vila',
@@ -329,7 +417,7 @@
       hreflang: {
         'pt-BR': `${ORIGIN}/pt/casas/casa-rosada/`,
         'en': `${ORIGIN}/en/houses/casa-rosada/`,
-        'x-default': `${ORIGIN}/pt/casas/casa-rosada/`
+        'x-default': `${ORIGIN}/en/houses/casa-rosada/`
       },
       robots: 'index, follow',
       ogTitle: 'Casa Rosada | Casas da Vila',
@@ -338,9 +426,6 @@
       ogLocale: 'pt_BR'
     },
 
-    /* =========================
-       INDIVIDUAL HOUSES EN
-    ========================= */
     'house-en-atelie-azul': {
       canonical: `${ORIGIN}/en/houses/atelie-azul/`,
       hreflang: {

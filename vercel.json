@@ -4,5 +4,47 @@
       "source": "/voucher/:ref",
       "destination": "/voucher.html?ref=:ref"
     }
+  ],
+  "redirects": [
+    {
+      "source": "http://www.casasdavila.com/:path*",
+      "destination": "https://casasdavila.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "http://casasdavila.com/:path*",
+      "destination": "https://casasdavila.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "destination": "/pt/",
+      "permanent": false
+    },
+    {
+      "source": "/casa-grande",
+      "destination": "/pt/casas/casa-grande/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-oca",
+      "destination": "/pt/casas/casa-oca/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-1",
+      "destination": "/pt/contato/",
+      "permanent": true
+    },
+    {
+      "source": "/homes",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-home",
+      "destination": "/pt/",
+      "permanent": true
+    }
   ]
 }
