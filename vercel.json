@@ -7,21 +7,6 @@
   ],
   "redirects": [
     {
-      "source": "http://www.casasdavila.com/:path*",
-      "destination": "https://casasdavila.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "http://casasdavila.com/:path*",
-      "destination": "https://casasdavila.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/",
-      "destination": "/pt/",
-      "permanent": false
-    },
-    {
       "source": "/casa-grande",
       "destination": "/pt/casas/casa-grande/",
       "permanent": true
@@ -32,8 +17,83 @@
       "permanent": true
     },
     {
+      "source": "/casa-dende",
+      "destination": "/pt/casas/casa-dende/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-branca",
+      "destination": "/pt/casas/casa-branca/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-manga",
+      "destination": "/pt/casas/casa-manga/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-rosa",
+      "destination": "/pt/casas/casa-rosada/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-rosada",
+      "destination": "/pt/casas/casa-rosada/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-dos-baloes",
+      "destination": "/pt/casas/casa-dos-baloes/",
+      "permanent": true
+    },
+    {
+      "source": "/atelie-azul",
+      "destination": "/pt/casas/atelie-azul/",
+      "permanent": true
+    },
+    {
+      "source": "/blue-atelier",
+      "destination": "/en/houses/atelie-azul/",
+      "permanent": true
+    },
+    {
+      "source": "/casas",
+      "destination": "/pt/casas/",
+      "permanent": true
+    },
+    {
+      "source": "/houses",
+      "destination": "/en/houses/",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/pt/contato/",
+      "permanent": true
+    },
+    {
       "source": "/contact-1",
       "destination": "/pt/contato/",
+      "permanent": true
+    },
+    {
+      "source": "/contato",
+      "destination": "/pt/contato/",
+      "permanent": true
+    },
+    {
+      "source": "/press",
+      "destination": "/pt/sobre/",
+      "permanent": true
+    },
+    {
+      "source": "/casas-da-vila-about-us",
+      "destination": "/pt/sobre/",
+      "permanent": true
+    },
+    {
+      "source": "/casas-da-vila-exclusive-and-green-offers",
+      "destination": "/pt/experiencias/",
       "permanent": true
     },
     {
@@ -44,6 +104,219 @@
     {
       "source": "/copy-of-home",
       "destination": "/pt/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-home",
+      "has": [
+        {
+          "type": "query",
+          "key": "locale",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/",
+      "permanent": true
+    },
+    {
+      "source": "/subscribe",
+      "destination": "/pt/reservar/",
+      "permanent": true
+    },
+    {
+      "source": "/reservation-",
+      "destination": "/pt/reservar/",
+      "permanent": true
+    },
+    {
+      "source": "/casasdavila",
+      "destination": "/pt/",
+      "permanent": true
+    },
+    {
+      "source": "/_frog",
+      "destination": "/pt/",
+      "permanent": true
+    },
+    {
+      "source": "/_api/:path*",
+      "destination": "/pt/",
+      "permanent": true
+    },
+
+    {
+      "source": "/casa-grande",
+      "has": [
+        {
+          "type": "query",
+          "key": "locale",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/casas/casa-grande/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-oca",
+      "has": [
+        {
+          "type": "query",
+          "key": "locale",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/casas/casa-oca/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-dende",
+      "has": [
+        {
+          "type": "query",
+          "key": "locale",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/casas/casa-dende/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-branca",
+      "has": [
+        {
+          "type": "query",
+          "key": "locale",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/casas/casa-branca/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-manga",
+      "has": [
+        {
+          "type": "query",
+          "key": "locale",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/casas/casa-manga/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-rosa",
+      "has": [
+        {
+          "type": "query",
+          "key": "locale",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/casas/casa-rosada/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-dos-baloes",
+      "has": [
+        {
+          "type": "query",
+          "key": "locale",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/casas/casa-dos-baloes/",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "has": [
+        {
+          "type": "query",
+          "key": "locale",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/contato/",
+      "permanent": true
+    },
+    {
+      "source": "/press",
+      "has": [
+        {
+          "type": "query",
+          "key": "locale",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/sobre/",
+      "permanent": true
+    },
+
+    {
+      "source": "/casa-grande",
+      "has": [
+        {
+          "type": "query",
+          "key": "lightbox",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/casas/casa-grande/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-oca",
+      "has": [
+        {
+          "type": "query",
+          "key": "lightbox",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/casas/casa-oca/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-dende",
+      "has": [
+        {
+          "type": "query",
+          "key": "lightbox",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/casas/casa-dende/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-rosa",
+      "has": [
+        {
+          "type": "query",
+          "key": "lightbox",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/casas/casa-rosada/",
+      "permanent": true
+    },
+    {
+      "source": "/casa-dos-baloes",
+      "has": [
+        {
+          "type": "query",
+          "key": "lightbox",
+          "value": "(.*)"
+        }
+      ],
+      "destination": "/pt/casas/casa-dos-baloes/",
+      "permanent": true
+    },
+
+    {
+      "source": "/pt/blog/onde-ficar-em-trancoso/",
+      "destination": "/pt/blog/onde-ficar-em-trancoso/",
       "permanent": true
     }
   ]
