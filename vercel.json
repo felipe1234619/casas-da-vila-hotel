@@ -7,6 +7,26 @@
   ],
   "redirects": [
     {
+      "source": "http://www.casasdavila.com/:path*",
+      "destination": "https://casasdavila.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "https://www.casasdavila.com/:path*",
+      "destination": "https://casasdavila.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "http://casasdavila.com/:path*",
+      "destination": "https://casasdavila.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "destination": "/pt/",
+      "permanent": false
+    },
+    {
       "source": "/casa-grande",
       "destination": "/pt/casas/casa-grande/",
       "permanent": true
@@ -98,23 +118,11 @@
     },
     {
       "source": "/homes",
-      "destination": "/en/",
+      "destination": "/en/houses/",
       "permanent": true
     },
     {
       "source": "/copy-of-home",
-      "destination": "/pt/",
-      "permanent": true
-    },
-    {
-      "source": "/copy-of-home",
-      "has": [
-        {
-          "type": "query",
-          "key": "locale",
-          "value": "(.*)"
-        }
-      ],
       "destination": "/pt/",
       "permanent": true
     },
@@ -134,6 +142,21 @@
       "permanent": true
     },
     {
+      "source": "/post/trancoso-new-year-s-eve-2026-where-magic-meets-the-sea",
+      "destination": "/en/blog/new-years-eve-2027-trancoso/",
+      "permanent": true
+    },
+    {
+      "source": "/post/:slug*",
+      "destination": "/pt/blog/onde-ficar-em-trancoso/",
+      "permanent": true
+    },
+    {
+      "source": "/profile/:path*",
+      "destination": "/pt/",
+      "permanent": true
+    },
+    {
       "source": "/_frog",
       "destination": "/pt/",
       "permanent": true
@@ -141,182 +164,6 @@
     {
       "source": "/_api/:path*",
       "destination": "/pt/",
-      "permanent": true
-    },
-
-    {
-      "source": "/casa-grande",
-      "has": [
-        {
-          "type": "query",
-          "key": "locale",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/casas/casa-grande/",
-      "permanent": true
-    },
-    {
-      "source": "/casa-oca",
-      "has": [
-        {
-          "type": "query",
-          "key": "locale",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/casas/casa-oca/",
-      "permanent": true
-    },
-    {
-      "source": "/casa-dende",
-      "has": [
-        {
-          "type": "query",
-          "key": "locale",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/casas/casa-dende/",
-      "permanent": true
-    },
-    {
-      "source": "/casa-branca",
-      "has": [
-        {
-          "type": "query",
-          "key": "locale",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/casas/casa-branca/",
-      "permanent": true
-    },
-    {
-      "source": "/casa-manga",
-      "has": [
-        {
-          "type": "query",
-          "key": "locale",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/casas/casa-manga/",
-      "permanent": true
-    },
-    {
-      "source": "/casa-rosa",
-      "has": [
-        {
-          "type": "query",
-          "key": "locale",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/casas/casa-rosada/",
-      "permanent": true
-    },
-    {
-      "source": "/casa-dos-baloes",
-      "has": [
-        {
-          "type": "query",
-          "key": "locale",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/casas/casa-dos-baloes/",
-      "permanent": true
-    },
-    {
-      "source": "/contact",
-      "has": [
-        {
-          "type": "query",
-          "key": "locale",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/contato/",
-      "permanent": true
-    },
-    {
-      "source": "/press",
-      "has": [
-        {
-          "type": "query",
-          "key": "locale",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/sobre/",
-      "permanent": true
-    },
-
-    {
-      "source": "/casa-grande",
-      "has": [
-        {
-          "type": "query",
-          "key": "lightbox",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/casas/casa-grande/",
-      "permanent": true
-    },
-    {
-      "source": "/casa-oca",
-      "has": [
-        {
-          "type": "query",
-          "key": "lightbox",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/casas/casa-oca/",
-      "permanent": true
-    },
-    {
-      "source": "/casa-dende",
-      "has": [
-        {
-          "type": "query",
-          "key": "lightbox",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/casas/casa-dende/",
-      "permanent": true
-    },
-    {
-      "source": "/casa-rosa",
-      "has": [
-        {
-          "type": "query",
-          "key": "lightbox",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/casas/casa-rosada/",
-      "permanent": true
-    },
-    {
-      "source": "/casa-dos-baloes",
-      "has": [
-        {
-          "type": "query",
-          "key": "lightbox",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/casas/casa-dos-baloes/",
-      "permanent": true
-    },
-
-    {
-      "source": "/pt/blog/onde-ficar-em-trancoso/",
-      "destination": "/pt/blog/onde-ficar-em-trancoso/",
       "permanent": true
     }
   ]
