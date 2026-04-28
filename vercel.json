@@ -1,3 +1,4 @@
+
 {
   "rewrites": [
     {
@@ -6,27 +7,6 @@
     }
   ],
   "redirects": [
-    {
-      "source": "http://www.casasdavila.com/:path*",
-      "destination": "https://casasdavila.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "https://www.casasdavila.com/:path*",
-      "destination": "https://casasdavila.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "http://casasdavila.com/:path*",
-      "destination": "https://casasdavila.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/",
-      "destination": "/pt/",
-      "permanent": false
-    },
-
     {
       "source": "/casa-grande",
       "destination": "/pt/casas/casa-grande/",
@@ -77,7 +57,6 @@
       "destination": "/en/houses/atelie-azul/",
       "permanent": true
     },
-
     {
       "source": "/casas",
       "destination": "/pt/casas/",
@@ -88,12 +67,6 @@
       "destination": "/en/houses/",
       "permanent": true
     },
-    {
-      "source": "/homes",
-      "destination": "/en/houses/",
-      "permanent": true
-    },
-
     {
       "source": "/contact",
       "destination": "/pt/contato/",
@@ -125,7 +98,24 @@
       "permanent": true
     },
     {
+      "source": "/homes",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
       "source": "/copy-of-home",
+      "destination": "/pt/",
+      "permanent": true
+    },
+    {
+      "source": "/copy-of-home",
+      "has": [
+        {
+          "type": "query",
+          "key": "locale",
+          "value": "(.*)"
+        }
+      ],
       "destination": "/pt/",
       "permanent": true
     },
@@ -144,18 +134,6 @@
       "destination": "/pt/",
       "permanent": true
     },
-
-    {
-      "source": "/post/trancoso-new-year-s-eve-2026-where-magic-meets-the-sea",
-      "destination": "/en/blog/new-years-eve-2027-trancoso/",
-      "permanent": true
-    },
-    {
-      "source": "/post/:slug*",
-      "destination": "/pt/blog/onde-ficar-em-trancoso/",
-      "permanent": true
-    },
-
     {
       "source": "/_frog",
       "destination": "/pt/",
@@ -166,24 +144,7 @@
       "destination": "/pt/",
       "permanent": true
     },
-    {
-      "source": "/profile/:path*",
-      "destination": "/pt/",
-      "permanent": true
-    },
 
-    {
-      "source": "/copy-of-home",
-      "has": [
-        {
-          "type": "query",
-          "key": "locale",
-          "value": "(.*)"
-        }
-      ],
-      "destination": "/pt/",
-      "permanent": true
-    },
     {
       "source": "/casa-grande",
       "has": [
@@ -351,6 +312,12 @@
         }
       ],
       "destination": "/pt/casas/casa-dos-baloes/",
+      "permanent": true
+    },
+
+    {
+      "source": "/pt/blog/onde-ficar-em-trancoso/",
+      "destination": "/pt/blog/onde-ficar-em-trancoso/",
       "permanent": true
     }
   ]
