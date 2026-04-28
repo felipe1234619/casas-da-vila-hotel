@@ -504,6 +504,44 @@
         transition:none !important;
       }
     }
+    .contactWhatsapp{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:240px;
+  min-height:52px;
+  padding:0 26px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.28);
+  color:#fff;
+  text-decoration:none;
+  font-size:.85rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  transition:all .28s ease;
+}
+
+.contactWhatsapp:hover{
+  background:rgba(255,255,255,.08);
+  transform:translateY(-1px);
+}
+.contactPrivacy,
+.contactNote{
+  max-width:620px;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+
+.contactPrivacy a{
+  white-space:nowrap;
+}
+
+.contactNote strong,
+.contactNote .nowrap{
+  white-space:nowrap;
+}
   </style>
 </head>
 
@@ -680,17 +718,23 @@
                 <button class="contactSubmit" id="contact-submit" type="submit">
                   Send message
                 </button>
-
-                <p class="contactPrivacy">
-                  By sending this form, you confirm that you have read our
-                  <a href="/en/privacy-policy/">Privacy Policy</a>.
-                </p>
-
-                <p class="contactNote">
-                  Your message will be received by our team and can also be followed up via
-                  <strong>WhatsApp: +55 73 99143-5522</strong>.
-                </p>
-
+<a
+  href="https://wa.me/5573991435522"
+  target="_blank"
+  rel="noopener"
+  class="contactWhatsapp"
+  id="contact-whatsapp"
+>
+  Check availability via WhatsApp
+</a>
+<p class="contactPrivacy">
+  By sending this form, you confirm that you have read our
+  <a href="/en/privacy-policy/">Privacy Policy</a>.
+</p>
+<p class="contactNote">
+  Your message will be received by our team. You can also follow up via
+  <strong class="nowrap">WhatsApp: +55 73 99143-5522</strong>.
+</p>
                 <p class="contactError" id="contact-error">
                   We could not send your message right now. Please try again in a moment.
                 </p>
@@ -806,7 +850,38 @@
           }
         });
       }
+const whatsappButton = document.getElementById('contact-whatsapp');
 
+function updateWhatsappLinkEN(){
+  if (!whatsappButton) return;
+
+  const name = document.getElementById('contact-name')?.value?.trim() || '';
+  const checkin = document.getElementById('contact-checkin')?.value || '';
+  const checkout = document.getElementById('contact-checkout')?.value || '';
+  const guests = document.getElementById('contact-guests')?.value || '';
+  const house = document.getElementById('contact-house')?.value || '';
+
+  const message = [
+    'Hello, I would like to check availability at Casas da Vila.',
+    name ? `Name: ${name}` : '',
+    checkin ? `Check-in: ${checkin}` : '',
+    checkout ? `Check-out: ${checkout}` : '',
+    guests ? `Guests: ${guests}` : '',
+    house ? `House of interest: ${house}` : '',
+    '',
+    'Could you please assist me with availability and next steps?'
+  ].filter(Boolean).join('\n');
+
+  whatsappButton.href = `https://wa.me/5573991435522?text=${encodeURIComponent(message)}`;
+}
+
+['contact-name','contact-checkin','contact-checkout','contact-guests','contact-house']
+  .forEach((id) => {
+    document.getElementById(id)?.addEventListener('input', updateWhatsappLinkEN);
+    document.getElementById(id)?.addEventListener('change', updateWhatsappLinkEN);
+  });
+
+updateWhatsappLinkEN();
       form.addEventListener('submit', async function (event) {
         event.preventDefault();
 

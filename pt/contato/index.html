@@ -21,6 +21,12 @@
   <meta property="og:image" content="https://casasdavila.com/assets/meta/og/og-default.jpg" />
 
   <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+<link rel="stylesheet" href="/assets/css/motion.css" />
+<link rel="stylesheet" href="/assets/css/responsive.css" />
+
+
 </head>
   <style>
     .contactHero{
@@ -513,6 +519,44 @@
         transition:none !important;
       }
     }
+    .contactWhatsapp{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:240px;
+  min-height:52px;
+  padding:0 26px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.28);
+  color:#fff;
+  text-decoration:none;
+  font-size:.85rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  transition:all .28s ease;
+}
+
+.contactWhatsapp:hover{
+  background:rgba(255,255,255,.08);
+  transform:translateY(-1px);
+}
+.contactPrivacy,
+.contactNote{
+  max-width:620px;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+
+.contactPrivacy a{
+  white-space:nowrap;
+}
+
+.contactNote strong,
+.contactNote .nowrap{
+  white-space:nowrap;
+}
   </style>
 </head>
 
@@ -688,16 +732,25 @@
                 <button class="contactSubmit" id="contact-submit" type="submit">
                   Enviar mensagem
                 </button>
+                <a
+  href="https://wa.me/5573991435522"
+  target="_blank"
+  rel="noopener"
+  class="contactWhatsapp"
+  id="contact-whatsapp"
+>
+  Falar direto no WhatsApp
+</a>
 
-                <p class="contactPrivacy">
-                  Ao enviar, você confirma que leu a nossa
-                  <a href="/pt/politica-de-privacidade/">Política de Privacidade</a>.
-                </p>
+<p class="contactPrivacy">
+  Ao enviar este formulário, você confirma que leu a nossa
+  <a href="/pt/politica-de-privacidade/">Política de Privacidade</a>.
+</p>
 
-                <p class="contactNote">
-                  Sua mensagem será recebida por nossa equipe e também pode ser acompanhada via
-                  <strong>WhatsApp: +55 73 99143-5522</strong>.
-                </p>
+<p class="contactNote">
+  Sua mensagem será recebida por nossa equipe e pode ser acompanhada também via
+  <strong class="nowrap">WhatsApp: +55 73 99143-5522</strong>.
+</p>
 
                 <p class="contactError" id="contact-error">
                   Não foi possível enviar sua mensagem neste momento. Tente novamente em instantes.
@@ -814,7 +867,38 @@
           }
         });
       }
+const whatsappButton = document.getElementById('contact-whatsapp');
 
+function updateWhatsappLinkPT(){
+  if (!whatsappButton) return;
+
+  const name = document.getElementById('contact-name')?.value?.trim() || '';
+  const checkin = document.getElementById('contact-checkin')?.value || '';
+  const checkout = document.getElementById('contact-checkout')?.value || '';
+  const guests = document.getElementById('contact-guests')?.value || '';
+  const house = document.getElementById('contact-house')?.value || '';
+
+  const message = [
+    'Olá, gostaria de verificar disponibilidade nas Casas da Vila.',
+    name ? `Nome: ${name}` : '',
+    checkin ? `Check-in: ${checkin}` : '',
+    checkout ? `Check-out: ${checkout}` : '',
+    guests ? `Hóspedes: ${guests}` : '',
+    house ? `Casa de interesse: ${house}` : '',
+    '',
+    'Poderiam me orientar com disponibilidade e próximos passos?'
+  ].filter(Boolean).join('\n');
+
+  whatsappButton.href = `https://wa.me/5573991435522?text=${encodeURIComponent(message)}`;
+}
+
+['contact-name','contact-checkin','contact-checkout','contact-guests','contact-house']
+  .forEach((id) => {
+    document.getElementById(id)?.addEventListener('input', updateWhatsappLinkPT);
+    document.getElementById(id)?.addEventListener('change', updateWhatsappLinkPT);
+  });
+
+updateWhatsappLinkPT();
       form.addEventListener('submit', async function (event) {
         event.preventDefault();
 

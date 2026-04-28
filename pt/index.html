@@ -40,195 +40,936 @@
 <link rel="stylesheet" href="/assets/css/global.css" />
 <link rel="stylesheet" href="/assets/css/motion.css" />
 <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+<style>
+    .homeHero{
+      position:relative;
+      min-height:78svh;
+      overflow:hidden;
+    }
+
+    .homeHeroMedia{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+
+    .homeHeroVideo{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .homeHeroShade,
+    .homeHeroGlow,
+    .homeHeroVignette,
+    .homeHeroGrain{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+    }
+
+    .homeHeroShade{
+      background:
+        linear-gradient(90deg, rgba(28,22,17,.58) 0%, rgba(28,22,17,.24) 42%, rgba(28,22,17,.10) 100%),
+        linear-gradient(180deg, rgba(255,245,232,.04) 0%, rgba(26,20,16,.22) 100%);
+    }
+
+    .homeHeroGlow{
+      background:
+        radial-gradient(circle at 18% 34%, rgba(255,248,238,.10) 0%, rgba(255,248,238,0) 36%);
+    }
+
+    .homeHeroVignette{
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,.18) 100%);
+    }
+
+    .homeHeroGrain{
+      opacity:.05;
+      background-image:radial-gradient(rgba(255,255,255,.7) .6px, transparent .7px);
+      background-size:8px 8px;
+      mix-blend-mode:soft-light;
+    }
+
+    .homeHeroTopper{
+      position:relative;
+      z-index:2;
+      width:min(var(--container), calc(100% - 32px));
+      min-height:78svh;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:44px;
+      align-items:end;
+      padding-top:calc(var(--header-h) + 18px);
+      padding-bottom:38px;
+    }
+
+    .homeHeroContent{
+      max-width:680px;
+    }
+
+    .homeHeroKicker{
+      display:inline-block;
+      color:rgba(255,255,255,.74);
+    }
+
+    .homeHeroTitle{
+      color:#fff;
+      text-shadow:0 10px 30px rgba(0,0,0,.16);
+      max-width:11ch;
+      margin:0;
+      font-size:clamp(3.2rem, 6.3vw, 5.8rem);
+      line-height:.92;
+      letter-spacing:-.045em;
+    }
+
+    .homeHeroText{
+      margin:20px 0 0;
+      max-width:28ch;
+      font-size:clamp(1rem, 1.35vw, 1.2rem);
+      line-height:1.7;
+      color:rgba(255,255,255,.90);
+    }
+
+    .homeHeroActions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:24px;
+    }
+
+    .homeHeroNote{
+      max-width:360px;
+      padding:24px;
+      border-radius:28px;
+      background:rgba(255,252,248,.76);
+      border:1px solid rgba(255,255,255,.48);
+      box-shadow:var(--shadow-lg);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    .homeHeroNote .eyebrow{
+      margin-bottom:10px;
+    }
+
+    .homeHeroNote p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.72;
+    }
+
+    .homeIntro{
+      padding-top:84px;
+      padding-bottom:34px;
+    }
+
+    .homeIntroGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:34px;
+      align-items:start;
+    }
+
+    .homeIntroHead{
+      max-width:920px;
+      display:grid;
+      gap:16px;
+    }
+
+    .homeIntroText{
+      display:grid;
+      gap:18px;
+    }
+
+    .homeCollection{
+      padding-top:18px;
+      padding-bottom:88px;
+    }
+
+    .homeCollectionHead{
+      max-width:920px;
+      display:grid;
+      gap:16px;
+      margin-bottom:28px;
+    }
+
+    .homeCollectionGrid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:28px;
+      align-items:stretch;
+    }
+
+    .homeFeatureCard,
+    .homeMiniCard{
+      position:relative;
+      overflow:hidden;
+      border-radius:30px;
+      background:rgba(255,252,248,.84);
+      border:1px solid rgba(255,255,255,.56);
+      box-shadow:var(--shadow-md);
+      transition:
+        transform .4s var(--ease),
+        box-shadow .4s var(--ease);
+    }
+
+    .homeFeatureCard:hover,
+    .homeMiniCard:hover{
+      transform:translateY(-6px);
+      box-shadow:0 28px 60px rgba(76,52,35,.16);
+    }
+
+    .homeFeatureMedia,
+    .homeMiniMedia{
+      position:relative;
+      overflow:hidden;
+    }
+
+    .homeFeatureMedia{
+      aspect-ratio:16 / 11;
+    }
+
+    .homeMiniMedia{
+      aspect-ratio:16 / 10;
+    }
+
+    .homeFeatureMedia img,
+    .homeMiniMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform 1.2s var(--ease);
+    }
+
+    .homeFeatureCard:hover .homeFeatureMedia img,
+    .homeMiniCard:hover .homeMiniMedia img{
+      transform:scale(1.04);
+    }
+
+    .homeFeatureBody{
+      padding:26px 26px 24px;
+      display:grid;
+      gap:14px;
+    }
+
+    .homeMiniStack{
+      display:grid;
+      gap:24px;
+    }
+
+    .homeMiniBody{
+      padding:22px 22px 20px;
+      display:grid;
+      gap:12px;
+    }
+
+    .homeFeatureBody h3,
+    .homeMiniBody h3{
+      margin:0;
+      font-family:var(--font-serif);
+      color:var(--text);
+      letter-spacing:-.03em;
+    }
+
+    .homeFeatureBody h3{
+      font-size:42px;
+      line-height:1;
+    }
+
+    .homeMiniBody h3{
+      font-size:30px;
+      line-height:1;
+    }
+
+    .homeFeatureBody p,
+    .homeMiniBody p{
+      margin:0;
+      color:var(--text-soft);
+      line-height:1.76;
+    }
+
+    .homeSectionLink{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      width:max-content;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .homeSectionLink::after{
+      content:"↗";
+      font-size:14px;
+    }
+
+    .homeSocial{
+      padding-top:0;
+      padding-bottom:88px;
+    }
+
+    .homeSocialGrid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:30px;
+      align-items:start;
+    }
+
+    .homeSocialMedia{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:18px;
+    }
+
+    .homeSocialMedia img{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      border-radius:24px;
+      box-shadow:var(--shadow-sm);
+    }
+
+    .homeSocialText{
+      display:grid;
+      gap:16px;
+      align-content:start;
+      max-width:620px;
+    }
+
+    .homePool{
+      padding-top:0;
+      padding-bottom:88px;
+    }
+
+    .homePoolPanel{
+      position:relative;
+      overflow:hidden;
+      border-radius:34px;
+      min-height:62svh;
+      box-shadow:var(--shadow-lg);
+    }
+
+    .homePoolPanel img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .homePoolPanel::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(24,19,15,.08) 0%, rgba(24,19,15,.40) 100%);
+    }
+
+    .homePoolCopy{
+      position:relative;
+      z-index:2;
+      min-height:62svh;
+      display:flex;
+      align-items:flex-end;
+      padding:34px;
+    }
+
+    .homePoolCopyInner{
+      max-width:620px;
+      color:#fff;
+    }
+
+    .homePoolCopyInner h2{
+      color:#fff;
+      margin:0 0 12px;
+    }
+
+    .homePoolCopyInner p{
+      margin:0;
+      color:rgba(255,255,255,.88);
+      line-height:1.8;
+    }
+
+    .homeBreakfast{
+      padding-top:0;
+      padding-bottom:84px;
+    }
+
+    .homeBreakfastGrid{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:30px;
+      align-items:center;
+    }
+
+    .homeBreakfastMedia img{
+      width:100%;
+      display:block;
+      border-radius:30px;
+      box-shadow:var(--shadow-md);
+    }
+
+    .homeBreakfastText{
+      display:grid;
+      gap:16px;
+      max-width:700px;
+    }
+
+    .homeClosing{
+      padding-top:0;
+      padding-bottom:72px;
+    }
+
+    .homeClosingPanel{
+      padding:42px;
+      border-radius:32px;
+      background:rgba(255,252,248,.72);
+      border:1px solid rgba(255,255,255,.54);
+      box-shadow:var(--shadow-md);
+    }
+
+    .homeClosingPanel .lead{
+      max-width:860px;
+    }
+
+    @media (max-width: 1100px){
+      .homeHeroTopper,
+      .homeIntroGrid,
+      .homeCollectionGrid,
+      .homeSocialGrid,
+      .homeBreakfastGrid{
+        grid-template-columns:1fr;
+      }
+
+      .homeSocialMedia{
+        grid-template-columns:1fr;
+      }
+
+      .homeHeroNote{
+        max-width:460px;
+      }
+    }
+
+    @media (max-width: 760px){
+      .homeHero{
+        min-height:auto;
+      }
+
+      .homeHeroTopper{
+        min-height:calc(78svh - var(--header-h) - 18px);
+        gap:24px;
+        padding-bottom:26px;
+      }
+
+      .homeHeroTitle{
+        max-width:10ch;
+        font-size:clamp(2.8rem, 12vw, 4.4rem);
+        line-height:.94;
+      }
+
+      .homeHeroText{
+        max-width:32ch;
+        font-size:17px;
+        line-height:1.68;
+      }
+
+      .homeHeroNote{
+        max-width:none;
+        width:100%;
+        padding:20px;
+        border-radius:24px;
+      }
+
+      .homeHeroActions{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .homeHeroActions .btn{
+        width:100%;
+      }
+
+      .homeIntro{
+        padding-top:60px;
+      }
+
+      .homeCollection,
+      .homeSocial,
+      .homePool,
+      .homeBreakfast{
+        padding-bottom:64px;
+      }
+
+      .homeFeatureBody{
+        padding:20px 18px 18px;
+      }
+
+      .homeMiniBody{
+        padding:18px 18px 18px;
+      }
+
+      .homeFeatureBody h3{
+        font-size:34px;
+      }
+
+      .homeMiniBody h3{
+        font-size:28px;
+      }
+
+      .homeSocialMedia img{
+        height:260px;
+        border-radius:20px;
+      }
+
+      .homePoolPanel,
+      .homePoolCopy{
+        min-height:50svh;
+      }
+
+      .homePoolCopy{
+        padding:24px;
+      }
+
+      .homeBreakfastMedia img,
+      .homeClosingPanel{
+        border-radius:24px;
+      }
+
+      .homeClosingPanel{
+        padding:26px;
+      }
+    }
+/* =========================================
+   HOME EN — COLLECTION LAYOUT FIX
+   ========================================= */
+
+.homeCollectionGrid{
+  grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);
+  gap:24px;
+  align-items:start;
+}
+
+.homeFeatureCard,
+.homeMiniCard{
+  border-radius:28px;
+  background:rgba(255,252,248,.88);
+  border:1px solid rgba(255,255,255,.62);
+  box-shadow:0 22px 48px rgba(76,52,35,.10);
+}
+
+.homeFeatureCard > a,
+.homeMiniCard > a{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  color:inherit;
+  text-decoration:none;
+}
+
+.homeFeatureMedia{
+  aspect-ratio:16 / 9.6;
+}
+
+.homeMiniMedia{
+  aspect-ratio:16 / 9.8;
+}
+
+.homeFeatureBody{
+  padding:22px 22px 20px;
+  gap:12px;
+}
+
+.homeMiniBody{
+  padding:20px 20px 18px;
+  gap:10px;
+}
+
+.homeFeatureBody h3{
+  font-size:36px;
+  line-height:1;
+  letter-spacing:-.035em;
+}
+
+.homeMiniBody h3{
+  font-size:28px;
+  line-height:1.02;
+  letter-spacing:-.03em;
+}
+
+.homeFeatureBody p,
+.homeMiniBody p{
+  font-size:16px;
+  line-height:1.7;
+  color:rgba(92,71,54,.82);
+}
+
+.homeSectionLink{
+  margin-top:2px;
+  font-size:15px;
+  font-weight:600;
+}
+
+.homeMiniStack{
+  gap:20px;
+}
+
+@media (max-width:1100px){
+  .homeCollectionGrid{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .homeMiniStack{
+    grid-template-columns:1fr 1fr;
+    display:grid;
+    gap:20px;
+  }
+}
+
+@media (max-width:760px){
+  .homeMiniStack{
+    grid-template-columns:1fr;
+  }
+
+  .homeFeatureBody{
+    padding:20px 18px 18px;
+  }
+
+  .homeMiniBody{
+    padding:18px 18px 16px;
+  }
+
+  .homeFeatureBody h3{
+    font-size:32px;
+  }
+
+  .homeMiniBody h3{
+    font-size:26px;
+  }
+
+  .homeFeatureBody p,
+  .homeMiniBody p{
+    font-size:15.5px;
+    line-height:1.66;
+  }
+}
+/* =========================================
+   HOME EN — OVERRIDE LIMPO (SEM CIRURGIA)
+   ========================================= */
+
+.homeCollectionGrid{
+  grid-template-columns:repeat(3, minmax(0,1fr)) !important;
+  gap:24px !important;
+  align-items:start !important;
+}
+
+.homeMiniStack{
+  display:contents !important;
+}
+
+/* unifica cards */
+.homeFeatureCard,
+.homeMiniCard{
+  border-radius:30px;
+  background:rgba(255,252,248,.88);
+  border:1px solid rgba(255,255,255,.62);
+  box-shadow:0 22px 52px rgba(76,52,35,.10);
+  transition:transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+
+.homeFeatureCard:hover,
+.homeMiniCard:hover{
+  transform:translateY(-6px);
+  box-shadow:0 28px 60px rgba(76,52,35,.16);
+}
+
+.homeFeatureCard > a,
+.homeMiniCard > a{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  text-decoration:none;
+  color:inherit;
+}
+
+/* mídia igual pra todos */
+.homeFeatureMedia,
+.homeMiniMedia{
+  aspect-ratio:16 / 10 !important;
+}
+
+.homeFeatureMedia img,
+.homeMiniMedia img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* tipografia alinhada */
+.homeFeatureBody,
+.homeMiniBody{
+  padding:22px !important;
+  gap:12px !important;
+}
+
+.homeFeatureBody h3,
+.homeMiniBody h3{
+  font-size:32px !important;
+  line-height:1.02;
+}
+
+.homeFeatureBody p,
+.homeMiniBody p{
+  font-size:16px;
+  line-height:1.7;
+  color:rgba(92,71,54,.82);
+}
+
+/* responsivo */
+@media (max-width:1100px){
+  .homeCollectionGrid{
+    grid-template-columns:1fr !important;
+  }
+}
+.contactWhatsapp{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:240px;
+  min-height:52px;
+  padding:0 26px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.28);
+  color:#fff;
+  text-decoration:none;
+  font-size:.85rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  transition:all .28s ease;
+}
+
+.contactWhatsapp:hover{
+  background:rgba(255,255,255,.08);
+  transform:translateY(-1px);
+}
+  </style>
+
 </head>
 
 <body class="home-video-header">
 
   <div id="site-header"></div>
 
-  <main>
+<main>
 
-    <!-- HERO -->
-    <section class="homeHero" aria-label="Casas da Vila">
-      <div class="homeHeroMedia">
-<video
-  class="homeHeroVideo"
-  autoplay
-  muted
-  loop
-  playsinline
-  poster="/assets/img/poster-hero.jpeg"
->
-  <source src="/assets/video/casas-da-vila-hero.mp4" type="video/mp4" />
-</video>
+  <section class="homeHero" aria-label="Casas da Vila">
+    <div class="homeHeroMedia">
+      <video
+        class="homeHeroVideo"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/assets/img/poster-hero.jpeg"
+      >
+        <source src="/assets/video/casas-da-vila-hero.mp4" type="video/mp4" />
+      </video>
 
-        <div class="homeHeroShade"></div>
-        <div class="homeHeroGlow"></div>
-        <div class="homeHeroVignette"></div>
-        <div class="homeHeroGrain"></div>
-      </div>
-
-      <div class="homeHeroInner">
-<div class="homeHeroContent">
-  <span class="homeHeroKicker heroReveal heroReveal--kicker">Trancoso, Bahia</span>
-
-  <h1 class="homeHeroTitle heroReveal heroReveal--title">
-    Casas da Vila
-  </h1>
-
-  <p class="homeHeroText heroReveal heroReveal--text">
-    Uma experiência tropical boutique entre jardim, arquitetura e mar,
-    concebida para dias lentos, beleza natural e descanso com atmosfera rara.
-  </p>
-</div>
-      </div>
-
-      <div class="homeHeroScroll" aria-hidden="true">
-        <span class="homeHeroScrollLine"></span>
-        <span class="homeHeroScrollText">Scroll</span>
-      </div>
-    </section>
-
-    <!-- EXPERIÊNCIA -->
-    <section class="section sectionAfterHero">
-      <div class="wrap">
-
-        <div class="sectionHead sectionHeadNarrow" data-reveal="zoom">
-          <p class="eyebrow">A estadia</p>
-          <h2 class="h2">Uma experiência boutique com espírito tropical</h2>
-
-          <p class="lead">
-            Casas da Vila reúne arquitetura autoral, natureza, privacidade e uma linguagem visual que
-            pertence a Trancoso — luminosa, viva e naturalmente sofisticada.
-          </p>
-        </div>
-
-        <div class="cardGrid cardGridHome">
-
-          <article class="card hoverLift" data-reveal="left">
-            <div class="cardMedia">
-              <img src="/assets/img/casadende7.jpeg" alt="Casas da Vila" />
-            </div>
-            <div class="cardBody">
-              <p class="cardMeta">Casas</p>
-              <h3 class="cardTitle">8 acomodações com identidade própria</h3>
-              <p class="cardText">
-                De refúgios intimistas para 2 hóspedes a casas amplas para 4, cada unidade tem
-                atmosfera, escala e personalidade próprias.
-              </p>
-            </div>
-          </article>
-
-          <article class="card hoverLift" data-reveal="zoom">
-            <div class="cardMedia">
-              <img src="/assets/img/home-jardim.jpg" alt="Jardim tropical em Trancoso" />
-            </div>
-            <div class="cardBody">
-              <p class="cardMeta">Natureza</p>
-              <h3 class="cardTitle">Jardins, varandas e o ritmo de fora</h3>
-              <p class="cardText">
-                A experiência da vila nasce do encontro entre interior e exterior, com muito verde,
-                texturas naturais e tempo desacelerado.
-              </p>
-            </div>
-          </article>
-
-          <article class="card hoverLift" data-reveal="right">
-            <div class="cardMedia">
-              <img src="/assets/img/breakfast3.jpeg" alt="Hospitalidade boutique" />
-            </div>
-            <div class="cardBody">
-              <p class="cardMeta">Hospitalidade</p>
-              <h3 class="cardTitle">Conforto, beleza e acolhimento</h3>
-              <p class="cardText">
-                Café da manhã e estacionamento já incluídos, em uma estadia desenhada para ser fluida,
-                elegante e sem excesso.
-              </p>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-<!-- BOOKING -->
-<section class="section sectionBooking">
-  <div class="wrap split splitBooking">
-
-    <div class="bookingCopy" data-reveal="left">
-      <p class="eyebrow">Reserva</p>
-      <h2 class="h2">Escolha a casa ideal para a sua estadia em Trancoso</h2>
-
-      <p class="body mt-18">
-        Cada casa foi pensada para oferecer uma forma própria de viver a vila,
-        com diferentes escalas, atmosferas e ritmos de permanência.
-      </p>
-
-      <p class="body mt-14">
-        Consulte disponibilidade, compare atmosferas e avance para a reserva
-        com café da manhã e estacionamento já incluídos na experiência.
-      </p>
-
-      <div class="mt-22">
-        <a class="btn btnPrimary" href="/pt/reservar/">Ver disponibilidade</a>
-      </div>
+      <div class="homeHeroShade"></div>
+      <div class="homeHeroGlow"></div>
+      <div class="homeHeroVignette"></div>
+      <div class="homeHeroGrain"></div>
     </div>
 
-    <div class="bookingPanel bookingPanelHome parallaxSoft" data-reveal="right">
-      <p class="eyebrow">Prévia</p>
-      <h3 class="h3">Sua estadia começa aqui</h3>
+    <div class="homeHeroTopper">
+      <div class="homeHeroContent">
+        <span class="eyebrow homeHeroKicker shimmerLine heroReveal heroReveal--kicker">
+          Trancoso, Bahia
+        </span>
 
-      <div class="formGrid mt-18">
-        <div class="field">
-          <label>Check-in</label>
-          <input type="text" value="Datas flexíveis" readonly />
-        </div>
+        <h1 class="display homeHeroTitle heroReveal heroReveal--title">
+          Hospedagem boutique tropical em Trancoso.
+        </h1>
 
-        <div class="field">
-          <label>Estadia</label>
-          <input type="text" value="Casas para 2 ou 4 hóspedes" readonly />
-        </div>
+        <p class="homeHeroText heroReveal heroReveal--text">
+          Jardins, casas autorais, café da manhã, piscina e um ritmo mais calmo de permanência.
+        </p>
 
-        <div class="field">
-          <label>Inclusões</label>
-          <input type="text" value="Café da manhã + estacionamento" readonly />
+        <div class="homeHeroActions heroReveal heroReveal--actions">
+          <a class="btn btnPrimary" href="/pt/reservar/">
+            Ver disponibilidade
+          </a>
+
+          <a class="btn btnGhost" href="/pt/casas/">
+            Explorar as casas
+          </a>
         </div>
       </div>
 
-      <div class="mt-18">
-        <a class="btn btnSoft" href="/pt/reservar/">
-          Ver casas disponíveis
-        </a>
+      <div class="homeHeroNote heroFloat" data-reveal="right">
+        <p class="eyebrow">A experiência</p>
+        <p>
+          Oito casas distintas, cercadas por jardim e tranquilidade tropical, com café da manhã e estacionamento já incluídos na estadia.
+        </p>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
-    <!-- FECHAMENTO -->
-    <section class="section sectionClosing">
-      <div class="wrap">
+  <section class="section homeIntro">
+    <div class="wrap homeIntroGrid">
+      <div class="homeIntroHead" data-reveal="zoom">
+        <p class="eyebrow">Casas da Vila</p>
+        <h2 class="h2">Mais do que hospedagem: uma forma de viver Trancoso.</h2>
+      </div>
 
-        <div class="softPanel closingPanel" data-reveal="zoom">
-          <p class="eyebrow">Trancoso</p>
+      <div class="homeIntroText" data-reveal="zoom">
+        <p class="lead">
+          Entre refúgios intimistas para dois hóspedes e casas mais amplas para quatro, a coleção é marcada por privacidade, vegetação, luz e permanência.
+        </p>
+        <p class="lead">
+          O resultado é uma experiência tropical boutique coerente, silenciosa e nunca repetitiva.
+        </p>
+      </div>
+    </div>
+  </section>
 
-          <h2 class="h2">Entre o mar, a vila e o jardim</h2>
+  <section class="section homeCollection">
+    <div class="wrap">
+      <div class="homeCollectionHead" data-reveal="zoom">
+        <p class="eyebrow">As casas</p>
+        <h2 class="h2">Uma coleção de casas com escala, atmosfera e identidade próprias.</h2>
+        <p class="lead">
+          Escolha a estadia que combina com o seu tempo em Trancoso — de casas mais suaves e intimistas a experiências mais amplas e expansivas.
+        </p>
+      </div>
 
-          <p class="lead mt-16">
-            Casas da Vila parte da sensibilidade de Trancoso: cor, natureza, textura,
-            calor e um luxo mais leve — sem excesso, sem ruído.
-          </p>
+      <div class="homeCollectionGrid">
+        <article class="homeFeatureCard" data-reveal="left">
+          <a href="/pt/casas/casa-grande/">
+            <div class="homeFeatureMedia">
+              <img src="/assets/img/casa-grande/gallery-04.jpeg" alt="Casa Grande" />
+            </div>
+            <div class="homeFeatureBody">
+              <h3>Casa Grande</h3>
+              <p>
+                A estadia mais ampla da vila, combinando privacidade, presença arquitetônica e um ritmo mais generoso de permanência.
+              </p>
+              <span class="homeSectionLink">Conhecer a casa</span>
+            </div>
+          </a>
+        </article>
 
-          <div class="ctaRow mt-26">
-            <a class="btn btnGhost" href="/pt/localizacao/">Ver localização</a>
-            <a class="btn btnGhost" href="/pt/experiencias/">Explorar experiências</a>
+        <div class="homeMiniStack">
+          <article class="homeMiniCard" data-reveal="right">
+            <a href="/pt/casas/casa-branca/">
+              <div class="homeMiniMedia">
+                <img src="/assets/img/casa-branca/hero.jpeg" alt="Casa Branca" />
+              </div>
+              <div class="homeMiniBody">
+                <h3>Casa Branca</h3>
+                <p>Leveza, frescor e silêncio visual em uma estadia marcada pela delicadeza.</p>
+                <span class="homeSectionLink">Conhecer a casa</span>
+              </div>
+            </a>
+          </article>
+
+          <article class="homeMiniCard" data-reveal="right">
+            <a href="/pt/casas/casa-dende/">
+              <div class="homeMiniMedia">
+                <img src="/assets/img/casa-dende/hero.jpeg" alt="Casa Dendê" />
+              </div>
+              <div class="homeMiniBody">
+                <h3>Casa Dendê</h3>
+                <p>Natureza, sombra e convivência em uma estadia mais ampla, marcada pela presença tropical.</p>
+                <span class="homeSectionLink">Conhecer a casa</span>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section homeSocial">
+    <div class="wrap homeSocialGrid">
+      <div class="homeSocialMedia" data-reveal="left">
+        <img src="/assets/img/home/social-lounge-01.jpeg" alt="Lounge nas Casas da Vila" />
+        <img src="/assets/img/home/social-lounge-02.jpeg" alt="Espaço de convivência nas Casas da Vila" />
+        <img src="/assets/img/home/pool-03.jpeg" alt="Atmosfera das áreas comuns" />
+      </div>
+
+      <div class="homeSocialText" data-reveal="right">
+        <p class="eyebrow">Lounges & áreas comuns</p>
+        <h2 class="h2">Lugares para permanecer além da própria casa.</h2>
+        <p class="lead">
+          Lounges, salas e espaços conectados ao jardim prolongam a experiência para além da acomodação, criando um ritmo mais suave de estadia.
+        </p>
+        <p class="lead">
+          Essas áreas fazem Casas da Vila parecer menos um hotel convencional e mais um refúgio tropical vivido.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section homePool">
+    <div class="wrap">
+      <div class="homePoolPanel" data-reveal="zoom">
+        <img src="/assets/img/home/pool-01.jpeg" alt="Piscina nas Casas da Vila" />
+        <div class="homePoolCopy">
+          <div class="homePoolCopyInner">
+            <p class="eyebrow" style="color:rgba(255,255,255,.78);">Piscina</p>
+            <h2 class="h2">Tempo aberto, luz tropical e um ritmo mais lento.</h2>
+            <p>
+              A piscina pertence à atmosfera da estadia tanto quanto as casas — um espaço de descanso, luz, calor e a sensação tranquila de não haver pressa.
+            </p>
           </div>
         </div>
-
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <section class="section homeBreakfast">
+    <div class="wrap homeBreakfastGrid">
+      <div class="homeBreakfastMedia" data-reveal="left">
+        <img src="/assets/img/home/breakfast-01.jpeg" alt="Café da manhã nas Casas da Vila" />
+      </div>
 
+      <div class="homeBreakfastText" data-reveal="right">
+        <p class="eyebrow">Café da manhã</p>
+        <h2 class="h2">Um início de dia suave, já incluído na experiência.</h2>
+        <p class="lead">
+          O café da manhã faz parte da estadia, não é um acréscimo: um ritual silencioso que marca a manhã e reforça o ritmo mais lento das Casas da Vila.
+        </p>
+        <p class="lead">
+          Junto com o estacionamento, ele já está incluído — para que a experiência seja fluida da chegada à partida.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section homeClosing">
+    <div class="wrap">
+      <div class="homeClosingPanel" data-reveal="zoom">
+        <p class="eyebrow">Reservas</p>
+        <h2 class="h2">Encontre a casa que combina com o seu ritmo em Trancoso.</h2>
+        <p class="lead mt-16">
+          Compare atmosferas, explore a coleção e avance para a reserva com café da manhã e estacionamento já incluídos na experiência.
+        </p>
+
+        <div class="ctaRow mt-26">
+          <a class="btn btnPrimary" href="/pt/reservar/">Ver disponibilidade</a>
+          <a class="btn btnGhost" href="/pt/contato/">Falar conosco</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
   <div id="site-footer"></div>
 
   <!-- JS (corrigido) -->

@@ -43,7 +43,8 @@
   <link rel="stylesheet" href="/assets/css/global.css" />
   <link rel="stylesheet" href="/assets/css/motion.css" />
   <link rel="stylesheet" href="/assets/css/responsive.css" />
-</head>  <style>
+</head>  
+<style>
     .homeHero{
       position:relative;
       min-height:78svh;
@@ -737,6 +738,27 @@
     grid-template-columns:1fr !important;
   }
 }
+.contactWhatsapp{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:240px;
+  min-height:52px;
+  padding:0 26px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.28);
+  color:#fff;
+  text-decoration:none;
+  font-size:.85rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  transition:all .28s ease;
+}
+
+.contactWhatsapp:hover{
+  background:rgba(255,255,255,.08);
+  transform:translateY(-1px);
+}
   </style>
 </head>
 <body class="page-home">
@@ -930,6 +952,15 @@
         </div>
       </div>
     </section>
+    <a
+  href="https://wa.me/5573991435522"
+  target="_blank"
+  rel="noopener"
+  class="contactWhatsapp"
+  id="contact-whatsapp"
+>
+  Check availability via WhatsApp
+</a>
 
     <section class="section homeClosing">
       <div class="wrap">
