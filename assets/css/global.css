@@ -4896,200 +4896,51 @@ img{
   background:rgba(255,255,255,.08);
   transform:translateY(-1px);
 }
-/* ================================
-   MOBILE HEADER FIX — CASAS DA VILA
-   ================================ */
+/* =========================
+   MOBILE HEADER — FIX REAL
+   ========================= */
 
 @media (max-width: 768px){
 
-  .siteHeaderShell{
-    width: 100%;
-    z-index: 9999;
-  }
-
-  .siteHeader{
-    padding: 10px 12px;
-  }
-
-  .headerInner{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
-  }
-
-  .brand{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-    flex: 1 1 auto;
-    max-width: 205px;
-    text-decoration: none;
-  }
-
-  .brandMark{
-    flex: 0 0 74px;
-    width: 74px;
-    height: 42px;
-    overflow: hidden;
-    border-radius: 9px;
-  }
-
-  .brandMarkImg{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
+  /* NÃO mexe no layout geral */
+  
   .brandText{
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .brandName{
-    white-space: nowrap;
-    font-size: 22px;
-    line-height: 0.95;
-    letter-spacing: -0.04em;
-  }
-
-  .brandSub{
-    white-space: nowrap;
-    font-size: 9px;
-    line-height: 1.1;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-  }
-
-  .nav{
-    display: none !important;
-  }
-
-  .headerActions{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex: 0 0 auto;
-  }
-
-  .langSwitch{
-    flex: 0 0 auto;
-    transform: scale(0.88);
-    transform-origin: center;
-  }
-
-  .headerReserveBtn{
-    flex: 0 0 auto;
-    padding: 13px 22px !important;
-    min-width: auto;
-    height: 54px;
-    border-radius: 999px;
-    font-size: 13px;
-    letter-spacing: 0.18em;
-    white-space: nowrap;
-  }
-
-  .headerMenuToggle{
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 48px;
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    border: 1px solid rgba(40,35,28,.22);
-    background: rgba(255,255,255,.72);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .headerMenuToggle span{
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #2b241d;
-    border-radius: 999px;
-    position: absolute;
-  }
-
-  .headerMenuToggle span:first-child{
-    transform: translateY(-5px);
-  }
-
-  .headerMenuToggle span:last-child{
-    transform: translateY(5px);
-  }
-}
-
-@media (max-width: 430px){
-
-  .brand{
-    max-width: 220px;
-    gap: 8px;
-  }
-
-  .brandMark{
-    flex-basis: 70px;
-    width: 70px;
-    height: 40px;
-  }
-
-  .brandName{
-    font-size: 20px;
-  }
-
-  .brandSub{
-    font-size: 8px;
-    letter-spacing: 0.2em;
-  }
-
-  .headerReserveBtn{
-    height: 50px;
-    padding: 12px 19px !important;
-    font-size: 12px;
-  }
-
-  .langSwitch{
-    transform: scale(0.84);
-  }
-
-  .headerMenuToggle{
-    flex-basis: 44px;
-    width: 44px;
-    height: 44px;
-  }
-}
-
-@media (max-width: 390px){
-
-  .brand{
-    max-width: 185px;
-  }
-
-  .brandMark{
-    flex-basis: 58px;
-    width: 58px;
-    height: 36px;
+    max-width: 140px;
   }
 
   .brandName{
     font-size: 18px;
+    line-height: 1;
+    white-space: nowrap;
   }
 
   .brandSub{
-    font-size: 7px;
+    font-size: 8px;
     letter-spacing: 0.18em;
+    white-space: nowrap;
   }
 
+  /* botão reservar menor */
   .headerReserveBtn{
-    padding: 11px 15px !important;
-    font-size: 11px;
+    padding: 10px 16px;
+    font-size: 12px;
   }
+
+  /* hamburguer correto */
+  .headerMenuToggle{
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .headerMenuToggle span{
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #2b241d;
+    margin: 3px 0;
+  }
+
 }
