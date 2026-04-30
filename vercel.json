@@ -313,12 +313,8 @@
       ],
       "destination": "/pt/casas/casa-dos-baloes/",
       "permanent": true
-    },
-
-    {
-      "source": "/pt/blog/onde-ficar-em-trancoso/",
-      "destination": "/pt/blog/onde-ficar-em-trancoso/",
-      "permanent": true
     }
+
+
   ]
 }
