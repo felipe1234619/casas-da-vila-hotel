@@ -405,30 +405,33 @@
     applyHeaderI18n(document);
   }
 })();
-document.addEventListener("click", function (event) {
-  const toggle = event.target.closest(".headerMenuToggle");
-  if (!toggle) return;
+/* Casas da Vila — Mobile Menu Toggle Definitivo */
+(function () {
+  document.addEventListener("click", function (event) {
+    const toggle = event.target.closest(".headerMenuToggle");
+    const drawer = document.querySelector(".mobileDrawer");
 
-  const drawer = document.querySelector(".mobileDrawer");
-  if (!drawer) return;
+    if (!toggle || !drawer) return;
 
-  const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    const willOpen = toggle.getAttribute("aria-expanded") !== "true";
 
-  toggle.setAttribute("aria-expanded", String(!isOpen));
-  drawer.classList.toggle("is-open", !isOpen);
-  drawer.setAttribute("aria-hidden", String(isOpen));
-});
+    toggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    drawer.classList.toggle("is-open", willOpen);
+    drawer.classList.toggle("open", willOpen);
+    drawer.setAttribute("aria-hidden", willOpen ? "false" : "true");
+  });
 
-document.addEventListener("click", function (event) {
-  const link = event.target.closest(".mobileDrawer a");
-  if (!link) return;
+  document.addEventListener("click", function (event) {
+    if (!event.target.closest(".mobileDrawer a")) return;
 
-  const toggle = document.querySelector(".headerMenuToggle");
-  const drawer = document.querySelector(".mobileDrawer");
+    const toggle = document.querySelector(".headerMenuToggle");
+    const drawer = document.querySelector(".mobileDrawer");
 
-  if (toggle) toggle.setAttribute("aria-expanded", "false");
-  if (drawer) {
-    drawer.classList.remove("is-open");
-    drawer.setAttribute("aria-hidden", "true");
-  }
-});
+    if (toggle) toggle.setAttribute("aria-expanded", "false");
+
+    if (drawer) {
+      drawer.classList.remove("is-open", "open");
+      drawer.setAttribute("aria-hidden", "true");
+    }
+  });
+})();
