@@ -309,4 +309,32 @@ function highlightSeasonalFooterLinks() {
     loadGlobalHeader();
     loadGlobalFooter();
   });
+  
 })();
+document.addEventListener("click", function (event) {
+  const toggle = event.target.closest(".headerMenuToggle");
+  if (!toggle) return;
+
+  const drawer = document.querySelector(".mobileDrawer");
+  if (!drawer) return;
+
+  const isOpen = toggle.getAttribute("aria-expanded") === "true";
+
+  toggle.setAttribute("aria-expanded", String(!isOpen));
+  drawer.classList.toggle("is-open", !isOpen);
+  drawer.setAttribute("aria-hidden", String(isOpen));
+});
+
+document.addEventListener("click", function (event) {
+  const link = event.target.closest(".mobileDrawer a");
+  if (!link) return;
+
+  const toggle = document.querySelector(".headerMenuToggle");
+  const drawer = document.querySelector(".mobileDrawer");
+
+  if (toggle) toggle.setAttribute("aria-expanded", "false");
+  if (drawer) {
+    drawer.classList.remove("is-open");
+    drawer.setAttribute("aria-hidden", "true");
+  }
+});
