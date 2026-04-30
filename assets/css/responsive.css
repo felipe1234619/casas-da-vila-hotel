@@ -1428,3 +1428,216 @@ article {
     border-radius: 9px !important;
   }
 }
+/* =========================================================
+   CASAS DA VILA — MOBILE HEADER FINAL CORRIGIDO
+   flag + nome | reservar compacto | menu
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .siteHeaderShell {
+    position: fixed !important;
+    top: 12px !important;
+    left: 12px !important;
+    right: 12px !important;
+    z-index: 999999 !important;
+    pointer-events: none !important;
+  }
+
+  .siteHeader {
+    height: 56px !important;
+    border-radius: 999px !important;
+    background: rgba(250,246,238,.88) !important;
+    border: 1px solid rgba(255,255,255,.68) !important;
+    box-shadow: 0 16px 38px rgba(0,0,0,.16) !important;
+    backdrop-filter: blur(24px) saturate(145%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+    overflow: hidden !important;
+    pointer-events: auto !important;
+  }
+
+  .headerInner {
+    height: 56px !important;
+    display: grid !important;
+    grid-template-columns: minmax(128px, 1fr) 118px 42px !important;
+    align-items: center !important;
+    gap: 7px !important;
+    padding: 0 7px 0 10px !important;
+  }
+
+  .nav,
+  .langSwitch {
+    display: none !important;
+  }
+
+  .headerActions {
+    display: contents !important;
+  }
+
+  .brand {
+    grid-column: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-decoration: none !important;
+  }
+
+  .brandMark,
+  .brandMark--flag {
+    width: 30px !important;
+    height: 22px !important;
+    flex: 0 0 30px !important;
+    border-radius: 7px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    box-shadow: 0 0 0 1px rgba(70,55,38,.12) !important;
+  }
+
+  .brandMarkImg {
+    width: 30px !important;
+    height: 22px !important;
+    object-fit: cover !important;
+    border-radius: 7px !important;
+    display: block !important;
+  }
+
+  .brandText {
+    display: block !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .brandName {
+    display: block !important;
+    max-width: 92px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    font-size: 10.5px !important;
+    line-height: 1 !important;
+    letter-spacing: .07em !important;
+    text-transform: uppercase !important;
+    font-weight: 800 !important;
+    color: #34281e !important;
+  }
+
+  .brandSub {
+    display: none !important;
+  }
+
+  .headerReserveBtn {
+    grid-column: 2 !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    border-radius: 999px !important;
+    padding: 0 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+    letter-spacing: .15em !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+  }
+
+  .headerMenuToggle {
+    grid-column: 3 !important;
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 999px !important;
+    border: 1px solid rgba(70,55,38,.16) !important;
+    background: rgba(255,255,255,.56) !important;
+    color: #34281e !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    z-index: 1000000 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+
+  .headerMenuToggle span {
+    position: absolute !important;
+    width: 16px !important;
+    height: 1.5px !important;
+    border-radius: 999px !important;
+    background: currentColor !important;
+    transition: transform 260ms cubic-bezier(.2,.8,.2,1) !important;
+  }
+
+  .headerMenuToggle span:nth-child(1) {
+    transform: translateY(-5px) !important;
+  }
+
+  .headerMenuToggle span:nth-child(2) {
+    transform: translateY(5px) !important;
+  }
+
+  .headerMenuToggle[aria-expanded="true"] span:nth-child(1) {
+    transform: rotate(45deg) !important;
+  }
+
+  .headerMenuToggle[aria-expanded="true"] span:nth-child(2) {
+    transform: rotate(-45deg) !important;
+  }
+
+  .mobileDrawer {
+    display: block !important;
+    position: fixed !important;
+    top: 78px !important;
+    left: 12px !important;
+    right: 12px !important;
+    z-index: 999998 !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transform: translateY(-10px) scale(.985) !important;
+    pointer-events: none !important;
+    transition: opacity 260ms ease, transform 300ms cubic-bezier(.2,.8,.2,1) !important;
+  }
+
+  .mobileDrawer.is-open,
+  .mobileDrawer.open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+    pointer-events: auto !important;
+  }
+
+  .mobileDrawerPanel {
+    border-radius: 28px !important;
+    padding: 22px 20px 14px !important;
+    background: rgba(250,246,238,.97) !important;
+    border: 1px solid rgba(255,255,255,.65) !important;
+    box-shadow: 0 34px 90px rgba(0,0,0,.26) !important;
+    backdrop-filter: blur(26px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(150%) !important;
+  }
+
+  .mobileDrawerPanel::before {
+    content: "Casas da Vila";
+    display: block;
+    margin-bottom: 2px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #34281e;
+    letter-spacing: -.03em;
+  }
+
+  .mobileDrawerPanel::after {
+    content: "Trancoso, Bahia";
+    display: block;
+    margin: 0 0 16px;
+    font-size: .66rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(52,40,30,.62);
+  }
+}
