@@ -596,3 +596,154 @@ article {
     overflow-wrap: anywhere;
   }
 }
+/* =========================================================
+   OVERRIDE FINAL — HEADER MOBILE CASAS DA VILA
+   Estrutura: idioma | reservar | menu
+========================================================= */
+
+@media (max-width: 768px) {
+  header,
+  .site-header,
+  .header,
+  .main-header {
+    position: fixed !important;
+    top: 12px !important;
+    left: 12px !important;
+    right: 12px !important;
+    height: 56px !important;
+    min-height: 56px !important;
+    z-index: 99999 !important;
+    border-radius: 999px !important;
+    background: rgba(250, 246, 238, 0.82) !important;
+    backdrop-filter: blur(22px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(140%) !important;
+    border: 1px solid rgba(255,255,255,.65) !important;
+    box-shadow: 0 16px 38px rgba(0,0,0,.16) !important;
+    overflow: hidden !important;
+  }
+
+  .header-inner,
+  .site-header-inner,
+  .nav-inner,
+  .navbar,
+  header .container,
+  .site-header .container,
+  .header .container {
+    height: 56px !important;
+    min-height: 56px !important;
+    padding: 0 8px !important;
+    display: grid !important;
+    grid-template-columns: 78px 1fr 44px !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  /* Esconde logo no mobile para não esmagar o menu */
+  .brand,
+  .logo,
+  .site-logo,
+  .header-logo,
+  .navbar-brand,
+  header img,
+  .site-header img,
+  .header img {
+    display: none !important;
+  }
+
+  /* Idiomas à esquerda */
+  .lang-switch,
+  .language-switch,
+  .locale-switcher,
+  .language-toggle {
+    grid-column: 1 !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    transform: scale(.84) !important;
+    transform-origin: left center !important;
+    min-width: 0 !important;
+  }
+
+  /* Botão reservar central */
+  .btn-book,
+  .book-btn,
+  .booking-btn,
+  .reserve-btn,
+  a[href*="booking"],
+  a[href*="reservar"],
+  a[href*="reserva"] {
+    grid-column: 2 !important;
+    justify-self: stretch !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    padding: 0 14px !important;
+    border-radius: 999px !important;
+    font-size: 11px !important;
+    letter-spacing: .16em !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+  }
+
+  /* Botão menu à direita */
+  .hamburger,
+  .menu-toggle,
+  .nav-toggle,
+  .mobile-toggle,
+  .mobile-menu-toggle,
+  .hamburger-btn {
+    grid-column: 3 !important;
+    justify-self: end !important;
+    display: inline-flex !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 999px !important;
+    border: 1px solid rgba(70,55,38,.18) !important;
+    background: rgba(255,255,255,.48) !important;
+    color: #34281e !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+  }
+
+  .hamburger::before,
+  .menu-toggle::before,
+  .nav-toggle::before,
+  .mobile-toggle::before,
+  .mobile-menu-toggle::before,
+  .hamburger-btn::before {
+    content: "" !important;
+    width: 17px !important;
+    height: 1.5px !important;
+    background: currentColor !important;
+    border-radius: 999px !important;
+    box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor !important;
+  }
+
+  .hamburger span,
+  .menu-toggle span,
+  .nav-toggle span,
+  .mobile-toggle span,
+  .mobile-menu-toggle span,
+  .hamburger-btn span {
+    display: none !important;
+  }
+
+  nav,
+  .nav,
+  .main-nav,
+  .desktop-nav,
+  .header-nav,
+  .menu,
+  .navigation {
+    display: none !important;
+  }
+
+  .hero,
+  .page-hero,
+  .home-hero {
+    padding-top: 86px !important;
+  }
+}
