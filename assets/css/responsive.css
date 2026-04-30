@@ -1407,3 +1407,24 @@ article {
     touch-action: manipulation !important;
   }
 }
+/* =========================================================
+   FIX — LOGO MOBILE COMO FLAG, NÃO BOLA
+========================================================= */
+
+@media (max-width: 768px) {
+  .brandMark,
+  .brandMark--flag {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 9px !important;
+    overflow: hidden !important;
+    flex: 0 0 34px !important;
+  }
+
+  .brandMarkImg {
+    width: 34px !important;
+    height: 34px !important;
+    object-fit: cover !important;
+    border-radius: 9px !important;
+  }
+}

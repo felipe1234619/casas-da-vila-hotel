@@ -1,3 +1,56 @@
+/* =========================================================
+   CASAS DA VILA — MOBILE MENU HARD FIX
+   Colar no TOPO do assets/js/main.js
+========================================================= */
+
+(function () {
+  function initMobileMenu() {
+    const toggle = document.querySelector(".headerMenuToggle");
+    const drawer = document.querySelector(".mobileDrawer");
+
+    if (!toggle || !drawer) return;
+
+    toggle.onclick = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const open = toggle.getAttribute("aria-expanded") !== "true";
+
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      drawer.setAttribute("aria-hidden", open ? "false" : "true");
+
+      drawer.classList.toggle("is-open", open);
+      drawer.classList.toggle("open", open);
+
+      drawer.style.display = "block";
+      drawer.style.visibility = open ? "visible" : "hidden";
+      drawer.style.opacity = open ? "1" : "0";
+      drawer.style.pointerEvents = open ? "auto" : "none";
+      drawer.style.transform = open ? "translateY(0) scale(1)" : "translateY(-10px) scale(.985)";
+    };
+
+    drawer.querySelectorAll("a").forEach(function (link) {
+      link.onclick = function () {
+        toggle.setAttribute("aria-expanded", "false");
+        drawer.setAttribute("aria-hidden", "true");
+        drawer.classList.remove("is-open", "open");
+
+        drawer.style.visibility = "hidden";
+        drawer.style.opacity = "0";
+        drawer.style.pointerEvents = "none";
+        drawer.style.transform = "translateY(-10px) scale(.985)";
+      };
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMobileMenu);
+  } else {
+    initMobileMenu();
+  }
+
+  window.addEventListener("load", initMobileMenu);
+})();
 (function () {
   function qs(selector, scope = document) {
     return scope.querySelector(selector);
