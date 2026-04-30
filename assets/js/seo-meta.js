@@ -258,33 +258,32 @@
       ogLocale: 'en_US'
     },
 
-    'blog-pt-o-que-fazer': {
-      canonical: `${ORIGIN}/pt/blog/o-que-fazer-em-trancoso/`,
-      hreflang: {
-        'pt-BR': `${ORIGIN}/pt/blog/o-que-fazer-em-trancoso/`,
-        'en': `${ORIGIN}/en/blog/what-to-do-in-trancoso/`,
-        'x-default': `${ORIGIN}/en/blog/what-to-do-in-trancoso/`
-      },
-      robots: 'index, follow',
-      ogTitle: 'O que fazer em Trancoso | Casas da Vila',
-      ogDescription: 'Guia com o que fazer em Trancoso entre praia, gastronomia, natureza e ritmo local.',
-      ogImage: PROJECT_OG,
-      ogLocale: 'pt_BR'
-    },
-
-    'blog-en-what-to-do': {
-      canonical: `${ORIGIN}/en/blog/what-to-do-in-trancoso/`,
-      hreflang: {
-        'pt-BR': `${ORIGIN}/pt/blog/o-que-fazer-em-trancoso/`,
-        'en': `${ORIGIN}/en/blog/what-to-do-in-trancoso/`,
-        'x-default': `${ORIGIN}/en/blog/what-to-do-in-trancoso/`
-      },
-      robots: 'index, follow',
-      ogTitle: 'What to do in Trancoso | Casas da Vila',
-      ogDescription: 'A guide to what to do in Trancoso through beaches, food, nature and local rhythm.',
-      ogImage: PROJECT_OG,
-      ogLocale: 'en_US'
-    },
+'blog-pt-o-que-fazer': {
+  canonical: `${ORIGIN}/pt/blog/o-que-fazer-em-trancoso/`,
+  hreflang: {
+    'pt-BR': `${ORIGIN}/pt/blog/o-que-fazer-em-trancoso/`,
+    'en': `${ORIGIN}/en/blog/what-to-do-in-trancoso/`,
+    'x-default': `${ORIGIN}/en/blog/what-to-do-in-trancoso/`
+  },
+  robots: 'index, follow',
+  ogTitle: 'O que fazer em Trancoso: praias, Quadrado e experiências | Casas da Vila',
+  ogDescription: 'Guia completo sobre o que fazer em Trancoso: praias, Quadrado, gastronomia, experiências locais, roteiro de 3 dias e onde se hospedar.',
+  ogImage: PROJECT_OG,
+  ogLocale: 'pt_BR'
+},
+'blog-en-what-to-do': {
+  canonical: `${ORIGIN}/en/blog/what-to-do-in-trancoso/`,
+  hreflang: {
+    'pt-BR': `${ORIGIN}/pt/blog/o-que-fazer-em-trancoso/`,
+    'en': `${ORIGIN}/en/blog/what-to-do-in-trancoso/`,
+    'x-default': `${ORIGIN}/en/blog/what-to-do-in-trancoso/`
+  },
+  robots: 'index, follow',
+  ogTitle: 'Best Things to Do in Trancoso Brazil | Casas da Vila',
+  ogDescription: 'Discover the best things to do in Trancoso, Brazil: beaches, the Quadrado, restaurants, local experiences, where to stay and a curated 3-day itinerary.',
+  ogImage: PROJECT_OG,
+  ogLocale: 'en_US'
+},
 
     'blog-pt-reveillon-2027': {
       canonical: `${ORIGIN}/pt/blog/reveillon-2027-trancoso/`,
@@ -608,4 +607,6 @@
   upsertMetaByName('twitter:title', conf.ogTitle);
   upsertMetaByName('twitter:description', conf.ogDescription);
   upsertMetaByName('twitter:image', conf.ogImage);
+
+  
 })();
