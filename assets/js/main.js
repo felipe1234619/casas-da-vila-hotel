@@ -380,33 +380,3 @@
     applyHeaderI18n(document);
   }
 })();
-/* Casas da Vila — Mobile Menu Toggle Definitivo */
-(function () {
-  document.addEventListener("click", function (event) {
-    const toggle = event.target.closest(".headerMenuToggle");
-    const drawer = document.querySelector(".mobileDrawer");
-
-    if (!toggle || !drawer) return;
-
-    const willOpen = toggle.getAttribute("aria-expanded") !== "true";
-
-    toggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
-    drawer.classList.toggle("is-open", willOpen);
-    drawer.classList.toggle("open", willOpen);
-    drawer.setAttribute("aria-hidden", willOpen ? "false" : "true");
-  });
-
-  document.addEventListener("click", function (event) {
-    if (!event.target.closest(".mobileDrawer a")) return;
-
-    const toggle = document.querySelector(".headerMenuToggle");
-    const drawer = document.querySelector(".mobileDrawer");
-
-    if (toggle) toggle.setAttribute("aria-expanded", "false");
-
-    if (drawer) {
-      drawer.classList.remove("is-open", "open");
-      drawer.setAttribute("aria-hidden", "true");
-    }
-  });
-})();
