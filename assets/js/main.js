@@ -380,3 +380,45 @@
     applyHeaderI18n(document);
   }
 })();
+/* =========================================================
+   CASAS DA VILA — MOBILE MENU STABLE CONTROLLER
+   Funciona mesmo se o header for carregado depois
+========================================================= */
+
+/* Mobile menu — delegated controller */
+document.addEventListener("click", function (event) {
+  const toggle = event.target.closest(".headerMenuToggle");
+  if (!toggle) return;
+
+  const drawer = document.querySelector(".mobileDrawer");
+  if (!drawer) {
+    console.warn("mobileDrawer não existe no DOM");
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  const isOpen = drawer.classList.contains("is-open");
+
+  drawer.classList.toggle("is-open", !isOpen);
+  drawer.classList.toggle("open", !isOpen);
+  drawer.setAttribute("aria-hidden", isOpen ? "true" : "false");
+  toggle.setAttribute("aria-expanded", isOpen ? "false" : "true");
+});
+
+document.addEventListener("click", function (event) {
+  if (!event.target.closest(".mobileDrawer a")) return;
+
+  const drawer = document.querySelector(".mobileDrawer");
+  const toggle = document.querySelector(".headerMenuToggle");
+
+  if (drawer) {
+    drawer.classList.remove("is-open", "open");
+    drawer.setAttribute("aria-hidden", "true");
+  }
+
+  if (toggle) {
+    toggle.setAttribute("aria-expanded", "false");
+  }
+});

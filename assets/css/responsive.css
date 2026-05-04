@@ -880,37 +880,33 @@ article {
     transform: rotate(-45deg) !important;
   }
 
-  .mobileDrawer {
-    position: fixed !important;
-    top: 82px !important;
-    left: 12px !important;
-    right: 12px !important;
-    z-index: 99998 !important;
-    opacity: 0 !important;
-    transform: translateY(-10px) scale(0.985) !important;
-    pointer-events: none !important;
-    transition:
-      opacity 260ms ease,
-      transform 300ms cubic-bezier(.2,.8,.2,1) !important;
-  }
+.mobileDrawer {
+  display: block !important;
+  position: fixed !important;
+  top: 78px !important;
+  left: 12px !important;
+  right: 12px !important;
+  z-index: 9999999 !important;
 
-  .mobileDrawer.is-open,
-  .mobileDrawer.open {
-    opacity: 1 !important;
-    transform: translateY(0) scale(1) !important;
-    pointer-events: auto !important;
-  }
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transform: translateY(-10px) scale(0.985) !important;
+  pointer-events: none !important;
 
-  .mobileDrawerPanel {
-    border-radius: 28px !important;
-    padding: 18px 18px 10px !important;
-    background: rgba(250, 246, 238, 0.96) !important;
-    border: 1px solid rgba(255, 255, 255, 0.62) !important;
-    box-shadow: 0 32px 88px rgba(0, 0, 0, 0.24) !important;
-    backdrop-filter: blur(24px) saturate(145%) !important;
-    -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
-  }
+  transition:
+    opacity 260ms ease,
+    transform 300ms cubic-bezier(.2,.8,.2,1) !important;
+}
 
+.mobileDrawer.is-open,
+.mobileDrawer.open {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  pointer-events: auto !important;
+  z-index: 9999999 !important;
+}
   .mobileNav {
     display: flex !important;
     flex-direction: column !important;
@@ -1723,4 +1719,1027 @@ article {
     pointer-events: auto !important;
     transform: translateY(0) scale(1) !important;
   }
+}
+/* =========================================================
+   CASAS DA VILA — MOBILE HEADER CANONICAL OVERRIDE
+   ESTE BLOCO DEVE SER O ÚLTIMO DO RESPONSIVE.CSS
+========================================================= */
+
+@media (max-width: 768px) {
+  .siteHeaderShell {
+    position: fixed !important;
+    top: 12px !important;
+    left: 12px !important;
+    right: 12px !important;
+    z-index: 999999 !important;
+    pointer-events: auto !important;
+  }
+
+  .siteHeader {
+    height: 56px !important;
+    border-radius: 999px !important;
+    background: rgba(250, 246, 238, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.68) !important;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.16) !important;
+    backdrop-filter: blur(24px) saturate(145%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+    overflow: hidden !important;
+  }
+
+  .headerInner {
+    height: 56px !important;
+    display: grid !important;
+    grid-template-columns: minmax(156px, 1fr) 104px 38px !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 0 7px 0 10px !important;
+  }
+
+  .nav,
+  .langSwitch {
+    display: none !important;
+  }
+
+  .headerActions {
+    display: contents !important;
+  }
+
+  .brand {
+    grid-column: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-decoration: none !important;
+  }
+
+  .brandMark,
+  .brandMark--flag {
+    width: 40px !important;
+    height: 28px !important;
+    flex: 0 0 40px !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    display: flex !important;
+  }
+
+  .brandMarkImg {
+    width: 40px !important;
+    height: 28px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    display: block !important;
+  }
+
+  .brandText {
+    display: block !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .brandName {
+    display: block !important;
+    max-width: 108px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: clip !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+    letter-spacing: 0.035em !important;
+    text-transform: uppercase !important;
+    color: #34281e !important;
+    font-weight: 800 !important;
+  }
+
+  .brandSub {
+    display: none !important;
+  }
+
+  .headerReserveBtn {
+    grid-column: 2 !important;
+    width: 100% !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 0 9px !important;
+    border-radius: 999px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 9.4px !important;
+    line-height: 1 !important;
+    letter-spacing: 0.13em !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+  }
+
+  .headerMenuToggle {
+    grid-column: 3 !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 999px !important;
+    border: 1px solid rgba(70, 55, 38, 0.16) !important;
+    background: rgba(255, 255, 255, 0.58) !important;
+    color: #34281e !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    z-index: 1000000 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+
+  .headerMenuToggle span {
+    position: absolute !important;
+    width: 16px !important;
+    height: 1.5px !important;
+    border-radius: 999px !important;
+    background: currentColor !important;
+    transition: transform 260ms cubic-bezier(.2,.8,.2,1) !important;
+  }
+
+  .headerMenuToggle span:nth-child(1) {
+    transform: translateY(-5px) !important;
+  }
+
+  .headerMenuToggle span:nth-child(2) {
+    transform: translateY(5px) !important;
+  }
+
+  .headerMenuToggle[aria-expanded="true"] span:nth-child(1),
+  .headerMenuToggle.is-open span:nth-child(1) {
+    transform: rotate(45deg) !important;
+  }
+
+  .headerMenuToggle[aria-expanded="true"] span:nth-child(2),
+  .headerMenuToggle.is-open span:nth-child(2) {
+    transform: rotate(-45deg) !important;
+  }
+
+  .mobileDrawer {
+    display: block !important;
+    position: fixed !important;
+    top: 78px !important;
+    left: 12px !important;
+    right: 12px !important;
+    z-index: 999998 !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transform: translateY(-10px) scale(.985) !important;
+    pointer-events: none !important;
+    transition: opacity 260ms ease, transform 300ms cubic-bezier(.2,.8,.2,1) !important;
+  }
+
+  .mobileDrawer.is-open,
+  .mobileDrawer.open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+    pointer-events: auto !important;
+  }
+
+  .mobileDrawerPanel {
+    border-radius: 28px !important;
+    padding: 22px 20px 14px !important;
+    background: rgba(250, 246, 238, .97) !important;
+    border: 1px solid rgba(255, 255, 255, .65) !important;
+    box-shadow: 0 34px 90px rgba(0, 0, 0, .26) !important;
+    backdrop-filter: blur(26px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(150%) !important;
+  }
+
+  .mobileDrawerPanel::before {
+    content: "Casas da Vila";
+    display: block;
+    margin-bottom: 2px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #34281e;
+    letter-spacing: -.03em;
+  }
+
+  .mobileDrawerPanel::after {
+    content: "Trancoso, Bahia";
+    display: block;
+    margin: 0 0 16px;
+    font-size: .66rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(52, 40, 30, .62);
+  }
+
+  .mobileNav {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .mobileNav a {
+    min-height: 54px !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 14px 2px !important;
+    color: #34281e !important;
+    text-decoration: none !important;
+    font-size: .98rem !important;
+    letter-spacing: .02em !important;
+    border-bottom: 1px solid rgba(70,55,38,.10) !important;
+  }
+
+  .mobileNav a:last-child {
+    margin-top: 10px !important;
+    border-bottom: 0 !important;
+    border-radius: 999px !important;
+    justify-content: center !important;
+    background: #1f5eff !important;
+    color: #fff !important;
+    font-size: .76rem !important;
+    font-weight: 800 !important;
+    letter-spacing: .17em !important;
+    text-transform: uppercase !important;
+  }
+}
+.mobileDrawer.is-open,
+.mobileDrawer.open {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  pointer-events: auto !important;
+}
+@media (max-width: 768px) {
+  .brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+  }
+
+  .brandText {
+    display: block !important;
+    min-width: 0 !important;
+  }
+
+  .brandName {
+    display: block !important;
+    max-width: 120px !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    font-size: 11px !important;
+    line-height: 1 !important;
+    letter-spacing: .03em !important;
+    color: #34281e !important;
+  }
+
+  .brandSub {
+    display: none !important;
+  }
+
+  .brandMark,
+  .brandMark--flag {
+    width: 40px !important;
+    height: 28px !important;
+    flex: 0 0 40px !important;
+    border-radius: 8px !important;
+  }
+
+  .brandMarkImg {
+    width: 40px !important;
+    height: 28px !important;
+    object-fit: cover !important;
+  }
+}
+.mobileDrawer {
+  display: block !important;
+}
+
+.mobileDrawer.is-open,
+.mobileDrawer.open {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  pointer-events: auto !important;
+  z-index: 999999 !important;
+}
+@media (max-width: 768px) {
+  header.siteHeaderShell {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-radius: 0 !important;
+  }
+
+  .siteHeader {
+    overflow: hidden !important;
+  }
+
+  .mobileDrawer {
+    display: block !important;
+    position: fixed !important;
+    top: 78px !important;
+    left: 12px !important;
+    right: 12px !important;
+    z-index: 9999999 !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transform: translateY(-10px) scale(.985) !important;
+    pointer-events: none !important;
+  }
+
+  .mobileDrawer.is-open,
+  .mobileDrawer.open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+    pointer-events: auto !important;
+  }
+
+  .brandText {
+    display: block !important;
+  }
+
+  .brandName {
+    display: block !important;
+    max-width: 120px !important;
+    overflow: visible !important;
+    white-space: nowrap !important;
+  }
+}
+@media (max-width: 768px) {
+
+  /* CONTAINER */
+  .mobileDrawer {
+    top: 76px !important;
+    left: 16px !important;
+    right: 16px !important;
+  }
+
+  /* PAINEL PRINCIPAL — estilo Aman */
+  .mobileDrawerPanel {
+    padding: 26px 24px 22px !important;
+    border-radius: 28px !important;
+
+    background: rgba(248, 244, 236, 0.92) !important;
+    backdrop-filter: blur(28px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(140%) !important;
+
+    border: 1px solid rgba(120, 95, 65, 0.12) !important;
+
+    box-shadow:
+      0 30px 80px rgba(0,0,0,0.28),
+      inset 0 1px 0 rgba(255,255,255,0.4) !important;
+  }
+
+  /* TÍTULO */
+  .mobileDrawerPanel::before {
+    content: "Casas da Vila";
+    display: block;
+    font-family: serif;
+    font-size: 1.55rem;
+    font-weight: 500;
+    color: #2e2a24;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  /* LINHA SUTIL */
+  .mobileDrawerPanel::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: rgba(60, 45, 25, 0.08);
+    margin-bottom: 14px;
+  }
+
+  /* LINKS */
+  .mobileNav a {
+    display: block;
+    padding: 14px 2px !important;
+
+    font-size: 0.95rem;
+    color: #3b342a !important;
+
+    letter-spacing: 0.02em;
+    font-weight: 400;
+
+    border-bottom: 1px solid rgba(60,45,25,0.06);
+
+    transition: all 0.25s ease;
+  }
+
+  .mobileNav a:hover {
+    color: #000;
+    transform: translateX(3px);
+  }
+
+  .mobileNav a:last-child {
+    border-bottom: none;
+  }
+
+  /* BOTÃO RESERVAR — versão Aman (menos “tech”) */
+  .mobileNav a[href*="reservar"] {
+    margin-top: 20px !important;
+
+    height: 48px !important;
+    border-radius: 999px !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(90deg, #2e6bff, #4fc3ff) !important;
+    color: #fff !important;
+
+    font-size: 0.72rem !important;
+    letter-spacing: 0.22em !important;
+    text-transform: uppercase;
+
+    box-shadow: 0 12px 28px rgba(46,107,255,0.28) !important;
+  }
+
+  /* RODAPÉ */
+  .mobileDrawerPanel small,
+  .mobileDrawerPanel .location {
+    display: block;
+    margin-top: 12px;
+
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: rgba(60,45,25,0.55);
+  }
+
+}
+/* =========================================================
+   CASAS DA VILA — MOBILE SYSTEM FINAL
+   Header + Drawer + Backdrop + Aman motion
+========================================================= */
+
+@media (max-width: 768px) {
+
+  header.siteHeaderShell {
+    height: auto !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .siteHeader {
+    height: 56px !important;
+    border-radius: 999px !important;
+    background: rgba(250,246,238,.78) !important;
+    backdrop-filter: blur(28px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(150%) !important;
+    box-shadow: 0 18px 46px rgba(0,0,0,.18) !important;
+  }
+
+  .headerInner {
+    grid-template-columns: minmax(152px, 1fr) 102px 38px !important;
+  }
+
+  .brandMark,
+  .brandMark--flag {
+    width: 42px !important;
+    height: 28px !important;
+    border-radius: 9px !important;
+  }
+
+  .brandMarkImg {
+    width: 42px !important;
+    height: 28px !important;
+    object-fit: cover !important;
+  }
+
+  .brandText {
+    display: block !important;
+  }
+
+  .brandName {
+    display: block !important;
+    max-width: 112px !important;
+    font-size: 10.5px !important;
+    letter-spacing: .035em !important;
+    color: #34281e !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+  }
+
+  .brandSub {
+    display: none !important;
+  }
+
+  .headerReserveBtn {
+    height: 36px !important;
+    font-size: 9.4px !important;
+    letter-spacing: .14em !important;
+    box-shadow: 0 10px 24px rgba(31,94,255,.22) !important;
+  }
+
+  .headerMenuToggle {
+    width: 36px !important;
+    height: 36px !important;
+    background: rgba(255,255,255,.62) !important;
+  }
+
+  .mobileDrawer {
+    top: 76px !important;
+    left: 14px !important;
+    right: 14px !important;
+    z-index: 9999999 !important;
+  }
+
+  .mobileDrawer::before {
+    content: "";
+    position: fixed;
+    inset: -90px 0 0 0;
+    z-index: -1;
+    background: rgba(18, 14, 10, .34);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity 320ms ease;
+    pointer-events: none;
+  }
+
+  .mobileDrawer.is-open::before,
+  .mobileDrawer.open::before {
+    opacity: 1;
+  }
+
+  .mobileDrawerPanel {
+    position: relative;
+    overflow: hidden;
+    padding: 26px 24px 22px !important;
+    border-radius: 30px !important;
+    background:
+      linear-gradient(rgba(250,246,238,.94), rgba(250,246,238,.94)),
+      url("/assets/img/trancoso2.jpeg") center/cover !important;
+    border: 1px solid rgba(255,255,255,.62) !important;
+    box-shadow:
+      0 34px 92px rgba(0,0,0,.32),
+      inset 0 1px 0 rgba(255,255,255,.45) !important;
+    transform: translateY(10px);
+    transition: transform 360ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  .mobileDrawer.is-open .mobileDrawerPanel,
+  .mobileDrawer.open .mobileDrawerPanel {
+    transform: translateY(0);
+  }
+
+  .mobileDrawerPanel::before {
+    content: "Casas da Vila";
+    display: block;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.75rem !important;
+    line-height: .95;
+    letter-spacing: -.035em;
+    color: #2f281f;
+    margin-bottom: 4px !important;
+  }
+
+  .mobileDrawerPanel::after {
+    content: "Trancoso, Bahia";
+    display: block;
+    margin: 0 0 18px !important;
+    font-size: .62rem !important;
+    letter-spacing: .24em !important;
+    text-transform: uppercase;
+    color: rgba(52,40,30,.58);
+  }
+
+  .mobileNav a {
+    min-height: 50px !important;
+    padding: 13px 0 !important;
+    font-size: .98rem !important;
+    color: #35291f !important;
+    border-bottom: 1px solid rgba(70,55,38,.08) !important;
+  }
+
+  .mobileNav a:last-child {
+    margin-top: 16px !important;
+    height: 48px !important;
+    border-radius: 999px !important;
+    background: linear-gradient(90deg, #1f5eff, #49c2ff) !important;
+    color: #fff !important;
+    font-size: .74rem !important;
+    letter-spacing: .2em !important;
+    box-shadow: 0 16px 34px rgba(31,94,255,.28) !important;
+  }
+}
+@media (max-width: 768px) {
+
+  /* ↓ DIMINUI O DRAWER (principal ajuste) */
+  .mobileDrawerPanel {
+    padding: 22px 20px 18px !important;
+    border-radius: 26px !important;
+    max-width: 92% !important;
+    margin: 0 auto !important;
+
+    background: rgba(248,244,236,0.88) !important;
+    backdrop-filter: blur(24px) saturate(130%) !important;
+  }
+
+  /* ↓ TÍTULO MENOS PESADO */
+  .mobileDrawerPanel::before {
+    font-size: 1.45rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* ↓ SUBTÍTULO MAIS LEVE */
+  .mobileDrawerPanel::after {
+    font-size: 0.58rem !important;
+    margin-bottom: 14px !important;
+  }
+
+  /* ↓ LINKS MAIS FINOS */
+  .mobileNav a {
+    padding: 11px 0 !important;
+    font-size: 0.92rem !important;
+    border-bottom: 1px solid rgba(60,45,25,0.05) !important;
+  }
+
+  /* ↓ BOTÃO MENOS “GRITADO” */
+  .mobileNav a[href*="reservar"] {
+    margin-top: 14px !important;
+    height: 44px !important;
+
+    font-size: 0.68rem !important;
+    letter-spacing: 0.18em !important;
+
+    box-shadow: 0 10px 22px rgba(31,94,255,0.22) !important;
+  }
+
+  /* ↓ BACKDROP MAIS SOFISTICADO */
+  .mobileDrawer::before {
+    background: rgba(12,10,8,0.28) !important;
+  }
+
+}
+@media (max-width: 768px) {
+
+  .mobileDrawerPanel {
+    transform: translateY(14px) scale(.985) !important;
+    transition:
+      transform 420ms cubic-bezier(.2,.8,.2,1),
+      opacity 320ms ease !important;
+  }
+
+  .mobileDrawer.is-open .mobileDrawerPanel,
+  .mobileDrawer.open .mobileDrawerPanel {
+    transform: translateY(0) scale(1) !important;
+  }
+
+  .mobileNav a {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 360ms ease,
+      transform 420ms cubic-bezier(.2,.8,.2,1),
+      color 240ms ease !important;
+  }
+
+  .mobileDrawer.is-open .mobileNav a,
+  .mobileDrawer.open .mobileNav a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobileDrawer.is-open .mobileNav a:nth-child(1) { transition-delay: 60ms !important; }
+  .mobileDrawer.is-open .mobileNav a:nth-child(2) { transition-delay: 95ms !important; }
+  .mobileDrawer.is-open .mobileNav a:nth-child(3) { transition-delay: 130ms !important; }
+  .mobileDrawer.is-open .mobileNav a:nth-child(4) { transition-delay: 165ms !important; }
+  .mobileDrawer.is-open .mobileNav a:nth-child(5) { transition-delay: 200ms !important; }
+  .mobileDrawer.is-open .mobileNav a:nth-child(6) { transition-delay: 245ms !important; }
+
+  .mobileNav a[href*="reservar"] {
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .mobileNav a[href*="reservar"]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 0%,
+      rgba(255,255,255,.28) 42%,
+      transparent 68%
+    );
+    transform: translateX(-120%);
+    transition: transform 900ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  .mobileDrawer.is-open .mobileNav a[href*="reservar"]::after {
+    transform: translateX(120%);
+    transition-delay: 420ms;
+  }
+
+  .headerMenuToggle {
+    transition:
+      background 260ms ease,
+      transform 260ms cubic-bezier(.2,.8,.2,1),
+      box-shadow 260ms ease !important;
+  }
+
+  .headerMenuToggle:active {
+    transform: scale(.94) !important;
+  }
+
+  .headerMenuToggle[aria-expanded="true"],
+  .headerMenuToggle.is-open {
+    background: rgba(255,255,255,.82) !important;
+    box-shadow:
+      inset 0 0 0 1px rgba(70,55,38,.08),
+      0 8px 22px rgba(0,0,0,.12) !important;
+  }
+
+  .siteHeader {
+    transition:
+      background 300ms ease,
+      box-shadow 300ms ease,
+      transform 300ms cubic-bezier(.2,.8,.2,1) !important;
+  }
+
+  body.drawer-open .siteHeader {
+    background: rgba(250,246,238,.64) !important;
+    box-shadow: 0 14px 34px rgba(0,0,0,.12) !important;
+  }
+
+  .mobileDrawerPanel {
+    background:
+      linear-gradient(rgba(248,244,236,.88), rgba(248,244,236,.9)),
+      url("/assets/img/trancoso2.jpeg") center/cover !important;
+  }
+}
+@media (max-width: 768px) {
+
+  .headerInner {
+    grid-template-columns: minmax(170px, 1fr) 88px 36px !important;
+    gap: 7px !important;
+    padding: 0 8px 0 11px !important;
+  }
+
+  .brand {
+    gap: 9px !important;
+  }
+
+  .brandMark,
+  .brandMark--flag {
+    width: 48px !important;
+    height: 32px !important;
+    flex: 0 0 48px !important;
+    border-radius: 10px !important;
+  }
+
+  .brandMarkImg {
+    width: 48px !important;
+    height: 32px !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+  }
+
+  .brandName {
+    display: block !important;
+    max-width: 118px !important;
+    font-size: 11.5px !important;
+    letter-spacing: .025em !important;
+    font-weight: 700 !important;
+    color: #2f281f !important;
+  }
+
+  .headerReserveBtn {
+    width: 88px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 0 8px !important;
+    font-size: 8.6px !important;
+    letter-spacing: .12em !important;
+    font-weight: 800 !important;
+    box-shadow: 0 8px 18px rgba(31,94,255,.16) !important;
+  }
+
+  .headerMenuToggle {
+    width: 34px !important;
+    height: 34px !important;
+  }
+}
+@media (max-width: 768px) {
+  .mobileNav a {
+    border-radius: 14px !important;
+    transition:
+      background 220ms ease,
+      color 220ms ease,
+      transform 220ms ease,
+      padding-left 220ms ease !important;
+  }
+
+  .mobileNav a:hover,
+  .mobileNav a:focus-visible,
+  .mobileNav a:active {
+    background: rgba(70, 55, 38, 0.07) !important;
+    color: #1f1a14 !important;
+    transform: translateX(4px) !important;
+    padding-left: 10px !important;
+  }
+
+  .mobileNav a[href*="reservar"]:hover,
+  .mobileNav a[href*="reservar"]:focus-visible,
+  .mobileNav a[href*="reservar"]:active {
+    transform: translateY(-1px) !important;
+    filter: brightness(1.04) !important;
+  }
+}
+@media (max-width: 768px) {
+
+  .siteHeader {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 4px; /* 👈 respiro interno */
+  }
+
+  .brandMark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible !important; /* 👈 impede corte */
+  }
+
+  .brandMarkImg {
+    width: 28px;  /* ajusta proporção */
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+}
+@media (max-width: 768px) {
+
+  .siteHeaderShell,
+  .siteHeader {
+    overflow: visible !important;
+  }
+
+}
+.headerCTA {
+  transform: scale(0.92);
+}
+
+.brandMarkImg {
+  width: 32px;
+}
+@media (max-width: 768px) {
+  .headerInner {
+    grid-template-columns: minmax(184px, 1fr) 86px 34px !important;
+    padding-left: 18px !important;
+    padding-right: 8px !important;
+  }
+
+  .brand {
+    overflow: visible !important;
+    padding-left: 4px !important;
+    gap: 10px !important;
+  }
+
+  .brandMark,
+  .brandMark--flag {
+    width: 52px !important;
+    height: 34px !important;
+    flex: 0 0 52px !important;
+    border-radius: 10px !important;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  .brandMarkImg {
+    width: 52px !important;
+    height: 34px !important;
+    object-fit: contain !important;
+    border-radius: 10px !important;
+    transform: none !important;
+  }
+
+  .siteHeader {
+    overflow: visible !important;
+  }
+}
+@media (max-width: 768px) {
+  .headerReserveBtn {
+    width: 82px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 8px !important;
+    font-size: 8.4px !important;
+    letter-spacing: .11em !important;
+    box-shadow: 0 6px 14px rgba(31,94,255,.14) !important;
+  }
+
+  .brandMark,
+  .brandMark--flag {
+    width: 54px !important;
+    height: 34px !important;
+    flex: 0 0 54px !important;
+    border-radius: 10px !important;
+  }
+
+  .brandMarkImg {
+    width: 54px !important;
+    height: 34px !important;
+    object-fit: contain !important;
+    border-radius: 10px !important;
+  }
+
+  .headerInner {
+    grid-template-columns: minmax(186px, 1fr) 82px 34px !important;
+    gap: 8px !important;
+  }
+}
+.mobileDrawer .brandTitle {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: #2b241c;
+  margin-bottom: 16px;
+}
+/* ===== AMAN LEVEL MOBILE MENU UPGRADE ===== */
+
+/* Header mais leve (integra com hero) */
+.siteHeader {
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.65);
+}
+
+/* Drawer nasce do header */
+.mobileDrawer {
+  top: 72px !important;
+}
+
+/* Ajuste do painel */
+.mobileDrawerPanel {
+  padding: 26px 22px 22px;
+  border-radius: 26px;
+}
+
+/* Título editorial */
+.mobileDrawer .brandTitle {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: #2b241c;
+  margin-bottom: 6px;
+}
+
+/* Linha Aman */
+.mobileDrawer .brandDivider {
+  width: 32px;
+  height: 1px;
+  background: rgba(0,0,0,0.15);
+  margin: 8px 0 18px;
+}
+
+/* Hover elegante */
+.mobileNav a {
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.mobileNav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: rgba(0,0,0,0.4);
+  transition: width 0.3s ease;
+}
+
+.mobileNav a:hover::after {
+  width: 100%;
+}
+
+/* Botão mais elegante (menos agressivo) */
+.mobileDrawer .btn-primary {
+  height: 44px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  opacity: 0.92;
 }
