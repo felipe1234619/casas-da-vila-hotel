@@ -29,28 +29,34 @@ export default async function handler(req, res) {
       return res.status(404).json({ error: 'Voucher not found' });
     }
 
-    if (!data.voucher_pdf_path) {
-      return res.status(404).json({ error: 'Voucher PDF not found' });
-    }
+    let signedUrl = null;
 
-    const signed = await supabase.storage
-      .from('vouchers')
-      .createSignedUrl(data.voucher_pdf_path, 60 * 30);
+    if (data.voucher_pdf_path) {
+      const signed = await supabase.storage
+        .from('vouchers')
+        .createSignedUrl(data.voucher_pdf_path, 60 * 30);
 
-    if (signed.error) {
-      throw signed.error;
+      if (!signed.error) {
+        signedUrl = signed.data.signedUrl;
+      }
     }
 
     if (download) {
-      return res.redirect(302, signed.data.signedUrl);
+      if (!signedUrl) {
+        return res.status(404).json({ error: 'Voucher PDF not found' });
+      }
+
+      return res.redirect(302, signedUrl);
     }
 
     return res.status(200).json({
       ok: true,
       booking_reference: data.booking_reference,
       voucher_html: data.voucher_html,
-      pdf_url: signed.data.signedUrl,
-      download_url: `/api/voucher-by-ref?ref=${encodeURIComponent(ref)}&download=1`
+      pdf_url: signedUrl,
+      download_url: signedUrl
+        ? `/api/voucher-by-ref?ref=${encodeURIComponent(ref)}&download=1`
+        : null
     });
   } catch (error) {
     console.error('voucher-by-ref error:', error);

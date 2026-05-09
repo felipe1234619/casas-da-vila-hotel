@@ -208,7 +208,8 @@ function renderVoucherHtml(payload) {
 
   const paymentLabel =
     String(payment_status || '').toLowerCase() === 'paid' ? 'Pago' : 'Pendente';
-
+const heroUrl =
+  `${process.env.SITE_URL || 'https://casasdavila.com'}/assets/img/voucher/voucher-hero.jpg`;
   return `<!doctype html>
 <html lang="pt-BR">
 <head>
@@ -250,8 +251,7 @@ function renderVoucherHtml(payload) {
     align-items:flex-end;
     background:
       linear-gradient(to bottom, rgba(8,12,18,.18), rgba(8,12,18,.48)),
-      url('/assets/img/voucher/voucher-hero.jpg') center/cover no-repeat;
-  }
+url('${heroUrl}') center/cover no-repeat;  }
   .brand{
     color:#fff;
     max-width:600px;
@@ -490,12 +490,26 @@ function renderVoucherHtml(payload) {
 
       <section class="section">
         <h3>Informações da estadia</h3>
-        <div class="notes">
-          Check-in a partir de 14h.<br>
-          Check-out até 12h.<br>
-          Café da manhã incluído.<br>
-          Para orientações de chegada ou suporte antes da sua estadia, nossa equipe permanece à disposição.
-        </div>
+<div class="notes">
+  Check-in a partir de 14h.<br>
+  Check-out até 12h.<br>
+  Café da manhã incluído.<br>
+  Para orientações de chegada ou suporte antes da sua estadia, nossa equipe permanece à disposição.
+</div>
+
+<div style="margin-top:22px;padding:18px 20px;background:#f8f5ef;border:1px solid rgba(26,26,26,.10);">
+  <div style="font-size:15px;line-height:1.8;color:#2f2b27;">
+    <strong>Política de tarifa não reembolsável.</strong><br>
+    Esta reserva foi confirmada sob tarifa não reembolsável. Após a confirmação do pagamento,
+    não são permitidos cancelamentos, reembolsos ou alterações de datas, salvo autorização expressa
+    de Casas da Vila.
+    <br><br>
+    <strong>Non-refundable rate policy.</strong><br>
+    This reservation was confirmed under a non-refundable rate. Once payment is confirmed,
+    cancellations, refunds or date changes are not permitted, unless expressly authorized by
+    Casas da Vila.
+  </div>
+</div>
       </section>
     </section>
 
@@ -606,6 +620,13 @@ async function sendBookingEmails(payload) {
         <p><strong>Hóspedes:</strong> ${escapeHtml(String(payload.guests_count || 1))}</p>
         <p><strong>Valor:</strong> ${formatMoneyBRLFromCents(payload.amount_total)}</p>
         <p><strong>Observações:</strong> ${escapeHtml(payload.special_requests || '-')}</p>
+        <p style="margin-top:18px;line-height:1.7;">
+  <strong>Política da reserva:</strong>
+  tarifa não reembolsável após confirmação do pagamento.
+  <br><br>
+  <strong>Reservation policy:</strong>
+  non-refundable rate after payment confirmation.
+</p>
         <p><strong>Voucher:</strong> <a href="${voucherUrl}">${voucherUrl}</a></p>
       </div>
     `
