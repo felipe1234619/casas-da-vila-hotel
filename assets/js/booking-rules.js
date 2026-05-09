@@ -44,7 +44,7 @@
         casa_dende: 7580,
         casa_oca: 3750,
         casa_branca: 3880,
-        casa_manga: 3880,
+        casa_manga: 3980,
         casa_baloes: 4550
       }
     },
@@ -53,14 +53,14 @@
       from: "2026-01-01",
       to: "2026-12-14",
       prices: {
-        casa_rosada: 1980,
-        atelier_azul: 1650,
-        casa_grande: 4250,
-        casa_dende: 3550,
-        casa_oca: 1759,
-        casa_branca: 1850,
-        casa_manga: 1850,
-        casa_baloes: 2250
+        casa_rosada: 2240,
+        atelier_azul: 1950,
+        casa_grande: 4950,
+        casa_dende: 3850,
+        casa_oca: 1959,
+        casa_branca: 1950,
+        casa_manga: 1950,
+        casa_baloes: 2950
       },
       minStay: {
         casa_rosada: 3,
@@ -78,14 +78,14 @@
       from: "2027-01-07",
       to: "2027-12-15",
       prices: {
-        casa_rosada: 1980,
-        atelier_azul: 1650,
-        casa_grande: 4250,
-        casa_dende: 3550,
-        casa_oca: 1759,
-        casa_branca: 1850,
-        casa_manga: 1850,
-        casa_baloes: 2250
+        casa_rosada: 2250,
+        atelier_azul: 1850,
+        casa_grande: 4950,
+        casa_dende: 3850,
+        casa_oca: 1959,
+        casa_branca: 2050,
+        casa_manga: 2050,
+        casa_baloes: 2550
       },
       minStay: {
         casa_rosada: 3,
