@@ -339,28 +339,39 @@ totalEl.textContent = `${t.total}: ${formatCurrency(config.total)}`;
     });
   }
 
-  function bindBookingEngine(options) {
-    const {
-      checkinSelector = "#checkin",
-      checkoutSelector = "#checkout",
-      guestsSelector = "#guests"
-    } = options || {};
+function bindBookingEngine(options) {
+  const {
+    checkinSelector = "#checkin",
+    checkoutSelector = "#checkout",
+    guestsSelector = "#guests",
+    onSearch = null,
+    onCheckoutStart = null
+  } = options || {};
 
-    const checkinEl = document.querySelector(checkinSelector);
-    const checkoutEl = document.querySelector(checkoutSelector);
-    const guestsEl = document.querySelector(guestsSelector);
+  const checkinEl = document.querySelector(checkinSelector);
+  const checkoutEl = document.querySelector(checkoutSelector);
+  const guestsEl = document.querySelector(guestsSelector);
 
-    const handler = () => refreshBookingCards(options);
-
-    [checkinEl, checkoutEl, guestsEl].forEach((el) => {
-      if (!el) return;
-      el.addEventListener("change", handler);
-      el.addEventListener("input", handler);
-    });
-
+  const handler = () => {
     refreshBookingCards(options);
-  }
 
+    if (typeof onSearch === "function") {
+      onSearch({
+        checkin: checkinEl?.value || null,
+        checkout: checkoutEl?.value || null,
+        guests: guestsEl?.value || null
+      });
+    }
+  };
+
+  [checkinEl, checkoutEl, guestsEl].forEach((el) => {
+    if (!el) return;
+    el.addEventListener("change", handler);
+    el.addEventListener("input", handler);
+  });
+
+  refreshBookingCards(options);
+}
   window.BookingRules = {
     RATE_RULES,
     BLOCKED_DATES,
