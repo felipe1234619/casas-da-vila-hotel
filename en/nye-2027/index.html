@@ -19,12 +19,12 @@
   <meta property="og:title" content="NYE 2027 in Trancoso | Casas da Vila" />
   <meta property="og:description" content="Exclusive houses, high demand and limited availability for New Year's Eve in Trancoso." />
   <meta property="og:url" content="https://casasdavila.com/en/nye-2027/" />
-  <meta property="og:image" content="https://casasdavila.com/assets/img/hero-trancoso.jpg" />
+  <meta property="og:image" content="https://casasdavila.com/assets/img/reveillon.jpeg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="NYE 2027 in Trancoso | Casas da Vila" />
   <meta name="twitter:description" content="Exclusive houses, high demand and limited availability for New Year's Eve in Trancoso." />
-  <meta name="twitter:image" content="https://casasdavila.com/assets/img/hero-trancoso.jpg" />
+  <meta name="twitter:image" content="https://casasdavila.com/assets/img/reveillon.jepg" />
 
   <link rel="stylesheet" href="/assets/css/global.css" />
   <link rel="stylesheet" href="/assets/css/motion.css" />
@@ -38,8 +38,13 @@
       padding-bottom:84px;
       overflow:hidden;
       background:
-        linear-gradient(180deg, rgba(14,18,20,.64) 0%, rgba(14,18,20,.44) 26%, rgba(14,18,20,.62) 100%),
-        url("/assets/img/hero-trancoso.jpg") center center / cover no-repeat;
+linear-gradient(
+  180deg,
+  rgba(14,18,20,.38) 0%,
+  rgba(14,18,20,.20) 26%,
+  rgba(14,18,20,.30) 100%
+),
+        url("/assets/img/reveillon1.jpeg") center center / cover no-repeat;
     }
 
     .nyeHero::before{
@@ -470,6 +475,275 @@
       border-color:rgba(92,71,54,.18);
       box-shadow:var(--shadow-lg);
     }
+.editorialVisual{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.editorialHeroImage{
+  position:relative;
+  overflow:hidden;
+  border-radius:32px;
+  min-height:520px;
+  box-shadow:var(--shadow-lg);
+}
+
+.editorialHeroImage img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.editorialHeroImage span{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(10px);
+  font-size:.72rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text);
+}
+
+.editorialWideQuote{
+  position:relative;
+  overflow:hidden;
+  border-radius:28px;
+  padding:34px;
+  background:
+    linear-gradient(180deg, #f3eadc 0%, #eadcc8 100%);
+  box-shadow:var(--shadow-soft);
+}
+
+.editorialWideQuote::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(214,183,129,.18),
+      transparent 44%
+    );
+  pointer-events:none;
+}
+
+.editorialWideQuote p{
+  position:relative;
+  z-index:1;
+  margin:0;
+  font-family:var(--font-serif);
+  font-size:clamp(1.8rem, 2.4vw, 2.8rem);
+  line-height:1.12;
+  letter-spacing:-0.04em;
+  color:var(--text);
+  text-wrap:balance;
+}
+.nyeImageCard{
+  min-height:260px;
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:var(--shadow-lg);
+  background:#ddd;
+}
+
+.nyeImageCard.large{
+  grid-column:1 / -1;
+  min-height:340px;
+}
+
+.nyeImageCard img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .7s ease;
+}
+
+.nyeImageCard:hover img{
+  transform:scale(1.035);
+}
+
+.nyeImageCard span{
+  position:absolute;
+  left:18px;
+  bottom:16px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(10px);
+  font-size:.72rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text);
+}
+
+.nyeItineraryGrid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+}
+
+.nyeItineraryCard{
+  padding:24px;
+  border-radius:24px;
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(255,255,255,.58);
+  box-shadow:var(--shadow-soft);
+}
+
+.nyeItineraryCard strong{
+  display:block;
+  font-family:var(--font-serif);
+  font-size:1.45rem;
+  line-height:1.08;
+  margin-bottom:10px;
+  color:var(--text);
+}
+
+.nyeItineraryCard p{
+  margin:0;
+  color:var(--text-soft);
+  line-height:1.72;
+}
+
+.nyeMapGrid{
+  display:grid;
+  grid-template-columns:.95fr 1.05fr;
+  gap:24px;
+  align-items:stretch;
+}
+
+.nyeMapPanel,
+.nyeMapText{
+  padding:32px;
+  border-radius:30px;
+  background:linear-gradient(180deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.58) 100%);
+  border:1px solid rgba(255,255,255,.60);
+  box-shadow:var(--shadow-lg);
+}
+
+.nyeMapImage{
+  overflow:hidden;
+  border-radius:26px;
+  background:#ead7a8;
+}
+
+.nyeMapImage img{
+  width:100%;
+  display:block;
+}
+
+.nyeMapMini{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:14px;
+}
+
+.nyeMapMini div{
+  padding:14px;
+  border-radius:16px;
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(92,71,54,.08);
+}
+
+.nyeMapMini span{
+  display:block;
+  font-size:.68rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--text-soft);
+}
+
+.nyeMapMini strong{
+  display:block;
+  margin-top:4px;
+  color:var(--text);
+  font-family:var(--font-serif);
+}
+.editorialStack{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  grid-template-rows:340px 220px;
+  gap:16px;
+}
+
+.editorialStack .large{
+  grid-row:1 / span 2;
+  min-height:100%;
+}
+
+.editorialStack .vertical{
+  min-height:100%;
+}
+
+.editorialQuote{
+  border-radius:28px;
+  padding:28px;
+  background:#efe8dd;
+  display:flex;
+  align-items:flex-end;
+  box-shadow:var(--shadow-soft);
+}
+
+.editorialQuote p{
+  margin:0;
+  font-family:var(--font-serif);
+  font-size:1.5rem;
+  line-height:1.25;
+  letter-spacing:-0.03em;
+  color:var(--text);
+}
+.editorialQuote{
+  position:relative;
+  overflow:hidden;
+}
+
+.editorialQuote::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(214,183,129,.18),
+      transparent 42%
+    );
+  pointer-events:none;
+}
+@media (max-width:900px){
+  .editorialStack{
+    grid-template-columns:1fr;
+    grid-template-rows:auto;
+  }
+
+  .editorialStack .large{
+    grid-row:auto;
+  }
+}
+
+@media (max-width:900px){
+  .nyeEditorial,
+  .nyeMapGrid,
+  .nyeItineraryGrid{
+    grid-template-columns:1fr;
+  }
+
+  .nyeImageStack{
+    grid-template-columns:1fr;
+  }
+
+  .nyeMapMini{
+    grid-template-columns:1fr;
+  }
+}
 
     @media (max-width:1100px){
       .nyeHeroGrid,
@@ -491,284 +765,433 @@
         grid-template-columns:1fr;
       }
     }
+
   </style>
 </head>
 <body>
 
   <div id="site-header"></div>
 
-  <main>
+<main>
 
-    <section class="nyeHero">
-      <div class="nyeInner">
-        <div class="nyeHeroGrid">
+  <section class="nyeHero">
+    <div class="nyeInner">
+      <div class="nyeHeroGrid">
 
-          <div class="nyeIntro">
-            <p class="eyebrow">NYE 2027 • Trancoso</p>
+        <div class="nyeIntro">
+          <p class="eyebrow">NYE 2027 • Trancoso, Brazil</p>
 
-            <h1 class="display nyeTitle">
-              The world chooses Trancoso for the turn of the year.
-            </h1>
+          <h1 class="display nyeTitle">
+            New Year’s Eve in Trancoso, lived slowly.
+          </h1>
 
-            <p class="nyeLead">
-              Few destinations combine beauty, energy, privacy and atmosphere in the way Trancoso does during the final days of the year.
-            </p>
+          <p class="nyeLead">
+            A more intimate way to experience one of Brazil’s most desired turn-of-the-year destinations.
+          </p>
 
-            <p class="nyeIntroText">
-              Casas da Vila offers a more private way to experience this period — with carefully positioned houses, limited availability and a calmer rhythm for one of the most desired weeks of the calendar.
-            </p>
-          </div>
-
-          <div class="nyePanel">
-            <div class="nyePanelHead">
-              <span class="nyeKicker">Limited availability</span>
-              <p class="nyePanelIntro">
-                Availability for NYE 2027 tends to move early. The most attractive houses are usually reserved well in advance.
-              </p>
-            </div>
-
-            <div class="nyeStats">
-              <div class="nyeStat">
-                <strong id="nye-stock-total">3</strong>
-                <span>houses left</span>
-              </div>
-              <div class="nyeStat">
-                <strong id="nye-nights-min">7</strong>
-                <span>min. nights</span>
-              </div>
-              <div class="nyeStat">
-                <strong id="nye-starting-price">R$ 18k+</strong>
-                <span>from</span>
-              </div>
-            </div>
-
-            <div class="nyeUrgency">
-              <strong id="nye-urgency-label">High-demand period.</strong>
-              <div id="nye-urgency-copy">
-                A limited number of houses will be available for New Year's Eve packages.
-              </div>
-            </div>
-
-            <div class="nyeActions">
-              <a class="btn btnPrimary" href="/en/book/">See availability</a>
-              <a
-                class="btn btnGhost"
-                href="https://wa.me/5573991435522?text=I%20want%20information%20about%20NYE%202027%20in%20Trancoso."
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                WhatsApp
-              </a>
-            </div>
-          </div>
-
+          <p class="nyeIntroText">
+            Casas da Vila offers charming rustic houses surrounded by garden atmosphere, close to village life and shaped for guests who want privacy, simplicity and beauty during NYE 2027.
+          </p>
         </div>
-      </div>
-    </section>
 
-    <section class="nyeSection">
-      <div class="nyeWrap">
-        <div class="nyeHead">
-          <p class="eyebrow">Why Trancoso</p>
-          <h2 class="h2">Why the world chooses Trancoso at this time</h2>
+        <div class="nyePanel">
+          <div class="nyePanelHead">
+            <span class="nyeKicker">Limited availability</span>
+            <p class="nyePanelIntro">
+              New Year’s Eve in Trancoso moves early. The most suitable houses are usually reserved well in advance.
+            </p>
+          </div>
+
+          <div class="nyeStats">
+            <div class="nyeStat">
+              <strong id="nye-stock-total">3</strong>
+              <span>houses left</span>
+            </div>
+            <div class="nyeStat">
+              <strong id="nye-nights-min">7</strong>
+              <span>min. nights</span>
+            </div>
+            <div class="nyeStat">
+              <strong id="nye-starting-price">R$ 18k+</strong>
+              <span>from</span>
+            </div>
+          </div>
+
+          <div class="nyeUrgency">
+            <strong id="nye-urgency-label">High-demand period.</strong>
+            <div id="nye-urgency-copy">
+              A limited number of houses will be available for New Year’s Eve packages.
+            </div>
+          </div>
+
+          <div class="nyeActions">
+            <a class="btn btnPrimary" href="/en/book/">See availability</a>
+            <a
+              class="btn btnGhost"
+              href="https://wa.me/5573991435522?text=I%20want%20information%20about%20NYE%202027%20in%20Trancoso."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="nyeSection">
+    <div class="nyeWrap">
+      <div class="nyeEditorial">
+
+        <div class="nyeEditorialText">
+          <p class="eyebrow">The destination</p>
+          <h2 class="h2">What New Year’s Eve in Trancoso feels like</h2>
+
+          <p class="mt-16">
+            New Year’s Eve in Trancoso is not only about parties. It is a week of beach mornings, warm evenings, long dinners, village walks, music, encounters and a particular sense of freedom that makes the destination so desired at the end of the year.
+          </p>
+
+          <p>
+            The Quadrado becomes more alive, the beaches carry the rhythm of summer and the days tend to unfold slowly between sea, garden, shade, food and conversation.
+          </p>
+
+          <p>
+            For many guests, the choice of where to stay defines the whole experience. A house gives the week a different pace: more space, more privacy, more silence after the celebration and a softer return to the day after.
+          </p>
+        </div>
+
+<div class="editorialVisual">
+
+  <figure class="editorialHeroImage">
+    <img
+      src="/assets/img/reveillon.jpeg"
+      alt="New Year's Eve atmosphere in Trancoso"
+      loading="lazy"
+    />
+    <span>Summer in Trancoso</span>
+  </figure>
+
+  <div class="editorialWideQuote">
+    <p>
+      “Some guests come for the celebration.
+      Most return for the atmosphere.”
+    </p>
+  </div>
+
+</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="nyeSection nyeSectionAlt">
+    <div class="nyeWrap">
+      <div class="nyeHead">
+        <p class="eyebrow">Why Trancoso</p>
+        <h2 class="h2">Why the turn of the year here feels different</h2>
+        <p class="lead mt-16">
+          Trancoso brings together beach, village life, architecture, vegetation and a social atmosphere that becomes especially magnetic during the final days of the year.
+        </p>
+      </div>
+
+      <div class="nyeGrid3">
+        <article class="nyeCard">
+          <h3>The Quadrado</h3>
+          <p>
+            The symbolic heart of Trancoso becomes brighter and more alive during NYE, with restaurants, music, movement and the architecture that gives the village its identity.
+          </p>
+        </article>
+
+        <article class="nyeCard">
+          <h3>The beaches</h3>
+          <p>
+            Even in peak season, the coast still gives space to breathe: wide sand, open sky, warm water and the summer light that defines southern Bahia.
+          </p>
+        </article>
+
+        <article class="nyeCard">
+          <h3>The return home</h3>
+          <p>
+            After intense days and nights, the house matters. A quiet garden base changes the way the whole week is lived.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="nyeSection">
+    <div class="nyeWrap">
+      <div class="nyeHead">
+        <p class="eyebrow">Seven-night rhythm</p>
+        <h2 class="h2">A week shaped by beach, village and rest</h2>
+      </div>
+
+      <div class="nyeItineraryGrid">
+        <article class="nyeItineraryCard">
+          <strong>Arrive slowly</strong>
+          <p>Settle into the house, understand the village rhythm and begin the week without rush.</p>
+        </article>
+
+        <article class="nyeItineraryCard">
+          <strong>Beach days</strong>
+          <p>Spend the mornings by the sea and let the afternoons move naturally between rest and shade.</p>
+        </article>
+
+        <article class="nyeItineraryCard">
+          <strong>Quadrado nights</strong>
+          <p>Walk, dine and experience the social life of Trancoso without losing the calm of your own base.</p>
+        </article>
+
+        <article class="nyeItineraryCard">
+          <strong>The morning after</strong>
+          <p>Return to silence, garden, breakfast and a softer beginning to the new year.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="nyeSection nyeSectionAlt">
+    <div class="nyeWrap">
+      <div class="nyeMapGrid">
+
+        <div class="nyeMapText">
+          <p class="eyebrow">Location</p>
+          <h2 class="h2">Close to the village rhythm of Trancoso</h2>
           <p class="lead mt-16">
-            New Year's Eve in Trancoso is not only about celebration. It is a very specific way of living this period — between beaches, village life, beauty, encounters and a rhythm that feels vibrant without losing its atmosphere.
+            During New Year’s Eve, location is more than convenience. It affects how you move, rest, arrive, return and live the busiest week of the season.
           </p>
+
+          <p class="mt-16" style="color:var(--text-soft); line-height:1.82;">
+            Casas da Vila sits within the village scale of Trancoso: close enough to the Quadrado and local movement, while preserving the quieter feeling of a garden stay.
+          </p>
+
+          <div class="ctaRow mt-26">
+            <a class="btn btnPrimary" href="/en/location/">See full location</a>
+            <a
+              class="btn btnGhost"
+              href="https://maps.google.com/?q=Rua%20Piri%2C%2025%2C%20Trancoso%2C%20Porto%20Seguro%2C%20Bahia"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open directions
+            </a>
+          </div>
         </div>
 
-        <div class="nyeGrid3">
-          <article class="nyeCard">
-            <h3>The Quadrado</h3>
-            <p>
-              The symbolic heart of Trancoso becomes even more magnetic during this period, concentrating light, architecture, circulation and social life.
-            </p>
-          </article>
+        <div class="nyeMapPanel">
+          <div class="nyeMapImage">
+            <img src="/assets/img/mapa.jpeg" alt="Illustrated map showing Casas da Vila, the Quadrado and beach access in Trancoso" loading="lazy" />
+          </div>
 
-          <article class="nyeCard">
-            <h3>The beaches</h3>
-            <p>
-              Even during peak season, the coastline preserves something essential: openness, nature and a strong sense of freedom.
-            </p>
-          </article>
-
-          <article class="nyeCard">
-            <h3>The rhythm</h3>
-            <p>
-              What makes the destination singular is not only what happens, but how it happens — with energy, beauty and a slower perception of time.
-            </p>
-          </article>
+          <div class="nyeMapMini">
+            <div>
+              <span>Quadrado</span>
+              <strong>10 min walk</strong>
+            </div>
+            <div>
+              <span>Village</span>
+              <strong>green setting</strong>
+            </div>
+            <div>
+              <span>Beach</span>
+              <strong>nearby access</strong>
+            </div>
+          </div>
         </div>
+
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="nyeSection nyeSectionAlt">
-      <div class="nyeWrap">
-        <div class="nyeOfferGrid">
+  <section class="nyeSection">
+    <div class="nyeWrap">
+      <div class="nyeOfferGrid">
 
-          <div class="nyeOfferPanel">
-            <p class="eyebrow">Stay</p>
-            <h2 class="h2">Where you stay shapes the whole experience</h2>
-            <p class="lead mt-16">
-              During New Year's Eve, accommodation is not simply logistical. It defines comfort, rest, privacy and the flow of the days between arrival and the turn of the year.
-            </p>
+        <div class="nyeOfferPanel">
+          <p class="eyebrow">Stay</p>
+          <h2 class="h2">Where you stay shapes the whole week</h2>
+          <p class="lead mt-16">
+            During New Year’s Eve, accommodation is not simply logistical. It defines comfort, rest, privacy and the flow of the days between arrival and the turn of the year.
+          </p>
 
-            <ul class="nyeList">
-              <li>Private houses with more space and atmosphere</li>
-              <li>Positioning that truly matters during high-demand periods</li>
-              <li>A calmer and more intentional alternative to conventional holiday-season stays</li>
-            </ul>
+          <ul class="nyeList">
+            <li>Charming rustic houses with garden atmosphere</li>
+            <li>More privacy than a conventional high-season stay</li>
+            <li>A calmer base close to the village rhythm of Trancoso</li>
+            <li>Suitable for guests who value simplicity, beauty and space</li>
+          </ul>
 
-            <div class="ctaRow mt-26">
-              <a class="btn btnPrimary" href="/en/houses/">Explore houses</a>
-              <a class="btn btnGhost" href="/en/blog/where-to-stay-in-trancoso/">Where to stay in Trancoso</a>
+          <div class="ctaRow mt-26">
+            <a class="btn btnPrimary" href="/en/houses/">Explore houses</a>
+            <a class="btn btnGhost" href="/en/blog/where-to-stay-in-trancoso/">Where to stay in Trancoso</a>
+          </div>
+        </div>
+
+        <div class="nyePricingPanel">
+          <p class="eyebrow">NYE packages</p>
+          <div class="nyePrice" id="nye-price-panel">from R$ 18,000</div>
+          <p>
+            Indicative starting range for New Year’s Eve stays. Final pricing varies according to the house, package structure and number of guests.
+          </p>
+
+          <ul class="nyeList" style="color:rgba(255,255,255,.76);">
+            <li>7-night minimum stay</li>
+            <li>Limited inventory</li>
+            <li>Early inquiry recommended</li>
+            <li>Non-refundable conditions may apply after confirmation</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="nyeCapture">
+    <div class="nyeCaptureInner">
+      <div class="nyeCaptureCard">
+
+        <p class="eyebrow" style="color:rgba(255,255,255,.76);">Request availability</p>
+        <h2 class="h2" style="color:#fff;">Plan your NYE 2027 stay</h2>
+        <p class="lead mt-16" style="color:rgba(255,255,255,.84); max-width:760px;">
+          Share your preferred dates, guest count and house profile. Our team will reply with availability, package conditions and the next step for your reservation.
+        </p>
+
+        <form id="nye-lead-form" novalidate>
+          <div class="nyeFormGrid">
+            <div class="field">
+              <label class="label" for="nye-name">Name</label>
+              <input class="premiumInput" id="nye-name" name="name" type="text" placeholder="Your full name" required />
+            </div>
+
+            <div class="field">
+              <label class="label" for="nye-email">Email</label>
+              <input class="premiumInput" id="nye-email" name="email" type="email" placeholder="you@email.com" required />
+            </div>
+
+            <div class="field">
+              <label class="label" for="nye-phone">Phone</label>
+              <input class="premiumInput" id="nye-phone" name="phone" type="tel" placeholder="+55 11 99999 9999" />
+            </div>
+
+            <div class="field">
+              <label class="label" for="nye-guests">Guests</label>
+              <select class="premiumInput" id="nye-guests" name="guests">
+                <option value="">Select</option>
+                <option value="2">2 guests</option>
+                <option value="4">4 guests</option>
+                <option value="6">6 guests</option>
+                <option value="8+">8 or more</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="label" for="nye-checkin">Check-in</label>
+              <input class="premiumInput" id="nye-checkin" name="checkin" type="date" />
+            </div>
+
+            <div class="field">
+              <label class="label" for="nye-checkout">Check-out</label>
+              <input class="premiumInput" id="nye-checkout" name="checkout" type="date" />
+            </div>
+
+            <div class="field fieldFull">
+              <label class="label" for="nye-message">Message</label>
+              <textarea class="premiumInput premiumTextarea" id="nye-message" name="message" placeholder="Tell us a bit about the house profile, group composition or any important detail for your NYE stay."></textarea>
             </div>
           </div>
 
-          <div class="nyePricingPanel">
-            <p class="eyebrow">NYE packages</p>
-            <div class="nyePrice" id="nye-price-panel">from R$ 18,000</div>
-            <p>
-              Indicative starting range for New Year's Eve stays. Final pricing varies according to the house, package structure and number of guests.
-            </p>
-
-            <ul class="nyeList" style="color:rgba(255,255,255,.76);">
-              <li>7-night minimum stay</li>
-              <li>Limited inventory</li>
-              <li>Early inquiry recommended</li>
-            </ul>
+          <div class="nyeSubmitRow">
+            <button class="btn btnPrimary" type="submit" id="nye-submit-btn">Send inquiry</button>
+            <a
+              class="btn btnGhost"
+              href="https://wa.me/5573991435522?text=I%20want%20information%20about%20NYE%202027%20in%20Trancoso."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp
+            </a>
           </div>
 
-        </div>
-      </div>
-    </section>
-
-    <section class="nyeCapture">
-      <div class="nyeCaptureInner">
-        <div class="nyeCaptureCard">
-
-          <p class="eyebrow" style="color:rgba(255,255,255,.76);">Request availability</p>
-          <h2 class="h2" style="color:#fff;">Plan your NYE 2027 stay</h2>
-          <p class="lead mt-16" style="color:rgba(255,255,255,.84); max-width:760px;">
-            Share your preferred dates, guest count and house profile. Our team will reply with availability, package conditions and the next step for your reservation.
+          <p class="nyeFine" id="nye-form-note">
+            By sending this inquiry, you request priority contact regarding NYE 2027 availability.
           </p>
 
-          <form id="nye-lead-form" novalidate>
-            <div class="nyeFormGrid">
-              <div class="field">
-                <label class="label" for="nye-name">Name</label>
-                <input class="premiumInput" id="nye-name" name="name" type="text" placeholder="Your full name" required />
-              </div>
+          <p class="nyeFine" id="nye-form-feedback" style="display:none;"></p>
+        </form>
 
-              <div class="field">
-                <label class="label" for="nye-email">Email</label>
-                <input class="premiumInput" id="nye-email" name="email" type="email" placeholder="you@email.com" required />
-              </div>
-
-              <div class="field">
-                <label class="label" for="nye-phone">Phone</label>
-                <input class="premiumInput" id="nye-phone" name="phone" type="tel" placeholder="+55 11 99999 9999" />
-              </div>
-
-              <div class="field">
-                <label class="label" for="nye-guests">Guests</label>
-                <select class="premiumInput" id="nye-guests" name="guests">
-                  <option value="">Select</option>
-                  <option value="2">2 guests</option>
-                  <option value="4">4 guests</option>
-                  <option value="6">6 guests</option>
-                  <option value="8+">8 or more</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label class="label" for="nye-checkin">Check-in</label>
-                <input class="premiumInput" id="nye-checkin" name="checkin" type="date" />
-              </div>
-
-              <div class="field">
-                <label class="label" for="nye-checkout">Check-out</label>
-                <input class="premiumInput" id="nye-checkout" name="checkout" type="date" />
-              </div>
-
-              <div class="field fieldFull">
-                <label class="label" for="nye-message">Message</label>
-                <textarea class="premiumInput premiumTextarea" id="nye-message" name="message" placeholder="Tell us a bit about the house profile, group composition or any important detail for your NYE stay."></textarea>
-              </div>
-            </div>
-
-            <div class="nyeSubmitRow">
-              <button class="btn btnPrimary" type="submit" id="nye-submit-btn">Send inquiry</button>
-              <a
-                class="btn btnGhost"
-                href="https://wa.me/5573991435522?text=I%20want%20information%20about%20NYE%202027%20in%20Trancoso."
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                WhatsApp
-              </a>
-            </div>
-
-            <p class="nyeFine" id="nye-form-note">
-              By sending this inquiry, you request priority contact regarding NYE 2027 availability.
-            </p>
-
-            <p class="nyeFine" id="nye-form-feedback" style="display:none;"></p>
-          </form>
-
-        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="nyeSection">
-      <div class="nyeWrap">
-        <div class="nyeHead">
-          <p class="eyebrow">Frequently asked questions</p>
-          <h2 class="h2">FAQ</h2>
-        </div>
-
-        <div class="nyeFaq">
-          <details>
-            <summary>Is Trancoso very busy during New Year's Eve?</summary>
-            <div class="answer">
-              Yes. It is one of the highest-demand periods of the year, which makes early planning especially important.
-            </div>
-          </details>
-
-          <details>
-            <summary>What is the usual minimum package?</summary>
-            <div class="answer">
-              New Year's Eve stays usually operate with a minimum number of nights, often around a week depending on the house.
-            </div>
-          </details>
-
-          <details>
-            <summary>When should I start planning NYE 2027?</summary>
-            <div class="answer">
-              The earlier, the better. The most attractive and best-positioned houses in the destination tend to move first.
-            </div>
-          </details>
-        </div>
+  <section class="nyeSection">
+    <div class="nyeWrap">
+      <div class="nyeHead">
+        <p class="eyebrow">Frequently asked questions</p>
+        <h2 class="h2">NYE 2027 in Trancoso — FAQ</h2>
       </div>
-    </section>
 
-    <section class="nyeSection nyeSectionAlt">
-      <div class="nyeWrap">
-        <div class="nyeHead">
-          <p class="eyebrow">Related guides</p>
-          <h2 class="h2">Keep exploring Trancoso</h2>
-        </div>
+      <div class="nyeFaq">
+        <details>
+          <summary>Is Trancoso very busy during New Year’s Eve?</summary>
+          <div class="answer">Yes. It is one of the highest-demand periods of the year, so early planning is strongly recommended.</div>
+        </details>
 
-        <div class="seoLinksGrid">
-          <a href="/en/blog/what-to-do-in-trancoso/">What to do in Trancoso</a>
-          <a href="/en/blog/where-to-stay-in-trancoso/">Where to stay in Trancoso</a>
-          <a href="/en/blog/new-years-eve-2027-trancoso/">NYE 2027 in Trancoso</a>
-          <a href="/en/book/">See availability</a>
-        </div>
+        <details>
+          <summary>What is the usual minimum package?</summary>
+          <div class="answer">New Year’s Eve stays usually operate with a minimum number of nights, often around a week depending on the house.</div>
+        </details>
+
+        <details>
+          <summary>When should I start planning NYE 2027?</summary>
+          <div class="answer">The earlier, the better. The most suitable houses tend to be reserved well in advance.</div>
+        </details>
+
+        <details>
+          <summary>Where is the best area to stay in Trancoso for NYE?</summary>
+          <div class="answer">Many guests prefer staying close to the village and the Quadrado while preserving a quieter base for rest.</div>
+        </details>
+
+        <details>
+          <summary>Is Casas da Vila close to the Quadrado?</summary>
+          <div class="answer">Yes. Casas da Vila is positioned within the village scale of Trancoso, around a short walk from the Quadrado.</div>
+        </details>
+
+        <details>
+          <summary>Are the houses suitable for groups?</summary>
+          <div class="answer">Some houses are better for couples or small groups, while others may suit families or friends. Availability depends on the selected dates and house profile.</div>
+        </details>
+
+        <details>
+          <summary>Are NYE packages refundable?</summary>
+          <div class="answer">New Year’s Eve packages may follow stricter booking conditions. Final payment and cancellation terms are confirmed before reservation.</div>
+        </details>
+
+        <details>
+          <summary>Is Trancoso a good destination after New Year’s Eve?</summary>
+          <div class="answer">Yes. The days after the celebration can be especially pleasant for guests who want beach time, rest and a slower beginning to the year.</div>
+        </details>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+  <section class="nyeSection nyeSectionAlt">
+    <div class="nyeWrap">
+      <div class="nyeHead">
+        <p class="eyebrow">Related guides</p>
+        <h2 class="h2">Keep exploring Trancoso</h2>
+      </div>
 
+      <div class="seoLinksGrid">
+        <a href="/en/blog/what-to-do-in-trancoso/">What to do in Trancoso</a>
+        <a href="/en/blog/where-to-stay-in-trancoso/">Where to stay in Trancoso</a>
+        <a href="/en/location/">Location in Trancoso</a>
+        <a href="/en/book/">See availability</a>
+      </div>
+    </div>
+  </section>
+
+</main>
   <div id="site-footer"></div>
 
   <script src="/assets/js/main.js"></script>

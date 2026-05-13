@@ -19,12 +19,12 @@
   <meta property="og:title" content="Réveillon 2027 em Trancoso | Casas da Vila" />
   <meta property="og:description" content="Casas exclusivas, alta demanda e disponibilidade limitada para viver a virada em Trancoso." />
   <meta property="og:url" content="https://casasdavila.com/pt/reveillon-2027/" />
-  <meta property="og:image" content="https://casasdavila.com/assets/img/hero-trancoso.jpg" />
+  <meta property="og:image" content="https://casasdavila.com/assets/img/reveillon.jpeg" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Réveillon 2027 em Trancoso | Casas da Vila" />
   <meta name="twitter:description" content="Casas exclusivas, alta demanda e disponibilidade limitada para viver a virada em Trancoso." />
-  <meta name="twitter:image" content="https://casasdavila.com/assets/img/hero-trancoso.jpg" />
+  <meta name="twitter:image" content="https://casasdavila.com/assets/img/reveillon.jpeg" />
 
   <link rel="stylesheet" href="/assets/css/global.css" />
   <link rel="stylesheet" href="/assets/css/motion.css" />
@@ -38,8 +38,13 @@
       padding-bottom:84px;
       overflow:hidden;
       background:
-        linear-gradient(180deg, rgba(14,18,20,.64) 0%, rgba(14,18,20,.44) 26%, rgba(14,18,20,.62) 100%),
-        url("/assets/img/hero-trancoso.jpg") center center / cover no-repeat;
+linear-gradient(
+  180deg,
+  rgba(14,18,20,.38) 0%,
+  rgba(14,18,20,.20) 26%,
+  rgba(14,18,20,.30) 100%
+),
+        url("/assets/img/reveillon1.jpeg") center center / cover no-repeat;
     }
 
     .nyeHero::before{
@@ -470,6 +475,275 @@
       border-color:rgba(92,71,54,.18);
       box-shadow:var(--shadow-lg);
     }
+.editorialVisual{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.editorialHeroImage{
+  position:relative;
+  overflow:hidden;
+  border-radius:32px;
+  min-height:520px;
+  box-shadow:var(--shadow-lg);
+}
+
+.editorialHeroImage img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.editorialHeroImage span{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(10px);
+  font-size:.72rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text);
+}
+
+.editorialWideQuote{
+  position:relative;
+  overflow:hidden;
+  border-radius:28px;
+  padding:34px;
+  background:
+    linear-gradient(180deg, #f3eadc 0%, #eadcc8 100%);
+  box-shadow:var(--shadow-soft);
+}
+
+.editorialWideQuote::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(214,183,129,.18),
+      transparent 44%
+    );
+  pointer-events:none;
+}
+
+.editorialWideQuote p{
+  position:relative;
+  z-index:1;
+  margin:0;
+  font-family:var(--font-serif);
+  font-size:clamp(1.8rem, 2.4vw, 2.8rem);
+  line-height:1.12;
+  letter-spacing:-0.04em;
+  color:var(--text);
+  text-wrap:balance;
+}
+.nyeImageCard{
+  min-height:260px;
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:var(--shadow-lg);
+  background:#ddd;
+}
+
+.nyeImageCard.large{
+  grid-column:1 / -1;
+  min-height:340px;
+}
+
+.nyeImageCard img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .7s ease;
+}
+
+.nyeImageCard:hover img{
+  transform:scale(1.035);
+}
+
+.nyeImageCard span{
+  position:absolute;
+  left:18px;
+  bottom:16px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(10px);
+  font-size:.72rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text);
+}
+
+.nyeItineraryGrid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+}
+
+.nyeItineraryCard{
+  padding:24px;
+  border-radius:24px;
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(255,255,255,.58);
+  box-shadow:var(--shadow-soft);
+}
+
+.nyeItineraryCard strong{
+  display:block;
+  font-family:var(--font-serif);
+  font-size:1.45rem;
+  line-height:1.08;
+  margin-bottom:10px;
+  color:var(--text);
+}
+
+.nyeItineraryCard p{
+  margin:0;
+  color:var(--text-soft);
+  line-height:1.72;
+}
+
+.nyeMapGrid{
+  display:grid;
+  grid-template-columns:.95fr 1.05fr;
+  gap:24px;
+  align-items:stretch;
+}
+
+.nyeMapPanel,
+.nyeMapText{
+  padding:32px;
+  border-radius:30px;
+  background:linear-gradient(180deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.58) 100%);
+  border:1px solid rgba(255,255,255,.60);
+  box-shadow:var(--shadow-lg);
+}
+
+.nyeMapImage{
+  overflow:hidden;
+  border-radius:26px;
+  background:#ead7a8;
+}
+
+.nyeMapImage img{
+  width:100%;
+  display:block;
+}
+
+.nyeMapMini{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:14px;
+}
+
+.nyeMapMini div{
+  padding:14px;
+  border-radius:16px;
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(92,71,54,.08);
+}
+
+.nyeMapMini span{
+  display:block;
+  font-size:.68rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--text-soft);
+}
+
+.nyeMapMini strong{
+  display:block;
+  margin-top:4px;
+  color:var(--text);
+  font-family:var(--font-serif);
+}
+.editorialStack{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  grid-template-rows:340px 220px;
+  gap:16px;
+}
+
+.editorialStack .large{
+  grid-row:1 / span 2;
+  min-height:100%;
+}
+
+.editorialStack .vertical{
+  min-height:100%;
+}
+
+.editorialQuote{
+  border-radius:28px;
+  padding:28px;
+  background:#efe8dd;
+  display:flex;
+  align-items:flex-end;
+  box-shadow:var(--shadow-soft);
+}
+
+.editorialQuote p{
+  margin:0;
+  font-family:var(--font-serif);
+  font-size:1.5rem;
+  line-height:1.25;
+  letter-spacing:-0.03em;
+  color:var(--text);
+}
+.editorialQuote{
+  position:relative;
+  overflow:hidden;
+}
+
+.editorialQuote::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(214,183,129,.18),
+      transparent 42%
+    );
+  pointer-events:none;
+}
+@media (max-width:900px){
+  .editorialStack{
+    grid-template-columns:1fr;
+    grid-template-rows:auto;
+  }
+
+  .editorialStack .large{
+    grid-row:auto;
+  }
+}
+
+@media (max-width:900px){
+  .nyeEditorial,
+  .nyeMapGrid,
+  .nyeItineraryGrid{
+    grid-template-columns:1fr;
+  }
+
+  .nyeImageStack{
+    grid-template-columns:1fr;
+  }
+
+  .nyeMapMini{
+    grid-template-columns:1fr;
+  }
+}
 
     @media (max-width:1100px){
       .nyeHeroGrid,
@@ -491,283 +765,527 @@
         grid-template-columns:1fr;
       }
     }
+.faqSection{
+  margin-top:120px;
+}
+
+.faqIntro{
+  max-width:720px;
+  margin-bottom:42px;
+}
+
+.faqIntro h2{
+  font-size:clamp(34px,4vw,58px);
+  line-height:1.05;
+  letter-spacing:-0.04em;
+  margin:12px 0 18px;
+}
+
+.faqIntro p{
+  font-size:18px;
+  line-height:1.7;
+  color:rgba(255,255,255,.72);
+}
+
+.faqGrid{
+  display:grid;
+  gap:18px;
+}
+
+.faqItem{
+  border-top:1px solid rgba(255,255,255,.12);
+  padding-top:20px;
+}
+
+.faqItem summary{
+  list-style:none;
+  cursor:pointer;
+  font-size:20px;
+  font-weight:500;
+  letter-spacing:-0.02em;
+}
+
+.faqItem summary::-webkit-details-marker{
+  display:none;
+}
+
+.faqItem p{
+  margin-top:14px;
+  max-width:860px;
+  color:rgba(255,255,255,.72);
+  line-height:1.8;
+  font-size:16px;
+}
   </style>
 </head>
 <body>
 
   <div id="site-header"></div>
 
-  <main>
+<main>
 
-    <section class="nyeHero">
-      <div class="nyeInner">
-        <div class="nyeHeroGrid">
+  <section class="nyeHero">
+    <div class="nyeInner">
+      <div class="nyeHeroGrid">
 
-          <div class="nyeIntro">
-            <p class="eyebrow">Réveillon 2027 • Trancoso</p>
+        <div class="nyeIntro">
+          <p class="eyebrow">Réveillon 2027 • Trancoso</p>
 
-            <h1 class="display nyeTitle">
-              O mundo escolhe Trancoso para a virada.
-            </h1>
+          <h1 class="display nyeTitle">
+            O Réveillon em Trancoso, vivido com mais calma.
+          </h1>
 
-            <p class="nyeLead">
-              Poucos destinos combinam beleza, energia, privacidade e atmosfera da forma como Trancoso faz durante o fim do ano.
-            </p>
+          <p class="nyeLead">
+            Uma forma mais íntima de viver um dos destinos mais desejados do Brasil na virada do ano.
+          </p>
 
-            <p class="nyeIntroText">
-              Casas da Vila oferece uma forma mais privada de viver esse período — com casas cuidadosamente posicionadas, disponibilidade limitada e um ritmo mais sereno para uma das semanas mais desejadas do calendário.
-            </p>
-          </div>
-
-          <div class="nyePanel">
-            <div class="nyePanelHead">
-              <span class="nyeKicker">Disponibilidade limitada</span>
-              <p class="nyePanelIntro">
-                A disponibilidade para o Réveillon 2027 tende a se mover cedo. As casas mais bem posicionadas costumam ser reservadas com bastante antecedência.
-              </p>
-            </div>
-
-            <div class="nyeStats">
-              <div class="nyeStat">
-                <strong id="nye-stock-total">3</strong>
-                <span>casas restantes</span>
-              </div>
-              <div class="nyeStat">
-                <strong id="nye-nights-min">7</strong>
-                <span>mín. de noites</span>
-              </div>
-              <div class="nyeStat">
-                <strong id="nye-starting-price">R$ 18 mil+</strong>
-                <span>a partir de</span>
-              </div>
-            </div>
-
-            <div class="nyeUrgency">
-              <strong id="nye-urgency-label">Período de alta demanda.</strong>
-              <div id="nye-urgency-copy">
-                Um número limitado de casas estará disponível para pacotes de Réveillon.
-              </div>
-            </div>
-
-            <div class="nyeActions">
-              <a class="btn btnPrimary" href="/pt/reservar/">Ver disponibilidade</a>
-              <a
-                class="btn btnGhost"
-                href="https://wa.me/5573991435522?text=Quero%20informa%C3%A7%C3%B5es%20sobre%20o%20R%C3%A9veillon%202027%20em%20Trancoso."
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                WhatsApp
-              </a>
-            </div>
-          </div>
-
+          <p class="nyeIntroText">
+            Casas da Vila oferece casas rústicas e charmosas cercadas por atmosfera tropical, próximas da vida do vilarejo e pensadas para hóspedes que valorizam privacidade, simplicidade e beleza durante o Réveillon 2027.
+          </p>
         </div>
-      </div>
-    </section>
 
-    <section class="nyeSection">
-      <div class="nyeWrap">
-        <div class="nyeHead">
-          <p class="eyebrow">Por que Trancoso</p>
-          <h2 class="h2">Por que o mundo escolhe Trancoso nessa data</h2>
+        <div class="nyePanel">
+          <div class="nyePanelHead">
+            <span class="nyeKicker">Disponibilidade limitada</span>
+            <p class="nyePanelIntro">
+              O Réveillon em Trancoso costuma se movimentar cedo. As casas mais procuradas geralmente são reservadas com bastante antecedência.
+            </p>
+          </div>
+
+          <div class="nyeStats">
+            <div class="nyeStat">
+              <strong id="nye-stock-total">3</strong>
+              <span>casas restantes</span>
+            </div>
+            <div class="nyeStat">
+              <strong id="nye-nights-min">7</strong>
+              <span>mín. noites</span>
+            </div>
+            <div class="nyeStat">
+              <strong id="nye-starting-price">R$ 18k+</strong>
+              <span>a partir de</span>
+            </div>
+          </div>
+
+          <div class="nyeUrgency">
+            <strong id="nye-urgency-label">Período de alta procura.</strong>
+            <div id="nye-urgency-copy">
+              Um número limitado de casas estará disponível para os pacotes de Réveillon.
+            </div>
+          </div>
+
+          <div class="nyeActions">
+            <a class="btn btnPrimary" href="/pt/reservar/">Ver disponibilidade</a>
+
+            <a
+              class="btn btnGhost"
+              href="https://wa.me/5573991435522?text=Gostaria%20de%20informações%20sobre%20o%20Réveillon%202027%20em%20Trancoso."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+<section class="nyeSection">
+  <div class="nyeWrap">
+
+    <div class="nyeEditorial">
+
+      <div class="nyeEditorialText">
+
+        <p class="eyebrow">O destino</p>
+
+        <h2 class="h2">
+          Como é viver o Réveillon em Trancoso
+        </h2>
+
+        <p class="mt-16">
+          O Réveillon em Trancoso não é apenas sobre festas. É uma semana de praia, verão, caminhadas pelo Quadrado, encontros, música e uma sensação particular de liberdade que torna o destino tão desejado no fim do ano.
+        </p>
+
+        <p>
+          As praias acompanham o ritmo do verão e os dias acontecem lentamente entre mar, jardim, sombra, refeições longas e conversas sem pressa.
+        </p>
+
+        <p>
+          Para muitos hóspedes, a escolha de onde ficar transforma completamente a experiência. Uma casa muda o ritmo da semana: mais espaço, mais privacidade e um retorno mais leve depois da celebração.
+        </p>
+
+      </div>
+
+      <div class="editorialVisual">
+
+        <figure class="editorialHeroImage">
+          <img
+            src="/assets/img/reveillon.jpeg"
+            alt="Atmosfera de Réveillon em Trancoso"
+            loading="lazy"
+          />
+          <span>Verão em Trancoso</span>
+        </figure>
+
+        <div class="editorialWideQuote">
+          <p>
+            “Alguns chegam pela celebração.
+            Muitos voltam pela atmosfera.”
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+  <section class="nyeSection nyeSectionAlt">
+    <div class="nyeWrap">
+      <div class="nyeHead">
+        <p class="eyebrow">Por que Trancoso</p>
+        <h2 class="h2">Por que a virada do ano aqui é diferente</h2>
+
+        <p class="lead mt-16">
+          Trancoso reúne praia, vida de vilarejo, arquitetura, vegetação e uma atmosfera social que se torna especialmente magnética durante os últimos dias do ano.
+        </p>
+      </div>
+
+      <div class="nyeGrid3">
+
+        <article class="nyeCard">
+          <h3>O Quadrado</h3>
+          <p>
+            O coração simbólico de Trancoso ganha ainda mais luz e movimento durante o Réveillon, com restaurantes, encontros, música e a arquitetura que define a identidade do vilarejo.
+          </p>
+        </article>
+
+        <article class="nyeCard">
+          <h3>As praias</h3>
+          <p>
+            Mesmo na alta temporada, a costa ainda preserva algo essencial: espaço, horizonte aberto, mar quente e a luz característica do verão no sul da Bahia.
+          </p>
+        </article>
+
+        <article class="nyeCard">
+          <h3>O retorno para casa</h3>
+          <p>
+            Depois de dias e noites intensos, a casa importa. Uma base mais silenciosa e cercada de jardim transforma completamente a experiência da semana.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="nyeSection">
+    <div class="nyeWrap">
+
+      <div class="nyeHead">
+        <p class="eyebrow">O ritmo da semana</p>
+        <h2 class="h2">Uma semana entre praia, vila e descanso</h2>
+      </div>
+
+      <div class="nyeItineraryGrid">
+
+        <article class="nyeItineraryCard">
+          <strong>Chegar devagar</strong>
+          <p>
+            Entrar no ritmo da vila, compreender o lugar e começar a semana sem pressa.
+          </p>
+        </article>
+
+        <article class="nyeItineraryCard">
+          <strong>Dias de praia</strong>
+          <p>
+            Passar as manhãs junto ao mar e deixar as tardes seguirem naturalmente entre sombra, descanso e verão.
+          </p>
+        </article>
+
+        <article class="nyeItineraryCard">
+          <strong>Noites no Quadrado</strong>
+          <p>
+            Caminhar, jantar e viver a energia de Trancoso sem abrir mão da tranquilidade da própria casa.
+          </p>
+        </article>
+
+        <article class="nyeItineraryCard">
+          <strong>O dia seguinte</strong>
+          <p>
+            Voltar para o jardim, para o café da manhã e para um início de ano mais leve e desacelerado.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="nyeSection nyeSectionAlt">
+    <div class="nyeWrap">
+
+      <div class="nyeMapGrid">
+
+        <div class="nyeMapText">
+          <p class="eyebrow">Localização</p>
+
+          <h2 class="h2">
+            Próximo ao ritmo do vilarejo de Trancoso
+          </h2>
+
           <p class="lead mt-16">
-            O Réveillon em Trancoso não é apenas celebração. É uma forma específica de viver esse período — entre praias, vida de vila, beleza, encontros e um ritmo que consegue ser vibrante sem perder a atmosfera.
+            Durante o Réveillon, localização é mais do que conveniência. Ela muda a forma como você circula, descansa, chega e vive a semana mais movimentada do ano.
           </p>
+
+          <p class="mt-16" style="color:var(--text-soft); line-height:1.82;">
+            Casas da Vila está inserida na escala do vilarejo de Trancoso: próxima o suficiente do Quadrado e da vida local, preservando ao mesmo tempo uma atmosfera mais calma e cercada de jardim.
+          </p>
+
+          <div class="ctaRow mt-26">
+            <a class="btn btnPrimary" href="/pt/localizacao/">
+              Ver localização completa
+            </a>
+
+            <a
+              class="btn btnGhost"
+              href="https://maps.google.com/?q=Rua%20Piri%2C%2025%2C%20Trancoso%2C%20Porto%20Seguro%2C%20Bahia"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Abrir direções
+            </a>
+          </div>
         </div>
 
-        <div class="nyeGrid3">
-          <article class="nyeCard">
-            <h3>O Quadrado</h3>
-            <p>
-              O coração simbólico de Trancoso se torna ainda mais magnético nesse período, concentrando luz, arquitetura, circulação e vida social.
-            </p>
-          </article>
+        <div class="nyeMapPanel">
 
-          <article class="nyeCard">
-            <h3>As praias</h3>
-            <p>
-              Mesmo na alta temporada, o litoral preserva algo essencial: amplitude, natureza e uma forte sensação de liberdade.
-            </p>
-          </article>
+          <div class="nyeMapImage">
+            <img
+              src="/assets/img/mapa.jpeg"
+              alt="Mapa ilustrado mostrando Casas da Vila, Quadrado e acesso à praia em Trancoso"
+              loading="lazy"
+            />
+          </div>
 
-          <article class="nyeCard">
-            <h3>O ritmo</h3>
-            <p>
-              O que faz o destino singular não é apenas o que acontece, mas como acontece — com energia, beleza e uma percepção de tempo mais desacelerada.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
+          <div class="nyeMapMini">
+            <div>
+              <span>Quadrado</span>
+              <strong>10 min a pé</strong>
+            </div>
 
-    <section class="nyeSection nyeSectionAlt">
-      <div class="nyeWrap">
-        <div class="nyeOfferGrid">
+            <div>
+              <span>Vilarejo</span>
+              <strong>área arborizada</strong>
+            </div>
 
-          <div class="nyeOfferPanel">
-            <p class="eyebrow">Hospedagem</p>
-            <h2 class="h2">Onde você fica molda toda a experiência</h2>
-            <p class="lead mt-16">
-              Durante o Réveillon, hospedagem não é apenas logística. Ela define conforto, descanso, privacidade e a fluidez dos dias entre chegada e virada.
-            </p>
-
-            <ul class="nyeList">
-              <li>Casas privadas com mais espaço e atmosfera</li>
-              <li>Posicionamento que realmente importa em período de alta demanda</li>
-              <li>Uma alternativa mais serena e intencional às estadias convencionais da temporada</li>
-            </ul>
-
-            <div class="ctaRow mt-26">
-              <a class="btn btnPrimary" href="/pt/casas/">Explorar casas</a>
-              <a class="btn btnGhost" href="/pt/blog/onde-ficar-em-trancoso/">Onde ficar em Trancoso</a>
+            <div>
+              <span>Praia</span>
+              <strong>acesso próximo</strong>
             </div>
           </div>
 
-          <div class="nyePricingPanel">
-            <p class="eyebrow">Pacotes de Réveillon</p>
-            <div class="nyePrice" id="nye-price-panel">a partir de R$ 18.000</div>
-            <p>
-              Faixa inicial indicativa para estadias de Réveillon. O valor final varia conforme a casa, a estrutura do pacote e o número de hóspedes.
-            </p>
+        </div>
 
-            <ul class="nyeList" style="color:rgba(255,255,255,.76);">
-              <li>Mínimo de 7 noites</li>
-              <li>Estoque limitado</li>
-              <li>Consulta antecipada recomendada</li>
-            </ul>
+      </div>
+    </div>
+  </section>
+
+<section class="nyeSection">
+  <div class="nyeWrap">
+    <div class="nyeOfferGrid">
+
+      <div class="nyeOfferPanel">
+        <p class="eyebrow">Hospedagem</p>
+        <h2 class="h2">Onde você fica transforma toda a semana</h2>
+
+        <p class="lead mt-16">
+          Durante o Réveillon, hospedagem não é apenas logística. Ela define conforto, descanso, privacidade e o ritmo dos dias entre a chegada e a virada do ano.
+        </p>
+
+        <ul class="nyeList">
+          <li>Casas rústicas e charmosas cercadas por jardim</li>
+          <li>Mais privacidade do que uma hospedagem convencional de alta temporada</li>
+          <li>Uma base mais tranquila próxima ao ritmo do vilarejo</li>
+          <li>Ideal para hóspedes que valorizam simplicidade, beleza e espaço</li>
+        </ul>
+
+        <div class="ctaRow mt-26">
+          <a class="btn btnPrimary" href="/pt/casas/">Explorar casas</a>
+          <a class="btn btnGhost" href="/pt/blog/onde-ficar-em-trancoso/">Onde ficar em Trancoso</a>
+        </div>
+      </div>
+
+      <div class="nyePricingPanel">
+        <p class="eyebrow">Pacotes de Réveillon</p>
+
+        <div class="nyePrice" id="nye-price-panel">
+          a partir de R$ 18.000
+        </div>
+
+        <p>
+          Faixa inicial indicativa para hospedagens de Réveillon. O valor final varia conforme a casa, o formato do pacote e o número de hóspedes.
+        </p>
+
+        <ul class="nyeList" style="color:rgba(255,255,255,.76);">
+          <li>Estadia mínima de 7 noites</li>
+          <li>Inventário limitado</li>
+          <li>Consulta antecipada recomendada</li>
+          <li>Condições não reembolsáveis podem se aplicar após confirmação</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="nyeCapture">
+  <div class="nyeCaptureInner">
+    <div class="nyeCaptureCard">
+
+      <p class="eyebrow" style="color:rgba(255,255,255,.76);">Consultar disponibilidade</p>
+      <h2 class="h2" style="color:#fff;">Planeje sua estadia no Réveillon 2027</h2>
+
+      <p class="lead mt-16" style="color:rgba(255,255,255,.84); max-width:760px;">
+        Informe suas datas, número de hóspedes e perfil desejado de casa. Nossa equipe responderá com disponibilidade, condições do pacote e próximos passos para reserva.
+      </p>
+
+      <form id="nye-lead-form" novalidate>
+        <div class="nyeFormGrid">
+          <div class="field">
+            <label class="label" for="nye-name">Nome</label>
+            <input class="premiumInput" id="nye-name" name="name" type="text" placeholder="Seu nome completo" required />
           </div>
 
-        </div>
-      </div>
-    </section>
+          <div class="field">
+            <label class="label" for="nye-email">Email</label>
+            <input class="premiumInput" id="nye-email" name="email" type="email" placeholder="voce@email.com" required />
+          </div>
 
-    <section class="nyeCapture">
-      <div class="nyeCaptureInner">
-        <div class="nyeCaptureCard">
+          <div class="field">
+            <label class="label" for="nye-phone">Telefone</label>
+            <input class="premiumInput" id="nye-phone" name="phone" type="tel" placeholder="+55 11 99999 9999" />
+          </div>
 
-          <p class="eyebrow" style="color:rgba(255,255,255,.76);">Solicitar disponibilidade</p>
-          <h2 class="h2" style="color:#fff;">Planeje sua estadia de Réveillon 2027</h2>
-          <p class="lead mt-16" style="color:rgba(255,255,255,.84); max-width:760px;">
-            Compartilhe datas desejadas, número de hóspedes e perfil da casa. Nossa equipe retornará com disponibilidade, condições do pacote e o próximo passo da sua reserva.
-          </p>
+          <div class="field">
+            <label class="label" for="nye-guests">Hóspedes</label>
+            <select class="premiumInput" id="nye-guests" name="guests">
+              <option value="">Selecione</option>
+              <option value="2">2 hóspedes</option>
+              <option value="4">4 hóspedes</option>
+              <option value="6">6 hóspedes</option>
+              <option value="8+">8 ou mais</option>
+            </select>
+          </div>
 
-          <form id="nye-lead-form" novalidate>
-            <div class="nyeFormGrid">
-              <div class="field">
-                <label class="label" for="nye-name">Nome</label>
-                <input class="premiumInput" id="nye-name" name="name" type="text" placeholder="Seu nome completo" required />
-              </div>
+          <div class="field">
+            <label class="label" for="nye-checkin">Check-in</label>
+            <input class="premiumInput" id="nye-checkin" name="checkin" type="date" />
+          </div>
 
-              <div class="field">
-                <label class="label" for="nye-email">E-mail</label>
-                <input class="premiumInput" id="nye-email" name="email" type="email" placeholder="voce@email.com" required />
-              </div>
+          <div class="field">
+            <label class="label" for="nye-checkout">Check-out</label>
+            <input class="premiumInput" id="nye-checkout" name="checkout" type="date" />
+          </div>
 
-              <div class="field">
-                <label class="label" for="nye-phone">Telefone</label>
-                <input class="premiumInput" id="nye-phone" name="phone" type="tel" placeholder="+55 11 99999 9999" />
-              </div>
-
-              <div class="field">
-                <label class="label" for="nye-guests">Hóspedes</label>
-                <select class="premiumInput" id="nye-guests" name="guests">
-                  <option value="">Selecionar</option>
-                  <option value="2">2 hóspedes</option>
-                  <option value="4">4 hóspedes</option>
-                  <option value="6">6 hóspedes</option>
-                  <option value="8+">8 ou mais</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label class="label" for="nye-checkin">Check-in</label>
-                <input class="premiumInput" id="nye-checkin" name="checkin" type="date" />
-              </div>
-
-              <div class="field">
-                <label class="label" for="nye-checkout">Check-out</label>
-                <input class="premiumInput" id="nye-checkout" name="checkout" type="date" />
-              </div>
-
-              <div class="field fieldFull">
-                <label class="label" for="nye-message">Mensagem</label>
-                <textarea class="premiumInput premiumTextarea" id="nye-message" name="message" placeholder="Conte um pouco sobre o perfil da casa, composição do grupo ou qualquer detalhe importante para a sua estadia de Réveillon."></textarea>
-              </div>
-            </div>
-
-            <div class="nyeSubmitRow">
-              <button class="btn btnPrimary" type="submit" id="nye-submit-btn">Enviar consulta</button>
-              <a
-                class="btn btnGhost"
-                href="https://wa.me/5573991435522?text=Quero%20informa%C3%A7%C3%B5es%20sobre%20o%20R%C3%A9veillon%202027%20em%20Trancoso."
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                WhatsApp
-              </a>
-            </div>
-
-            <p class="nyeFine" id="nye-form-note">
-              Ao enviar esta consulta, você solicita contato prioritário sobre a disponibilidade de Réveillon 2027.
-            </p>
-
-            <p class="nyeFine" id="nye-form-feedback" style="display:none;"></p>
-          </form>
-
-        </div>
-      </div>
-    </section>
-
-    <section class="nyeSection">
-      <div class="nyeWrap">
-        <div class="nyeHead">
-          <p class="eyebrow">Perguntas frequentes</p>
-          <h2 class="h2">FAQ</h2>
+          <div class="field fieldFull">
+            <label class="label" for="nye-message">Mensagem</label>
+            <textarea class="premiumInput premiumTextarea" id="nye-message" name="message" placeholder="Conte um pouco sobre o perfil da casa, composição do grupo ou qualquer detalhe importante para sua estadia de Réveillon."></textarea>
+          </div>
         </div>
 
-        <div class="nyeFaq">
-          <details>
-            <summary>Trancoso fica muito concorrido no Réveillon?</summary>
-            <div class="answer">
-              Sim. Trata-se de um dos períodos de maior procura do ano, o que torna o planejamento antecipado especialmente importante.
-            </div>
-          </details>
+        <div class="nyeSubmitRow">
+          <button class="btn btnPrimary" type="submit" id="nye-submit-btn">Enviar consulta</button>
 
-          <details>
-            <summary>Qual costuma ser o pacote mínimo?</summary>
-            <div class="answer">
-              As estadias de Réveillon costumam operar com um número mínimo de noites, em geral em torno de uma semana, dependendo da casa.
-            </div>
-          </details>
-
-          <details>
-            <summary>Quando devo começar a planejar o Réveillon 2027?</summary>
-            <div class="answer">
-              Quanto antes, melhor. As casas mais atrativas e melhor posicionadas no destino costumam ser as primeiras a se mover.
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="nyeSection nyeSectionAlt">
-      <div class="nyeWrap">
-        <div class="nyeHead">
-          <p class="eyebrow">Guias relacionados</p>
-          <h2 class="h2">Continue explorando Trancoso</h2>
+          <a
+            class="btn btnGhost"
+            href="https://wa.me/5573991435522?text=Gostaria%20de%20informações%20sobre%20o%20Réveillon%202027%20em%20Trancoso."
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp
+          </a>
         </div>
 
-        <div class="seoLinksGrid">
-          <a href="/pt/blog/o-que-fazer-em-trancoso/">O que fazer em Trancoso</a>
-          <a href="/pt/blog/onde-ficar-em-trancoso/">Onde ficar em Trancoso</a>
-          <a href="/pt/blog/reveillon-2027-trancoso/">Réveillon 2027 em Trancoso</a>
-          <a href="/pt/reservar/">Ver disponibilidade</a>
-        </div>
-      </div>
-    </section>
+        <p class="nyeFine" id="nye-form-note">
+          Ao enviar esta consulta, você solicita contato prioritário sobre a disponibilidade para o Réveillon 2027.
+        </p>
 
-  </main>
+        <p class="nyeFine" id="nye-form-feedback" style="display:none;"></p>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<section class="nyeSection">
+  <div class="nyeWrap">
+    <div class="nyeHead">
+      <p class="eyebrow">Perguntas frequentes</p>
+      <h2 class="h2">Réveillon 2027 em Trancoso — FAQ</h2>
+    </div>
+
+    <div class="nyeFaq">
+      <details>
+        <summary>Trancoso fica muito cheio no Réveillon?</summary>
+        <div class="answer">Sim. É um dos períodos de maior procura do ano, por isso o planejamento antecipado é especialmente importante.</div>
+      </details>
+
+      <details>
+        <summary>Qual é a estadia mínima usual?</summary>
+        <div class="answer">No Réveillon, as estadias normalmente seguem pacotes mínimos, em geral próximos de uma semana, conforme a casa e a disponibilidade.</div>
+      </details>
+
+      <details>
+        <summary>Quando devo começar a planejar o Réveillon 2027?</summary>
+        <div class="answer">O quanto antes. As casas mais adequadas para o período tendem a ser reservadas com bastante antecedência.</div>
+      </details>
+
+      <details>
+        <summary>Qual é a melhor região para ficar em Trancoso no Réveillon?</summary>
+        <div class="answer">Muitos hóspedes preferem ficar próximos ao vilarejo e ao Quadrado, preservando ao mesmo tempo uma base mais tranquila para descanso.</div>
+      </details>
+
+      <details>
+        <summary>Casas da Vila fica perto do Quadrado?</summary>
+        <div class="answer">Sim. Casas da Vila está inserida na escala do vilarejo de Trancoso, próxima ao Quadrado e à vida local.</div>
+      </details>
+
+      <details>
+        <summary>As casas são adequadas para grupos?</summary>
+        <div class="answer">Algumas casas são mais indicadas para casais ou grupos menores, enquanto outras podem atender famílias ou amigos. A recomendação depende das datas e do perfil do grupo.</div>
+      </details>
+
+      <details>
+        <summary>Os pacotes de Réveillon são reembolsáveis?</summary>
+        <div class="answer">Pacotes de Réveillon podem seguir condições específicas e não reembolsáveis após confirmação. As condições finais são informadas antes da reserva.</div>
+      </details>
+
+      <details>
+        <summary>Vale a pena ficar em Trancoso depois da virada?</summary>
+        <div class="answer">Sim. Os dias após a celebração podem ser especialmente agradáveis para quem deseja praia, descanso e um início de ano mais desacelerado.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="nyeSection nyeSectionAlt">
+  <div class="nyeWrap">
+    <div class="nyeHead">
+      <p class="eyebrow">Guias relacionados</p>
+      <h2 class="h2">Continue explorando Trancoso</h2>
+    </div>
+
+    <div class="seoLinksGrid">
+      <a href="/pt/blog/o-que-fazer-em-trancoso/">O que fazer em Trancoso</a>
+      <a href="/pt/blog/onde-ficar-em-trancoso/">Onde ficar em Trancoso</a>
+      <a href="/pt/localizacao/">Localização em Trancoso</a>
+      <a href="/pt/reservar/">Ver disponibilidade</a>
+    </div>
+  </div>
+</section>
+<main>
 
   <div id="site-footer"></div>
 
@@ -814,53 +1332,63 @@
         });
       }
 
-      form.addEventListener('submit', async function (event) {
-        event.preventDefault();
+if (form) {
 
-        feedback.style.display = 'none';
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Enviando...';
+  form.addEventListener('submit', async function (event) {
 
-        const payload = {
-          locale: 'pt',
-          page: window.location.pathname,
-          interest: 'Réveillon 2027',
-          name: form.name.value,
-          email: form.email.value,
-          phone: form.phone.value,
-          guests: form.guests.value,
-          checkin: form.checkin.value,
-          checkout: form.checkout.value,
-          message: form.message.value
-        };
+    event.preventDefault();
 
-        try {
-          const response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
+    feedback.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
 
-          const result = await response.json();
+    const payload = {
+      locale: 'pt',
+      page: window.location.pathname,
+      interest: 'Réveillon 2027',
+      name: form.name.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      guests: form.guests.value,
+      checkin: form.checkin.value,
+      checkout: form.checkout.value,
+      message: form.message.value
+    };
 
-          if (!response.ok || !result.ok) {
-            throw new Error(result.error || 'Falha no envio');
-          }
-
-          feedback.textContent = 'Sua consulta foi recebida. Nossa equipe entrará em contato em breve.';
-          feedback.style.display = 'block';
-          feedback.style.color = 'rgba(255,255,255,.88)';
-          form.reset();
-        } catch (error) {
-          feedback.textContent = 'Não foi possível enviar sua consulta neste momento. Tente novamente em instantes.';
-          feedback.style.display = 'block';
-          feedback.style.color = '#ffd9cc';
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Enviar consulta';
-        }
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
 
+      const result = await response.json();
+
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error || 'Falha no envio');
+      }
+
+      feedback.textContent = 'Sua consulta foi recebida. Nossa equipe entrará em contato em breve.';
+      feedback.style.display = 'block';
+      feedback.style.color = 'rgba(255,255,255,.88)';
+      form.reset();
+
+    } catch (error) {
+
+      feedback.textContent = 'Não foi possível enviar sua consulta neste momento. Tente novamente em instantes.';
+      feedback.style.display = 'block';
+      feedback.style.color = '#ffd9cc';
+
+    } finally {
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar consulta';
+
+    }
+
+  });
+
+}
       async function loadNYEInventory() {
         try {
           const response = await fetch('/api/nye-2027-status');
@@ -926,6 +1454,61 @@
       "addressCountry": "BR"
     }
   }
+   <script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"Trancoso fica muito cheio no Réveillon?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Sim. O Réveillon é um dos períodos de maior procura em Trancoso, por isso a reserva antecipada é altamente recomendável."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Qual é a estadia mínima para o Réveillon?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Para o Réveillon, as estadias normalmente seguem pacotes mínimos, em geral a partir de 7 noites, conforme a casa e a disponibilidade."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Casas da Vila fica perto do Quadrado?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Sim. Casas da Vila está inserida na escala do vilarejo de Trancoso, próxima ao Quadrado e à vida local."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Vale a pena ficar em casa privativa no Réveillon?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Sim. Uma casa privativa oferece mais espaço, privacidade e uma base mais tranquila para descansar entre praia, encontros e celebrações."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"As tarifas de Réveillon são reembolsáveis?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Pacotes de Réveillon podem seguir condições específicas e não reembolsáveis após confirmação. As condições finais são informadas antes da reserva."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Quando devo consultar disponibilidade?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"O quanto antes. As casas mais adequadas para o período tendem a ser reservadas com bastante antecedência."
+      }
+    }
+  ]
+
   </script>
   <!-- TWIPLA Tracking Code -->
 <script>
@@ -942,5 +1525,7 @@
 })(window,document,'https://app-worker.visitor-analytics.io/main.js','ffa77e64-4883-11f1-8907-960004340fd3','va')
 </script>
 <!-- End TWIPLA -->
+
+</script>
 </body>
 </html>
