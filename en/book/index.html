@@ -1549,7 +1549,12 @@ function updateSummary() {
 
           updateSummary();
           persistPendingBooking();
-
+window.trackBookingEvent?.("booking_search", {
+  house_name: "multi-house-search",
+  checkin: selectedState.checkIn,
+  checkout: selectedState.checkOut,
+  guests: selectedState.guests
+});
           renderEmpty('Searching availability…', 'We are checking the available houses for the selected period.');
 
           const items = await fetchAvailability(checkIn, checkOut, guestsCount);

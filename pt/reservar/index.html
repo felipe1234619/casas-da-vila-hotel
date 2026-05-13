@@ -1237,7 +1237,12 @@ function validateSearch(checkIn, checkOut, guestsCount) {
 
           updateSummary();
           persistPendingBooking();
-
+window.trackBookingEvent?.("booking_search", {
+  house_name: "multi-house-search",
+  checkin: selectedState.checkIn,
+  checkout: selectedState.checkOut,
+  guests: selectedState.guests
+});
           renderEmpty('Buscando disponibilidade…', 'Estamos consultando as casas disponíveis para o período selecionado.');
 
           const items = await fetchAvailability(checkIn, checkOut, guestsCount);
