@@ -20,10 +20,65 @@
   <link rel="stylesheet" href="/assets/css/responsive.css" />
 
   <style>
-    .articleHero{
-      padding:calc(var(--header-h,96px) + 42px) 0 34px;
-    }
-    .articleWrap{
+.articleHero{
+  position:relative;
+  padding:calc(var(--header-h,96px) + 76px) 0 86px;
+  min-height:78svh;
+  display:flex;
+  align-items:end;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(14,18,20,.38) 0%,
+      rgba(14,18,20,.20) 26%,
+      rgba(14,18,20,.36) 100%
+    ),
+    url("/assets/img/reveillon3.jpeg") center center / cover no-repeat;
+}
+
+.articleHero::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:140px;
+  background:linear-gradient(180deg, rgba(246,242,235,0) 0%, #f6f2eb 100%);
+  pointer-events:none;
+}
+
+.articleHero .articleWrap{
+  position:relative;
+  z-index:2;
+}
+
+.articleHero .articleKicker,
+.articleHero .articleTitle,
+.articleHero .articleLead{
+  color:#fff;
+}
+
+.articleHero .articleLead{
+  color:rgba(255,255,255,.88);
+}
+
+.articleHero .articleMetaCard{
+  background:linear-gradient(180deg, rgba(29,34,35,.66) 0%, rgba(29,34,35,.56) 100%);
+  border:1px solid rgba(236,224,202,.30);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+
+.articleHero .articleMetaCard small{
+  color:rgba(255,255,255,.62);
+}
+
+.articleHero .articleMetaCard strong{
+  color:#fff;
+}
+
+.articleHero .articleMetaCard span{
+  color:rgba(255,255,255,.76);
+}    .articleWrap{
       width:min(1120px, calc(100vw - 40px));
       margin:0 auto;
     }
@@ -286,6 +341,103 @@
       border-bottom:0;
       padding-bottom:0;
     }
+    .articleMedia{
+  margin:34px 0 42px;
+  border-radius:30px;
+  overflow:hidden;
+  box-shadow:var(--shadow-soft);
+  background:#ddd;
+  max-height:520px;
+}
+
+.articleMedia img{
+  width:100%;
+  height:520px;
+  object-fit:cover;
+  object-position:center 58%;
+  display:block;
+}
+
+.articleMedia figcaption{
+  padding:16px 20px;
+  background:rgba(255,255,255,.66);
+  color:var(--muted);
+  font-size:.92rem;
+  line-height:1.6;
+}
+
+.articleSevenDays{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  margin-top:22px;
+}
+
+.articleDayCard{
+  padding:22px;
+  border-radius:22px;
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:var(--shadow-soft);
+}
+
+.articleDayCard strong{
+  display:block;
+  margin-bottom:8px;
+  font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;
+  font-size:1.35rem;
+  line-height:1.1;
+  color:var(--ink);
+}
+
+.articleDayCard p{
+  margin:0;
+  font-size:.98rem;
+  line-height:1.74;
+}
+
+.articleLandingCta{
+  margin:42px 0;
+  padding:34px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#1f1915,#43372d 52%,#51645a);
+  color:#fff;
+  box-shadow:0 26px 70px rgba(34,28,23,.22);
+}
+
+.articleLandingCta h2{
+  color:#fff;
+  margin-bottom:14px;
+}
+
+.articleLandingCta p{
+  color:rgba(255,255,255,.82);
+}
+
+.articleLandingCta .btn{
+  margin-top:10px;
+}
+.articleMedia{
+  position:relative;
+}
+
+.articleMedia::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:80px;
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.08) 100%
+  );
+  pointer-events:none;
+}
+@media (max-width:820px){
+  .articleSevenDays{
+    grid-template-columns:1fr;
+  }
+}
     @media (max-width:1080px){
       .articleIntro,
       .articleGrid{
@@ -336,7 +488,10 @@
               Descubra por que o mundo escolhe Trancoso para a virada: praias, atmosfera, Quadrado, hospedagem e o ritmo único que transforma o Réveillon 2027 em uma experiência memorável.
             </p>
           </div>
-
+<div class="ctaRow mt-26">
+  <a class="btn btnPrimary" href="/pt/reservar/">Ver disponibilidade</a>
+  <a class="btn btnGhost" href="/pt/reveillon-2027/">Pacotes de Réveillon</a>
+</div>
           <div class="articleMetaGrid">
             <div class="articleMetaCard">
               <small>Leitura</small>
@@ -352,7 +507,16 @@
         </div>
       </div>
     </section>
-
+<figure class="articleMedia">
+  <img
+    src="/assets/img/praia.jpeg"
+    alt="Atmosfera de Réveillon em Trancoso durante o verão"
+    loading="lazy"
+  />
+  <figcaption>
+    O Réveillon em Trancoso combina praia, vilarejo, encontros e uma atmosfera que transforma a virada em uma experiência de destino.
+  </figcaption>
+</figure>
     <section class="articleBody">
       <div class="articleWrap">
         <div class="articleGrid">
@@ -427,7 +591,17 @@
                 <a href="/pt/casas/">as casas da Casas da Vila</a>.
               </p>
             </section>
+<section class="articleLandingCta">
+  <h2>Consultar casas para o Réveillon 2027</h2>
 
+  <p>
+    Para quem já está planejando a virada em Trancoso, a página de Réveillon reúne disponibilidade, pacotes, estadia mínima e o caminho direto para consulta.
+  </p>
+
+  <a class="btn btnPrimary" href="/pt/reveillon-2027/">
+    Ver pacotes de Réveillon 2027
+  </a>
+</section>
             <section>
               <h2>Como viver melhor esse período</h2>
               <p>
@@ -437,34 +611,106 @@
                 Em um destino como esse, deixar espaço para o imprevisto, para o tempo livre e para a contemplação faz parte do acerto.
               </p>
             </section>
+<section>
+  <h2>7 dias em Trancoso durante o Réveillon</h2>
 
-            <section>
-              <h2>Perguntas frequentes</h2>
+  <p>
+    A melhor forma de viver a virada não é preencher todos os horários, mas distribuir a semana entre chegada, praia, descanso, Quadrado e momentos de celebração.
+  </p>
 
-              <div class="articleFaq">
-                <details>
-                  <summary>Trancoso fica muito concorrido no Réveillon?</summary>
-                  <div class="answer">
-                    Sim. Trata-se de um dos períodos de maior procura do destino, o que torna a antecedência especialmente importante na escolha da hospedagem.
-                  </div>
-                </details>
+  <div class="articleSevenDays">
+    <div class="articleDayCard">
+      <strong>Dia 1 — Chegada</strong>
+      <p>Instale-se com calma, reconheça a casa e comece a desacelerar no ritmo do vilarejo.</p>
+    </div>
 
-                <details>
-                  <summary>Vale a pena passar a virada em Trancoso?</summary>
-                  <div class="answer">
-                    Para quem busca uma combinação entre beleza natural, vida social, praia e atmosfera especial, sim. É justamente essa composição que torna o destino tão desejado nessa data.
-                  </div>
-                </details>
+    <div class="articleDayCard">
+      <strong>Dias 2 e 3 — Praia</strong>
+      <p>Manhãs junto ao mar, tardes mais livres e jantares sem pressa criam o tom da semana.</p>
+    </div>
 
-                <details>
-                  <summary>Quando começar a planejar o Réveillon 2027?</summary>
-                  <div class="answer">
-                    Quanto antes, melhor. Em períodos de alta demanda, boas escolhas de hospedagem e localização tendem a acontecer com maior antecedência.
-                  </div>
-                </details>
-              </div>
-            </section>
+    <div class="articleDayCard">
+      <strong>Dias 4 e 5 — Quadrado</strong>
+      <p>O Quadrado concentra arquitetura, restaurantes, encontros e a vida social mais simbólica de Trancoso.</p>
+    </div>
 
+    <div class="articleDayCard">
+      <strong>Dia 6 — Virada</strong>
+      <p>O Réveillon acontece entre celebração, paisagem e a energia particular que faz Trancoso ser tão desejado.</p>
+    </div>
+
+    <div class="articleDayCard">
+      <strong>Dia 7 — Recomeço</strong>
+      <p>Depois da festa, a casa, o jardim, o café da manhã e o silêncio tornam o início do ano mais leve.</p>
+    </div>
+
+    <div class="articleDayCard">
+      <strong>Depois da virada</strong>
+      <p>Quem permanece alguns dias a mais costuma encontrar uma experiência mais calma e ainda muito bonita.</p>
+    </div>
+  </div>
+</section>
+<section>
+  <h2>Perguntas frequentes</h2>
+
+  <div class="articleFaq">
+    <details>
+      <summary>Trancoso fica muito concorrido no Réveillon?</summary>
+      <div class="answer">
+        Sim. O Réveillon é um dos períodos de maior procura do destino, o que torna a antecedência especialmente importante na escolha da hospedagem.
+      </div>
+    </details>
+
+    <details>
+      <summary>Vale a pena passar a virada em Trancoso?</summary>
+      <div class="answer">
+        Para quem busca uma combinação entre beleza natural, praia, vida social e atmosfera especial, sim. É justamente essa composição que torna o destino tão desejado nessa data.
+      </div>
+    </details>
+
+    <details>
+      <summary>Quando começar a planejar o Réveillon 2027?</summary>
+      <div class="answer">
+        Quanto antes, melhor. Em períodos de alta demanda, boas escolhas de hospedagem e localização tendem a acontecer com maior antecedência.
+      </div>
+    </details>
+
+    <details>
+      <summary>Qual é a estadia mínima no Réveillon?</summary>
+      <div class="answer">
+        Em geral, o período de Réveillon opera com pacotes mínimos, frequentemente próximos de uma semana, conforme a casa, as datas e a disponibilidade.
+      </div>
+    </details>
+
+    <details>
+      <summary>Onde ficar em Trancoso durante o Réveillon?</summary>
+      <div class="answer">
+        Muitos hóspedes preferem uma base próxima ao vilarejo e ao Quadrado, mas com atmosfera mais calma para descanso entre praia, encontros e celebrações.
+      </div>
+    </details>
+
+    <details>
+      <summary>Casas privativas funcionam bem para o Réveillon?</summary>
+      <div class="answer">
+        Sim. Casas privativas oferecem mais espaço, privacidade e flexibilidade, especialmente para famílias, casais ou grupos que querem uma experiência mais reservada.
+      </div>
+    </details>
+
+    <details>
+      <summary>As tarifas de Réveillon são reembolsáveis?</summary>
+      <div class="answer">
+        Pacotes de Réveillon podem seguir condições específicas e não reembolsáveis após confirmação. As condições finais devem ser verificadas antes da reserva.
+      </div>
+    </details>
+
+    <details>
+      <summary>Vale ficar alguns dias depois da virada?</summary>
+      <div class="answer">
+        Sim. Os dias seguintes podem ser mais tranquilos e agradáveis, com praia, descanso e uma forma mais leve de começar o ano.
+      </div>
+    </details>
+  </div>
+</section>
             <section class="articleRelated">
               <h2>Leituras relacionadas</h2>
               <p>
@@ -505,7 +751,78 @@
   </main>
 
   <div id="site-footer"></div>
-
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"Trancoso fica muito concorrido no Réveillon?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Sim. O Réveillon é um dos períodos de maior procura do destino, o que torna a antecedência especialmente importante na escolha da hospedagem."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Vale a pena passar a virada em Trancoso?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Para quem busca uma combinação entre beleza natural, praia, vida social e atmosfera especial, sim. É justamente essa composição que torna o destino tão desejado nessa data."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Quando começar a planejar o Réveillon 2027?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Quanto antes, melhor. Em períodos de alta demanda, boas escolhas de hospedagem e localização tendem a acontecer com maior antecedência."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Qual é a estadia mínima no Réveillon?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Em geral, o período de Réveillon opera com pacotes mínimos, frequentemente próximos de uma semana, conforme a casa, as datas e a disponibilidade."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Onde ficar em Trancoso durante o Réveillon?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Muitos hóspedes preferem uma base próxima ao vilarejo e ao Quadrado, mas com atmosfera mais calma para descanso entre praia, encontros e celebrações."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Casas privativas funcionam bem para o Réveillon?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Sim. Casas privativas oferecem mais espaço, privacidade e flexibilidade, especialmente para famílias, casais ou grupos que querem uma experiência mais reservada."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"As tarifas de Réveillon são reembolsáveis?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Pacotes de Réveillon podem seguir condições específicas e não reembolsáveis após confirmação. As condições finais devem ser verificadas antes da reserva."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Vale ficar alguns dias depois da virada?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Sim. Os dias seguintes podem ser mais tranquilos e agradáveis, com praia, descanso e uma forma mais leve de começar o ano."
+      }
+    }
+  ]
+}
+</script>
   <script src="/assets/js/main.js"></script>
 <script src="/assets/js/seo-meta.js"></script>
 <!-- TWIPLA Tracking Code -->

@@ -20,32 +20,487 @@
   <link rel="stylesheet" href="/assets/css/responsive.css" />
 
   <style>
-    /* === SAME STRUCTURE (IDENTICAL TO PT) === */
-    .articleHero{padding:calc(var(--header-h,96px) + 42px) 0 34px;}
-    .articleWrap{width:min(1120px, calc(100vw - 40px));margin:0 auto;}
-    .articleIntro{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);gap:26px;align-items:end;}
-    .articleKicker{display:inline-flex;align-items:center;gap:12px;margin:0 0 18px;color:var(--muted);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;}
-    .articleKicker::before{content:"";width:38px;height:1px;background:rgba(111,85,58,.35);}
-    .articleTitle{margin:0;max-width:11ch;font-size:clamp(3rem,7vw,5.8rem);line-height:.94;letter-spacing:-.05em;font-weight:500;font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;text-wrap:balance;}
-    .articleLead{margin:22px 0 0;max-width:58ch;font-size:1.08rem;line-height:1.8;color:var(--muted);}
-    .articleMetaCard{padding:26px;border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.44));border:1px solid rgba(255,255,255,.46);box-shadow:var(--shadow-soft);}
-    .articleMetaCard small{display:block;margin-bottom:8px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);}
-    .articleMetaCard strong{display:block;font-size:1rem;line-height:1.5;color:var(--ink);}
-    .articleMetaCard span{display:block;margin-top:6px;color:var(--muted);line-height:1.65;font-size:.95rem;}
-    .articleMetaGrid{display:grid;gap:18px;}
-    .articleBody{padding:18px 0 100px;}
-    .articleGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.34fr);gap:34px;align-items:start;}
-    .articleContent section + section{margin-top:46px;}
-    .articleContent h2{margin:0 0 16px;font-size:clamp(2rem,4vw,3rem);line-height:1;letter-spacing:-.04em;font-weight:500;font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;}
-    .articleContent h3{margin:22px 0 10px;font-size:1.35rem;}
-    .articleContent p{margin:0 0 16px;font-size:1.02rem;line-height:1.86;color:var(--muted);}
-    .articleHighlight{padding:28px;border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.46));border:1px solid rgba(255,255,255,.5);}
-    .articlePull{padding:34px;border-radius:30px;background:linear-gradient(135deg,#1f1915,#43372d 52%,#51645a);color:#fff;}
-    .articleAside{position:sticky;top:120px;display:grid;gap:18px;}
-    .articleAsideCard{padding:24px;border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.64),rgba(255,255,255,.42));}
-    .articleFaq details{padding:18px;border-radius:20px;background:rgba(255,255,255,.58);}
-    .articleRelated{margin-top:54px;padding:30px;border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.46));}
-    @media (max-width:1080px){.articleIntro,.articleGrid{grid-template-columns:1fr}.articleAside{position:static}}
+
+.articleHero{
+  position:relative;
+  padding:calc(var(--header-h,96px) + 76px) 0 86px;
+  min-height:78svh;
+  display:flex;
+  align-items:end;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(14,18,20,.38) 0%,
+      rgba(14,18,20,.20) 26%,
+      rgba(14,18,20,.36) 100%
+    ),
+    url("/assets/img/reveillon3.jpeg") center center / cover no-repeat;
+}
+
+.articleHero::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:140px;
+  background:linear-gradient(
+    180deg,
+    rgba(246,242,235,0) 0%,
+    #f6f2eb 100%
+  );
+  pointer-events:none;
+}
+
+.articleHero .articleWrap{
+  position:relative;
+  z-index:2;
+}
+
+.articleHero .articleKicker,
+.articleHero .articleTitle,
+.articleHero .articleLead{
+  color:#fff;
+}
+
+.articleHero .articleLead{
+  color:rgba(255,255,255,.88);
+}
+
+.articleHero .articleMetaCard{
+  background:linear-gradient(
+    180deg,
+    rgba(29,34,35,.66) 0%,
+    rgba(29,34,35,.56) 100%
+  );
+  border:1px solid rgba(236,224,202,.30);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+
+.articleHero .articleMetaCard small{
+  color:rgba(255,255,255,.62);
+}
+
+.articleHero .articleMetaCard strong{
+  color:#fff;
+}
+
+.articleHero .articleMetaCard span{
+  color:rgba(255,255,255,.76);
+}
+
+.articleWrap{
+  width:min(1120px, calc(100vw - 40px));
+  margin:0 auto;
+}
+
+.articleIntro{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);
+  gap:26px;
+  align-items:end;
+}
+
+.articleKicker{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  margin:0 0 18px;
+  color:var(--muted);
+  font-size:.8rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.articleKicker::before{
+  content:"";
+  width:38px;
+  height:1px;
+  background:rgba(111,85,58,.35);
+}
+
+.articleTitle{
+  margin:0;
+  max-width:11ch;
+  font-size:clamp(3rem,7vw,5.8rem);
+  line-height:.94;
+  letter-spacing:-.05em;
+  font-weight:500;
+  font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;
+  text-wrap:balance;
+}
+
+.articleLead{
+  margin:22px 0 0;
+  max-width:58ch;
+  font-size:1.08rem;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+.articleMetaCard{
+  padding:26px;
+  border-radius:26px;
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.66),
+    rgba(255,255,255,.44)
+  );
+  border:1px solid rgba(255,255,255,.46);
+  box-shadow:var(--shadow-soft);
+}
+
+.articleMetaCard small{
+  display:block;
+  margin-bottom:8px;
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--soft);
+}
+
+.articleMetaCard strong{
+  display:block;
+  font-size:1rem;
+  line-height:1.5;
+  color:var(--ink);
+}
+
+.articleMetaCard span{
+  display:block;
+  margin-top:6px;
+  color:var(--muted);
+  line-height:1.65;
+  font-size:.95rem;
+}
+
+.articleMetaGrid{
+  display:grid;
+  gap:18px;
+}
+
+.articleBody{
+  padding:18px 0 100px;
+}
+
+.articleGrid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(260px,.34fr);
+  gap:34px;
+  align-items:start;
+}
+
+.articleContent section + section{
+  margin-top:46px;
+}
+
+.articleContent h2{
+  margin:0 0 16px;
+  font-size:clamp(2rem,4vw,3rem);
+  line-height:1;
+  letter-spacing:-.04em;
+  font-weight:500;
+  font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;
+}
+
+.articleContent h3{
+  margin:22px 0 10px;
+  font-size:1.35rem;
+  line-height:1.12;
+  letter-spacing:-.03em;
+  font-weight:500;
+  font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;
+  color:var(--ink);
+}
+
+.articleContent p{
+  margin:0 0 16px;
+  font-size:1.02rem;
+  line-height:1.86;
+  color:var(--muted);
+  max-width:70ch;
+}
+
+.articleContent a{
+  color:var(--ink);
+  text-decoration:none;
+  border-bottom:1px solid rgba(32,28,24,.16);
+}
+
+.articleHighlight{
+  padding:28px;
+  border-radius:28px;
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.7),
+    rgba(255,255,255,.46)
+  );
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:var(--shadow-soft);
+}
+
+.articlePull{
+  padding:34px;
+  border-radius:30px;
+  background:linear-gradient(
+    135deg,
+    #1f1915,
+    #43372d 52%,
+    #51645a
+  );
+  color:#fff;
+  box-shadow:0 26px 70px rgba(34,28,23,.22);
+}
+
+.articlePull p{
+  color:rgba(255,255,255,.86);
+  max-width:34ch;
+  margin:0;
+  font-size:1.1rem;
+  line-height:1.72;
+}
+
+.articleAside{
+  position:sticky;
+  top:calc(var(--header-h,96px) + 22px);
+  display:grid;
+  gap:18px;
+}
+
+.articleAsideCard{
+  padding:24px 22px;
+  border-radius:24px;
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.64),
+    rgba(255,255,255,.42)
+  );
+  border:1px solid rgba(255,255,255,.46);
+  box-shadow:var(--shadow-soft);
+}
+
+.articleAsideCard h3{
+  margin:0 0 10px;
+  font-size:1.08rem;
+  line-height:1.2;
+  font-weight:600;
+  color:var(--ink);
+}
+
+.articleAsideCard p,
+.articleAsideCard li{
+  font-size:.95rem;
+  line-height:1.72;
+  color:var(--muted);
+}
+
+.articleAsideCard ul{
+  margin:0;
+  padding-left:18px;
+}
+
+.articleAsideCard .btn{
+  margin-top:8px;
+  width:100%;
+  justify-content:center;
+}
+
+.articleFaq{
+  display:grid;
+  gap:12px;
+  margin-top:10px;
+}
+
+.articleFaq details{
+  padding:18px 18px 16px;
+  border-radius:20px;
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(255,255,255,.5);
+}
+
+.articleFaq summary{
+  cursor:pointer;
+  list-style:none;
+  font-size:1rem;
+  line-height:1.5;
+  color:var(--ink);
+  font-weight:600;
+}
+
+.articleFaq summary::-webkit-details-marker{
+  display:none;
+}
+
+.articleFaq .answer{
+  margin-top:12px;
+  color:var(--muted);
+  line-height:1.78;
+  font-size:.98rem;
+}
+
+.articleRelated{
+  margin-top:54px;
+  padding:30px;
+  border-radius:30px;
+  background:linear-gradient(
+    180deg,
+    rgba(255,255,255,.66),
+    rgba(255,255,255,.46)
+  );
+  border:1px solid rgba(255,255,255,.48);
+  box-shadow:var(--shadow-soft);
+}
+
+.articleRelatedLinks{
+  display:grid;
+  gap:0;
+  margin-top:18px;
+  border-top:1px solid var(--line);
+}
+
+.articleRelatedLinks a{
+  display:block;
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.articleMedia{
+  margin:34px 0 42px;
+  border-radius:30px;
+  overflow:hidden;
+  box-shadow:var(--shadow-soft);
+  background:#ddd;
+  max-height:520px;
+  position:relative;
+}
+
+.articleMedia img{
+  width:100%;
+  height:520px;
+  object-fit:cover;
+  object-position:center 58%;
+  display:block;
+}
+
+.articleMedia::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:80px;
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.08) 100%
+  );
+  pointer-events:none;
+}
+
+.articleMedia figcaption{
+  padding:16px 20px;
+  background:rgba(255,255,255,.66);
+  color:var(--muted);
+  font-size:.92rem;
+  line-height:1.6;
+}
+
+.articleSevenDays{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  margin-top:22px;
+}
+
+.articleDayCard{
+  padding:22px;
+  border-radius:22px;
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:var(--shadow-soft);
+}
+
+.articleDayCard strong{
+  display:block;
+  margin-bottom:8px;
+  font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;
+  font-size:1.35rem;
+  line-height:1.1;
+  color:var(--ink);
+}
+
+.articleDayCard p{
+  margin:0;
+  font-size:.98rem;
+  line-height:1.74;
+}
+
+.articleLandingCta{
+  margin:42px 0;
+  padding:34px;
+  border-radius:30px;
+  background:linear-gradient(
+    135deg,
+    #1f1915,
+    #43372d 52%,
+    #51645a
+  );
+  color:#fff;
+  box-shadow:0 26px 70px rgba(34,28,23,.22);
+}
+
+.articleLandingCta h2{
+  color:#fff;
+  margin-bottom:14px;
+}
+
+.articleLandingCta p{
+  color:rgba(255,255,255,.82);
+}
+
+.articleLandingCta .btn{
+  margin-top:10px;
+}
+
+@media (max-width:1080px){
+
+  .articleIntro,
+  .articleGrid{
+    grid-template-columns:1fr;
+  }
+
+  .articleAside{
+    position:static;
+  }
+}
+
+@media (max-width:820px){
+
+  .articleHero{
+    padding-top:calc(var(--header-h,90px) + 30px);
+  }
+
+  .articleWrap{
+    width:min(100vw - 28px, 1120px);
+  }
+
+  .articleTitle{
+    max-width:100%;
+    font-size:clamp(2.4rem,10vw,4rem);
+  }
+
+  .articleSevenDays{
+    grid-template-columns:1fr;
+  }
+
+  .articleMetaCard,
+  .articleHighlight,
+  .articlePull,
+  .articleAsideCard,
+  .articleRelated{
+    border-radius:22px;
+    padding:22px 18px;
+  }
+}
+
   </style>
 </head>
 
@@ -56,175 +511,458 @@
 <main>
 
 <section class="articleHero">
+
   <div class="articleWrap">
+
     <div class="articleIntro">
 
       <div>
+
         <p class="articleKicker">New Year’s Eve in Trancoso</p>
-        <h1 class="articleTitle">NYE 2027 in Trancoso</h1>
+
+        <h1 class="articleTitle">
+          New Year’s Eve 2027 in Trancoso
+        </h1>
 
         <p class="articleLead">
-          Discover why the world chooses Trancoso for the turn of the year: beaches, atmosphere,
-          the Quadrado, where to stay and how to truly experience New Year’s Eve 2027.
+          Discover why the world chooses Trancoso for the turn of the year:
+          beaches, atmosphere, the Quadrado, where to stay and the unique rhythm
+          that transforms NYE 2027 into a memorable destination experience.
         </p>
+
+      </div>
+
+      <div class="ctaRow mt-26">
+        <a class="btn btnPrimary" href="/en/book/">Check availability</a>
+        <a class="btn btnGhost" href="/en/nye-2027/">NYE packages</a>
       </div>
 
       <div class="articleMetaGrid">
+
         <div class="articleMetaCard">
           <small>Reading</small>
           <strong>New Year’s guide</strong>
-          <span>Atmosphere, rhythm, location and what defines the experience during the most desired week of the year.</span>
+          <span>
+            Atmosphere, accommodation, local rhythm and why Trancoso becomes one
+            of the world’s most desired destinations during the turn of the year.
+          </span>
         </div>
+
         <div class="articleMetaCard">
           <small>Season</small>
           <strong>Peak period</strong>
-          <span>Planning ahead and choosing the right house becomes essential for a better stay.</span>
+          <span>
+            Planning ahead and choosing the right stay makes a real difference
+            during this time of year.
+          </span>
         </div>
+
       </div>
 
     </div>
+
   </div>
+
 </section>
 
+<figure class="articleMedia">
+
+  <img
+    src="/assets/img/praia.jpeg"
+    alt="New Year’s Eve atmosphere in Trancoso during summer"
+    loading="lazy"
+  />
+
+  <figcaption>
+    New Year’s Eve in Trancoso combines beach, village life, encounters and a
+    unique atmosphere that transforms the turn of the year into a destination experience.
+  </figcaption>
+
+</figure>
+
 <section class="articleBody">
+
   <div class="articleWrap">
+
     <div class="articleGrid">
 
       <div class="articleContent">
 
         <section>
+
           <p>
-            New Year’s Eve in Trancoso is not just a celebration — it is a moment when the destination
-            reaches its most vibrant, luminous and socially connected state.
+            New Year’s Eve in Trancoso is not simply a celebration on the calendar.
+            It is a moment when the destination concentrates light, encounters,
+            movement and a very particular atmosphere.
           </p>
 
           <div class="articlePull">
             <p>
               In Trancoso, the turn of the year happens not only at midnight,
-              but across days — in the light, the rhythm, and the way people gather.
+              but through the landscape, the rhythm of the village and the way
+              time seems to move differently.
             </p>
           </div>
+
         </section>
 
         <section>
-          <h2>Why the world chooses Trancoso</h2>
+
+          <h2>Why the world chooses Trancoso during this season</h2>
+
           <p>
-            Few destinations combine nature, social life, beauty and intimacy in the way Trancoso does.
-            During New Year’s Eve, this balance becomes even more evident.
+            Some destinations host New Year’s Eve. Trancoso somehow absorbs it.
+            The combination of tropical nature, beaches, village scale,
+            sophisticated social life and atmosphere creates a rare international appeal.
           </p>
+
+          <p>
+            Guests arrive not only for parties, but for a certain way of
+            experiencing the final days of the year: slowly, beautifully,
+            between the beach, the Quadrado and long summer evenings.
+          </p>
+
         </section>
 
         <section>
-          <h2>The atmosphere</h2>
+
+          <h2>What makes the atmosphere so unique</h2>
 
           <h3>The Quadrado</h3>
+
           <p>
-            The heart of Trancoso becomes even more symbolic during this period.
+            During New Year’s Eve, the Quadrado becomes even more symbolic.
+            Architecture, restaurants, encounters and movement define the social heart of Trancoso.
           </p>
 
           <h3>The beaches</h3>
+
           <p>
-            Even at peak season, the coastline maintains a rare sense of openness and natural presence.
+            Even during peak season, the coastline preserves something essential:
+            openness, warm sea, natural beauty and freedom.
           </p>
 
           <h3>The rhythm</h3>
+
           <p>
-            What defines Trancoso is not only what happens, but how it happens — with a slower,
-            more intentional rhythm.
+            Perhaps the greatest difference lies in the rhythm itself.
+            Trancoso remains vibrant without completely losing its slower,
+            more intentional pace.
           </p>
+
         </section>
 
         <section>
+
           <h2>Planning ahead matters</h2>
+
           <p>
-            For NYE 2027, planning is not optional. The best stays and locations are defined early.
+            For NYE 2027, planning ahead becomes part of the experience itself.
+            Choosing the right accommodation, location and stay style directly impacts the quality of the trip.
           </p>
 
           <div class="articleHighlight">
-            <h3>What matters most</h3>
+
+            <h3>What matters most during this season</h3>
+
             <p>
-              Where you stay will define your experience more than anything else.
+              More than simply being in Trancoso, what matters is how you experience it:
+              which house you stay in, the level of privacy,
+              access, comfort and atmosphere throughout the week.
             </p>
+
           </div>
+
         </section>
 
         <section>
-          <h2>Where to stay</h2>
+
+          <h2>Where to stay in Trancoso during New Year’s Eve</h2>
+
           <p>
-            In Trancoso, accommodation defines the rhythm of your stay.
+            During such a sensitive season, accommodation is not just logistical support.
+            It defines privacy, comfort, rhythm and the way you experience the days around the celebration.
           </p>
+
           <p>
-            See also:
-            <a href="/en/blog/where-to-stay-trancoso/">Where to stay in Trancoso</a>
+            To better understand the different areas and stay styles,
+            read also:
+            <a href="/en/blog/where-to-stay-trancoso/">
+              Where to stay in Trancoso
+            </a>
           </p>
+
+          <p>
+            To discover our collection, see also:
+            <a href="/en/houses/">
+              Casas da Vila houses
+            </a>
+          </p>
+
+        </section>
+
+        <section class="articleLandingCta">
+
+          <h2>Check houses for New Year’s Eve 2027</h2>
+
+          <p>
+            For guests already planning the turn of the year in Trancoso,
+            the NYE page gathers availability, minimum stay information,
+            accommodation details and direct inquiry access.
+          </p>
+
+          <a class="btn btnPrimary" href="/en/nye-2027/">
+            View NYE 2027 packages
+          </a>
+
         </section>
 
         <section>
-          <h2>How to experience it better</h2>
+
+          <h2>How to experience this period better</h2>
+
           <p>
-            The best New Year’s Eve here is not the busiest — it’s the most balanced.
+            The best New Year’s Eve in Trancoso is usually not the busiest,
+            but the most balanced one.
           </p>
+
+          <p>
+            Alternating beach time, village life, dinners, encounters and rest
+            creates a richer experience than trying to turn every day into a full agenda.
+          </p>
+
         </section>
 
         <section>
-          <h2>FAQ</h2>
+
+          <h2>7 days in Trancoso during New Year’s Eve</h2>
+
+          <p>
+            The best way to experience the turn of the year is not by filling every hour,
+            but by balancing beach, rest, the Quadrado and celebration moments throughout the week.
+          </p>
+
+          <div class="articleSevenDays">
+
+            <div class="articleDayCard">
+              <strong>Day 1 — Arrival</strong>
+              <p>Arrive slowly, settle into the house and begin adapting to the village rhythm.</p>
+            </div>
+
+            <div class="articleDayCard">
+              <strong>Days 2 & 3 — Beach</strong>
+              <p>Sea mornings, slower afternoons and long dinners define the beginning of the week.</p>
+            </div>
+
+            <div class="articleDayCard">
+              <strong>Days 4 & 5 — The Quadrado</strong>
+              <p>The Quadrado concentrates architecture, restaurants, encounters and Trancoso’s social energy.</p>
+            </div>
+
+            <div class="articleDayCard">
+              <strong>Day 6 — The turn of the year</strong>
+              <p>Celebration, landscape and atmosphere come together during one of the most desired nights of the year.</p>
+            </div>
+
+            <div class="articleDayCard">
+              <strong>Day 7 — A softer beginning</strong>
+              <p>After the celebration, the house, breakfast, garden and silence create a lighter start to the year.</p>
+            </div>
+
+            <div class="articleDayCard">
+              <strong>After New Year’s Eve</strong>
+              <p>Guests who stay a little longer often discover an even calmer and more beautiful side of Trancoso.</p>
+            </div>
+
+          </div>
+
+        </section>
+
+        <section>
+
+          <h2>Frequently asked questions</h2>
 
           <div class="articleFaq">
+
             <details>
-              <summary>Is Trancoso crowded during NYE?</summary>
-              <div class="answer">Yes, it is one of the most demanded periods of the year.</div>
+              <summary>Is Trancoso crowded during New Year’s Eve?</summary>
+              <div class="answer">
+                Yes. New Year’s Eve is one of the destination’s highest demand periods,
+                making early planning especially important.
+              </div>
             </details>
 
             <details>
-              <summary>Is it worth it?</summary>
-              <div class="answer">Absolutely, if you seek a unique combination of beauty and atmosphere.</div>
+              <summary>Is it worth spending New Year’s Eve in Trancoso?</summary>
+              <div class="answer">
+                Yes — especially for guests looking for a combination of natural beauty,
+                atmosphere, beach life and sophisticated social energy.
+              </div>
             </details>
 
             <details>
-              <summary>When should I plan?</summary>
-              <div class="answer">As early as possible.</div>
+              <summary>When should I start planning NYE 2027?</summary>
+              <div class="answer">
+                As early as possible. The best accommodation options tend to be reserved far in advance.
+              </div>
             </details>
+
+            <details>
+              <summary>What is the minimum stay during New Year’s Eve?</summary>
+              <div class="answer">
+                New Year’s Eve usually operates with minimum-stay packages,
+                often around one week depending on the house and dates.
+              </div>
+            </details>
+
+            <details>
+              <summary>Where should I stay in Trancoso during NYE?</summary>
+              <div class="answer">
+                Many guests prefer houses near the village and the Quadrado,
+                while still maintaining privacy and a calmer atmosphere.
+              </div>
+            </details>
+
+            <details>
+              <summary>Do private houses work well for New Year’s Eve?</summary>
+              <div class="answer">
+                Yes. Private houses offer more flexibility, privacy and comfort,
+                especially for couples, families and groups.
+              </div>
+            </details>
+
+            <details>
+              <summary>Are NYE packages refundable?</summary>
+              <div class="answer">
+                New Year’s Eve reservations may follow non-refundable conditions after confirmation.
+                Final policies should always be checked before booking.
+              </div>
+            </details>
+
+            <details>
+              <summary>Is it worth staying after New Year’s Eve?</summary>
+              <div class="answer">
+                Yes. The days after the celebration are often calmer and especially pleasant.
+              </div>
+            </details>
+
           </div>
+
         </section>
 
         <section class="articleRelated">
+
           <h2>Related reads</h2>
 
+          <p>
+            Continue exploring Trancoso with guides designed to help you plan your stay better.
+          </p>
+
           <div class="articleRelatedLinks">
-            <a href="/en/blog/where-to-stay-trancoso/">Where to stay in Trancoso</a>
-            <a href="/en/blog/things-to-do-trancoso/">Things to do in Trancoso</a>
-            <a href="/en/book/">Check availability</a>
+
+            <a href="/en/blog/where-to-stay-trancoso/">
+              Where to stay in Trancoso
+            </a>
+
+            <a href="/en/blog/things-to-do-trancoso/">
+              Things to do in Trancoso
+            </a>
+
+            <a href="/en/book/">
+              Check availability
+            </a>
+
           </div>
+
         </section>
 
       </div>
 
       <aside class="articleAside">
+
         <div class="articleAsideCard">
+
           <h3>Quick summary</h3>
+
           <ul>
             <li>Peak demand period</li>
             <li>Quadrado + beaches define the experience</li>
-            <li>Stay quality matters most</li>
+            <li>Accommodation changes the quality of the stay</li>
+            <li>Planning ahead matters</li>
           </ul>
+
         </div>
 
         <div class="articleAsideCard">
+
           <h3>Plan your stay</h3>
-          <a class="btn btnPrimary" href="/en/book/">Check availability</a>
+
+          <p>
+            For a smoother, more private and better positioned New Year’s Eve in Trancoso.
+          </p>
+
+          <a class="btn btnPrimary" href="/en/book/">
+            Check availability
+          </a>
+
         </div>
+
       </aside>
 
     </div>
+
   </div>
+
 </section>
 
 </main>
 
 <div id="site-footer"></div>
 
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"Is Trancoso crowded during New Year’s Eve?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Yes. New Year’s Eve is one of the destination’s highest demand periods, making early planning especially important."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Is it worth spending New Year’s Eve in Trancoso?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Yes — especially for guests looking for a combination of natural beauty, atmosphere, beach life and sophisticated social energy."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"When should I start planning NYE 2027?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"As early as possible. The best accommodation options tend to be reserved far in advance."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"What is the minimum stay during New Year’s Eve?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"New Year’s Eve usually operates with minimum-stay packages, often around one week depending on the house and dates."
+      }
+    }
+  ]
+}
+</script>
+
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/seo-meta.js"></script>
+
 <!-- TWIPLA Tracking Code -->
 <script>
 (function(v,i,s,a,t){
@@ -240,5 +978,6 @@
 })(window,document,'https://app-worker.visitor-analytics.io/main.js','ffa77e64-4883-11f1-8907-960004340fd3','va')
 </script>
 <!-- End TWIPLA -->
+
 </body>
 </html>
