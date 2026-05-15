@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>O que fazer em Trancoso: praias, Quadrado e experiências (2026)</title>
-  <meta name="description" content="Guia completo sobre o que fazer em Trancoso: praias, Quadrado, gastronomia, experiências locais, roteiro de 3 dias e onde se hospedar." />
+  <title>O que fazer em Trancoso: praias, Quadrado e guia completo</title>
+  <meta name="description" content="Descubra o que fazer em Trancoso: praias, Quadrado, restaurantes, experiências locais, onde ficar e um roteiro editorial de 3 dias no destino." />
 
   <link rel="canonical" href="https://casasdavila.com/pt/blog/o-que-fazer-em-trancoso/" />
   <link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/blog/o-que-fazer-em-trancoso/" />
@@ -16,84 +16,550 @@
   <link rel="stylesheet" href="/assets/css/responsive.css" />
 
   <style>
-    .articleHero{padding:calc(var(--header-h,96px) + 42px) 0 34px;}
-    .articleWrap{width:min(1120px, calc(100vw - 40px));margin:0 auto;}
-    .articleIntro{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);gap:26px;align-items:end;}
-    .articleKicker{display:inline-flex;align-items:center;gap:12px;margin:0 0 18px;color:var(--muted);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;}
-    .articleKicker::before{content:"";width:38px;height:1px;background:rgba(111,85,58,.35);}
-    .articleTitle{margin:0;max-width:12ch;font-size:clamp(3rem,7vw,5.8rem);line-height:.94;letter-spacing:-.05em;font-weight:500;font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;text-wrap:balance;}
-    .articleLead{margin:22px 0 0;max-width:62ch;font-size:1.08rem;line-height:1.8;color:var(--muted);}
-    .articleMetaGrid{display:grid;gap:18px;}
-    .articleMetaCard{padding:26px;border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.44));border:1px solid rgba(255,255,255,.46);box-shadow:var(--shadow-soft);}
-    .articleMetaCard small{display:block;margin-bottom:8px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);}
-    .articleMetaCard strong{display:block;font-size:1rem;line-height:1.5;color:var(--ink);}
-    .articleMetaCard span{display:block;margin-top:6px;color:var(--muted);line-height:1.65;font-size:.95rem;}
-    .articleBody{padding:18px 0 100px;}
-    .articleGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.34fr);gap:34px;align-items:start;}
-    .articleContent{min-width:0;}
-    .articleContent section + section{margin-top:46px;}
-    .articleContent h2{margin:0 0 16px;font-size:clamp(2rem,4vw,3rem);line-height:1;letter-spacing:-.04em;font-weight:500;font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;text-wrap:balance;}
-    .articleContent h3{margin:22px 0 10px;font-size:1.35rem;line-height:1.12;letter-spacing:-.03em;font-weight:500;font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;color:var(--ink);}
-    .articleContent p{margin:0 0 16px;font-size:1.02rem;line-height:1.86;color:var(--muted);max-width:72ch;}
-    .articleContent ul{margin:0 0 18px 18px;padding:0;color:var(--muted);}
-    .articleContent li{margin:0 0 10px;line-height:1.8;}
-    .articleContent a{color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(32,28,24,.16);transition:border-color .25s ease,color .25s ease;}
-    .articleContent a:hover{color:#000;border-color:rgba(32,28,24,.4);}
-    .articleImage{margin:24px 0 28px;border-radius:30px;overflow:hidden;box-shadow:var(--shadow-soft);background:rgba(255,255,255,.42);}
-    .articleImage img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;}
-    .articleImage figcaption{padding:13px 18px;color:var(--soft);font-size:.82rem;line-height:1.55;background:rgba(255,255,255,.58);}
-    .articleHighlight{padding:28px;border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.46));border:1px solid rgba(255,255,255,.5);box-shadow:var(--shadow-soft);}
-    .articleHighlight h3{margin-top:0;}
-    .articlePull{padding:34px;border-radius:30px;background:linear-gradient(135deg,#1f1915,#43372d 52%,#51645a);color:#fff;box-shadow:0 26px 70px rgba(34,28,23,.22);position:relative;overflow:hidden;}
-    .articlePull::after{content:"";position:absolute;inset:auto -10% -24% auto;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 68%);}
-    .articlePull>*{position:relative;z-index:2;}
-    .articlePull p{color:rgba(255,255,255,.86);max-width:38ch;margin:0;font-size:1.1rem;line-height:1.72;}
-    .articleAside{position:sticky;top:calc(var(--header-h,96px) + 22px);display:grid;gap:18px;}
-    .articleAsideCard{padding:24px 22px;border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.64),rgba(255,255,255,.42));border:1px solid rgba(255,255,255,.46);box-shadow:var(--shadow-soft);}
-    .articleAsideCard h3{margin:0 0 10px;font-size:1.08rem;line-height:1.2;font-weight:600;color:var(--ink);}
-    .articleAsideCard p,.articleAsideCard li{font-size:.95rem;line-height:1.72;color:var(--muted);}
-    .articleAsideCard ul{margin:0;padding-left:18px;}
-    .articleAsideCard .btn{margin-top:8px;width:100%;justify-content:center;}
-    .articleFaq{display:grid;gap:12px;margin-top:10px;}
-    .articleFaq details{padding:18px 18px 16px;border-radius:20px;background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.5);}
-    .articleFaq summary{cursor:pointer;list-style:none;font-size:1rem;line-height:1.5;color:var(--ink);font-weight:600;}
-    .articleFaq summary::-webkit-details-marker{display:none;}
-    .articleFaq .answer{margin-top:12px;color:var(--muted);line-height:1.78;font-size:.98rem;}
-    .articleRelated{margin-top:54px;padding:30px;border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.46));border:1px solid rgba(255,255,255,.48);box-shadow:var(--shadow-soft);}
-    .articleRelated h2{margin-bottom:14px;}
-    .articleRelatedLinks{display:grid;gap:0;margin-top:18px;border-top:1px solid var(--line);}
-    .articleRelatedLinks a{display:block;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);line-height:1.6;}
-    .articleRelatedLinks a:last-child{border-bottom:0;padding-bottom:0;}
-    @media (max-width:1080px){.articleIntro,.articleGrid{grid-template-columns:1fr;}.articleAside{position:static;}.articleTitle{max-width:12ch;}}
-    @media (max-width:820px){.articleHero{padding-top:calc(var(--header-h,90px) + 30px);}.articleWrap{width:min(100vw - 28px,1120px);}.articleTitle{max-width:100%;font-size:clamp(2.4rem,10vw,4rem);}.articleMetaCard,.articleHighlight,.articlePull,.articleAsideCard,.articleRelated{border-radius:22px;padding:22px 18px;}.articleImage{border-radius:22px;}}
+.articleHero{
+  position:relative;
+  min-height:84svh;
+  display:flex;
+  align-items:end;
+  overflow:hidden;
+
+  padding:
+    calc(var(--header-h,96px) + 74px)
+    0
+    74px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(14,18,20,.52) 0%,
+      rgba(14,18,20,.18) 32%,
+      rgba(14,18,20,.46) 100%
+    ),
+    url("/assets/img/trancoso2.jpeg")
+    center center / cover no-repeat;
+}
+
+.articleHero::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:140px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(246,242,235,0) 0%,
+      #f6f2eb 100%
+    );
+}
+
+.articleHero .articleWrap{
+  position:relative;
+  z-index:2;
+}
+
+.articleHero .articleKicker,
+.articleHero .articleTitle,
+.articleHero .articleLead{
+  color:#fff;
+}
+
+.articleHero .articleLead{
+  color:rgba(255,255,255,.88);
+}
+
+.articleHero .articleMetaCard{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(29,34,35,.68),
+      rgba(29,34,35,.54)
+    );
+
+  border:1px solid rgba(255,255,255,.14);
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.articleHero .articleMetaCard small{
+  color:rgba(255,255,255,.56);
+}
+
+.articleHero .articleMetaCard strong{
+  color:#fff;
+}
+
+.articleHero .articleMetaCard span{
+  color:rgba(255,255,255,.76);
+}
+
+.articleWrap{
+  width:min(1120px, calc(100vw - 40px));
+  margin:0 auto;
+}
+
+.articleIntro{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);
+  gap:26px;
+  align-items:end;
+}
+
+.articleKicker{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  margin:0 0 18px;
+  color:var(--muted);
+  font-size:.8rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.articleKicker::before{
+  content:"";
+  width:38px;
+  height:1px;
+  background:rgba(111,85,58,.35);
+}
+
+.articleTitle{
+  margin:0;
+  max-width:13ch;
+  font-size:clamp(3rem,7vw,5.8rem);
+  line-height:.94;
+  letter-spacing:-.05em;
+  font-weight:500;
+  font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;
+  text-wrap:balance;
+}
+
+.articleLead{
+  margin:22px 0 0;
+  max-width:64ch;
+  font-size:1.08rem;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+.articleMetaGrid{
+  display:grid;
+  gap:18px;
+}
+
+.articleMetaCard{
+  padding:26px;
+  border-radius:26px;
+  background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.44));
+  border:1px solid rgba(255,255,255,.46);
+  box-shadow:var(--shadow-soft);
+}
+
+.articleMetaCard small{
+  display:block;
+  margin-bottom:8px;
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--soft);
+}
+
+.articleMetaCard strong{
+  display:block;
+  font-size:1rem;
+  line-height:1.5;
+  color:var(--ink);
+}
+
+.articleMetaCard span{
+  display:block;
+  margin-top:6px;
+  color:var(--muted);
+  line-height:1.65;
+  font-size:.95rem;
+}
+
+.articleBody{
+  padding:18px 0 100px;
+}
+
+.articleGrid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(260px,.34fr);
+  gap:34px;
+  align-items:start;
+}
+
+.articleContent section + section{
+  margin-top:46px;
+}
+
+.articleContent h2{
+  margin:0 0 16px;
+  font-size:clamp(2rem,4vw,3rem);
+  line-height:1;
+  letter-spacing:-.04em;
+  font-weight:500;
+  font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;
+  text-wrap:balance;
+}
+
+.articleContent h3{
+  margin:22px 0 10px;
+  font-size:1.35rem;
+  line-height:1.12;
+  letter-spacing:-.03em;
+  font-weight:500;
+  font-family:"IvyPresto Display","Cormorant Garamond","Times New Roman",serif;
+  color:var(--ink);
+}
+
+.articleContent p{
+  margin:0 0 16px;
+  font-size:1.02rem;
+  line-height:1.86;
+  color:var(--muted);
+  max-width:74ch;
+}
+
+.articleContent ul{
+  margin:0 0 18px 18px;
+  padding:0;
+  color:var(--muted);
+}
+
+.articleContent li{
+  margin:0 0 10px;
+  line-height:1.8;
+}
+
+.articleContent a{
+  color:var(--ink);
+  text-decoration:none;
+  border-bottom:1px solid rgba(32,28,24,.16);
+}
+
+.articleImage{
+  position:relative;
+  margin:34px 0 42px;
+  border-radius:32px;
+  overflow:hidden;
+  box-shadow:var(--shadow-soft);
+  background:rgba(255,255,255,.42);
+}
+
+.articleImage img{
+  display:block;
+  width:100%;
+  height:620px;
+  object-fit:cover;
+  object-position:center;
+}
+
+.articleImage::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:100px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.12) 100%
+    );
+
+  pointer-events:none;
+}
+
+.articleImage figcaption{
+  padding:13px 18px;
+  color:var(--soft);
+  font-size:.82rem;
+  line-height:1.55;
+  background:rgba(255,255,255,.58);
+}
+
+.articlePull{
+  padding:34px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#1f1915,#43372d 52%,#51645a);
+  color:#fff;
+  box-shadow:0 26px 70px rgba(34,28,23,.22);
+}
+
+.articlePull p{
+  color:rgba(255,255,255,.86);
+  max-width:42ch;
+  margin:0;
+  font-size:1.1rem;
+  line-height:1.72;
+}
+
+.articleHighlight{
+  padding:28px;
+  border-radius:28px;
+  background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.46));
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:var(--shadow-soft);
+}
+
+.snippetBox{
+  padding:26px;
+  border-radius:28px;
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:var(--shadow-soft);
+}
+
+.snippetBox ol{
+  margin:12px 0 0 20px;
+  color:var(--muted);
+}
+
+.articleSevenDays{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+  margin-top:24px;
+}
+
+.articleDayCard{
+  padding:24px;
+  border-radius:24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.68),
+      rgba(255,255,255,.48)
+    );
+
+  border:1px solid rgba(255,255,255,.52);
+  box-shadow:var(--shadow-soft);
+}
+
+.articleDayCard strong{
+  display:block;
+  margin-bottom:10px;
+
+  font-family:
+    "IvyPresto Display",
+    "Cormorant Garamond",
+    serif;
+
+  font-size:1.4rem;
+  line-height:1.08;
+  color:var(--ink);
+}
+
+.articleDayCard p{
+  margin:0;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+.articleAside{
+  position:sticky;
+  top:calc(var(--header-h,96px) + 22px);
+  display:grid;
+  gap:18px;
+}
+
+.articleAsideCard{
+  padding:24px 22px;
+  border-radius:24px;
+  background:linear-gradient(180deg,rgba(255,255,255,.64),rgba(255,255,255,.42));
+  border:1px solid rgba(255,255,255,.46);
+  box-shadow:var(--shadow-soft);
+}
+
+.articleAsideCard h3{
+  margin:0 0 10px;
+  font-size:1.08rem;
+  line-height:1.2;
+  font-weight:600;
+  color:var(--ink);
+}
+
+.articleAsideCard p,
+.articleAsideCard li{
+  font-size:.95rem;
+  line-height:1.72;
+  color:var(--muted);
+}
+
+.articleAsideCard ul{
+  margin:0;
+  padding-left:18px;
+}
+
+.articleAsideCard .btn{
+  margin-top:8px;
+  width:100%;
+  justify-content:center;
+}
+
+.articleFaq{
+  display:grid;
+  gap:12px;
+  margin-top:10px;
+}
+
+.articleFaq details{
+  padding:18px;
+  border-radius:20px;
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(255,255,255,.5);
+}
+
+.articleFaq summary{
+  cursor:pointer;
+  list-style:none;
+  font-size:1rem;
+  line-height:1.5;
+  color:var(--ink);
+  font-weight:600;
+}
+
+.articleFaq summary::-webkit-details-marker{
+  display:none;
+}
+
+.articleFaq .answer{
+  margin-top:12px;
+  color:var(--muted);
+  line-height:1.78;
+  font-size:.98rem;
+}
+
+.articleRelated{
+  margin-top:54px;
+  padding:30px;
+  border-radius:30px;
+  background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.46));
+  border:1px solid rgba(255,255,255,.48);
+  box-shadow:var(--shadow-soft);
+}
+
+.articleRelatedLinks{
+  display:grid;
+  margin-top:18px;
+  border-top:1px solid var(--line);
+}
+
+.articleRelatedLinks a{
+  display:block;
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+  text-decoration:none;
+  color:var(--ink);
+  line-height:1.6;
+}
+
+@media (max-width:1080px){
+  .articleIntro,
+  .articleGrid{
+    grid-template-columns:1fr;
+  }
+
+  .articleAside{
+    position:static;
+  }
+}
+
+@media (max-width:900px){
+  .articleSevenDays{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width:820px){
+  .articleWrap{
+    width:min(100vw - 28px,1120px);
+  }
+
+  .articleTitle{
+    max-width:100%;
+    font-size:clamp(2.4rem,10vw,4rem);
+  }
+
+  .articleMetaCard,
+  .articleHighlight,
+  .articlePull,
+  .articleAsideCard,
+  .articleRelated,
+  .snippetBox{
+    border-radius:22px;
+    padding:22px 18px;
+  }
+
+  .articleImage{
+    border-radius:22px;
+  }
+
+  .articleImage img{
+    height:420px;
+  }
+}
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question",
+        "name":"O que fazer em Trancoso?",
+        "acceptedAnswer":{"@type":"Answer","text":"As melhores experiências em Trancoso incluem caminhar pelo Quadrado no fim da tarde, visitar as praias dos Nativos, Coqueiros e Rio da Barra, aproveitar restaurantes locais, viver o ritmo da vila com calma e escolher uma hospedagem alinhada ao destino."}
+      },
+      {
+        "@type":"Question",
+        "name":"Quantos dias são ideais em Trancoso?",
+        "acceptedAnswer":{"@type":"Answer","text":"Três a cinco dias costumam ser suficientes para conhecer o Quadrado, as principais praias, restaurantes e o ritmo mais lento de Trancoso. Estadias mais longas são ideais para quem deseja mais praia e menos deslocamento."}
+      },
+      {
+        "@type":"Question",
+        "name":"Vale a pena visitar Trancoso?",
+        "acceptedAnswer":{"@type":"Answer","text":"Sim. Trancoso vale a visita pela combinação entre praias preservadas, Quadrado histórico, atmosfera tropical, gastronomia e uma forma mais desacelerada de viver a Bahia."}
+      },
+      {
+        "@type":"Question",
+        "name":"Onde ficar em Trancoso?",
+        "acceptedAnswer":{"@type":"Answer","text":"Onde ficar em Trancoso depende do estilo da viagem. Casas privativas são ideais para quem busca privacidade, espaço e conexão com o ritmo do destino, enquanto áreas próximas ao Quadrado facilitam o acesso a restaurantes e à vida da vila."}
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
   <div id="site-header"></div>
 
   <main>
+
     <section class="articleHero">
       <div class="articleWrap">
         <div class="articleIntro">
           <div>
-            <p class="articleKicker">Guia de destino</p>
+            <p class="articleKicker">Guia de Trancoso</p>
             <h1 class="articleTitle">O que fazer em Trancoso</h1>
             <p class="articleLead">
-              Um guia editorial para viver Trancoso com calma: praias, Quadrado, gastronomia, experiências locais e uma forma mais sensível de escolher o ritmo da viagem.
+              Um guia curado para viver Trancoso com mais calma: praias, Quadrado, restaurantes, experiências locais, um roteiro de 3 dias e onde ficar.
             </p>
           </div>
 
           <div class="articleMetaGrid">
             <div class="articleMetaCard">
-              <small>Leitura</small>
-              <strong>Guia completo de experiências</strong>
-              <span>Praias, vila, gastronomia, roteiro de 3 dias e dicas para aproveitar melhor a estadia.</span>
+              <small>Resposta rápida</small>
+              <strong>O essencial</strong>
+              <span>Quadrado, Praia dos Nativos, Praia dos Coqueiros, Rio da Barra, restaurantes locais e o ritmo lento da vila.</span>
             </div>
             <div class="articleMetaCard">
-              <small>Destino</small>
-              <strong>Trancoso, Bahia</strong>
-              <span>Conteúdo pensado para quem quer ir além do roteiro óbvio e viver o destino com mais presença.</span>
+              <small>Ideal para</small>
+              <strong>Viver a Bahia com calma</strong>
+              <span>Viajantes que buscam natureza, atmosfera, privacidade e um ritmo tropical mais reservado.</span>
             </div>
           </div>
         </div>
@@ -105,129 +571,182 @@
         <div class="articleGrid">
           <div class="articleContent">
 
+            <section class="snippetBox">
+              <h2>O que fazer em Trancoso?</h2>
+              <p>
+                As melhores coisas para fazer em Trancoso são: caminhar pelo Quadrado no fim da tarde, visitar a Praia dos Nativos, passar um dia sem pressa na Praia dos Coqueiros, conhecer o Rio da Barra, aproveitar restaurantes locais e deixar tempo livre para sentir a vila sem pressa.
+              </p>
+              <ol>
+                <li>Caminhar pelo Quadrado</li>
+                <li>Visitar a Praia dos Nativos</li>
+                <li>Passar o dia na Praia dos Coqueiros</li>
+                <li>Conhecer o Rio da Barra</li>
+                <li>Aproveitar restaurantes e a vida da vila</li>
+                <li>Ficar em uma casa privativa para viver o destino com mais calma</li>
+              </ol>
+            </section>
+
             <section>
               <p>
-                Se você está buscando o que fazer em Trancoso, este guia reúne as principais experiências do destino — das praias ao Quadrado, da gastronomia ao ritmo da vila.
-              </p>
-              <p>
-                Trancoso não é apenas um lugar para visitar. É um destino para ser vivido com mais tempo, mais presença e uma escolha cuidadosa de onde ficar.
+                Trancoso não é um destino para ser vivido com pressa. A melhor forma de experimentá-lo passa pelas praias, pela luz, pela comida, pela arquitetura e pelo tempo — com espaço suficiente no dia para que a vila se revele aos poucos.
               </p>
 
               <div class="articlePull">
                 <p>
-                  Em Trancoso, parte da experiência está menos na pressa de cumprir um roteiro e mais na forma como o destino é vivido.
+                  A melhor versão de Trancoso raramente é a mais cheia de compromissos.
+                  Ela acontece entre praia, jardim, almoços longos e noites que se desenrolam lentamente ao redor do Quadrado.
+                </p>
+              </div>
+
+              <p>
+                Este guia foi pensado para quem procura o que fazer em Trancoso, as melhores praias, experiências perto do Quadrado e onde ficar para viver o destino com mais atmosfera.
+              </p>
+
+              <div class="articlePull">
+                <p>
+                  Em Trancoso, os dias mais memoráveis costumam ser os mais simples: praia, sombra, uma caminhada pelo Quadrado e uma noite sem pressa.
                 </p>
               </div>
             </section>
 
             <section>
-              <h2>1. Caminhar pelo Quadrado</h2>
+              <h2>1. Caminhar pelo Quadrado no fim da tarde</h2>
               <p>
-                O Quadrado é o centro histórico e simbólico de Trancoso. Caminhar por ali ao entardecer, entre a igreja, as casas coloridas, os restaurantes e o gramado aberto, é uma das experiências mais emblemáticas do destino.
+                O Quadrado é o coração histórico e simbólico de Trancoso. É uma grande área verde cercada por casas coloridas, restaurantes e pela igreja branca voltada para o mar.
               </p>
               <p>
-                É ali que a vila revela sua escala mais humana: arquitetura simples, luz bonita, vida social discreta e uma atmosfera que mistura sofisticação e rusticidade sem esforço.
+                O fim da tarde é o melhor momento para ir. A luz suaviza, os restaurantes começam a abrir e a vila ganha a atmosfera que fez de Trancoso um dos destinos mais singulares do litoral brasileiro.
               </p>
 
               <figure class="articleImage">
-                <img src="/assets/img/quadrado4.jpeg" alt="Quadrado de Trancoso ao entardecer" onerror="this.closest('.articleImage').style.display='none'">
-                <figcaption>O Quadrado é o ponto de encontro entre história, paisagem e vida social em Trancoso.</figcaption>
+                <img src="/assets/img/quadrado4.jpeg" alt="Quadrado em Trancoso no fim da tarde" onerror="this.closest('.articleImage').style.display='none'">
+                <figcaption>O Quadrado é o centro da vida da vila e uma das experiências essenciais de Trancoso.</figcaption>
               </figure>
             </section>
 
             <section>
-              <h2>2. Conhecer as praias de Trancoso</h2>
+              <h2>2. Visitar as melhores praias de Trancoso</h2>
               <p>
-                As praias de Trancoso são extensas, abertas e marcadas pela presença dos coqueiros, das falésias e do mar em ritmo amplo. Cada praia tem uma energia própria, e a escolha depende do tipo de dia que você quer viver.
+                As praias de Trancoso são amplas, tropicais e menos urbanas do que muitos destinos de praia brasileiros. Cada uma oferece um tipo diferente de dia.
               </p>
 
               <h3>Praia dos Nativos</h3>
               <p>
-                Mais próxima do Quadrado, é uma das praias mais acessíveis para quem quer combinar mar, estrutura e facilidade de deslocamento.
+                A Praia dos Nativos é uma das mais fáceis de acessar a partir do Quadrado. É uma boa escolha para quem quer praia sem se afastar demais da vila.
               </p>
 
               <h3>Praia dos Coqueiros</h3>
               <p>
-                Uma das mais conhecidas, reúne boa estrutura, beleza natural e um equilíbrio interessante entre movimento e permanência confortável.
+                A Praia dos Coqueiros é uma das mais conhecidas de Trancoso, com boa estrutura, coqueiros e atmosfera descontraída para um dia mais longo junto ao mar.
               </p>
 
-              <h3>Praia do Rio da Barra</h3>
+              <h3>Rio da Barra</h3>
               <p>
-                Mais isolada, tem paisagem marcante e sensação de refúgio. É uma boa escolha para quem procura um dia mais contemplativo e menos urbano.
+                O Rio da Barra tem uma sensação mais reservada e cênica. É ideal para quem busca paisagem, tranquilidade e uma percepção maior de refúgio.
               </p>
 
               <figure class="articleImage">
-                <img src="/assets/img/experiencial.jpeg" alt="Praia em Trancoso com coqueiros e atmosfera tropical" onerror="this.closest('.articleImage').style.display='none'">
-                <figcaption>As praias de Trancoso pedem tempo: um dia bom pode ser apenas mar, sombra e permanência.</figcaption>
+                <img src="/assets/img/experiencial.jpeg" alt="Praia em Trancoso com atmosfera tropical" onerror="this.closest('.articleImage').style.display='none'">
+                <figcaption>Os dias de praia em Trancoso são melhor vividos sem pressa: mar, sombra e tempo.</figcaption>
               </figure>
             </section>
 
             <section>
-              <h2>3. Aproveitar a gastronomia local</h2>
+              <h2>3. Aproveitar restaurantes e gastronomia local</h2>
               <p>
-                A gastronomia faz parte da experiência em Trancoso. Há restaurantes sofisticados, mesas mais simples, cozinhas autorais e programas que funcionam melhor sem pressa.
+                Jantar é uma das melhores experiências em Trancoso. O Quadrado reúne muitos dos restaurantes mais atmosféricos, enquanto os almoços de praia criam um ritmo mais leve durante o dia.
               </p>
               <p>
-                O ideal é alternar jantares no Quadrado, almoços longos perto da praia e momentos mais reservados. Em Trancoso, a mesa também é uma forma de entender o destino.
+                A melhor experiência não depende de excesso de planejamento. Escolha uma ou duas refeições memoráveis, deixe espaço entre elas e permita que a noite aconteça naturalmente.
               </p>
             </section>
 
             <section>
-              <h2>4. Explorar experiências locais</h2>
+              <h2>4. Viver o ritmo mais lento da vila</h2>
               <p>
-                Passeios, caminhadas, banho de mar, pequenos deslocamentos, observação do ritmo local e momentos de descanso compõem uma experiência mais autêntica do que um roteiro rígido.
-              </p>
-              <p>
-                A melhor forma de viver Trancoso é escolher menos atividades e aprofundar mais cada momento: uma praia por dia, um fim de tarde no Quadrado, um jantar sem pressa.
+                Trancoso é tanto sobre atmosfera quanto sobre atrações. Caminhar, descansar, observar a luz e deixar tempo livre fazem parte da experiência.
               </p>
 
               <div class="articleHighlight">
-                <h3>Uma boa forma de viver Trancoso</h3>
+                <h3>Uma forma melhor de viver Trancoso</h3>
                 <p>
-                  Em vez de tentar fazer tudo em poucos dias, escolha experiências que conversem com o seu ritmo. Trancoso recompensa quem desacelera.
+                  Em vez de tentar ver tudo em um único dia, escolha menos experiências e dê mais tempo a cada uma delas. Trancoso recompensa a calma.
                 </p>
               </div>
             </section>
 
             <section>
-              <h2>5. Roteiro sugerido em Trancoso em 3 dias</h2>
+              <h2>3 dias perfeitos em Trancoso</h2>
+
+              <div class="articleSevenDays">
+
+                <div class="articleDayCard">
+                  <strong>Dia 1 — A vila</strong>
+                  <p>
+                    Chegada, Quadrado no fim da tarde e um jantar longo sob as árvores.
+                  </p>
+                </div>
+
+                <div class="articleDayCard">
+                  <strong>Dia 2 — A praia</strong>
+                  <p>
+                    Um dia mais lento entre Nativos, Coqueiros e um almoço demorado à beira-mar.
+                  </p>
+                </div>
+
+                <div class="articleDayCard">
+                  <strong>Dia 3 — Rio da Barra</strong>
+                  <p>
+                    Paisagem, praias mais silenciosas e uma última noite mais suave na vila.
+                  </p>
+                </div>
+
+              </div>
+
+            </section>
+
+            <section>
+              <h2>6. Onde ficar em Trancoso</h2>
               <p>
-                Para quem deseja organizar a viagem sem perder a espontaneidade, um roteiro simples pode ajudar a distribuir melhor praias, vila e descanso.
+                Onde você fica muda a forma como vive Trancoso. Uma casa privativa oferece mais espaço, privacidade e conexão com o ritmo mais lento do destino.
               </p>
-              <ul>
-                <li><strong>Dia 1:</strong> chegada, caminhada pelo Quadrado ao entardecer e jantar sem pressa.</li>
-                <li><strong>Dia 2:</strong> Praia dos Nativos ou Coqueiros, almoço longo e descanso no fim da tarde.</li>
-                <li><strong>Dia 3:</strong> Rio da Barra, retorno ao Quadrado e uma noite mais tranquila.</li>
-              </ul>
               <p>
-                Para estadias mais longas, vale incluir dias livres. Eles costumam ser justamente os mais memoráveis.
+                Para comparar regiões e estilos de hospedagem com mais profundidade, leia nosso guia sobre
+                <a href="/pt/blog/onde-ficar-em-trancoso/">onde ficar em Trancoso</a>.
+              </p>
+              <p>
+                Você também pode conhecer
+                <a href="/pt/casas/">nossas casas em Trancoso</a> ou
+                <a href="/pt/reservar/">consultar disponibilidade</a> para a sua estadia.
               </p>
             </section>
 
             <section>
-              <h2>6. Viver o ritmo da vila</h2>
-              <p>
-                Parte essencial do que fazer em Trancoso é não fazer nada com pressa. Caminhar, observar, descansar e simplesmente estar.
-              </p>
-              <p>
-                A vila funciona melhor quando há espaço para contemplação, para deslocamentos lentos e para uma relação mais sensível com o lugar.
-              </p>
-            </section>
 
-            <section>
-              <h2>Onde se hospedar em Trancoso</h2>
+              <h2>Como Trancoso se sente</h2>
+
               <p>
-                A experiência em Trancoso muda completamente de acordo com a hospedagem escolhida. Casas oferecem mais privacidade, espaço e conexão com o ritmo do destino.
+                Trancoso é vivido tanto pelo ritmo quanto pelos lugares.
+                As manhãs começam lentamente, as tardes se alongam naturalmente
+                e as noites se organizam em torno da luz, da comida e da conversa.
               </p>
+
               <p>
-                Para entender melhor as regiões e estilos de estadia, veja também
-                <a href="/pt/blog/onde-ficar-em-trancoso/">nosso guia completo sobre onde ficar em Trancoso</a>.
+                O destino não se constrói pela urgência, mas pela atmosfera.
               </p>
-              <p>
-                Para conhecer a coleção da Casas da Vila, acesse
-                <a href="/pt/casas/">nossas casas em Trancoso</a> ou consulte
-                <a href="/pt/reservar/">disponibilidade para sua estadia</a>.
-              </p>
+
+              <figure class="articleImage">
+                <img
+                  src="/assets/img/poster-hero.jpeg"
+                  alt="Atmosfera de Trancoso ao entardecer"
+                  loading="lazy"
+                />
+
+                <figcaption>
+                  Trancoso é lembrado tanto pela atmosfera quanto pela paisagem.
+                </figcaption>
+              </figure>
+
             </section>
 
             <section>
@@ -235,53 +754,56 @@
 
               <div class="articleFaq">
                 <details>
-                  <summary>Quantos dias ficar em Trancoso?</summary>
+                  <summary>O que fazer em Trancoso?</summary>
                   <div class="answer">
-                    Entre 3 e 5 dias costuma ser um bom intervalo para aproveitar praias, Quadrado, gastronomia e momentos de descanso com mais calma.
+                    As melhores experiências incluem caminhar pelo Quadrado, visitar a Praia dos Nativos, a Praia dos Coqueiros e o Rio da Barra, aproveitar restaurantes locais e viver a vila com calma.
                   </div>
                 </details>
 
                 <details>
-                  <summary>Qual é a melhor praia em Trancoso?</summary>
+                  <summary>Quantos dias são ideais em Trancoso?</summary>
                   <div class="answer">
-                    Depende do perfil da viagem. Nativos é mais acessível, Coqueiros tem boa estrutura e Rio da Barra oferece uma experiência mais isolada e contemplativa.
+                    Três a cinco dias são uma boa duração para uma primeira estadia. Esse tempo permite conhecer as principais praias, viver o Quadrado e ainda deixar espaço para momentos sem roteiro.
+                  </div>
+                </details>
+
+                <details>
+                  <summary>Vale a pena visitar Trancoso?</summary>
+                  <div class="answer">
+                    Sim. Trancoso vale a visita pelas praias, pelo Quadrado histórico, pela gastronomia, pela atmosfera tropical e pelo ritmo mais desacelerado.
+                  </div>
+                </details>
+
+                <details>
+                  <summary>Qual é a melhor praia de Trancoso?</summary>
+                  <div class="answer">
+                    Depende do estilo da viagem. Nativos é prática, Coqueiros tem mais estrutura e Rio da Barra oferece uma paisagem mais reservada.
                   </div>
                 </details>
 
                 <details>
                   <summary>Precisa de carro em Trancoso?</summary>
                   <div class="answer">
-                    Depende da localização da hospedagem e do estilo da viagem. Um carro pode facilitar deslocamentos para praias mais distantes, mas parte da experiência pode acontecer em escala local.
+                    Um carro pode ajudar se você quiser explorar praias mais distantes, mas muitos viajantes conseguem aproveitar o Quadrado e praias próximas sem depender dele todos os dias.
                   </div>
                 </details>
 
                 <details>
-                  <summary>Vale a pena ir para Trancoso fora da alta temporada?</summary>
+                  <summary>Onde ficar em Trancoso?</summary>
                   <div class="answer">
-                    Sim. Fora dos períodos mais disputados, o destino costuma ter menos movimento, mais tranquilidade e uma experiência mais fluida.
-                  </div>
-                </details>
-
-                <details>
-                  <summary>O que fazer em Trancoso à noite?</summary>
-                  <div class="answer">
-                    O Quadrado concentra boa parte da vida noturna, com restaurantes, bares e uma circulação mais charmosa, especialmente no início da noite.
+                    Casas privativas são ideais para quem busca espaço, privacidade e uma estadia mais atmosférica. Ficar perto da vila facilita o acesso ao Quadrado e aos restaurantes.
                   </div>
                 </details>
               </div>
             </section>
 
             <section class="articleRelated">
-              <h2>Leituras relacionadas</h2>
-              <p>
-                Continue explorando Trancoso com outros conteúdos pensados para quem busca uma experiência mais autêntica, bem localizada e bem orientada.
-              </p>
-
+              <h2>Guias relacionados</h2>
               <div class="articleRelatedLinks">
-                <a href="/pt/blog/onde-ficar-em-trancoso/">Onde ficar em Trancoso: regiões e estilos de hospedagem</a>
+                <a href="/pt/blog/onde-ficar-em-trancoso/">Onde ficar em Trancoso</a>
                 <a href="/pt/reveillon-2027/">Réveillon 2027 em Trancoso</a>
-                <a href="/pt/localizacao/">Veja nossa localização em Trancoso</a>
-                <a href="/pt/casas/">Conheça as casas da Casas da Vila</a>
+                <a href="/pt/localizacao/">Localização em Trancoso</a>
+                <a href="/pt/casas/">Conheça nossas casas</a>
                 <a href="/pt/reservar/">Consultar disponibilidade</a>
               </div>
             </section>
@@ -290,31 +812,36 @@
 
           <aside class="articleAside">
             <div class="articleAsideCard">
-              <h3>Resumo rápido</h3>
+              <h3>Lista rápida</h3>
               <ul>
-                <li>Quadrado ao entardecer</li>
+                <li>Quadrado no fim da tarde</li>
                 <li>Praia dos Nativos</li>
                 <li>Praia dos Coqueiros</li>
                 <li>Rio da Barra</li>
-                <li>Gastronomia local</li>
-                <li>Ritmo desacelerado</li>
+                <li>Restaurantes locais</li>
+                <li>Ritmo lento da vila</li>
               </ul>
             </div>
 
             <div class="articleAsideCard">
-              <h3>Hospedagem</h3>
+              <h3>Ideal para</h3>
               <p>
-                A forma como você se hospeda muda a forma como vive Trancoso.
+                Viajantes que procuram praia, atmosfera, privacidade e uma forma mais calma de viver a Bahia.
               </p>
-              <a class="btn btnPrimary" href="/pt/casas/">Conheça as casas</a>
+            </div>
+
+            <div class="articleAsideCard">
+              <h3>Fique em Trancoso com mais calma</h3>
+
+              <p>
+                Casas da Vila oferece casas tropicais privativas para hóspedes que buscam privacidade, atmosfera e um ritmo mais tranquilo próximo à vila.
+              </p>
+              <a class="btn btnPrimary" href="/pt/casas/">Ver casas</a>
             </div>
 
             <div class="articleAsideCard">
               <h3>Planeje sua estadia</h3>
-              <p>
-                Veja disponibilidade e escolha a casa mais adequada ao seu período.
-              </p>
-              <a class="btn btnPrimary" href="/pt/reservar/">Reservar</a>
+              <a class="btn btnPrimary" href="/pt/reservar/">Consultar disponibilidade</a>
             </div>
           </aside>
         </div>
@@ -326,23 +853,22 @@
 
   <script src="/assets/js/main.js"></script>
   <script src="/assets/js/seo-meta.js"></script>
-  <script src="/assets/js/seo-schema.js">
+  <script src="/assets/js/seo-schema.js"></script>
 
-  </script>
   <!-- TWIPLA Tracking Code -->
-<script>
-(function(v,i,s,a,t){
-  v[t]=v[t]||function(){(v[t].v=v[t].v||[]).push(arguments)};
-  if(!v._visaSettings){v._visaSettings={}}
-  v._visaSettings[a]={v:'1.0',s:a,a:'1',t:t};
-  var b=i.getElementsByTagName('body')[0];
-  var p=i.createElement('script');
-  p.defer=1;
-  p.async=1;
-  p.src=s+'?s='+a;
-  b.appendChild(p);
-})(window,document,'https://app-worker.visitor-analytics.io/main.js','ffa77e64-4883-11f1-8907-960004340fd3','va')
-</script>
-<!-- End TWIPLA -->
+  <script>
+  (function(v,i,s,a,t){
+    v[t]=v[t]||function(){(v[t].v=v[t].v||[]).push(arguments)};
+    if(!v._visaSettings){v._visaSettings={}}
+    v._visaSettings[a]={v:'1.0',s:a,a:'1',t:t};
+    var b=i.getElementsByTagName('body')[0];
+    var p=i.createElement('script');
+    p.defer=1;
+    p.async=1;
+    p.src=s+'?s='+a;
+    b.appendChild(p);
+  })(window,document,'https://app-worker.visitor-analytics.io/main.js','ffa77e64-4883-11f1-8907-960004340fd3','va')
+  </script>
+  <!-- End TWIPLA -->
 </body>
 </html>

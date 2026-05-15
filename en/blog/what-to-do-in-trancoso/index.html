@@ -16,8 +16,82 @@
   <link rel="stylesheet" href="/assets/css/responsive.css" />
 
   <style>
-    .articleHero{padding:calc(var(--header-h,96px) + 42px) 0 34px;}
-    .articleWrap{width:min(1120px, calc(100vw - 40px));margin:0 auto;}
+.articleHero{
+  position:relative;
+  min-height:84svh;
+  display:flex;
+  align-items:end;
+  overflow:hidden;
+
+  padding:
+    calc(var(--header-h,96px) + 74px)
+    0
+    74px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(14,18,20,.52) 0%,
+      rgba(14,18,20,.18) 32%,
+      rgba(14,18,20,.46) 100%
+    ),
+    url("/assets/img/trancoso2.jpeg")
+    center center / cover no-repeat;
+}
+
+.articleHero::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:140px;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(246,242,235,0) 0%,
+      #f6f2eb 100%
+    );
+}
+
+.articleHero .articleWrap{
+  position:relative;
+  z-index:2;
+}
+
+.articleHero .articleKicker,
+.articleHero .articleTitle,
+.articleHero .articleLead{
+  color:#fff;
+}
+
+.articleHero .articleLead{
+  color:rgba(255,255,255,.88);
+}
+
+.articleHero .articleMetaCard{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(29,34,35,.68),
+      rgba(29,34,35,.54)
+    );
+
+  border:1px solid rgba(255,255,255,.14);
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.articleHero .articleMetaCard small{
+  color:rgba(255,255,255,.56);
+}
+
+.articleHero .articleMetaCard strong{
+  color:#fff;
+}
+
+.articleHero .articleMetaCard span{
+  color:rgba(255,255,255,.76);
+}    .articleWrap{width:min(1120px, calc(100vw - 40px));margin:0 auto;}
     .articleIntro{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);gap:26px;align-items:end;}
     .articleKicker{display:inline-flex;align-items:center;gap:12px;margin:0 0 18px;color:var(--muted);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;}
     .articleKicker::before{content:"";width:38px;height:1px;background:rgba(111,85,58,.35);}
@@ -38,8 +112,37 @@
     .articleContent li{margin:0 0 10px;line-height:1.8;}
     .articleContent a{color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(32,28,24,.16);}
     .articleImage{margin:24px 0 28px;border-radius:30px;overflow:hidden;box-shadow:var(--shadow-soft);background:rgba(255,255,255,.42);}
-    .articleImage img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;}
-    .articleImage figcaption{padding:13px 18px;color:var(--soft);font-size:.82rem;line-height:1.55;background:rgba(255,255,255,.58);}
+.articleImage{
+  position:relative;
+  margin:34px 0 42px;
+  border-radius:32px;
+  overflow:hidden;
+  box-shadow:var(--shadow-soft);
+}
+
+.articleImage img{
+  display:block;
+  width:100%;
+  height:620px;
+  object-fit:cover;
+  object-position:center;
+}
+
+.articleImage::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:100px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.12) 100%
+    );
+
+  pointer-events:none;
+}    .articleImage figcaption{padding:13px 18px;color:var(--soft);font-size:.82rem;line-height:1.55;background:rgba(255,255,255,.58);}
     .articlePull{padding:34px;border-radius:30px;background:linear-gradient(135deg,#1f1915,#43372d 52%,#51645a);color:#fff;box-shadow:0 26px 70px rgba(34,28,23,.22);}
     .articlePull p{color:rgba(255,255,255,.86);max-width:42ch;margin:0;font-size:1.1rem;line-height:1.72;}
     .articleHighlight{padding:28px;border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.46));border:1px solid rgba(255,255,255,.5);box-shadow:var(--shadow-soft);}
@@ -97,6 +200,7 @@
   <div id="site-header"></div>
 
   <main>
+
     <section class="articleHero">
       <div class="articleWrap">
         <div class="articleIntro">
@@ -148,6 +252,14 @@
               <p>
                 Trancoso is not a destination that should be rushed. The best way to experience it is through beaches, light, food, architecture and time — with enough space in the day to let the village reveal itself.
               </p>
+              <div class="articlePull">
+  <p>
+    The best version of Trancoso is rarely the busiest one.
+    It lives somewhere between the beach,
+    the garden, late lunches
+    and evenings that unfold slowly around the Quadrado.
+  </p>
+</div>
               <p>
                 This guide is designed for travelers searching for what to do in Trancoso, the best beaches in Trancoso, things to do near the Quadrado, and where to stay for a more atmospheric experience.
               </p>
@@ -225,21 +337,36 @@
               </div>
             </section>
 
-            <section>
-              <h2>5. Suggested 3-day itinerary in Trancoso</h2>
-              <p>
-                If you are visiting Trancoso for the first time, three days can be enough to understand the destination without rushing.
-              </p>
-              <ul>
-                <li><strong>Day 1:</strong> arrival, walk through the Quadrado at sunset and dinner in the village.</li>
-                <li><strong>Day 2:</strong> Nativos or Coqueiros Beach, long lunch and a relaxed evening.</li>
-                <li><strong>Day 3:</strong> Rio da Barra, a slower beach day and one final night around the Quadrado.</li>
-              </ul>
-              <p>
-                If you have more time, add empty days. In Trancoso, unplanned time is often the luxury.
-              </p>
-            </section>
+<section>
 
+  <h2>3 perfect days in Trancoso</h2>
+
+  <div class="articleSevenDays">
+
+    <div class="articleDayCard">
+      <strong>Day 1 — The village</strong>
+      <p>
+        Arrival, Quadrado at sunset and a long dinner under the trees.
+      </p>
+    </div>
+
+    <div class="articleDayCard">
+      <strong>Day 2 — The beach</strong>
+      <p>
+        A slow day between Nativos, Coqueiros and beach lunch.
+      </p>
+    </div>
+
+    <div class="articleDayCard">
+      <strong>Day 3 — Rio da Barra</strong>
+      <p>
+        Landscape, quieter beaches and a softer final evening.
+      </p>
+    </div>
+
+  </div>
+
+</section>
             <section>
               <h2>6. Where to stay in Trancoso</h2>
               <p>
@@ -255,7 +382,36 @@
                 <a href="/en/book/">check availability</a> for your stay.
               </p>
             </section>
+<section>
 
+  <h2>What Trancoso feels like</h2>
+
+  <p>
+    Trancoso is experienced through rhythm as much as through places.
+    Mornings begin slowly,
+    afternoons stretch naturally
+    and evenings gather around light,
+    food and conversation.
+  </p>
+
+  <p>
+    The destination is not built around urgency,
+    but around atmosphere.
+  </p>
+
+  <figure class="articleImage">
+    <img
+      src="/assets/img/poster-hero.jpeg"
+      alt="Atmosphere in Trancoso during sunset"
+      loading="lazy"
+    />
+
+    <figcaption>
+      Trancoso is remembered as much for atmosphere as for landscape.
+    </figcaption>
+  </figure>
+
+</section>
             <section>
               <h2>Frequently asked questions</h2>
 
@@ -338,10 +494,13 @@
             </div>
 
             <div class="articleAsideCard">
-              <h3>Stay in Trancoso</h3>
-              <p>
-                Discover Casas da Vila’s private houses.
-              </p>
+<h3>Stay in Trancoso more slowly</h3>
+
+<p>
+  Casas da Vila offers private tropical houses
+  designed for guests looking for privacy,
+  atmosphere and a quieter rhythm near the village.
+</p>
               <a class="btn btnPrimary" href="/en/houses/">View houses</a>
             </div>
 
