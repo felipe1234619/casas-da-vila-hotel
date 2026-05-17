@@ -14,6 +14,12 @@
         language: document.documentElement.lang || navigator.language || null,
         source: "booking_frontend",
 
+        visitor_id: localStorage.getItem("cdv_visitor_id") || null,
+session_id: sessionStorage.getItem("cdv_session_id") || null,
+timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || null,
+language: navigator.language || null,
+referrer: document.referrer || null,
+
         house_slug: data.house_slug || data.houseSlug || null,
         house_name: data.house_name || data.houseName || null,
 
