@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Casas da Vila — Intelligence Dashboard</title>
+  <link rel="stylesheet" href="/assets/css/admin-analytics.css" />
+</head>
+<body>
+  <main class="dashboard">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Casas da Vila</p>
+        <h1>Intelligence Dashboard</h1>
+        <p class="subtitle">
+          Leitura proprietária de tráfego, intenção de reserva, origem editorial e comportamento de visitantes.
+        </p>
+      </div>
+
+      <div class="accessBox">
+        <input id="adminToken" type="password" placeholder="Token de acesso" />
+        <button id="loadDashboard">Acessar</button>
+      </div>
+    </section>
+
+    <section class="cards">
+      <article>
+        <span>Pageviews</span>
+        <strong id="pageviews">—</strong>
+      </article>
+      <article>
+        <span>Sessões</span>
+        <strong id="sessions">—</strong>
+      </article>
+      <article>
+        <span>Visitantes</span>
+        <strong id="visitors">—</strong>
+      </article>
+      <article>
+        <span>Buscas de reserva</span>
+        <strong id="bookingSearches">—</strong>
+      </article>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Páginas mais visitadas</h2>
+        <div id="topPages" class="list"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Origens / Referrers</h2>
+        <div id="topReferrers" class="list"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Países</h2>
+        <div id="topCountries" class="list"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Cidades</h2>
+        <div id="topCities" class="list"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Casas mais buscadas</h2>
+        <div id="topHouses" class="list"></div>
+      </div>
+
+      <div class="panel wide">
+        <h2>Últimas buscas de reserva</h2>
+        <div id="recentBookings" class="table"></div>
+      </div>
+
+      <div class="panel wide">
+        <h2>Últimos acessos do site</h2>
+        <div id="recentEvents" class="table"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/js/admin-analytics.js"></script>
+</body>
+</html>

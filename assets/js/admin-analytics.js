@@ -103,8 +103,6 @@
       if (!response.ok) {
         console.warn("Site analytics API error:", await response.text());
       }
-
-      console.info("Site event tracked:", payload);
     } catch (err) {
       console.warn("Site analytics failed:", err);
     }
