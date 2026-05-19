@@ -1,12 +1,18 @@
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({
+      error: 'Method not allowed. Use POST.'
+    });
   }
 
   try {
-    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) {
+    const SUPABASE_URL = process.env.SUPABASE_URL;
+    const SUPABASE_KEY =
+      process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+
+    if (!SUPABASE_URL || !SUPABASE_KEY) {
       return res.status(500).json({
-        error: 'Missing SUPABASE_URL or SUPABASE_ANON_KEY'
+        error: 'Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY'
       });
     }
 
@@ -14,7 +20,12 @@ export default async function handler(req, res) {
 
     const checkIn = body.checkIn || body.checkin || '';
     const checkOut = body.checkOut || body.checkout || '';
-    const guestsCount = Number(body.guestsCount || body.guests_count || body.guests || 1);
+    const guestsCount = Number(
+      body.guestsCount || body.guests_count || body.guests || 1
+    );
+
+    const isValidDate = (value) =>
+      /^\d{4}-\d{2}-\d{2}$/.test(String(value || ''));
 
     if (!checkIn || !checkOut) {
       return res.status(400).json({
@@ -22,18 +33,20 @@ export default async function handler(req, res) {
       });
     }
 
-    const isValidDate = (value) => /^\d{4}-\d{2}-\d{2}$/.test(String(value || ''));
-
     if (!isValidDate(checkIn) || !isValidDate(checkOut)) {
       return res.status(400).json({
-        error: 'Invalid dates. Use the format YYYY-MM-DD.'
+        error: 'Invalid dates. Use YYYY-MM-DD.'
       });
     }
 
     const start = new Date(`${checkIn}T00:00:00`);
     const end = new Date(`${checkOut}T00:00:00`);
 
-    if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime()) || end <= start) {
+    if (
+      Number.isNaN(start.getTime()) ||
+      Number.isNaN(end.getTime()) ||
+      end <= start
+    ) {
       return res.status(400).json({
         error: 'Invalid stay period.'
       });
@@ -46,12 +59,12 @@ export default async function handler(req, res) {
     }
 
     const response = await fetch(
-      `${process.env.SUPABASE_URL}/rest/v1/rpc/list_available_units_with_price`,
+      `${SUPABASE_URL}/rest/v1/rpc/list_available_units_with_price`,
       {
         method: 'POST',
         headers: {
-          apikey: process.env.SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${process.env.SUPABASE_ANON_KEY}`,
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -62,7 +75,13 @@ export default async function handler(req, res) {
       }
     );
 
-    const data = await response.json();
+    let data = null;
+
+    try {
+      data = await response.json();
+    } catch (_) {
+      data = null;
+    }
 
     if (!response.ok) {
       return res.status(response.status).json({
@@ -79,9 +98,10 @@ export default async function handler(req, res) {
     });
   } catch (error) {
     console.error('availability-error', error);
+
     return res.status(500).json({
       error: 'Internal error while checking availability.',
-      message: error.message
+      message: error?.message || String(error)
     });
   }
 }
