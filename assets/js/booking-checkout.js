@@ -49,16 +49,13 @@ referrer: document.referrer || null,
         }
       };
 
-      if (window.sb) {
-        const { error } = await window.sb
-          .from("booking_events")
-          .insert(payload);
-
-        if (error) {
-          console.warn("Booking event Supabase error:", error.message);
-        }
-      }
-
+await fetch("/api/site-event", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(payload)
+});
       console.info("Booking event tracked:", eventType, payload);
     } catch (err) {
       console.warn("Booking event tracking failed:", err);
