@@ -42,6 +42,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    console.log("BODY RECEIVED:", req.body);
         const origin = req.headers.origin || "";
 
     const allowedOrigins = [
@@ -79,7 +80,7 @@ export default async function handler(req, res) {
     };
 
     const { error } = await supabase
-      .from("site_events")
+      .from("booking_events")
       .insert(payload);
 
     if (error) {
