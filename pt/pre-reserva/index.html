@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Pré-reserva | Casas da Vila</title>
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="stylesheet" href="/assets/css/global.css" />
+  <link rel="stylesheet" href="/assets/css/responsive.css" />
+
+  <style>
+    body {
+      background: #f4efe7;
+      color: #241f1a;
+    }
+
+    .preWrap {
+      width: min(820px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 72px 0;
+    }
+
+    .preCard {
+      background: rgba(255,252,248,.86);
+      border: 1px solid rgba(90,70,50,.12);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 24px 70px rgba(30,20,10,.08);
+    }
+
+    .preCard h1 {
+      margin: 0 0 12px;
+      font-family: Georgia, serif;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1;
+    }
+
+    .preLead {
+      margin: 0 0 28px;
+      color: #6f665d;
+      line-height: 1.7;
+    }
+
+    .formGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: #7a6d61;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid rgba(90,70,50,.16);
+      border-radius: 14px;
+      padding: 14px 14px;
+      background: #fff;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .checks {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(90,70,50,.12);
+    }
+
+    .check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 14px;
+      line-height: 1.55;
+      color: #4e463f;
+    }
+
+    .check input {
+      width: auto;
+      margin-top: 3px;
+    }
+
+    .actions {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btnSubmit {
+      border: 0;
+      border-radius: 999px;
+      padding: 15px 22px;
+      background: #1f3f8b;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .status {
+      margin-top: 16px;
+      color: #6f665d;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 720px) {
+      .formGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .preCard {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="preWrap">
+    <section class="preCard">
+      <p class="eyebrow">Casas da Vila • Trancoso</p>
+      <h1>Pré-reserva</h1>
+
+      <p class="preLead">
+        Para sua segurança, reservas via PIX são iniciadas por este formulário.
+        Após o envio, nossa equipe retornará pelo WhatsApp com a referência da pré-reserva
+        e as instruções de pagamento.
+      </p>
+
+      <form id="preBookingForm">
+        <div class="formGrid">
+          <div class="field">
+            <label>Responsável financeiro</label>
+            <input name="payer_name" required placeholder="Nome completo" />
+          </div>
+
+          <div class="field">
+            <label>CPF ou CNPJ do pagador</label>
+            <input name="payer_document" required placeholder="CPF ou CNPJ" />
+          </div>
+
+          <div class="field">
+            <label>E-mail</label>
+            <input name="payer_email" type="email" required placeholder="email@exemplo.com" />
+          </div>
+
+          <div class="field">
+            <label>WhatsApp</label>
+            <input name="payer_phone" required placeholder="+55..." />
+          </div>
+
+          <div class="field">
+            <label>Casa desejada</label>
+            <select name="unit_name" required>
+              <option value="">Selecione</option>
+              <option>Casa Rosada</option>
+              <option>Casa Manga</option>
+              <option>Casa Grande</option>
+              <option>Casa Branca</option>
+              <option>Casa Oca</option>
+              <option>Casa Dendê</option>
+              <option>Casa dos Balões</option>
+              <option>Ateliê Azul</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Número de hóspedes</label>
+            <input name="guests_count" type="number" min="1" required />
+          </div>
+
+          <div class="field">
+            <label>Check-in</label>
+            <input name="checkin" type="date" required />
+          </div>
+
+          <div class="field">
+            <label>Check-out</label>
+            <input name="checkout" type="date" required />
+          </div>
+
+          <div class="field full">
+            <label>Nome dos hóspedes</label>
+            <textarea name="guests" required placeholder="Informe o nome completo dos hóspedes"></textarea>
+          </div>
+
+          <div class="field full">
+            <label>Crianças e idades</label>
+            <textarea name="children" placeholder="Ex.: Pedro Henrique, 12 anos"></textarea>
+          </div>
+
+          <div class="field full">
+            <label>Observações</label>
+            <textarea name="notes" placeholder="Pedidos especiais, horário previsto de chegada etc."></textarea>
+          </div>
+        </div>
+
+        <div class="checks">
+          <label class="check">
+            <input type="checkbox" name="payer_declaration_accepted" required />
+            <span>Declaro ser o responsável financeiro pela reserva e que o pagamento será realizado preferencialmente pelo CPF/CNPJ informado.</span>
+          </label>
+
+          <label class="check">
+            <input type="checkbox" name="policy_accepted" required />
+            <span>Estou ciente de que o envio de comprovante por WhatsApp não confirma a reserva. A confirmação ocorrerá somente após a identificação efetiva do crédito em conta.</span>
+          </label>
+
+          <label class="check">
+            <input type="checkbox" name="non_refundable_accepted" required />
+            <span>Estou ciente de que as tarifas confirmadas são não reembolsáveis após a confirmação do pagamento.</span>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button class="btnSubmit" type="submit">
+            Enviar solicitação via WhatsApp
+          </button>
+        </div>
+
+        <div id="formStatus" class="status"></div>
+      </form>
+    </section>
+  </main>
+
+  <script src="/assets/js/pre-reserva.js"></script>
+</body>
+</html>
