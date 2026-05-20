@@ -1,7 +1,9 @@
 export default function middleware(request) {
   const country = request.headers.get("x-vercel-ip-country");
 
-  if (country === "SG") {
+  const blockedCountries = ["SG", "IN"];
+
+  if (blockedCountries.includes(country)) {
     return new Response("Access blocked", {
       status: 403,
       headers: {
