@@ -3,6 +3,8 @@
 
   const form = document.getElementById("preBookingForm");
   const statusEl = document.getElementById("formStatus");
+  const whatsappBtn = document.getElementById("whatsappBtn");
+  const emailBtn = document.getElementById("emailBtn");
 
   function getFormData(form) {
     const fd = new FormData(form);
@@ -97,13 +99,31 @@
       }
 
       const message = buildWhatsAppMessage(data, result.booking_reference);
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      const encoded = encodeURIComponent(message);
 
-      statusEl.textContent = "Pré-reserva registrada. Abrindo WhatsApp...";
+      const whatsappUrl =
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
 
-      window.location.href = url;
+      const emailSubject =
+        encodeURIComponent(
+          `Pré-reserva ${result.booking_reference} — Casas da Vila`
+        );
+
+      const emailUrl =
+        `mailto:reservas@casasdavila.com?subject=${emailSubject}&body=${encoded}`;
+
+      whatsappBtn.href = whatsappUrl;
+      emailBtn.href = emailUrl;
+
+      whatsappBtn.style.display = "inline-flex";
+      emailBtn.style.display = "inline-flex";
+
+      statusEl.innerHTML =
+        "Pré-reserva registrada. Escolha como deseja enviar a solicitação.";
+
     } catch (error) {
       console.error(error);
+
       statusEl.textContent =
         "Não foi possível registrar a pré-reserva. Por favor, revise os dados ou tente novamente.";
     }

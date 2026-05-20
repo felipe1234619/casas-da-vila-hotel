@@ -119,7 +119,18 @@
       cursor: pointer;
       font-weight: 600;
     }
-
+.btnSecondary {
+  border-radius: 999px;
+  padding: 15px 22px;
+  border: 1px solid rgba(90,70,50,.18);
+  background: #fff;
+  color: #241f1a;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
     .status {
       margin-top: 16px;
       color: #6f665d;
@@ -234,12 +245,31 @@
             <span>Estou ciente de que as tarifas confirmadas são não reembolsáveis após a confirmação do pagamento.</span>
           </label>
         </div>
+<div class="actions">
+  <button class="btnSubmit" type="submit">
+    Continuar
+  </button>
 
-        <div class="actions">
-          <button class="btnSubmit" type="submit">
-            Enviar solicitação via WhatsApp
-          </button>
-        </div>
+  <a
+    id="emailBtn"
+    class="btnSecondary"
+    href="#"
+    target="_blank"
+    style="display:none;"
+  >
+    Enviar por E-mail
+  </a>
+
+  <a
+    id="whatsappBtn"
+    class="btnSecondary"
+    href="#"
+    target="_blank"
+    style="display:none;"
+  >
+    Enviar via WhatsApp
+  </a>
+</div>v>
 
         <div id="formStatus" class="status"></div>
       </form>
