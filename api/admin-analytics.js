@@ -66,8 +66,31 @@ export default async function handler(req, res) {
       top_countries: topEntries(countBy(cleanSiteEvents, "country")),
       top_cities: topEntries(countBy(cleanSiteEvents, "city")),
       top_houses: topEntries(countBy(bookingSearches, "house_name")),
-      recent_site_events: cleanSiteEvents.slice(0, 30),
-      recent_booking_events: cleanBookingEvents.slice(0, 30)
+recent_site_events: cleanSiteEvents.slice(0, 30),
+
+recent_booking_events: cleanBookingEvents.slice(0, 30),
+
+booking_availability_results: cleanBookingEvents.filter(
+  (e) => e.event_type === "booking_availability_result"
+),
+
+booking_summary: {
+  potential_revenue: cleanBookingEvents
+    .filter((e) => e.event_type === "booking_availability_result")
+    .reduce((sum, e) => sum + Number(e.estimated_total || 0), 0),
+
+  available_queries: cleanBookingEvents.filter(
+    (e) =>
+      e.event_type === "booking_availability_result" &&
+      e.availability_status === "available"
+  ).length,
+
+  unavailable_queries: cleanBookingEvents.filter(
+    (e) =>
+      e.event_type === "booking_availability_result" &&
+      e.availability_status === "unavailable"
+  ).length
+}
     });
   } catch (error) {
     return res.status(500).json({ error: error.message });

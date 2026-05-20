@@ -1558,6 +1558,32 @@ window.trackBookingEvent?.("booking_search", {
           renderEmpty('Searching availability…', 'We are checking the available houses for the selected period.');
 
           const items = await fetchAvailability(checkIn, checkOut, guestsCount);
+          const availableItems = Array.isArray(items)
+  ? items.filter((item) => item.available !== false)
+  : [];
+
+const estimatedTotal = availableItems.reduce((sum, item) => {
+  return sum + Number(item.total || item.estimated_total || 0);
+}, 0);
+
+window.trackBookingEvent?.("booking_availability_result", {
+  house_name: "multi-house-search",
+  checkin: checkIn,
+  checkout: checkOut,
+  guests: guestsCount,
+  nights: availableItems[0]?.nights || null,
+  currency: "BRL",
+  estimated_total: estimatedTotal,
+  availability_status: availableItems.length > 0 ? "available" : "unavailable",
+  available_units_count: availableItems.length,
+  available_units: availableItems.map((item) => ({
+    slug: item.slug || item.house_slug || null,
+    name: item.name || item.house_name || null,
+    nightly_rate: item.nightly_rate || item.price || null,
+    total: item.total || item.estimated_total || null,
+    nights: item.nights || null
+  }))
+});
           renderAvailabilityCards(items);
         } catch (error) {
           renderEmpty('Unable to check right now', error.message || 'Please try again in a few moments.');

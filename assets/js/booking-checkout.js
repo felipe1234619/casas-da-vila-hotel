@@ -33,7 +33,9 @@ referrer: document.referrer || null,
 
         availability_status:
           data.availability_status || data.availabilityStatus || null,
-
+available_units_count: data.available_units_count || null,
+available_units: data.available_units || null,
+unavailable_reason: data.unavailable_reason || null,
         stripe_session_id: data.stripe_session_id || null,
         booking_id: data.booking_id || null,
 
