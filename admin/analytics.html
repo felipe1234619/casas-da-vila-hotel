@@ -24,26 +24,24 @@
     </section>
 
     <section class="cards">
-      <article>
-        <span>Pageviews</span>
-        <strong id="pageviews">—</strong>
-      </article>
-      <article>
-        <span>Sessões</span>
-        <strong id="sessions">—</strong>
-      </article>
-      <article>
-        <span>Visitantes</span>
-        <strong id="visitors">—</strong>
-      </article>
-      <article>
-        <span>Buscas de reserva</span>
-        <strong id="bookingSearches">—</strong>
-      </article>
-
+      <article><span>Pageviews</span><strong id="pageviews">—</strong></article>
+      <article><span>Sessões</span><strong id="sessions">—</strong></article>
+      <article><span>Visitantes</span><strong id="visitors">—</strong></article>
+      <article><span>Buscas de reserva</span><strong id="bookingSearches">—</strong></article>
+      <article><span>Receita potencial</span><strong id="potentialRevenue">—</strong></article>
+      <article><span>Consultas disponíveis</span><strong id="availableQueries">—</strong></article>
+      <article><span>Consultas indisponíveis</span><strong id="unavailableQueries">—</strong></article>
     </section>
 
     <section class="grid">
+      <div class="panel wide">
+        <h2>Visitor Sessions</h2>
+        <p class="panelLead">
+          Jornada agrupada por sessão: país, origem, páginas visitadas e intenção de reserva.
+        </p>
+        <div id="visitorSessions" class="sessions"></div>
+      </div>
+
       <div class="panel">
         <h2>Páginas mais visitadas</h2>
         <div id="topPages" class="list"></div>
@@ -53,20 +51,7 @@
         <h2>Origens / Referrers</h2>
         <div id="topReferrers" class="list"></div>
       </div>
-<article>
-  <span>Receita potencial</span>
-  <strong id="potentialRevenue">—</strong>
-</article>
 
-<article>
-  <span>Consultas disponíveis</span>
-  <strong id="availableQueries">—</strong>
-</article>
-
-<article>
-  <span>Consultas indisponíveis</span>
-  <strong id="unavailableQueries">—</strong>
-</article>
       <div class="panel">
         <h2>Países</h2>
         <div id="topCountries" class="list"></div>
@@ -83,24 +68,19 @@
       </div>
 
       <div class="panel wide">
+        <h2>Booking Intelligence</h2>
+        <div id="bookingIntelligence" class="table"></div>
+      </div>
+
+      <div class="panel wide">
         <h2>Últimas buscas de reserva</h2>
         <div id="recentBookings" class="table"></div>
       </div>
-<div class="panel wide">
-  <h2>Visitor Sessions</h2>
-  <p class="panelLead">
-    Jornada agrupada por sessão: país, origem, páginas visitadas e intenção de reserva.
-  </p>
-  <div id="visitorSessions" class="sessions"></div>
-</div>
+
       <div class="panel wide">
         <h2>Últimos acessos do site</h2>
         <div id="recentEvents" class="table"></div>
       </div>
-      <div class="panel wide">
-  <h2>Booking Intelligence</h2>
-  <div id="bookingIntelligence" class="table"></div>
-</div>
     </section>
   </main>
 
