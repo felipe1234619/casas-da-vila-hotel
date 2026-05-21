@@ -19,7 +19,71 @@ function topEntries(obj, limit = 8) {
     .sort((a, b) => b.value - a.value)
     .slice(0, limit);
 }
+function buildVisitorSessions(siteEvents = [], bookingEvents = []) {
+  const grouped = {};
 
+  siteEvents.forEach((event) => {
+    const sessionId = event.session_id || "unknown-session";
+
+    if (!grouped[sessionId]) {
+      grouped[sessionId] = {
+        session_id: sessionId,
+        visitor_id: event.visitor_id || null,
+        country: event.country || null,
+        city: event.city || null,
+        region: event.region || null,
+        referrer: event.referrer || null,
+        started_at: event.created_at,
+        last_seen_at: event.created_at,
+        pages_count: 0,
+        pages: [],
+        booking_events: []
+      };
+    }
+
+    grouped[sessionId].pages_count += 1;
+
+    grouped[sessionId].pages.push({
+      created_at: event.created_at,
+      page_path: event.page_path,
+      page_title: event.page_title,
+      referrer: event.referrer
+    });
+
+    if (new Date(event.created_at) < new Date(grouped[sessionId].started_at)) {
+      grouped[sessionId].started_at = event.created_at;
+    }
+
+    if (new Date(event.created_at) > new Date(grouped[sessionId].last_seen_at)) {
+      grouped[sessionId].last_seen_at = event.created_at;
+    }
+  });
+
+  bookingEvents.forEach((event) => {
+    if (!event.session_id || !grouped[event.session_id]) return;
+
+    grouped[event.session_id].booking_events.push({
+      created_at: event.created_at,
+      event_type: event.event_type,
+      house_name: event.house_name,
+      checkin: event.checkin,
+      checkout: event.checkout,
+      guests: event.guests,
+      estimated_total: event.estimated_total,
+      availability_status: event.availability_status
+    });
+  });
+
+  return Object.values(grouped)
+    .map((session) => ({
+      ...session,
+      entry_page: session.pages[session.pages.length - 1]?.page_path || null,
+      exit_page: session.pages[0]?.page_path || null,
+      has_booking_intent: session.booking_events.length > 0
+    }))
+    .sort((a, b) => new Date(b.last_seen_at) - new Date(a.last_seen_at))
+    .slice(0, 80);
+}
 export default async function handler(req, res) {
   const token = req.headers["x-admin-token"];
 
@@ -69,7 +133,7 @@ export default async function handler(req, res) {
 recent_site_events: cleanSiteEvents.slice(0, 30),
 
 recent_booking_events: cleanBookingEvents.slice(0, 30),
-
+visitor_sessions: buildVisitorSessions(cleanSiteEvents, cleanBookingEvents),
 booking_availability_results: cleanBookingEvents.filter(
   (e) => e.event_type === "booking_availability_result"
 ),

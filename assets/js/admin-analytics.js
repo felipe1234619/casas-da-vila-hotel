@@ -129,7 +129,83 @@ function renderBookingIntelligence(items) {
     )
     .join("");
 }
+function renderVisitorSessions(items) {
+  const el = $("visitorSessions");
 
+  if (!el) return;
+
+  if (!items || !items.length) {
+    el.innerHTML = `<p class="empty">Nenhuma sessão registrada ainda.</p>`;
+    return;
+  }
+
+  el.innerHTML = items
+    .slice(0, 40)
+    .map((session, index) => {
+      const location = [session.country, session.city].filter(Boolean).join(", ") || "Origem indefinida";
+      const referrer = session.referrer || "Direct / unknown";
+      const intent = session.has_booking_intent ? "Com intenção de reserva" : "Sem busca de reserva";
+
+      const pages = (session.pages || [])
+        .slice()
+        .reverse()
+        .map((page) => `
+          <div class="sessionPage">
+            <span>${formatDate(page.created_at)}</span>
+            <strong>${page.page_path || "—"}</strong>
+          </div>
+        `)
+        .join("");
+
+      const bookings = (session.booking_events || [])
+        .map((booking) => `
+          <div class="sessionBooking">
+            <span>${formatDate(booking.created_at)}</span>
+            <strong>${booking.checkin || "—"} → ${booking.checkout || "—"}</strong>
+            <em>${booking.house_name || "multi-house"} · ${formatMoney(booking.estimated_total)}</em>
+          </div>
+        `)
+        .join("");
+
+      return `
+        <article class="sessionCard">
+          <button class="sessionHeader" type="button" data-session-toggle="${index}">
+            <div>
+              <strong>${location}</strong>
+              <span>${referrer}</span>
+            </div>
+            <div class="sessionMeta">
+              <span>${session.pages_count || 0} páginas</span>
+              <span>${intent}</span>
+              <span>${formatDate(session.last_seen_at)}</span>
+            </div>
+          </button>
+
+          <div class="sessionDetails" data-session-details="${index}">
+            <div class="sessionColumns">
+              <div>
+                <h3>Páginas visitadas</h3>
+                ${pages || `<p class="empty">Sem páginas.</p>`}
+              </div>
+              <div>
+                <h3>Buscas de reserva</h3>
+                ${bookings || `<p class="empty">Nenhuma busca nessa sessão.</p>`}
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+
+  document.querySelectorAll("[data-session-toggle]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const id = button.getAttribute("data-session-toggle");
+      const details = document.querySelector(`[data-session-details="${id}"]`);
+      if (details) details.classList.toggle("isOpen");
+    });
+  });
+}
 async function loadDashboard() {
   const token = $("adminToken").value.trim();
 
@@ -183,6 +259,7 @@ async function loadDashboard() {
   renderBookings(data.recent_booking_events);
   renderSiteEvents(data.recent_site_events);
   renderBookingIntelligence(data.booking_availability_results);
+  renderVisitorSessions(data.visitor_sessions);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
