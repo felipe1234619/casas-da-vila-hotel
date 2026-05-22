@@ -6,6 +6,7 @@
   <title>Casas da Vila — Intelligence Dashboard</title>
   <link rel="stylesheet" href="/assets/css/admin-analytics.css" />
 </head>
+
 <body>
   <main class="dashboard">
     <section class="hero">
@@ -13,7 +14,8 @@
         <p class="eyebrow">Casas da Vila</p>
         <h1>Intelligence Dashboard</h1>
         <p class="subtitle">
-          Leitura proprietária de tráfego, intenção de reserva, origem editorial e comportamento de visitantes.
+          Leitura proprietária de tráfego, intenção de reserva, origem editorial,
+          comportamento de visitantes e receita potencial.
         </p>
       </div>
 
@@ -23,22 +25,43 @@
       </div>
     </section>
 
+    <section class="toolbar">
+      <div class="rangeButtons">
+        <button class="isActive" data-range="today">Hoje</button>
+        <button data-range="yesterday">Ontem</button>
+        <button data-range="5d">5 dias</button>
+        <button data-range="7d">7 dias</button>
+        <button data-range="30d">30 dias</button>
+      </div>
+
+      <div class="searchBox">
+        <input id="sessionSearch" type="search" placeholder="Buscar país, cidade, página, origem..." />
+      </div>
+    </section>
+
     <section class="cards">
       <article><span>Pageviews</span><strong id="pageviews">—</strong></article>
       <article><span>Sessões</span><strong id="sessions">—</strong></article>
       <article><span>Visitantes</span><strong id="visitors">—</strong></article>
+      <article><span>Recorrentes</span><strong id="returningVisitors">—</strong></article>
       <article><span>Buscas de reserva</span><strong id="bookingSearches">—</strong></article>
       <article><span>Receita potencial</span><strong id="potentialRevenue">—</strong></article>
       <article><span>Consultas disponíveis</span><strong id="availableQueries">—</strong></article>
-      <article><span>Consultas indisponíveis</span><strong id="unavailableQueries">—</strong></article>
+      <article><span>Intenção de reserva</span><strong id="bookingIntentRate">—</strong></article>
     </section>
 
     <section class="grid">
       <div class="panel wide">
-        <h2>Visitor Sessions</h2>
-        <p class="panelLead">
-          Jornada agrupada por sessão: país, origem, páginas visitadas e intenção de reserva.
-        </p>
+        <div class="panelHeader">
+          <div>
+            <h2>Visitor Sessions</h2>
+            <p class="panelLead">
+              Jornada por visitante: páginas acessadas, recorrência, origem, score e buscas de reserva.
+            </p>
+          </div>
+          <span id="lastUpdated" class="liveBadge">● aguardando</span>
+        </div>
+
         <div id="visitorSessions" class="sessions"></div>
       </div>
 
@@ -65,6 +88,11 @@
       <div class="panel">
         <h2>Casas mais buscadas</h2>
         <div id="topHouses" class="list"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Alertas de inteligência</h2>
+        <div id="intelligenceAlerts" class="list"></div>
       </div>
 
       <div class="panel wide">
