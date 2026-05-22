@@ -51,7 +51,7 @@ unavailable_reason: data.unavailable_reason || null,
         }
       };
 
-await fetch("/api/site-event", {
+await fetch("/api/booking-event", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"

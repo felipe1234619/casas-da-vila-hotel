@@ -80,7 +80,7 @@ export default async function handler(req, res) {
     };
 
     const { error } = await supabase
-      .from("booking_events")
+      .from("site_events")
       .insert(payload);
 
     if (error) {
