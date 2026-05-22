@@ -239,7 +239,7 @@ export default async function handler(req, res) {
         pageviews: cleanSiteEvents.length,
         sessions: sessions.size,
         visitors: visitors.size,
-        returning_visitors: returningVisitors, length,
+        returning_visitors: returningVisitors,
         booking_searches: bookingSearches.length,
         booking_intent_rate: sessions.size
           ? Math.round((bookingIntentSessions / sessions.size) * 100)
@@ -275,7 +275,11 @@ export default async function handler(req, res) {
         ).length
       }
     });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
+} catch (error) {
+  console.error("ADMIN ANALYTICS ERROR:", error);
+
+  return res.status(500).json({
+    error: error.message,
+    stack: error.stack
+  });
 }
