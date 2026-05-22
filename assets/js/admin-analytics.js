@@ -327,9 +327,10 @@ async function loadDashboard() {
   $("availableQueries").textContent =
     dashboardData.booking_summary?.available_queries || 0;
 
+if ($("unavailableQueries")) {
   $("unavailableQueries").textContent =
     dashboardData.booking_summary?.unavailable_queries || 0;
-
+}
   renderList("topPages", dashboardData.top_pages);
   renderList("topReferrers", dashboardData.top_referrers);
   renderList("topCountries", dashboardData.top_countries);

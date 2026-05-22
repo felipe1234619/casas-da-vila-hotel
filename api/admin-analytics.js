@@ -239,7 +239,7 @@ export default async function handler(req, res) {
         pageviews: cleanSiteEvents.length,
         sessions: sessions.size,
         visitors: visitors.size,
-        returning_visitors: returningVisitors,
+        returning_visitors: returningVisitors, length,
         booking_searches: bookingSearches.length,
         booking_intent_rate: sessions.size
           ? Math.round((bookingIntentSessions / sessions.size) * 100)
