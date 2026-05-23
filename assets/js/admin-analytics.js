@@ -279,12 +279,27 @@ document.addEventListener("DOMContentLoaded", () => {
     renderVisitorSessions(dashboardData?.visitor_sessions || []);
   });
 });
+
 function renderVisitorSessions(sessions) {
   const container = document.getElementById("visitorSessions");
-
   if (!container) return;
 
-  if (!sessions.length) {
+  const search = $("sessionSearch")?.value?.trim()?.toLowerCase() || "";
+
+  const filteredSessions = sessions.filter((session) => {
+    if (!search) return true;
+
+    const haystack = [
+      session.country,
+      session.city,
+      session.referrer,
+      ...(session.pages || []).map((p) => p.path)
+    ].join(" ").toLowerCase();
+
+    return haystack.includes(search);
+  });
+
+  if (!filteredSessions.length) {
     container.innerHTML = `
       <div class="emptyState">
         Nenhuma sessão encontrada para o filtro atual.
@@ -293,46 +308,68 @@ function renderVisitorSessions(sessions) {
     return;
   }
 
-  container.innerHTML = sessions
-    .slice(0, 20)
-    .map((session) => {
+  container.innerHTML = filteredSessions
+    .slice(0, 30)
+    .map((session, index) => {
+      const score = getLeadScore(session);
+
+      const intentLabel =
+        score >= 80 ? "🔥 High intent" :
+        score >= 55 ? "💎 Qualificado" :
+        score >= 30 ? "↗ Em consideração" :
+        "Exploratório";
+
       return `
         <div class="visitorSessionCard">
+          <button class="visitorSessionButton" type="button" data-session="${index}">
+            <div class="visitorSessionTop">
+              <div>
+                <strong>${session.country || "Unknown"}${session.city ? ` · ${session.city}` : ""}</strong>
+                <small>${session.referrer || "Direct / unknown"}</small>
+              </div>
 
-          <div class="visitorSessionTop">
-            <div>
-              <strong>${session.country || "Unknown"}</strong>
-              ${session.city ? `· ${session.city}` : ""}
+              <div class="sessionBadges">
+                <span>${session.page_count || 0} páginas</span>
+                <span>${session.has_booking_intent ? "Reserva" : "Explorando"}</span>
+                <span class="scoreBadge">${score}/100 · ${intentLabel}</span>
+              </div>
+            </div>
+          </button>
+
+          <div class="visitorSessionDetails">
+            <div class="sessionTimeline">
+              <h3>Timeline da sessão</h3>
+              ${(session.pages || []).map((p) => `
+                <div class="timelineItem">
+                  <span>${formatSessionTime(p.created_at)}</span>
+                  <strong>${p.path || "—"}</strong>
+                </div>
+              `).join("")}
             </div>
 
-            <div>
-              ${session.page_count} páginas
+            <div class="sessionTimeline">
+              <h3>Buscas de reserva</h3>
+              ${
+                (session.bookings || []).length
+                  ? session.bookings.map((b) => `
+                    <div class="timelineItem">
+                      <span>${formatSessionTime(b.created_at)}</span>
+                      <strong>${b.checkin || "—"} → ${b.checkout || "—"}</strong>
+                      <small>${b.house_name || "multi-house"}</small>
+                    </div>
+                  `).join("")
+                  : `<p class="emptyState">Nenhuma busca de reserva nesta sessão.</p>`
+              }
             </div>
           </div>
-
-          <div class="visitorSessionPaths">
-            ${session.pages
-              .slice(0, 5)
-              .map((p) => `<span>${p.path}</span>`)
-              .join("")}
-          </div>
-
-          <div class="visitorSessionMeta">
-
-            <span>
-              Origem:
-              ${session.referrer || "Direct"}
-            </span>
-
-            <span>
-              Reserva:
-              ${session.has_booking_intent ? "Sim" : "Não"}
-            </span>
-
-          </div>
-
         </div>
       `;
     })
     .join("");
+
+  document.querySelectorAll(".visitorSessionButton").forEach((button) => {
+    button.addEventListener("click", () => {
+      button.closest(".visitorSessionCard").classList.toggle("isOpen");
+    });
+  });
 }
