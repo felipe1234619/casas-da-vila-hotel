@@ -1552,20 +1552,14 @@ function updateSummary() {
 window.trackBookingEvent?.("booking_search", {
   house_name: "multi-house-search",
   house_slug: "multi-house-search",
-  checkin,
-  checkout,
-  guests_count,
-    visitor_id:
-    localStorage.getItem("cdv_visitor_id") || null,
+  checkin: checkIn,
+  checkout: checkOut,
+  guests_count: guestsCount,
 
-  session_id:
-    sessionStorage.getItem("cdv_session_id") || null,
-
-  page_path:
-    window.location.pathname,
-
-  referrer:
-    document.referrer || null
+  visitor_id: localStorage.getItem("cdv_visitor_id") || null,
+  session_id: sessionStorage.getItem("cdv_session_id") || null,
+  page_path: window.location.pathname,
+  referrer: document.referrer || null
 });
           renderEmpty('Searching availability…', 'We are checking the available houses for the selected period.');
 
