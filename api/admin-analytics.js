@@ -84,6 +84,7 @@ const range = req.query.range || "today";
 
 const now = new Date();
 let startDate = new Date();
+let endDate = new Date();
 
 if (range === "today") {
   startDate.setHours(0, 0, 0, 0);
@@ -92,6 +93,9 @@ if (range === "today") {
 if (range === "yesterday") {
   startDate.setDate(now.getDate() - 1);
   startDate.setHours(0, 0, 0, 0);
+
+  endDate = new Date(startDate);
+  endDate.setDate(startDate.getDate() + 1);
 }
 
 if (range === "5d") {
@@ -114,6 +118,7 @@ if (range === "30d") {
       .from("site_events")
       .select("*")
       .gte("created_at", startDate.toISOString())
+      .lt("created_at", endDate.toISOString())
       .order("created_at", { ascending: false })
       .limit(1000);
 
@@ -123,6 +128,7 @@ if (range === "30d") {
       .from("booking_events")
       .select("*")
       .gte("created_at", startDate.toISOString())
+      .lt("created_at", endDate.toISOString())
       .order("created_at", { ascending: false })
       .limit(1000);
 
