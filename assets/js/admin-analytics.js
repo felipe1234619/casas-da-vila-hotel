@@ -312,7 +312,9 @@ async function loadDashboard() {
   }
 
   dashboardData = await response.json();
-
+renderVisitorSessions(
+  dashboardData.visitor_sessions || []
+);
   $("pageviews").textContent = dashboardData.summary?.pageviews ?? "0";
   $("sessions").textContent = dashboardData.summary?.sessions ?? "0";
   $("visitors").textContent = dashboardData.summary?.visitors ?? "0";
@@ -370,3 +372,60 @@ document.addEventListener("DOMContentLoaded", () => {
     renderVisitorSessions(dashboardData?.visitor_sessions || []);
   });
 });
+function renderVisitorSessions(sessions) {
+  const container = document.getElementById("visitorSessions");
+
+  if (!container) return;
+
+  if (!sessions.length) {
+    container.innerHTML = `
+      <div class="emptyState">
+        Nenhuma sessão encontrada para o filtro atual.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = sessions
+    .slice(0, 20)
+    .map((session) => {
+      return `
+        <div class="visitorSessionCard">
+
+          <div class="visitorSessionTop">
+            <div>
+              <strong>${session.country || "Unknown"}</strong>
+              ${session.city ? `· ${session.city}` : ""}
+            </div>
+
+            <div>
+              ${session.page_count} páginas
+            </div>
+          </div>
+
+          <div class="visitorSessionPaths">
+            ${session.pages
+              .slice(0, 5)
+              .map((p) => `<span>${p.path}</span>`)
+              .join("")}
+          </div>
+
+          <div class="visitorSessionMeta">
+
+            <span>
+              Origem:
+              ${session.referrer || "Direct"}
+            </span>
+
+            <span>
+              Reserva:
+              ${session.has_booking_intent ? "Sim" : "Não"}
+            </span>
+
+          </div>
+
+        </div>
+      `;
+    })
+    .join("");
+}

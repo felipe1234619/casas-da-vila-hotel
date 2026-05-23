@@ -493,3 +493,49 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+#visitorSessions{
+  display:grid;
+  gap:18px;
+  margin-top:24px;
+}
+
+.visitorSessionCard{
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:18px;
+  padding:18px;
+  background:#fff;
+}
+
+.visitorSessionTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  margin-bottom:14px;
+}
+
+.visitorSessionPaths{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:14px;
+}
+
+.visitorSessionPaths span{
+  background:#f4f1ea;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:12px;
+}
+
+.visitorSessionMeta{
+  display:flex;
+  gap:18px;
+  font-size:13px;
+  opacity:.7;
+}
+
+.emptyState{
+  opacity:.6;
+  padding:12px 0;
+}
