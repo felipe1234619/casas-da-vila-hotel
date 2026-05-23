@@ -19,7 +19,65 @@ function topEntries(obj, limit = 8) {
     .sort((a, b) => b.value - a.value)
     .slice(0, limit);
 }
+function buildVisitorSessions(siteEvents, bookingEvents) {
+  const grouped = {};
 
+  siteEvents.forEach((event) => {
+    const key = event.session_id || event.visitor_id;
+    if (!key) return;
+
+    if (!grouped[key]) {
+      grouped[key] = {
+        session_id: event.session_id || null,
+        visitor_id: event.visitor_id || null,
+        country: event.country || "unknown",
+        city: event.city || "",
+        referrer: event.referrer || "Direct / unknown",
+        first_seen_at: event.created_at,
+        last_seen_at: event.created_at,
+        pages: [],
+        bookings: []
+      };
+    }
+
+    grouped[key].pages.push({
+      path: event.page_path || "—",
+      title: event.page_title || "",
+      created_at: event.created_at,
+      referrer: event.referrer || ""
+    });
+
+    if (new Date(event.created_at) > new Date(grouped[key].last_seen_at)) {
+      grouped[key].last_seen_at = event.created_at;
+    }
+  });
+
+  bookingEvents.forEach((event) => {
+    const key = event.session_id || event.visitor_id;
+    if (!key || !grouped[key]) return;
+
+    grouped[key].bookings.push({
+      checkin: event.checkin || null,
+      checkout: event.checkout || null,
+      house_name: event.house_name || "multi-house",
+      estimated_total: event.estimated_total || 0,
+      availability_status: event.availability_status || null,
+      created_at: event.created_at
+    });
+  });
+
+  return Object.values(grouped)
+    .map((session) => ({
+      ...session,
+      page_count: session.pages.length,
+      booking_count: session.bookings.length,
+      has_booking_intent:
+        session.pages.some((p) => String(p.path).includes("reservar") || String(p.path).includes("book")) ||
+        session.bookings.length > 0,
+      is_returning_visitor: false
+    }))
+    .sort((a, b) => new Date(b.last_seen_at) - new Date(a.last_seen_at));
+}
 export default async function handler(req, res) {
   const token = req.headers["x-admin-token"];
 
@@ -57,7 +115,7 @@ export default async function handler(req, res) {
     const availabilityResults = cleanBookingEvents.filter(
       (e) => e.event_type === "booking_availability_result"
     );
-
+const visitorSessions = buildVisitorSessions(cleanSiteEvents, cleanBookingEvents);
     return res.status(200).json({
       summary: {
         pageviews: cleanSiteEvents.length,
@@ -74,7 +132,7 @@ export default async function handler(req, res) {
       top_cities: topEntries(countBy(cleanSiteEvents, "city")),
       top_houses: topEntries(countBy(bookingSearches, "house_name")),
 
-      visitor_sessions: [],
+visitor_sessions: visitorSessions,
       alerts: [],
 
       recent_site_events: cleanSiteEvents.slice(0, 30),
