@@ -70,130 +70,118 @@ function scoreLabel(score) {
   return "Exploratório";
 }
 
-function renderVisitorSessions(items) {
-  const el = $("visitorSessions");
-  if (!el) return;
+function getLeadScore(session) {
+  let score = 0;
 
-  const term = ($("sessionSearch")?.value || "").toLowerCase().trim();
+  if (session.page_count >= 3) score += 20;
+  if (session.has_booking_intent) score += 30;
+  if ((session.bookings || []).length > 0) score += 25;
 
-  let rows = items || [];
+  const visitedHouse = (session.pages || []).some((p) =>
+    String(p.path || "").includes("/casas/") ||
+    String(p.path || "").includes("/houses/")
+  );
 
-  if (term) {
-    rows = rows.filter((session) => {
-      const searchable = [
-        session.country,
-        session.city,
-        session.region,
-        session.referrer,
-        session.entry_page,
-        session.exit_page,
-        ...(session.pages || []).map((p) => p.page_path),
-        ...(session.booking_events || []).map((b) => b.checkin + " " + b.checkout + " " + b.house_name)
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
+  if (visitedHouse) score += 15;
 
-      return searchable.includes(term);
-    });
-  }
+  const cameFromQualifiedSource = String(session.referrer || "").match(
+    /google|instagram|chatgpt|youtube/i
+  );
 
-  if (!rows.length) {
-    el.innerHTML = `<p class="empty">Nenhuma sessão encontrada para o filtro atual.</p>`;
+  if (cameFromQualifiedSource) score += 10;
+
+  return Math.min(score, 100);
+}
+
+function formatSessionTime(value) {
+  if (!value) return "—";
+
+  return new Intl.DateTimeFormat("pt-BR", {
+    dateStyle: "short",
+    timeStyle: "short"
+  }).format(new Date(value));
+}
+
+function renderVisitorSessions(sessions) {
+  const container = document.getElementById("visitorSessions");
+
+  if (!container) return;
+
+  if (!sessions.length) {
+    container.innerHTML = `
+      <div class="emptyState">
+        Nenhuma sessão encontrada para o filtro atual.
+      </div>
+    `;
     return;
   }
 
-  el.innerHTML = rows
-    .slice(0, 80)
+  container.innerHTML = sessions
+    .slice(0, 30)
     .map((session, index) => {
-      const location =
-        [session.country, session.city].filter(Boolean).join(", ") ||
-        "Origem indefinida";
-
-      const referrer = session.referrer || "Direct / unknown";
-      const score = Number(session.score || 0);
-
-      const pages = (session.pages || [])
-        .slice()
-        .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-        .map((page, pageIndex) => `
-          <div class="timelineItem">
-            <span class="timelineDot">${pageIndex + 1}</span>
-            <div>
-              <span>${formatDate(page.created_at)}</span>
-              <strong>${escapeHtml(page.page_path || "—")}</strong>
-              <em>${escapeHtml(page.page_title || "")}</em>
-            </div>
-          </div>
-        `)
-        .join("");
-
-      const bookings = (session.booking_events || [])
-        .map((booking) => `
-          <div class="sessionBooking">
-            <span>${formatDate(booking.created_at)}</span>
-            <strong>${escapeHtml(booking.checkin || "—")} → ${escapeHtml(booking.checkout || "—")}</strong>
-            <em>
-              ${escapeHtml(booking.house_name || "multi-house")}
-              · ${formatMoney(booking.estimated_total)}
-              · ${escapeHtml(booking.availability_status || "status indefinido")}
-            </em>
-          </div>
-        `)
-        .join("");
+      const score = getLeadScore(session);
+      const intentLabel = score >= 70 ? "High intent" : score >= 40 ? "Warm visitor" : "Low intent";
 
       return `
-        <article class="sessionCard ${session.has_booking_intent ? "hasIntent" : ""}">
-          <button class="sessionHeader" type="button" data-session-toggle="${index}">
-            <div class="sessionIdentity">
-              <strong>${escapeHtml(location)}</strong>
-              <span>${escapeHtml(referrer)}</span>
+        <div class="visitorSessionCard" data-session-index="${index}">
+          <button class="visitorSessionButton" type="button">
+            <div>
+              <strong>${session.country || "Unknown"}${session.city ? " · " + session.city : ""}</strong>
+              <small>${session.referrer || "Direct / unknown"}</small>
             </div>
 
-            <div class="sessionMeta">
-              <span>${session.pages_count || 0} páginas</span>
-              <span>${visitorStatus(session)}</span>
-              <span>${scoreLabel(score)} · ${score}</span>
-              <span>${formatDate(session.last_seen_at)}</span>
+            <div class="sessionBadges">
+              <span>${session.page_count || 0} páginas</span>
+              <span>${session.has_booking_intent ? "Com intenção" : "Sem reserva"}</span>
+              <span class="scoreBadge">${score}/100 · ${intentLabel}</span>
             </div>
           </button>
 
-          <div class="sessionDetails" data-session-details="${index}">
-            <div class="sessionSummary">
-              <div><span>Entrada</span><strong>${escapeHtml(session.entry_page || "—")}</strong></div>
-              <div><span>Saída</span><strong>${escapeHtml(session.exit_page || "—")}</strong></div>
-              <div><span>Sessões do visitante</span><strong>${session.visitor_sessions_count || 1}</strong></div>
-              <div><span>Buscas</span><strong>${(session.booking_events || []).length}</strong></div>
+          <div class="visitorSessionDetails">
+            <div class="sessionTimeline">
+              <h3>Páginas visitadas</h3>
+              ${(session.pages || [])
+                .map(
+                  (p) => `
+                    <div class="timelineItem">
+                      <span>${formatSessionTime(p.created_at)}</span>
+                      <strong>${p.path || "—"}</strong>
+                    </div>
+                  `
+                )
+                .join("")}
             </div>
 
-            <div class="sessionColumns">
-              <div>
-                <h3>Páginas visitadas</h3>
-                <div class="timeline">
-                  ${pages || `<p class="empty">Sem páginas.</p>`}
-                </div>
-              </div>
-
-              <div>
-                <h3>Buscas de reserva</h3>
-                ${bookings || `<p class="empty">Nenhuma busca nessa sessão.</p>`}
-              </div>
+            <div class="sessionTimeline">
+              <h3>Buscas de reserva</h3>
+              ${
+                (session.bookings || []).length
+                  ? session.bookings
+                      .map(
+                        (b) => `
+                          <div class="timelineItem">
+                            <span>${formatSessionTime(b.created_at)}</span>
+                            <strong>${b.checkin || "—"} → ${b.checkout || "—"}</strong>
+                            <small>${b.house_name || "multi-house"} · ${b.availability_status || "—"}</small>
+                          </div>
+                        `
+                      )
+                      .join("")
+                  : `<p class="emptyState">Nenhuma busca de reserva nesta sessão.</p>`
+              }
             </div>
           </div>
-        </article>
+        </div>
       `;
     })
     .join("");
 
-  document.querySelectorAll("[data-session-toggle]").forEach((button) => {
+  document.querySelectorAll(".visitorSessionButton").forEach((button) => {
     button.addEventListener("click", () => {
-      const id = button.getAttribute("data-session-toggle");
-      const details = document.querySelector(`[data-session-details="${id}"]`);
-      if (details) details.classList.toggle("isOpen");
+      button.closest(".visitorSessionCard").classList.toggle("isOpen");
     });
   });
 }
-
 function renderBookings(items) {
   const el = $("recentBookings");
   if (!el) return;

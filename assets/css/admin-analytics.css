@@ -539,3 +539,72 @@ h1 {
   opacity:.6;
   padding:12px 0;
 }
+.visitorSessionButton{
+  width:100%;
+  border:0;
+  background:transparent;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:24px;
+  text-align:left;
+  cursor:pointer;
+}
+
+.visitorSessionButton small{
+  display:block;
+  margin-top:6px;
+  opacity:.6;
+}
+
+.sessionBadges{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:8px;
+}
+
+.sessionBadges span{
+  background:#f3f0ea;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:12px;
+}
+
+.scoreBadge{
+  font-weight:700;
+}
+
+.visitorSessionDetails{
+  display:none;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+  margin-top:22px;
+  padding-top:22px;
+  border-top:1px solid rgba(0,0,0,.08);
+}
+
+.visitorSessionCard.isOpen .visitorSessionDetails{
+  display:grid;
+}
+
+.sessionTimeline h3{
+  font-size:14px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+  opacity:.55;
+}
+
+.timelineItem{
+  padding:12px 0;
+  border-bottom:1px solid rgba(0,0,0,.07);
+}
+
+.timelineItem span,
+.timelineItem small{
+  display:block;
+  font-size:12px;
+  opacity:.55;
+  margin-bottom:4px;
+}
