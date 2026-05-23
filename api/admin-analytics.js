@@ -52,20 +52,32 @@ function buildVisitorSessions(siteEvents, bookingEvents) {
     }
   });
 
-  bookingEvents.forEach((event) => {
-    const key = event.session_id || event.visitor_id;
-    if (!key || !grouped[key]) return;
+bookingEvents.forEach((event) => {
+  let key = null;
 
-    grouped[key].bookings.push({
-      checkin: event.checkin || null,
-      checkout: event.checkout || null,
-      house_name: event.house_name || "multi-house",
-      estimated_total: event.estimated_total || 0,
-      availability_status: event.availability_status || null,
-      created_at: event.created_at
-    });
+  if (event.session_id && grouped[event.session_id]) {
+    key = event.session_id;
+  }
+
+  if (!key && event.visitor_id) {
+    key = Object.keys(grouped).find(
+      (groupKey) => grouped[groupKey].visitor_id === event.visitor_id
+    );
+  }
+
+  if (!key) return;
+
+  grouped[key].bookings.push({
+    event_type: event.event_type || null,
+    checkin: event.checkin || null,
+    checkout: event.checkout || null,
+    house_name: event.house_name || "multi-house",
+    estimated_total: event.estimated_total || 0,
+    availability_status: event.availability_status || null,
+    available_units_count: event.available_units_count || null,
+    created_at: event.created_at
   });
-
+});
   return Object.values(grouped)
     .map((session) => ({
       ...session,
