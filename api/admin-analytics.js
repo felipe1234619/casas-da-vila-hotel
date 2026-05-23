@@ -80,7 +80,31 @@ function buildVisitorSessions(siteEvents, bookingEvents) {
 }
 export default async function handler(req, res) {
   const token = req.headers["x-admin-token"];
+const range = req.query.range || "today";
 
+const now = new Date();
+let startDate = new Date();
+
+if (range === "today") {
+  startDate.setHours(0, 0, 0, 0);
+}
+
+if (range === "yesterday") {
+  startDate.setDate(now.getDate() - 1);
+  startDate.setHours(0, 0, 0, 0);
+}
+
+if (range === "5d") {
+  startDate.setDate(now.getDate() - 5);
+}
+
+if (range === "7d") {
+  startDate.setDate(now.getDate() - 7);
+}
+
+if (range === "30d") {
+  startDate.setDate(now.getDate() - 30);
+}
   if (!token || token !== process.env.ADMIN_ANALYTICS_TOKEN) {
     return res.status(401).json({ error: "Unauthorized" });
   }
@@ -89,6 +113,7 @@ export default async function handler(req, res) {
     const { data: siteEvents, error: siteError } = await supabase
       .from("site_events")
       .select("*")
+      .gte("created_at", startDate.toISOString())
       .order("created_at", { ascending: false })
       .limit(1000);
 
@@ -97,6 +122,7 @@ export default async function handler(req, res) {
     const { data: bookingEvents, error: bookingError } = await supabase
       .from("booking_events")
       .select("*")
+      .gte("created_at", startDate.toISOString())
       .order("created_at", { ascending: false })
       .limit(1000);
 
