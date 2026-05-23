@@ -1550,12 +1550,12 @@ function updateSummary() {
           updateSummary();
           persistPendingBooking();
 window.trackBookingEvent?.("booking_search", {
-  house_name,
+  house_name: "multi-house-search",
+  house_slug: "multi-house-search",
   checkin,
   checkout,
   guests_count,
-
-  visitor_id:
+    visitor_id:
     localStorage.getItem("cdv_visitor_id") || null,
 
   session_id:
