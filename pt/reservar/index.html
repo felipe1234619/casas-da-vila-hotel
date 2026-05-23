@@ -1238,10 +1238,22 @@ function validateSearch(checkIn, checkOut, guestsCount) {
           updateSummary();
           persistPendingBooking();
 window.trackBookingEvent?.("booking_search", {
-  house_name: "multi-house-search",
-  checkin: selectedState.checkIn,
-  checkout: selectedState.checkOut,
-  guests: selectedState.guests
+  house_name,
+  checkin,
+  checkout,
+  guests_count,
+
+  visitor_id:
+    localStorage.getItem("cdv_visitor_id") || null,
+
+  session_id:
+    sessionStorage.getItem("cdv_session_id") || null,
+
+  page_path:
+    window.location.pathname,
+
+  referrer:
+    document.referrer || null
 });
           renderEmpty('Buscando disponibilidade…', 'Estamos consultando as casas disponíveis para o período selecionado.');
 
