@@ -10,6 +10,7 @@
         event_type: eventType,
 
         page_url: window.location.href,
+        page_path: window.location.pathname,
         referrer: document.referrer || null,
         language: document.documentElement.lang || navigator.language || null,
         source: "booking_frontend",
@@ -27,6 +28,12 @@ referrer: document.referrer || null,
         checkout: data.checkout || null,
         nights: data.nights ? Number(data.nights) : null,
         guests: data.guests ? Number(data.guests) : null,
+        guests_count:
+  data.guests_count
+    ? Number(data.guests_count)
+    : data.guests
+    ? Number(data.guests)
+    : null,
 
         currency: data.currency || "BRL",
         estimated_total: data.estimated_total || data.estimatedTotal || null,
