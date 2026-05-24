@@ -182,6 +182,24 @@ function classifyLeadScore(score) {
   if (score >= 25) return "↗ Em consideração";
   return "Exploratório";
 }
+function buildIntelligenceAlerts(sessions = []) {
+  return sessions
+    .filter((session) => Number(session.lead_score || 0) >= 45)
+    .slice(0, 10)
+    .map((session) => ({
+      title:
+        Number(session.lead_score || 0) >= 70
+          ? "Alta intenção de reserva"
+          : "Visitante qualificado",
+      description: `${session.country || "Origem desconhecida"}${
+        session.city ? " · " + session.city : ""
+      } — ${session.page_count || 0} páginas, ${
+        session.booking_count || 0
+      } eventos de reserva.`,
+      score: session.lead_score,
+      created_at: session.last_seen_at
+    }));
+}
 export default async function handler(req, res) {
   const token = req.headers["x-admin-token"];
 const range = req.query.range || "today";
@@ -268,8 +286,7 @@ const visitorSessions = buildVisitorSessions(cleanSiteEvents, cleanBookingEvents
       top_cities: topEntries(countBy(cleanSiteEvents, "city")),
 top_houses: topEntries(countSearchedHouses(availabilityResults)),
 visitor_sessions: visitorSessions,
-      alerts: [],
-
+alerts: buildIntelligenceAlerts(visitorSessions),
       recent_site_events: cleanSiteEvents.slice(0, 30),
       recent_booking_events: cleanBookingEvents.slice(0, 30),
 
