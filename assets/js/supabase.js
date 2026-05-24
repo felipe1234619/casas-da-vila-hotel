@@ -1,5 +1,5 @@
 (function () {
-  const SUPABASE_URL = "https:// https://wrtlgzbjxxerihuwgwrv.supabase.co";
+  const SUPABASE_URL = "https://wrtlgzbjxxerihuwgwrv.supabase.co";
   const SUPABASE_ANON_KEY = "sb_publishable_OEmkC3OvQY00TfL4rN2HyA_v2ImAzQ_";
 
   if (!window.supabase) {
