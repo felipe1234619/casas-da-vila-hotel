@@ -287,6 +287,14 @@ const visitorSessions = buildVisitorSessions(cleanSiteEvents, cleanBookingEvents
 top_houses: topEntries(countSearchedHouses(availabilityResults)),
 visitor_sessions: visitorSessions,
 alerts: buildIntelligenceAlerts(visitorSessions),
+
+reservation_funnel: buildReservationFunnel(
+  cleanSiteEvents,
+  cleanBookingEvents
+),
+
+recent_site_events: cleanSiteEvents.slice(0, 30),
+recent_booking_events: cleanBookingEvents.slice(0, 30),
       recent_site_events: cleanSiteEvents.slice(0, 30),
       recent_booking_events: cleanBookingEvents.slice(0, 30),
 
