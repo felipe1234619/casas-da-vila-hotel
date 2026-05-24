@@ -640,3 +640,38 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+.liveVisitorToast {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 9999;
+  max-width: 360px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(18px);
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.liveVisitorToast.isVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.liveVisitorToast strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.liveVisitorToast span {
+  display: block;
+  font-size: 13px;
+  opacity: 0.72;
+  line-height: 1.45;
+}

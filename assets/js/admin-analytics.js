@@ -251,6 +251,7 @@ if ($("unavailableQueries")) {
   renderSiteEvents(dashboardData.recent_site_events);
   renderBookingIntelligence(dashboardData.booking_availability_results);
   renderReservationFunnel(dashboardData.reservation_funnel);
+  renderLiveVisitorToast(dashboardData.live_visitors || []);
   renderVisitorSessions(dashboardData.visitor_sessions);
 
   $("lastUpdated").textContent = `● atualizado ${new Date().toLocaleTimeString("pt-BR", {
@@ -394,4 +395,33 @@ function renderReservationFunnel(funnel) {
       </div>
     `)
     .join("");
+}
+let previousLiveVisitorCount = 0;
+
+function renderLiveVisitorToast(visitors = []) {
+  const el = $("liveVisitorToast");
+  if (!el) return;
+
+  const count = visitors.length || 0;
+
+  if (count > previousLiveVisitorCount && count > 0) {
+    const visitor = visitors[0];
+
+    el.innerHTML = `
+      <strong>Visitante ativo agora</strong>
+      <span>
+        ${(visitor.country || "Origem desconhecida")}
+        ${visitor.city ? " · " + visitor.city : ""}
+        ${visitor.page_path ? " · " + visitor.page_path : ""}
+      </span>
+    `;
+
+    el.classList.add("isVisible");
+
+    setTimeout(() => {
+      el.classList.remove("isVisible");
+    }, 7000);
+  }
+
+  previousLiveVisitorCount = count;
 }
