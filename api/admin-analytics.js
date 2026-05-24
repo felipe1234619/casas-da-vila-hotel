@@ -200,6 +200,77 @@ function buildIntelligenceAlerts(sessions = []) {
       created_at: session.last_seen_at
     }));
 }
+function buildLiveVisitors(siteEvents = []) {
+  const now = Date.now();
+  const activeWindowMs = 5 * 60 * 1000;
+
+  const recent = siteEvents.filter((event) => {
+    if (!event.created_at) return false;
+    return now - new Date(event.created_at).getTime() <= activeWindowMs;
+  });
+
+  const grouped = {};
+
+  recent.forEach((event) => {
+    const key = event.session_id || event.visitor_id || "unknown";
+
+    if (!grouped[key]) {
+      grouped[key] = {
+        country: event.country || "Unknown",
+        city: event.city || "",
+        page_path: event.page_path || "-",
+        referrer: event.referrer || "Direct / unknown",
+        last_seen_at: event.created_at
+      };
+    }
+
+    if (new Date(event.created_at) > new Date(grouped[key].last_seen_at)) {
+      grouped[key].page_path = event.page_path || "-";
+      grouped[key].last_seen_at = event.created_at;
+    }
+  });
+
+  return Object.values(grouped);
+}
+function buildReservationFunnel(siteEvents = [], bookingEvents = []) {
+  const sessions = new Set(siteEvents.map((e) => e.session_id).filter(Boolean));
+
+  const visitedHouse = new Set(
+    siteEvents
+      .filter((e) => String(e.page_path || "").includes("/casas/"))
+      .map((e) => e.session_id)
+      .filter(Boolean)
+  );
+
+  const visitedBooking = new Set(
+    siteEvents
+      .filter((e) => String(e.page_path || "").includes("/reservar"))
+      .map((e) => e.session_id)
+      .filter(Boolean)
+  );
+
+  const searchedDates = new Set(
+    bookingEvents
+      .filter((e) => e.event_type === "booking_search")
+      .map((e) => e.session_id)
+      .filter(Boolean)
+  );
+
+  const gotAvailability = new Set(
+    bookingEvents
+      .filter((e) => e.event_type === "booking_availability_result")
+      .map((e) => e.session_id)
+      .filter(Boolean)
+  );
+
+  return {
+    sessions: sessions.size,
+    visited_house: visitedHouse.size,
+    visited_booking: visitedBooking.size,
+    searched_dates: searchedDates.size,
+    got_availability: gotAvailability.size
+  };
+}
 export default async function handler(req, res) {
   const token = req.headers["x-admin-token"];
 const range = req.query.range || "today";
@@ -295,9 +366,6 @@ reservation_funnel: buildReservationFunnel(
 live_visitors: buildLiveVisitors(cleanSiteEvents),
 recent_site_events: cleanSiteEvents.slice(0, 30),
 recent_booking_events: cleanBookingEvents.slice(0, 30),
-      recent_site_events: cleanSiteEvents.slice(0, 30),
-      recent_booking_events: cleanBookingEvents.slice(0, 30),
-
       booking_availability_results: availabilityResults,
 
       booking_summary: {
