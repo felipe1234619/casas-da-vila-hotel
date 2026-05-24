@@ -292,7 +292,7 @@ reservation_funnel: buildReservationFunnel(
   cleanSiteEvents,
   cleanBookingEvents
 ),
-
+live_visitors: buildLiveVisitors(cleanSiteEvents),
 recent_site_events: cleanSiteEvents.slice(0, 30),
 recent_booking_events: cleanBookingEvents.slice(0, 30),
       recent_site_events: cleanSiteEvents.slice(0, 30),
