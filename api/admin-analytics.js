@@ -105,35 +105,6 @@ function countSearchedHouses(events = []) {
   const counts = {};
 
   events.forEach((event) => {
-    const units = event.available_units || event.metadata?.available_units || [];
-
-    if (Array.isArray(units)) {
-      units.forEach((unit) => {
-        const name =
-          unit.house_name ||
-          unit.name ||
-          unit.unit_name ||
-          unit.slug ||
-          null;
-
-        if (!name) return;
-
-        counts[name] = (counts[name] || 0) + 1;
-      });
-    }
-
-    const houseName = event.house_name;
-    if (houseName && houseName !== "multi-house-search") {
-      counts[houseName] = (counts[houseName] || 0) + 1;
-    }
-  });
-
-  return counts;
-}
-function countSearchedHouses(events = []) {
-  const counts = {};
-
-  events.forEach((event) => {
 
     const units =
       event.available_units ||
