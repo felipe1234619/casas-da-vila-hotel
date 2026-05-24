@@ -90,15 +90,28 @@ house_name:
   });
 });
   return Object.values(grouped)
-    .map((session) => ({
-      ...session,
-page_count: session.pages.filter((p) => p.path && p.path !== "—").length,
-      booking_count: session.bookings.length,
-      has_booking_intent:
-        session.pages.some((p) => String(p.path).includes("reservar") || String(p.path).includes("book")) ||
-        session.bookings.length > 0,
-      is_returning_visitor: false
-    }))
+.map((session) => ({
+  ...session,
+
+  page_count: session.pages.filter(
+    (p) => p.path && p.path !== "-"
+  ).length,
+
+  booking_count: session.bookings.length,
+
+  has_booking_intent:
+    session.pages.some((p) =>
+      String(p.path).includes("reservar")
+    ) || session.bookings.length > 0,
+
+  is_returning_visitor: false,
+
+  lead_score: calculateLeadScore(session),
+
+  lead_label: classifyLeadScore(
+    calculateLeadScore(session)
+  )
+}))
     .sort((a, b) => new Date(b.last_seen_at) - new Date(a.last_seen_at));
 }
 function countSearchedHouses(events = []) {
@@ -129,6 +142,45 @@ function countSearchedHouses(events = []) {
   });
 
   return counts;
+}
+function calculateLeadScore(session) {
+  let score = 0;
+
+  const paths = (session.pages || []).map((p) => p.path || "");
+  const bookings = session.bookings || [];
+
+  if (paths.some((p) => p.includes("/reservar") || p.includes("/book"))) {
+    score += 20;
+  }
+
+  if (paths.some((p) => p.includes("/casas/") || p.includes("/houses/"))) {
+    score += 15;
+  }
+
+  if (bookings.some((b) => b.event_type === "booking_search")) {
+    score += 25;
+  }
+
+  if (bookings.some((b) => b.event_type === "booking_availability_result")) {
+    score += 25;
+  }
+
+  if (session.page_count >= 4) {
+    score += 10;
+  }
+
+  if (session.is_returning_visitor) {
+    score += 10;
+  }
+
+  return Math.min(score, 100);
+}
+
+function classifyLeadScore(score) {
+  if (score >= 70) return "🔥 Alta intenção";
+  if (score >= 45) return "💎 Qualificado";
+  if (score >= 25) return "↗ Em consideração";
+  return "Exploratório";
 }
 export default async function handler(req, res) {
   const token = req.headers["x-admin-token"];
