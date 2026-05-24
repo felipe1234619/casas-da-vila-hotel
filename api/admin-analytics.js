@@ -130,6 +130,35 @@ function countSearchedHouses(events = []) {
 
   return counts;
 }
+function countSearchedHouses(events = []) {
+  const counts = {};
+
+  events.forEach((event) => {
+
+    const units =
+      event.available_units ||
+      event.metadata?.available_units ||
+      [];
+
+    if (!Array.isArray(units)) return;
+
+    units.forEach((unit) => {
+
+      const name =
+        unit.house_name ||
+        unit.house ||
+        unit.name ||
+        unit.slug ||
+        unit.unit_name;
+
+      if (!name) return;
+
+      counts[name] = (counts[name] || 0) + 1;
+    });
+  });
+
+  return counts;
+}
 export default async function handler(req, res) {
   const token = req.headers["x-admin-token"];
 const range = req.query.range || "today";
