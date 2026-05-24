@@ -608,3 +608,35 @@ h1 {
   opacity:.55;
   margin-bottom:4px;
 }
+.funnelGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.funnelStep {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(0,0,0,.08);
+}
+
+.funnelStep span {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  opacity: .62;
+  margin-bottom: 10px;
+}
+
+.funnelStep strong {
+  font-size: 32px;
+  font-family: inherit;
+}
+
+@media (max-width: 800px) {
+  .funnelGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -250,6 +250,7 @@ if ($("unavailableQueries")) {
   renderBookings(dashboardData.recent_booking_events);
   renderSiteEvents(dashboardData.recent_site_events);
   renderBookingIntelligence(dashboardData.booking_availability_results);
+  renderReservationFunnel(dashboardData.reservation_funnel);
   renderVisitorSessions(dashboardData.visitor_sessions);
 
   $("lastUpdated").textContent = `● atualizado ${new Date().toLocaleTimeString("pt-BR", {
@@ -372,4 +373,25 @@ function renderVisitorSessions(sessions) {
       button.closest(".visitorSessionCard").classList.toggle("isOpen");
     });
   });
+}
+function renderReservationFunnel(funnel) {
+  const el = $("reservationFunnel");
+  if (!el || !funnel) return;
+
+  const items = [
+    ["Sessões", funnel.sessions],
+    ["Visitou casa", funnel.visited_house],
+    ["Foi para reservar", funnel.visited_booking],
+    ["Buscou datas", funnel.searched_dates],
+    ["Recebeu disponibilidade", funnel.got_availability]
+  ];
+
+  el.innerHTML = items
+    .map(([label, value]) => `
+      <div class="funnelStep">
+        <span>${label}</span>
+        <strong>${value || 0}</strong>
+      </div>
+    `)
+    .join("");
 }
