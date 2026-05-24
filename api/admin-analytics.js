@@ -357,6 +357,10 @@ const visitorSessions = buildVisitorSessions(cleanSiteEvents, cleanBookingEvents
       top_cities: topEntries(countBy(cleanSiteEvents, "city")),
 top_houses: topEntries(countSearchedHouses(availabilityResults)),
 visitor_sessions: visitorSessions,
+hot_leads: visitorSessions
+  .filter((s) => s.lead_score >= 80)
+  .sort((a, b) => b.lead_score - a.lead_score)
+  .slice(0, 10),
 alerts: buildIntelligenceAlerts(visitorSessions),
 
 reservation_funnel: buildReservationFunnel(

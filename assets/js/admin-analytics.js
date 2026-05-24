@@ -251,6 +251,7 @@ if ($("unavailableQueries")) {
   renderSiteEvents(dashboardData.recent_site_events);
   renderBookingIntelligence(dashboardData.booking_availability_results);
   renderReservationFunnel(dashboardData.reservation_funnel);
+  renderHotLeads(dashboardData.hot_leads || []);
   renderLiveVisitorToast(dashboardData.live_visitors || []);
   renderVisitorSessions(dashboardData.visitor_sessions);
 
@@ -424,4 +425,52 @@ function renderLiveVisitorToast(visitors = []) {
   }
 
   previousLiveVisitorCount = count;
+}
+function renderHotLeads(leads = []) {
+  const el = $("hotLeads");
+  if (!el) return;
+
+  if (!leads.length) {
+    el.innerHTML = `
+      <div class="emptyState">
+        Nenhum lead qualificado no período.
+      </div>
+    `;
+    return;
+  }
+
+  el.innerHTML = `
+    <div class="hotLeadTable">
+      ${leads
+        .map((lead) => {
+          const lastPage =
+            lead.pages?.[lead.pages.length - 1]?.path || "-";
+
+          const searchedHouse =
+            lead.bookings?.[0]?.house_name || "multi-house-search";
+
+          return `
+            <div class="hotLeadRow">
+              <div class="hotLeadScore">
+                ${lead.lead_score}
+              </div>
+
+              <div class="hotLeadInfo">
+                <strong>${lead.city || "Unknown city"} · ${lead.country || "--"}</strong>
+
+                <span>
+                  ${lastPage}
+                </span>
+              </div>
+
+              <div class="hotLeadMeta">
+                <small>${searchedHouse}</small>
+                <small>${lead.lead_label || "Intent"}</small>
+              </div>
+            </div>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
 }
