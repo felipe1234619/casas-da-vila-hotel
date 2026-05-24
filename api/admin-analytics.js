@@ -19,6 +19,17 @@ function topEntries(obj, limit = 8) {
     .sort((a, b) => b.value - a.value)
     .slice(0, limit);
 }
+function getEventPath(event) {
+  if (event.page_path) return event.page_path;
+
+  try {
+    if (event.page_url) {
+      return new URL(event.page_url).pathname;
+    }
+  } catch (_) {}
+
+  return "—";
+}
 function buildVisitorSessions(siteEvents, bookingEvents) {
   const grouped = {};
 
@@ -41,7 +52,7 @@ function buildVisitorSessions(siteEvents, bookingEvents) {
     }
 
     grouped[key].pages.push({
-      path: event.page_path || "—",
+path: getEventPath(event),
       title: event.page_title || "",
       created_at: event.created_at,
       referrer: event.referrer || ""
@@ -71,8 +82,8 @@ bookingEvents.forEach((event) => {
     event_type: event.event_type || null,
     checkin: event.checkin || null,
     checkout: event.checkout || null,
-    house_name: event.house_name || "multi-house",
-    estimated_total: event.estimated_total || 0,
+house_name:
+  event.house_name || event.house_slug || "multi-house-search",    estimated_total: event.estimated_total || 0,
     availability_status: event.availability_status || null,
     available_units_count: event.available_units_count || null,
     created_at: event.created_at
@@ -81,7 +92,7 @@ bookingEvents.forEach((event) => {
   return Object.values(grouped)
     .map((session) => ({
       ...session,
-      page_count: session.pages.length,
+page_count: session.pages.filter((p) => p.path && p.path !== "—").length,
       booking_count: session.bookings.length,
       has_booking_intent:
         session.pages.some((p) => String(p.path).includes("reservar") || String(p.path).includes("book")) ||
@@ -89,6 +100,35 @@ bookingEvents.forEach((event) => {
       is_returning_visitor: false
     }))
     .sort((a, b) => new Date(b.last_seen_at) - new Date(a.last_seen_at));
+}
+function countSearchedHouses(events = []) {
+  const counts = {};
+
+  events.forEach((event) => {
+    const units = event.available_units || event.metadata?.available_units || [];
+
+    if (Array.isArray(units)) {
+      units.forEach((unit) => {
+        const name =
+          unit.house_name ||
+          unit.name ||
+          unit.unit_name ||
+          unit.slug ||
+          null;
+
+        if (!name) return;
+
+        counts[name] = (counts[name] || 0) + 1;
+      });
+    }
+
+    const houseName = event.house_name;
+    if (houseName && houseName !== "multi-house-search") {
+      counts[houseName] = (counts[houseName] || 0) + 1;
+    }
+  });
+
+  return counts;
 }
 export default async function handler(req, res) {
   const token = req.headers["x-admin-token"];
@@ -174,8 +214,7 @@ const visitorSessions = buildVisitorSessions(cleanSiteEvents, cleanBookingEvents
       top_referrers: topEntries(countBy(cleanSiteEvents, "referrer")),
       top_countries: topEntries(countBy(cleanSiteEvents, "country")),
       top_cities: topEntries(countBy(cleanSiteEvents, "city")),
-      top_houses: topEntries(countBy(bookingSearches, "house_name")),
-
+top_houses: topEntries(countSearchedHouses(availabilityResults)),
 visitor_sessions: visitorSessions,
       alerts: [],
 
