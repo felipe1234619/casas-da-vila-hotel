@@ -7,7 +7,7 @@
   <!-- PT HOME -->
   <url>
     <loc>https://casasdavila.com/pt/</loc>
-    <lastmod>2026-04-23</lastmod>
+  <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/" />
@@ -18,7 +18,7 @@
   <!-- EN HOME -->
   <url>
     <loc>https://casasdavila.com/en/</loc>
-    <lastmod>2026-04-23</lastmod>
+  <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.98</priority>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/" />
@@ -71,7 +71,7 @@
   <!-- HOUSES INDEX -->
   <url>
     <loc>https://casasdavila.com/pt/casas/</loc>
-    <lastmod>2026-04-23</lastmod>
+  <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.94</priority>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/" />
@@ -81,7 +81,7 @@
 
   <url>
     <loc>https://casasdavila.com/en/houses/</loc>
-    <lastmod>2026-04-23</lastmod>
+  <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.94</priority>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/casas/" />
@@ -267,6 +267,16 @@
   <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/collections/couples/" />
 </url>
 <url>
+  <loc>https://casasdavila.com/en/collections/couples/</loc>
+  <lastmod>2026-05-26</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+  <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/collections/couples/" />
+  <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/colecoes/casais/" />
+  <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/collections/couples/" />
+</url>
+
+<url>
   <loc>https://casasdavila.com/pt/colecoes/familias/</loc>
   <lastmod>2026-05-26</lastmod>
   <changefreq>monthly</changefreq>
@@ -276,14 +286,15 @@
   <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/collections/families/" />
 </url>
 <url>
-  <loc>https://casasdavila.com/en/collections/couples/</loc>
+  <loc>https://casasdavila.com/en/collections/families/</loc>
   <lastmod>2026-05-26</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
-  <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/collections/couples/" />
-  <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/colecoes/casais/" />
-  <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/collections/couples/" />
+  <xhtml:link rel="alternate" hreflang="en" href="https://casasdavila.com/en/collections/families/" />
+  <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/colecoes/familias/" />
+  <xhtml:link rel="alternate" hreflang="x-default" href="https://casasdavila.com/en/collections/families/" />
 </url>
+
   <!-- EXPERIENCE -->
   <url>
     <loc>https://casasdavila.com/pt/experiencias/</loc>
@@ -329,7 +340,7 @@
   <!-- ABOUT -->
   <url>
     <loc>https://casasdavila.com/pt/sobre/</loc>
-    <lastmod>2026-04-23</lastmod>
+  <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.74</priority>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/sobre/" />
@@ -339,7 +350,7 @@
 
   <url>
     <loc>https://casasdavila.com/en/about/</loc>
-    <lastmod>2026-04-23</lastmod>
+  <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.74</priority>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://casasdavila.com/pt/sobre/" />
