@@ -357,6 +357,61 @@
         min-height:280px;
       }
     }
+    .aboutCollections{
+  padding-top:0;
+  padding-bottom:92px;
+}
+
+.aboutCollectionsPanel{
+  max-width:1080px;
+  margin:0 auto;
+  padding:42px;
+  border-radius:34px;
+  background:rgba(255,252,248,0.78);
+  border:1px solid rgba(255,255,255,0.56);
+  box-shadow:var(--shadow-lg);
+  text-align:center;
+}
+
+.aboutCollectionsGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+  margin-top:32px;
+}
+
+.aboutCollectionCard{
+  padding:26px;
+  border-radius:26px;
+  background:rgba(255,255,255,0.72);
+  border:1px solid rgba(92,71,54,0.08);
+  text-decoration:none;
+  color:inherit;
+}
+
+.aboutCollectionCard h3{
+  margin:0 0 10px;
+  font-family:var(--font-serif);
+  font-size:28px;
+  letter-spacing:-.03em;
+}
+
+.aboutCollectionCard p{
+  margin:0;
+  color:var(--text-soft);
+  line-height:1.72;
+}
+
+@media(max-width:900px){
+  .aboutCollectionsGrid{
+    grid-template-columns:1fr;
+  }
+
+  .aboutCollectionsPanel{
+    padding:24px;
+    border-radius:26px;
+  }
+}
   </style>
 </head>
 <body>
@@ -520,7 +575,53 @@
         </div>
       </div>
     </section>
+<section class="section aboutCollections">
+  <div class="wrap">
 
+    <div class="aboutCollectionsPanel" data-reveal="zoom">
+      <p class="eyebrow">Casas</p>
+
+      <h2 class="h2">
+        Casas diferentes.<br>
+        Uma mesma forma silenciosa de estar.
+      </h2>
+
+      <p class="lead mt-16">
+        A Casas da Vila não se organiza como uma sequência de quartos, mas como uma pequena
+        coleção de casas tropicais — cada uma com sua própria atmosfera, escala e ritmo.
+      </p>
+
+      <div class="aboutCollectionsGrid">
+
+        <a class="aboutCollectionCard" href="/pt/colecoes/casais/">
+          <p class="eyebrow">Para casais</p>
+          <h3>Estadias íntimas</h3>
+          <p>
+            Casas mais suaves e silenciosas para dois — moldadas por jardim, sombra e privacidade.
+          </p>
+        </a>
+
+        <a class="aboutCollectionCard" href="/pt/colecoes/familias/">
+          <p class="eyebrow">Para famílias</p>
+          <h3>Dias compartilhados</h3>
+          <p>
+            Casas mais generosas para famílias, grupos e estadias tropicais prolongadas.
+          </p>
+        </a>
+
+        <a class="aboutCollectionCard" href="/pt/casas/">
+          <p class="eyebrow">Todas as casas</p>
+          <h3>A coleção</h3>
+          <p>
+            Explore a coleção completa da Casas da Vila e escolha o ritmo que combina com sua estadia.
+          </p>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</section>
     <section class="section aboutClosing">
       <div class="wrap">
         <div class="aboutClosingPanel" data-reveal="zoom">
@@ -565,6 +666,51 @@
  <script src="/assets/js/supabase.js"></script>
 
    <script src="/assets/js/site-analytics.js"></script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"AboutPage",
+  "name":"Sobre a Casas da Vila",
+  "url":"https://casasdavila.com/pt/sobre/",
+  "description":"A Casas da Vila é um projeto de hospitalidade boutique em Trancoso, Bahia, organizado como uma coleção de casas tropicais com atmosfera de jardim, ritmo silencioso e café da manhã incluído.",
+  "isPartOf":{
+    "@type":"WebSite",
+    "name":"Casas da Vila",
+    "url":"https://casasdavila.com/"
+  },
+  "about":{
+    "@type":"LodgingBusiness",
+    "name":"Casas da Vila",
+    "url":"https://casasdavila.com/",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Trancoso",
+      "addressRegion":"Bahia",
+      "addressCountry":"BR"
+    }
+  }
+}
+</script>
 
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BreadcrumbList",
+  "itemListElement":[
+    {
+      "@type":"ListItem",
+      "position":1,
+      "name":"Início",
+      "item":"https://casasdavila.com/pt/"
+    },
+    {
+      "@type":"ListItem",
+      "position":2,
+      "name":"Sobre",
+      "item":"https://casasdavila.com/pt/sobre/"
+    }
+  ]
+}
+</script>
 </body>
 </html>

@@ -374,7 +374,61 @@
       .aboutDifferenceImageWrap img{
         min-height:280px;
       }
-    
+    .aboutCollections{
+  padding-top:0;
+  padding-bottom:92px;
+}
+
+.aboutCollectionsPanel{
+  max-width:1080px;
+  margin:0 auto;
+  padding:42px;
+  border-radius:34px;
+  background:rgba(255,252,248,0.78);
+  border:1px solid rgba(255,255,255,0.56);
+  box-shadow:var(--shadow-lg);
+  text-align:center;
+}
+
+.aboutCollectionsGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+  margin-top:32px;
+}
+
+.aboutCollectionCard{
+  padding:26px;
+  border-radius:26px;
+  background:rgba(255,255,255,0.72);
+  border:1px solid rgba(92,71,54,0.08);
+  text-decoration:none;
+  color:inherit;
+}
+
+.aboutCollectionCard h3{
+  margin:0 0 10px;
+  font-family:var(--font-serif);
+  font-size:28px;
+  letter-spacing:-.03em;
+}
+
+.aboutCollectionCard p{
+  margin:0;
+  color:var(--text-soft);
+  line-height:1.72;
+}
+
+@media(max-width:900px){
+  .aboutCollectionsGrid{
+    grid-template-columns:1fr;
+  }
+
+  .aboutCollectionsPanel{
+    padding:24px;
+    border-radius:26px;
+  }
+}
   </style>
 </head>
 <body>
@@ -565,7 +619,53 @@
 
       </div>
     </section>
+<section class="section aboutCollections">
+  <div class="wrap">
 
+    <div class="aboutCollectionsPanel" data-reveal="zoom">
+      <p class="eyebrow">Houses</p>
+
+      <h2 class="h2">
+        Different houses.<br>
+        One quiet way of staying.
+      </h2>
+
+      <p class="lead mt-16">
+        Casas da Vila is not organized as a sequence of rooms, but as a small collection
+        of tropical houses — each one with its own atmosphere, scale and rhythm.
+      </p>
+
+      <div class="aboutCollectionsGrid">
+
+        <a class="aboutCollectionCard" href="/en/collections/couples/">
+          <p class="eyebrow">For couples</p>
+          <h3>Intimate stays</h3>
+          <p>
+            Softer, quieter houses for two — shaped by garden, shade and privacy.
+          </p>
+        </a>
+
+        <a class="aboutCollectionCard" href="/en/collections/families/">
+          <p class="eyebrow">For families</p>
+          <h3>Shared days</h3>
+          <p>
+            More generous houses for families, groups and longer tropical stays.
+          </p>
+        </a>
+
+        <a class="aboutCollectionCard" href="/en/houses/">
+          <p class="eyebrow">All houses</p>
+          <h3>The collection</h3>
+          <p>
+            Explore the full Casas da Vila collection and choose the rhythm that fits your stay.
+          </p>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</section>
     <section class="section aboutClosing">
       <div class="wrap">
 
@@ -600,7 +700,6 @@
   <script src="/assets/js/main.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 <script src="/assets/js/seo-meta.js"></script>
-</script>
 <!-- TWIPLA Tracking Code -->
 <script>
 (function(v,i,s,a,t){
@@ -618,6 +717,51 @@
 <!-- End TWIPLA -->
  <script src="/assets/js/supabase.js"></script>
    <script src="/assets/js/site-analytics.js"></script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"AboutPage",
+  "name":"About Casas da Vila",
+  "url":"https://casasdavila.com/en/about/",
+  "description":"Casas da Vila is a boutique hospitality project in Trancoso, Bahia, organized as a collection of tropical houses with garden atmosphere, quiet rhythm and breakfast included.",
+  "isPartOf":{
+    "@type":"WebSite",
+    "name":"Casas da Vila",
+    "url":"https://casasdavila.com/"
+  },
+  "about":{
+    "@type":"LodgingBusiness",
+    "name":"Casas da Vila",
+    "url":"https://casasdavila.com/",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Trancoso",
+      "addressRegion":"Bahia",
+      "addressCountry":"BR"
+    }
+  }
+}
+</script>
 
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BreadcrumbList",
+  "itemListElement":[
+    {
+      "@type":"ListItem",
+      "position":1,
+      "name":"Home",
+      "item":"https://casasdavila.com/en/"
+    },
+    {
+      "@type":"ListItem",
+      "position":2,
+      "name":"About",
+      "item":"https://casasdavila.com/en/about/"
+    }
+  ]
+}
+</script>
 </body>
 </html>
