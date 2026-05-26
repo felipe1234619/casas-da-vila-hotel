@@ -374,42 +374,68 @@
       .aboutDifferenceImageWrap img{
         min-height:280px;
       }
-    .aboutCollections{
+.aboutCollections{
   padding-top:0;
   padding-bottom:92px;
 }
 
 .aboutCollectionsPanel{
-  max-width:1080px;
+  max-width:1180px;
   margin:0 auto;
-  padding:42px;
+  padding:42px 48px;
   border-radius:34px;
   background:rgba(255,252,248,0.78);
   border:1px solid rgba(255,255,255,0.56);
   box-shadow:var(--shadow-lg);
-  text-align:center;
+  text-align:left;
+}
+
+.aboutCollectionsPanel > .eyebrow,
+.aboutCollectionsPanel > .h2,
+.aboutCollectionsPanel > .lead{
+  max-width:760px;
+}
+
+.aboutCollectionsPanel > .h2{
+  font-size:clamp(40px,4vw,62px);
+  line-height:1.02;
+  letter-spacing:-.045em;
+}
+
+.aboutCollectionsPanel > .lead{
+  font-size:18px;
+  line-height:1.76;
 }
 
 .aboutCollectionsGrid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:22px;
-  margin-top:32px;
+  gap:0;
+  margin-top:36px;
+  border-top:1px solid rgba(92,71,54,.12);
 }
 
 .aboutCollectionCard{
-  padding:26px;
-  border-radius:26px;
-  background:rgba(255,255,255,0.72);
-  border:1px solid rgba(92,71,54,0.08);
+  padding:26px 30px 8px;
+  border-radius:0;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  text-align:left;
+  min-height:220px;
   text-decoration:none;
   color:inherit;
+}
+
+.aboutCollectionCard + .aboutCollectionCard{
+  border-left:1px solid rgba(92,71,54,.12);
 }
 
 .aboutCollectionCard h3{
   margin:0 0 10px;
   font-family:var(--font-serif);
-  font-size:28px;
+  font-size:30px;
+  line-height:1.05;
   letter-spacing:-.03em;
 }
 
@@ -419,14 +445,32 @@
   line-height:1.72;
 }
 
+.aboutCollectionCard::after{
+  content:"→";
+  display:block;
+  margin-top:24px;
+  font-size:22px;
+  color:var(--text);
+}
+
 @media(max-width:900px){
   .aboutCollectionsGrid{
     grid-template-columns:1fr;
   }
 
   .aboutCollectionsPanel{
-    padding:24px;
+    padding:28px;
     border-radius:26px;
+  }
+
+  .aboutCollectionCard{
+    padding:26px 0;
+    min-height:auto;
+  }
+
+  .aboutCollectionCard + .aboutCollectionCard{
+    border-left:0;
+    border-top:1px solid rgba(92,71,54,.12);
   }
 }
   </style>
