@@ -541,6 +541,67 @@
   color: var(--text-soft);
   line-height: 1.7;
 }
+.housesCollectionsLogic{
+  padding-top:0;
+  padding-bottom:84px;
+}
+
+.housesCollectionLogicPanel{
+  padding:42px;
+  border-radius:34px;
+  background:rgba(255,252,248,.76);
+  border:1px solid rgba(255,255,255,.56);
+  box-shadow:var(--shadow-lg);
+}
+
+.housesCollectionLogicGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+  margin-top:30px;
+}
+
+.housesCollectionLogicCard{
+  padding:26px;
+  border-radius:26px;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(92,71,54,.08);
+  text-decoration:none;
+  color:inherit;
+}
+
+.housesCollectionLogicCard span{
+  display:block;
+  margin-bottom:12px;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(58,47,39,.56);
+}
+
+.housesCollectionLogicCard h3{
+  margin:0 0 10px;
+  font-family:var(--font-serif);
+  font-size:30px;
+  line-height:1;
+  letter-spacing:-.03em;
+}
+
+.housesCollectionLogicCard p{
+  margin:0;
+  color:var(--text-soft);
+  line-height:1.72;
+}
+
+@media(max-width:900px){
+  .housesCollectionLogicGrid{
+    grid-template-columns:1fr;
+  }
+
+  .housesCollectionLogicPanel{
+    padding:28px;
+  }
+}
   </style>
 </head>
 <body>
@@ -571,13 +632,12 @@
       <div class="housesHeroInner">
         <div class="housesHeroContent" data-reveal="left">
           <p class="housesHeroKicker">Casas da Vila • Trancoso</p>
-
 <h1 class="housesHeroTitle">
-  Houses in Trancoso with distinct character.
+  A collection of tropical houses for experiencing Trancoso in different ways.
 </h1>
-          <p class="housesHeroText">
-            From quieter stays to more expansive houses, the village brings together homes where architecture, garden, light and atmosphere create different ways of living Trancoso.
-          </p>
+<p class="housesHeroText">
+  Some houses invite silence and intimacy. Others offer a broader, more open way of staying, connected to garden and shared tropical living. Together, they form an authorial collection of stays in Trancoso.
+</p>
         </div>
 
         <aside class="housesHeroNote heroFloat" data-reveal="right" aria-label="About the collection">
@@ -624,7 +684,41 @@
         </div>
       </div>
     </section>
+<section class="section housesCollectionsLogic">
+  <div class="wrap">
+    <div class="housesCollectionLogicPanel" data-reveal="zoom">
 
+      <p class="eyebrow">Collections</p>
+
+      <h2 class="h2">
+        Houses organized by atmosphere, scale and rhythm.
+      </h2>
+
+      <div class="housesCollectionLogicGrid">
+
+        <a href="/en/collections/couples/" class="housesCollectionLogicCard">
+          <span>For couples</span>
+          <h3>Intimate stays</h3>
+          <p>Quieter, more sensory houses for two.</p>
+        </a>
+
+        <a href="/en/collections/families/" class="housesCollectionLogicCard">
+          <span>For families</span>
+          <h3>Shared stays</h3>
+          <p>More generous houses for families, groups and longer stays.</p>
+        </a>
+
+        <a href="/en/reveillon-2027/" class="housesCollectionLogicCard">
+          <span>New Year’s Eve</span>
+          <h3>Tropical season</h3>
+          <p>Houses suited for longer summer stays in Trancoso.</p>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</section>
     <section class="section housesCollectionV2">
       <div class="wrap">
 
@@ -849,7 +943,28 @@
         </div>
       </div>
     </section>
+<section class="section housesManifesto">
+  <div class="wrap">
 
+    <div class="housesClosingPanel" data-reveal="zoom">
+
+      <p class="eyebrow">The experience</p>
+
+      <h2 class="h2">
+        More atmosphere.<br>
+        Less conventional hospitality.
+      </h2>
+
+      <p class="lead mt-16">
+        Casas da Vila was not conceived as repeated rooms, but as houses with their
+        own identities — shaped by garden, architecture, silence, shade and slower
+        ways of staying in Trancoso.
+      </p>
+
+    </div>
+
+  </div>
+</section>
     <section class="section housesClosing">
       <div class="wrap">
         <div class="housesClosingPanel" data-reveal="zoom">
@@ -922,6 +1037,31 @@
  <script src="/assets/js/supabase.js"></script>
 
    <script src="/assets/js/site-analytics.js"></script>
-
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"CollectionPage",
+  "name":"Houses in Trancoso — Casas da Vila",
+  "url":"https://casasdavila.com/en/houses/",
+  "description":"A curated collection of tropical houses in Trancoso with authorial architecture, gardens and different stay atmospheres.",
+  "hasPart":[
+    {
+      "@type":"LodgingBusiness",
+      "name":"Casa Grande",
+      "url":"https://casasdavila.com/en/houses/casa-grande/"
+    },
+    {
+      "@type":"LodgingBusiness",
+      "name":"Casa Oca",
+      "url":"https://casasdavila.com/en/houses/casa-oca/"
+    },
+    {
+      "@type":"LodgingBusiness",
+      "name":"Casa Rosada",
+      "url":"https://casasdavila.com/en/houses/casa-rosada/"
+    }
+  ]
+}
+</script>
 </body>
 </html>

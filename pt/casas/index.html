@@ -1006,6 +1006,67 @@
   color: var(--text-soft);
   line-height: 1.7;
 }
+.housesCollectionsLogic{
+  padding-top:0;
+  padding-bottom:84px;
+}
+
+.housesCollectionLogicPanel{
+  padding:42px;
+  border-radius:34px;
+  background:rgba(255,252,248,.76);
+  border:1px solid rgba(255,255,255,.56);
+  box-shadow:var(--shadow-lg);
+}
+
+.housesCollectionLogicGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+  margin-top:30px;
+}
+
+.housesCollectionLogicCard{
+  padding:26px;
+  border-radius:26px;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(92,71,54,.08);
+  text-decoration:none;
+  color:inherit;
+}
+
+.housesCollectionLogicCard span{
+  display:block;
+  margin-bottom:12px;
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(58,47,39,.56);
+}
+
+.housesCollectionLogicCard h3{
+  margin:0 0 10px;
+  font-family:var(--font-serif);
+  font-size:30px;
+  line-height:1;
+  letter-spacing:-.03em;
+}
+
+.housesCollectionLogicCard p{
+  margin:0;
+  color:var(--text-soft);
+  line-height:1.72;
+}
+
+@media(max-width:900px){
+  .housesCollectionLogicGrid{
+    grid-template-columns:1fr;
+  }
+
+  .housesCollectionLogicPanel{
+    padding:28px;
+  }
+}
   </style>
 </head>
 <body>
@@ -1037,9 +1098,8 @@
     <div class="housesHeroContent" data-reveal="left">
       <p class="housesHeroKicker">Casas da Vila • Trancoso</p>
 <h1 class="housesHeroTitle">
-  Casas em Trancoso com identidade própria.
+  Uma coleção de casas tropicais para viver Trancoso de maneiras diferentes.
 </h1>
-
       <p class="housesHeroText">
         Da permanência mais íntima às casas mais amplas, a vila reúne estadias autorais em que arquitetura, jardim, luz e atmosfera propõem formas distintas de viver Trancoso.
       </p>
@@ -1090,7 +1150,49 @@
         </div>
       </div>
     </section>
+<section class="section housesCollectionsLogic">
+  <div class="wrap">
 
+    <div class="housesCollectionLogicPanel" data-reveal="zoom">
+
+      <p class="eyebrow">Coleções</p>
+
+      <h2 class="h2">
+        Casas organizadas por atmosfera, escala e ritmo.
+      </h2>
+
+      <div class="housesCollectionLogicGrid">
+
+        <a href="/pt/colecoes/casais/" class="housesCollectionLogicCard">
+          <span>Para casais</span>
+          <h3>Estadias íntimas</h3>
+          <p>
+            Casas mais silenciosas e sensoriais para dois.
+          </p>
+        </a>
+
+        <a href="/pt/colecoes/familias/" class="housesCollectionLogicCard">
+          <span>Para famílias</span>
+          <h3>Estadias compartilhadas</h3>
+          <p>
+            Casas mais amplas para famílias, grupos e permanências longas.
+          </p>
+        </a>
+
+        <a href="/pt/reveillon-2027/" class="housesCollectionLogicCard">
+          <span>Réveillon</span>
+          <h3>Temporada tropical</h3>
+          <p>
+            Casas preparadas para estadias prolongadas durante o verão em Trancoso.
+          </p>
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
 <section class="section housesCollectionV2">
   <div class="wrap">
 
@@ -1319,6 +1421,28 @@
     </div>
   </div>
 </section>
+<section class="section housesManifesto">
+  <div class="wrap">
+
+    <div class="housesClosingPanel" data-reveal="zoom">
+
+      <p class="eyebrow">A experiência</p>
+
+      <h2 class="h2">
+        Mais atmosfera.<br>
+        Menos hospitalidade convencional.
+      </h2>
+
+      <p class="lead mt-16">
+        As Casas da Vila não foram concebidas como quartos repetidos,
+        mas como casas com identidades próprias — moldadas por jardim,
+        arquitetura, silêncio, sombra e permanências mais lentas em Trancoso.
+      </p>
+
+    </div>
+
+  </div>
+</section>
     <section class="section housesClosing">
       <div class="wrap">
         <div class="housesClosingPanel" data-reveal="zoom">
@@ -1392,6 +1516,31 @@
  <script src="/assets/js/supabase.js"></script>
 
    <script src="/assets/js/site-analytics.js"></script>
-
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"CollectionPage",
+  "name":"Casas em Trancoso — Casas da Vila",
+  "url":"https://casasdavila.com/pt/casas/",
+  "description":"Coleção de casas tropicais em Trancoso com arquitetura autoral, jardim e diferentes atmosferas de estadia.",
+  "hasPart":[
+    {
+      "@type":"LodgingBusiness",
+      "name":"Casa Grande",
+      "url":"https://casasdavila.com/pt/casas/casa-grande/"
+    },
+    {
+      "@type":"LodgingBusiness",
+      "name":"Casa Oca",
+      "url":"https://casasdavila.com/pt/casas/casa-oca/"
+    },
+    {
+      "@type":"LodgingBusiness",
+      "name":"Casa Rosada",
+      "url":"https://casasdavila.com/pt/casas/casa-rosada/"
+    }
+  ]
+}
+</script>
 </body>
 </html>
