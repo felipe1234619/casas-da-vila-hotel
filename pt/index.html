@@ -663,6 +663,153 @@
   }
 }
 /* =========================================
+   HOME EN — DISCOVERY / COLLECTIONS
+   ========================================= */
+
+.homeDiscovery,
+.homeStayTypes,
+.homeManifesto,
+.homeAllHouses{
+  padding-top:0;
+  padding-bottom:92px;
+}
+
+.discoveryGrid,
+.stayTypesGrid,
+.allHousesGrid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:22px;
+}
+
+.discoveryCard,
+.stayTypeCard,
+.allHouseCard{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border-radius:30px;
+  background:rgba(255,252,248,.84);
+  border:1px solid rgba(255,255,255,.56);
+  box-shadow:var(--shadow-md);
+  text-decoration:none;
+  color:inherit;
+  transition:
+    transform .4s var(--ease),
+    box-shadow .4s var(--ease);
+}
+
+.discoveryCard:hover,
+.stayTypeCard:hover,
+.allHouseCard:hover{
+  transform:translateY(-6px);
+  box-shadow:0 28px 60px rgba(76,52,35,.16);
+}
+
+.discoveryCardBody,
+.stayTypeBody,
+.allHouseBody{
+  padding:24px;
+  display:grid;
+  gap:12px;
+}
+
+.discoveryCard h3,
+.stayTypeBody h3,
+.allHouseBody h3{
+  margin:0;
+  font-family:var(--font-serif);
+  font-size:30px;
+  line-height:1;
+  letter-spacing:-.03em;
+}
+
+.discoveryCard p,
+.stayTypeBody p,
+.allHouseBody p{
+  margin:0;
+  color:var(--text-soft);
+  line-height:1.72;
+}
+
+.discoveryCard img,
+.allHouseCard img{
+  width:100%;
+  aspect-ratio:16 / 11;
+  object-fit:cover;
+}
+
+.homeManifestoPanel{
+  max-width:1080px;
+  margin:0 auto;
+  padding:42px;
+  border-radius:34px;
+  background:rgba(255,252,248,.78);
+  border:1px solid rgba(255,255,255,.56);
+  box-shadow:var(--shadow-lg);
+}
+
+.manifestoGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px;
+  margin-top:26px;
+}
+
+.manifestoList{
+  display:grid;
+  gap:16px;
+}
+
+.manifestoItem{
+  padding:18px 20px;
+  border-radius:20px;
+  background:rgba(255,255,255,.70);
+  border:1px solid rgba(92,71,54,.08);
+}
+
+.manifestoItem strong{
+  display:block;
+  margin-bottom:6px;
+  font-size:15px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--text);
+}
+
+.manifestoItem p{
+  margin:0;
+  color:var(--text-soft);
+  line-height:1.68;
+}
+
+@media(max-width:1100px){
+
+  .discoveryGrid,
+  .stayTypesGrid,
+  .allHousesGrid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .manifestoGrid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:760px){
+
+  .discoveryGrid,
+  .stayTypesGrid,
+  .allHousesGrid{
+    grid-template-columns:1fr;
+  }
+
+  .homeManifestoPanel{
+    padding:24px;
+    border-radius:26px;
+  }
+}
+/* =========================================
    HOME EN — OVERRIDE LIMPO (SEM CIRURGIA)
    ========================================= */
 
@@ -842,6 +989,55 @@
       </div>
     </div>
   </section>
+  <section class="section homeDiscovery">
+  <div class="wrap">
+
+    <div class="homeCollectionHead" data-reveal="zoom">
+      <p class="eyebrow">Encontre sua estadia</p>
+      <h2 class="h2">Diferentes ritmos de estar em Trancoso.</h2>
+      <p class="lead">
+        Explore casas e coleções moldadas por intimidade, silêncio, convivência,
+        jardins tropicais e tempo mais lento.
+      </p>
+    </div>
+
+    <div class="discoveryGrid">
+
+      <a class="discoveryCard" href="/pt/colecoes/casais/" data-reveal="left">
+        <div class="discoveryCardBody">
+          <p class="eyebrow">Para casais</p>
+          <h3>Estadias tropicais íntimas</h3>
+          <p>Casas mais suaves, moldadas por privacidade, jardim e dias silenciosos.</p>
+        </div>
+      </a>
+
+      <a class="discoveryCard" href="/pt/colecoes/familias/" data-reveal="zoom">
+        <div class="discoveryCardBody">
+          <p class="eyebrow">Para famílias</p>
+          <h3>Dias tropicais compartilhados</h3>
+          <p>Casas mais amplas para famílias, grupos e estadias prolongadas.</p>
+        </div>
+      </a>
+
+      <a class="discoveryCard" href="/pt/casas/" data-reveal="zoom">
+        <div class="discoveryCardBody">
+          <p class="eyebrow">Estadias lentas</p>
+          <h3>Ritmo silencioso de vila</h3>
+          <p>Casas moldadas por luz, sombra, silêncio e o ritmo mais lento de Trancoso.</p>
+        </div>
+      </a>
+
+      <a class="discoveryCard" href="/pt/reveillon-2027/" data-reveal="right">
+        <div class="discoveryCardBody">
+          <p class="eyebrow">Réveillon</p>
+          <h3>Celebrações tropicais prolongadas</h3>
+          <p>Estadias mais longas durante a temporada mais desejada de Trancoso.</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
 
   <section class="section homeCollection">
     <div class="wrap">
@@ -868,6 +1064,7 @@
             </div>
           </a>
         </article>
+
 
         <div class="homeMiniStack">
           <article class="homeMiniCard" data-reveal="right">
@@ -899,6 +1096,63 @@
       </div>
     </div>
   </section>
+  <section class="section homeAllHouses">
+  <div class="wrap">
+
+    <div class="homeCollectionHead" data-reveal="zoom">
+      <p class="eyebrow">A coleção</p>
+      <h2 class="h2">Oito casas com diferentes escalas, atmosferas e ritmos.</h2>
+      <p class="lead">
+        Explore a coleção completa da Casas da Vila e descubra a estadia que melhor combina
+        com seu ritmo em Trancoso.
+      </p>
+    </div>
+
+    <div class="allHousesGrid">
+
+      <a class="allHouseCard" href="/pt/casas/casa-grande/">
+        <img src="/assets/img/casa-grande/gallery-04.jpeg" alt="Casa Grande">
+        <div class="allHouseBody"><h3>Casa Grande</h3><p>Permanência tropical expansiva.</p></div>
+      </a>
+
+      <a class="allHouseCard" href="/pt/casas/casa-dende/">
+        <img src="/assets/img/casa-dende/hero.jpeg" alt="Casa Dendê">
+        <div class="allHouseBody"><h3>Casa Dendê</h3><p>Natureza, sombra e convivência.</p></div>
+      </a>
+
+      <a class="allHouseCard" href="/pt/casas/casa-dos-baloes/">
+        <img src="/assets/img/casa-dos-baloes/hero.jpeg" alt="Casa dos Balões">
+        <div class="allHouseBody"><h3>Casa dos Balões</h3><p>Convivência tropical familiar.</p></div>
+      </a>
+
+      <a class="allHouseCard" href="/pt/casas/casa-rosada/">
+        <img src="/assets/img/casa-rosada/hero.jpeg" alt="Casa Rosada">
+        <div class="allHouseBody"><h3>Casa Rosada</h3><p>Intimidade acolhedora para casais.</p></div>
+      </a>
+
+      <a class="allHouseCard" href="/pt/casas/casa-manga/">
+        <img src="/assets/img/casa-manga/hero.jpeg" alt="Casa Manga">
+        <div class="allHouseBody"><h3>Casa Manga</h3><p>Sombra de jardim e dias lentos.</p></div>
+      </a>
+
+      <a class="allHouseCard" href="/pt/casas/casa-branca/">
+        <img src="/assets/img/casa-branca/hero.jpeg" alt="Casa Branca">
+        <div class="allHouseBody"><h3>Casa Branca</h3><p>Leveza, serenidade e calma.</p></div>
+      </a>
+
+      <a class="allHouseCard" href="/pt/casas/casa-oca/">
+        <img src="/assets/img/casa-oca/gallery-07.jpg" alt="Casa Oca">
+        <div class="allHouseBody"><h3>Casa Oca</h3><p>Textura, abrigo e silêncio tropical.</p></div>
+      </a>
+
+      <a class="allHouseCard" href="/pt/casas/atelie-azul/">
+        <img src="/assets/img/atelie-azul/hero.jpeg" alt="Ateliê Azul">
+        <div class="allHouseBody"><h3>Ateliê Azul</h3><p>Cor, jardim e atmosfera autoral.</p></div>
+      </a>
+
+    </div>
+  </div>
+</section>
 
   <section class="section homeSocial">
     <div class="wrap homeSocialGrid">
@@ -956,6 +1210,97 @@
       </div>
     </div>
   </section>
+  <section class="section homeManifesto">
+  <div class="wrap">
+    <div class="homeManifestoPanel" data-reveal="zoom">
+
+      <p class="eyebrow">Por que a Casas da Vila é diferente</p>
+      <h2 class="h2">Mais atmosfera.<br>Menos hospitalidade convencional.</h2>
+
+      <div class="manifestoGrid">
+        <div class="manifestoList">
+          <div class="manifestoItem">
+            <strong>Casas, não quartos</strong>
+            <p>Cada estadia acontece em uma casa tropical individual, com identidade e ritmo próprios.</p>
+          </div>
+
+          <div class="manifestoItem">
+            <strong>Privacidade tropical</strong>
+            <p>Jardins, vegetação e arquitetura silenciosa criam uma permanência mais suave.</p>
+          </div>
+
+          <div class="manifestoItem">
+            <strong>Ritmo mais lento</strong>
+            <p>A experiência é desenhada em torno de calma, luz e tempo sem urgência.</p>
+          </div>
+        </div>
+
+        <div class="manifestoList">
+          <div class="manifestoItem">
+            <strong>Atmosfera acima do excesso</strong>
+            <p>A Casas da Vila privilegia textura, calor e presença em vez de códigos convencionais de luxo.</p>
+          </div>
+
+          <div class="manifestoItem">
+            <strong>Café da manhã incluído</strong>
+            <p>O ritual da manhã já faz parte da experiência, da chegada à partida.</p>
+          </div>
+
+          <div class="manifestoItem">
+            <strong>Uma forma mais silenciosa de estar</strong>
+            <p>Mais retiro do que hotel, mais vila do que resort, mais atmosfera do que espetáculo.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section class="section homeStayTypes">
+  <div class="wrap">
+
+    <div class="homeCollectionHead" data-reveal="zoom">
+      <p class="eyebrow">Tipos de estadia</p>
+      <h2 class="h2">Casas organizadas por atmosfera e ritmo.</h2>
+    </div>
+
+    <div class="stayTypesGrid">
+
+      <div class="stayTypeCard">
+        <div class="stayTypeBody">
+          <p class="eyebrow">Estadias tropicais silenciosas</p>
+          <h3>Casa Branca · Casa Manga · Casa Oca</h3>
+          <p>Casas mais suaves, moldadas por silêncio, sombra e permanência lenta.</p>
+        </div>
+      </div>
+
+      <div class="stayTypeCard">
+        <div class="stayTypeBody">
+          <p class="eyebrow">Para casais</p>
+          <h3>Casa Rosada · Ateliê Azul</h3>
+          <p>Estadias mais íntimas, pensadas para acolhimento, privacidade e calma.</p>
+        </div>
+      </div>
+
+      <div class="stayTypeCard">
+        <div class="stayTypeBody">
+          <p class="eyebrow">Estadias compartilhadas</p>
+          <h3>Casa Grande · Casa Dendê</h3>
+          <p>Casas mais amplas para grupos, encontros e estadias tropicais prolongadas.</p>
+        </div>
+      </div>
+
+      <div class="stayTypeCard">
+        <div class="stayTypeBody">
+          <p class="eyebrow">Famílias</p>
+          <h3>Casa dos Balões</h3>
+          <p>Permanência tropical ampla e familiar em Trancoso.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
   <section class="section homeClosing">
     <div class="wrap">
@@ -1099,5 +1444,26 @@ document.addEventListener("DOMContentLoaded", function () {
  <script src="/assets/js/supabase.js"></script>
 
    <script src="/assets/js/site-analytics.js"></script>
+   <script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Hotel",
+  "name":"Casas da Vila",
+  "url":"https://casasdavila.com/pt/",
+  "image":"https://casasdavila.com/assets/meta/og/og-home.jpg",
+  "description":"Uma estadia boutique tropical em Trancoso, Bahia, organizada como uma coleção de casas autorais com jardins, piscina, café da manhã e atmosfera silenciosa.",
+  "address":{
+    "@type":"PostalAddress",
+    "addressLocality":"Trancoso",
+    "addressRegion":"Bahia",
+    "addressCountry":"BR"
+  },
+  "amenityFeature":[
+    {"@type":"LocationFeatureSpecification","name":"Café da manhã incluído","value":true},
+    {"@type":"LocationFeatureSpecification","name":"Piscina","value":true},
+    {"@type":"LocationFeatureSpecification","name":"Estacionamento incluído","value":true}
+  ]
+}
+</script>
 </body>
 </html>
