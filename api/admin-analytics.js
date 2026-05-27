@@ -342,10 +342,14 @@ if (range === "30d") {
       (e) => e.event_type === "booking_availability_result"
     );
 const visitorSessions = buildVisitorSessions(cleanSiteEvents, cleanBookingEvents);
+const pageViewEvents = cleanSiteEvents.filter(
+  (e) => e.event_type === "page_view"
+);
     return res.status(200).json({
       summary: {
-        pageviews: cleanSiteEvents.length,
-        sessions: sessions.size,
+pageviews: cleanSiteEvents.filter(
+  (e) => e.event_type === "page_view"
+).length,        sessions: sessions.size,
         visitors: visitors.size,
 is_returning_visitor:
   siteEvents.filter(
