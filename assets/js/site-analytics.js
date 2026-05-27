@@ -154,7 +154,7 @@ function setItem(key, value) {
     let visitorId = getOrCreateId(KEYS.visitorId);
     let firstSeenAt = getItem(KEYS.firstSeenAt);
     let visitCount = Number(getItem(KEYS.visitCount) || 0);
-
+const hadPreviousVisitorId = Boolean(visitorId && firstSeenAt);
     if (!firstSeenAt) {
       firstSeenAt = nowIso();
       setItem(KEYS.firstSeenAt, firstSeenAt);
@@ -162,11 +162,12 @@ function setItem(key, value) {
 
     setItem(KEYS.lastSeenAt, nowIso());
 
-    return {
-      visitor_id: visitorId,
-      first_seen_at: firstSeenAt,
-      visit_count: visitCount
-    };
+return {
+  visitor_id: visitorId,
+  first_seen_at: firstSeenAt,
+  visit_count: visitCount,
+  had_previous_visitor_id: hadPreviousVisitorId
+};
   }
 
   function shouldCreateNewSession() {
@@ -250,8 +251,9 @@ function setItem(key, value) {
       session_started_at: session.session_started_at,
       last_activity_at: nowIso(),
 
-      is_returning_visitor: session.is_returning_visitor,
-      is_bot_suspected: botSuspected,
+is_returning_visitor:
+  visitor.had_previous_visitor_id || session.is_returning_visitor,
+        is_bot_suspected: botSuspected,
 
       metadata: {
         ...metadata,

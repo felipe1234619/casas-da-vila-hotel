@@ -331,9 +331,17 @@ if (range === "30d") {
     const cleanSiteEvents = siteEvents || [];
     const cleanBookingEvents = bookingEvents || [];
 
-    const sessions = new Set(cleanSiteEvents.map((e) => e.session_id).filter(Boolean));
-    const visitors = new Set(cleanSiteEvents.map((e) => e.visitor_id).filter(Boolean));
+const pageViewEvents = cleanSiteEvents.filter(
+  (e) => e.event_type === "page_view"
+);
 
+const sessions = new Set(
+  pageViewEvents.map((e) => e.session_id).filter(Boolean)
+);
+
+const visitors = new Set(
+  pageViewEvents.map((e) => e.visitor_id).filter(Boolean)
+);
     const bookingSearches = cleanBookingEvents.filter(
       (e) => e.event_type === "booking_search"
     );
@@ -343,9 +351,7 @@ if (range === "30d") {
     );
 const visitorSessions = buildVisitorSessions(cleanSiteEvents, cleanBookingEvents);
 
-const pageViewEvents = cleanSiteEvents.filter(
-  (e) => e.event_type === "page_view"
-);
+;
 
 return res.status(200).json({
   summary: {
