@@ -72,19 +72,27 @@
     return memoryStore[key] || null;
   }
 
-  function setItem(key, value) {
-    memoryStore[key] = value;
+function setItem(key, value) {
+  memoryStore[key] = value;
 
-    if (storageOk) {
-      try {
-        localStorage.setItem(key, value);
-      } catch (_) {}
-    }
-
-    setCookie(key, value);
+  if (storageOk) {
+    try {
+      localStorage.setItem(key, value);
+    } catch (_) {}
   }
 
-  function getOrCreateId(key) {
+  try {
+    if (key === KEYS.sessionId) {
+      sessionStorage.setItem("cdv_session_id", value);
+    }
+
+    if (key === KEYS.visitorId) {
+      localStorage.setItem("cdv_visitor_id", value);
+    }
+  } catch (_) {}
+
+  setCookie(key, value);
+}  function getOrCreateId(key) {
     let value = getItem(key);
 
     if (!value) {
@@ -295,8 +303,14 @@
     await sendPayload(payload, options);
   }
 
-  window.trackSiteEvent = trackSiteEvent;
+window.trackSiteEvent = trackSiteEvent;
 
+window.CDVAnalytics = {
+  track: trackSiteEvent,
+  getVisitorId: () => getItem(KEYS.visitorId),
+  getSessionId: () => getItem(KEYS.sessionId),
+  getVisitCount: () => Number(getItem(KEYS.visitCount) || 0)
+};
   ["mousemove", "scroll", "keydown", "touchstart", "click"].forEach((event) => {
     window.addEventListener(event, markActivity, { passive: true });
   });
