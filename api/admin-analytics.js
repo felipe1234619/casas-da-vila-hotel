@@ -104,8 +104,10 @@ house_name:
       String(p.path).includes("reservar")
     ) || session.bookings.length > 0,
 
-  is_returning_visitor: false,
-
+is_returning_visitor:
+  siteEvents.filter(
+    (e) => e.visitor_id && e.visitor_id === session.visitor_id
+  ).some((e) => e.is_returning_visitor === true),
   lead_score: calculateLeadScore(session),
 
   lead_label: classifyLeadScore(
@@ -202,8 +204,7 @@ function buildIntelligenceAlerts(sessions = []) {
 }
 function buildLiveVisitors(siteEvents = []) {
   const now = Date.now();
-  const activeWindowMs = 5 * 60 * 1000;
-
+const activeWindowMs = 90 * 1000;
   const recent = siteEvents.filter((event) => {
     if (!event.created_at) return false;
     return now - new Date(event.created_at).getTime() <= activeWindowMs;
@@ -346,8 +347,10 @@ const visitorSessions = buildVisitorSessions(cleanSiteEvents, cleanBookingEvents
         pageviews: cleanSiteEvents.length,
         sessions: sessions.size,
         visitors: visitors.size,
-        returning_visitors: 0,
-        booking_searches: bookingSearches.length,
+is_returning_visitor:
+  siteEvents.filter(
+    (e) => e.visitor_id && e.visitor_id === session.visitor_id
+  ).some((e) => e.is_returning_visitor === true),        booking_searches: bookingSearches.length,
         booking_intent_rate: 0
       },
 
