@@ -342,27 +342,31 @@ if (range === "30d") {
       (e) => e.event_type === "booking_availability_result"
     );
 const visitorSessions = buildVisitorSessions(cleanSiteEvents, cleanBookingEvents);
+
 const pageViewEvents = cleanSiteEvents.filter(
   (e) => e.event_type === "page_view"
 );
-    return res.status(200).json({
-      summary: {
-pageviews: cleanSiteEvents.filter(
-  (e) => e.event_type === "page_view"
-).length,        sessions: sessions.size,
-        visitors: visitors.size,
-is_returning_visitor:
-  siteEvents.filter(
-    (e) => e.visitor_id && e.visitor_id === session.visitor_id
-  ).some((e) => e.is_returning_visitor === true),        booking_searches: bookingSearches.length,
-        booking_intent_rate: 0
-      },
 
-      top_pages: topEntries(countBy(cleanSiteEvents, "page_path")),
-      top_referrers: topEntries(countBy(cleanSiteEvents, "referrer")),
-      top_countries: topEntries(countBy(cleanSiteEvents, "country")),
-      top_cities: topEntries(countBy(cleanSiteEvents, "city")),
-top_houses: topEntries(countSearchedHouses(availabilityResults)),
+return res.status(200).json({
+  summary: {
+    pageviews: pageViewEvents.length,
+    sessions: sessions.size,
+    visitors: visitors.size,
+    returning_visitors: new Set(
+      cleanSiteEvents
+        .filter((e) => e.is_returning_visitor === true)
+        .map((e) => e.visitor_id)
+        .filter(Boolean)
+    ).size,
+    booking_searches: bookingSearches.length,
+    booking_intent_rate: 0
+  },
+
+  top_pages: topEntries(countBy(pageViewEvents, "page_path")),
+  top_referrers: topEntries(countBy(pageViewEvents, "referrer")),
+  top_countries: topEntries(countBy(pageViewEvents, "country")),
+  top_cities: topEntries(countBy(pageViewEvents, "city")),
+  top_houses: topEntries(countSearchedHouses(availabilityResults)),
 visitor_sessions: visitorSessions,
 hot_leads: visitorSessions
   .filter((s) => s.lead_score >= 80)
