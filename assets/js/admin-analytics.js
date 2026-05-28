@@ -283,7 +283,11 @@ document.addEventListener("DOMContentLoaded", () => {
     renderVisitorSessions(dashboardData?.visitor_sessions || []);
   });
 });
-
+setInterval(() => {
+  if (getToken()) {
+    loadDashboard();
+  }
+}, 30000);
 function renderVisitorSessions(sessions) {
   const container = document.getElementById("visitorSessions");
   if (!container) return;
