@@ -40,6 +40,11 @@
     </section>
 
     <section class="cards">
+      <article class="metricCard liveVisitorsCard">
+  <span>Visitantes ao vivo</span>
+  <strong id="liveVisitorsCount">0</strong>
+  <small>ativos agora</small>
+</article>
       <article><span>Pageviews</span><strong id="pageviews">—</strong></article>
       <article><span>Sessões</span><strong id="sessions">—</strong></article>
       <article><span>Visitantes</span><strong id="visitors">—</strong></article>
@@ -64,7 +69,16 @@
 
         <div id="visitorSessions" class="sessions"></div>
       </div>
+<section class="panel">
+  <div class="panelHeader">
+    <h2>Visitantes ao vivo</h2>
+    <span>últimos 90 segundos</span>
+  </div>
 
+  <div id="liveVisitorsList" class="liveVisitorsList">
+    <p class="empty">Nenhum visitante ativo agora.</p>
+  </div>
+</section>
       <div class="panel"><article><span>Consultas disponíveis</span><strong id="availableQueries">—</strong></article>
         <h2>Páginas mais visitadas</h2>
         <div id="topPages" class="list"></div>

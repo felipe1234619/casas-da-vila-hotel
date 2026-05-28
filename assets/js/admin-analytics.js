@@ -253,6 +253,7 @@ if ($("unavailableQueries")) {
   renderReservationFunnel(dashboardData.reservation_funnel);
   renderHotLeads(dashboardData.hot_leads || []);
   renderLiveVisitorToast(dashboardData.live_visitors || []);
+  renderLiveVisitorsPanel(dashboardData.live_visitors || []);
   renderVisitorSessions(dashboardData.visitor_sessions);
 
   $("lastUpdated").textContent = `● atualizado ${new Date().toLocaleTimeString("pt-BR", {
@@ -473,4 +474,33 @@ function renderHotLeads(leads = []) {
         .join("")}
     </div>
   `;
+}
+function renderLiveVisitorsPanel(visitors = []) {
+  const countEl = $("liveVisitorsCount");
+  const listEl = $("liveVisitorsList");
+
+  if (countEl) {
+    countEl.textContent = visitors.length || 0;
+  }
+
+  if (!listEl) return;
+
+  if (!visitors.length) {
+    listEl.innerHTML = `<p class="empty">Nenhum visitante ativo agora.</p>`;
+    return;
+  }
+
+  listEl.innerHTML = visitors
+    .map(
+      (visitor) => `
+        <div class="liveVisitorRow">
+          <strong>${escapeHtml(visitor.country || "Origem desconhecida")}${
+            visitor.city ? " · " + escapeHtml(visitor.city) : ""
+          }</strong>
+          <span>${escapeHtml(visitor.page_path || "—")}</span>
+          <small>última atividade: ${formatDate(visitor.last_seen_at)}</small>
+        </div>
+      `
+    )
+    .join("");
 }

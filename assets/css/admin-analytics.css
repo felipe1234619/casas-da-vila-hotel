@@ -770,3 +770,34 @@ h1 {
     line-height: 1.4;
   }
 }
+.liveVisitorsCard strong {
+  color: #2f6f4e;
+}
+
+.liveVisitorsList {
+  display: grid;
+  gap: 10px;
+}
+
+.liveVisitorRow {
+  padding: 14px 16px;
+  border: 1px solid rgba(60, 45, 30, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.liveVisitorRow strong,
+.liveVisitorRow span,
+.liveVisitorRow small {
+  display: block;
+}
+
+.liveVisitorRow span {
+  margin-top: 4px;
+  color: #5f554b;
+}
+
+.liveVisitorRow small {
+  margin-top: 6px;
+  color: #9a8f84;
+}
