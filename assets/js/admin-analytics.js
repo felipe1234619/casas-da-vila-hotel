@@ -504,3 +504,41 @@ function renderLiveVisitorsPanel(visitors = []) {
     )
     .join("");
 }
+function renderLiveVisitorsPanel(visitors = []) {
+  const countEl = $("liveVisitorsCount");
+  const listEl = $("liveVisitorsList");
+
+  if (countEl) {
+    countEl.textContent = visitors.length || 0;
+  }
+
+  if (!listEl) return;
+
+  if (!visitors.length) {
+    listEl.innerHTML =
+      '<p class="empty">Nenhum visitante ativo agora.</p>';
+    return;
+  }
+
+  listEl.innerHTML = visitors
+    .map(
+      (visitor) => `
+        <div class="liveVisitorRow">
+          <strong>
+            ${escapeHtml(visitor.country || "Origem desconhecida")}
+            ${visitor.city ? " · " + escapeHtml(visitor.city) : ""}
+          </strong>
+
+          <span>
+            ${escapeHtml(visitor.page_path || "—")}
+          </span>
+
+          <small>
+            última atividade:
+            ${formatDate(visitor.last_seen_at)}
+          </small>
+        </div>
+      `
+    )
+    .join("");
+}

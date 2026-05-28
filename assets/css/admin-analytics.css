@@ -801,3 +801,42 @@ h1 {
   margin-top: 6px;
   color: #9a8f84;
 }
+.liveVisitorsCard strong {
+  color: #2f6f4e;
+}
+
+.liveVisitorsCard small {
+  display: block;
+  margin-top: 6px;
+  color: #8f857b;
+  font-size: 0.82rem;
+}
+
+.liveVisitorsList {
+  display: grid;
+  gap: 10px;
+}
+
+.liveVisitorRow {
+  padding: 14px 16px;
+  border: 1px solid rgba(60, 45, 30, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.liveVisitorRow strong,
+.liveVisitorRow span,
+.liveVisitorRow small {
+  display: block;
+}
+
+.liveVisitorRow span {
+  margin-top: 4px;
+  color: #5f554b;
+}
+
+.liveVisitorRow small {
+  margin-top: 6px;
+  color: #9a8f84;
+  font-size: 0.82rem;
+}
