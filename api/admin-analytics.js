@@ -350,7 +350,16 @@ const visitors = new Set(
       (e) => e.event_type === "booking_availability_result"
     );
 const visitorSessions = buildVisitorSessions(cleanSiteEvents, cleanBookingEvents);
-
+const returningVisitors = new Set(
+  cleanSiteEvents
+    .filter(
+      (e) =>
+        e.is_returning_visitor === true ||
+        Number(e.visit_count || 0) > 1
+    )
+    .map((e) => e.visitor_id)
+    .filter(Boolean)
+).size;
 ;
 
 return res.status(200).json({
@@ -358,12 +367,7 @@ return res.status(200).json({
     pageviews: pageViewEvents.length,
     sessions: sessions.size,
     visitors: visitors.size,
-    returning_visitors: new Set(
-      cleanSiteEvents
-        .filter((e) => e.is_returning_visitor === true)
-        .map((e) => e.visitor_id)
-        .filter(Boolean)
-    ).size,
+returning_visitors: returningVisitors,
     booking_searches: bookingSearches.length,
     booking_intent_rate: 0
   },
