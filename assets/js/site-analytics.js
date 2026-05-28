@@ -73,7 +73,8 @@
 
         visitor_id: getVisitorId(),
         session_id: getSessionId(),
-
+visit_count: Number(localStorage.getItem("cdv_visit_count") || 0) + 1,
+is_returning_visitor: Number(localStorage.getItem("cdv_visit_count") || 0) >= 1,
         is_bot_suspected: botSuspected,
 
         metadata: {
@@ -81,7 +82,10 @@
           tracked_at: new Date().toISOString()
         }
       };
-
+localStorage.setItem(
+  "cdv_visit_count",
+  String(payload.visit_count)
+);
       const response = await fetch("/api/site-event", {
         method: "POST",
         headers: {
@@ -108,11 +112,20 @@
     getSessionId
   };
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () {
-      trackSiteEvent("page_view");
+function startHeartbeat() {
+  setInterval(() => {
+    trackSiteEvent("heartbeat", {
+      source: "live_heartbeat"
     });
-  } else {
+  }, 30000);
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", function () {
     trackSiteEvent("page_view");
-  }
-})();
+    startHeartbeat();
+  });
+} else {
+  trackSiteEvent("page_view");
+  startHeartbeat();
+}})();
