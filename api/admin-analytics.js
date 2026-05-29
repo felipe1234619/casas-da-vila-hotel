@@ -342,25 +342,32 @@ const sessions = new Set(
 const visitors = new Set(
   pageViewEvents.map((e) => e.visitor_id).filter(Boolean)
 );
-    const bookingSearches = cleanBookingEvents.filter(
-      (e) => e.event_type === "booking_search"
-    );
 
-    const availabilityResults = cleanBookingEvents.filter(
-      (e) => e.event_type === "booking_availability_result"
-    );
+const bookingSearches = cleanBookingEvents.filter(
+  (e) => e.event_type === "booking_search"
+);
+
+const visitorSessionsById = new Map();
+
+pageViewEvents.forEach((event) => {
+  if (!event.visitor_id || !event.session_id) return;
+
+  if (!visitorSessionsById.has(event.visitor_id)) {
+    visitorSessionsById.set(event.visitor_id, new Set());
+  }
+
+  visitorSessionsById.get(event.visitor_id).add(event.session_id);
+});
+
+const returningVisitors = Array.from(visitorSessionsById.values()).filter(
+  (sessionsSet) => sessionsSet.size > 1
+).length;
+
+const availabilityResults = cleanBookingEvents.filter(
+  (e) => e.event_type === "booking_availability_result"
+);
+
 const visitorSessions = buildVisitorSessions(cleanSiteEvents, cleanBookingEvents);
-const returningVisitors = new Set(
-  cleanSiteEvents
-    .filter(
-      (e) =>
-        e.is_returning_visitor === true ||
-        Number(e.visit_count || 0) > 1
-    )
-    .map((e) => e.visitor_id)
-    .filter(Boolean)
-).size;
-;
 
 return res.status(200).json({
   summary: {
