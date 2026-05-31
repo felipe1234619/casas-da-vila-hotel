@@ -255,6 +255,7 @@ if ($("unavailableQueries")) {
   renderLiveVisitorToast(dashboardData.live_visitors || []);
   renderLiveVisitorsPanel(dashboardData.live_visitors || []);
   renderVisitorSessions(dashboardData.visitor_sessions);
+  renderVisitorsMap(dashboardData.visitor_sessions || []);
 
   $("lastUpdated").textContent = `● atualizado ${new Date().toLocaleTimeString("pt-BR", {
     hour: "2-digit",
@@ -328,8 +329,7 @@ function renderVisitorSessions(sessions) {
         "Exploratório";
 
       return `
-        <div class="visitorSessionCard">
-          <button class="visitorSessionButton" type="button" data-session="${index}">
+<div class="visitorSessionCard" data-session-id="${escapeHtml(session.session_id || session.visitor_id || "")}">          <button class="visitorSessionButton" type="button" data-session="${index}">
             <div class="visitorSessionTop">
               <div>
                 <strong>${session.country || "Unknown"}${session.city ? ` · ${session.city}` : ""}</strong>
@@ -546,3 +546,112 @@ function renderLiveVisitorsPanel(visitors = []) {
     )
     .join("");
 }
+let visitorsMapInstance = null;
+let visitorsMapLayer = null;
+
+function renderVisitorsMap(sessions = []) {
+  const el = $("visitorsMap");
+  if (!el || typeof L === "undefined") return;
+
+  if (!visitorsMapInstance) {
+    visitorsMapInstance = L.map("visitorsMap", {
+      scrollWheelZoom: false
+    }).setView([20, 0], 2);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap"
+    }).addTo(visitorsMapInstance);
+
+    visitorsMapLayer = L.layerGroup().addTo(visitorsMapInstance);
+  }
+
+  visitorsMapLayer.clearLayers();
+
+  const validSessions = sessions.filter(
+    (session) =>
+      session.latitude !== null &&
+      session.longitude !== null &&
+      !Number.isNaN(Number(session.latitude)) &&
+      !Number.isNaN(Number(session.longitude))
+  );
+
+  if (!validSessions.length) {
+    setTimeout(() => visitorsMapInstance.invalidateSize(), 200);
+    return;
+  }
+
+  validSessions.forEach((session) => {
+    const lat = Number(session.latitude);
+    const lng = Number(session.longitude);
+    const sessionId = session.session_id || session.visitor_id || "";
+
+    const pages = (session.pages || [])
+      .slice(0, 8)
+      .map((p) => {
+        const path = escapeHtml(p.path || "—");
+        const href = p.path && p.path.startsWith("/") ? p.path : "#";
+
+        return `
+          <li>
+            <a href="${href}" target="_blank" rel="noopener">${path}</a>
+            <small>${formatDate(p.created_at)}</small>
+          </li>
+        `;
+      })
+      .join("");
+
+    const popup = `
+      <div class="mapPopup">
+        <strong>${escapeHtml(session.country || "Origem desconhecida")}${
+          session.city ? " · " + escapeHtml(session.city) : ""
+        }</strong>
+
+        <span>${escapeHtml(session.referrer || "Direct / unknown")}</span>
+
+        <button type="button" onclick="focusVisitorSession('${escapeHtml(sessionId)}')">
+          Ver sessão no dashboard
+        </button>
+
+        <details>
+          <summary>Páginas visitadas (${session.page_count || 0})</summary>
+          <ul>${pages || "<li>Sem páginas registradas</li>"}</ul>
+        </details>
+      </div>
+    `;
+
+    L.marker([lat, lng]).addTo(visitorsMapLayer).bindPopup(popup);
+  });
+
+  const bounds = L.latLngBounds(
+    validSessions.map((session) => [
+      Number(session.latitude),
+      Number(session.longitude)
+    ])
+  );
+
+  visitorsMapInstance.fitBounds(bounds, {
+    padding: [32, 32],
+    maxZoom: 6
+  });
+
+  setTimeout(() => visitorsMapInstance.invalidateSize(), 200);
+}
+
+window.focusVisitorSession = function (sessionId) {
+  const card = document.querySelector(
+    `.visitorSessionCard[data-session-id="${CSS.escape(sessionId)}"]`
+  );
+
+  if (!card) return;
+
+  card.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+  card.classList.add("isOpen", "isHighlighted");
+
+  setTimeout(() => {
+    card.classList.remove("isHighlighted");
+  }, 2500);
+};

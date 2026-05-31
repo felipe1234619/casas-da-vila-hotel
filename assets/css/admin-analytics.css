@@ -840,3 +840,70 @@ h1 {
   color: #9a8f84;
   font-size: 0.82rem;
 }
+.mapPanel {
+  grid-column: 1 / -1;
+}
+
+.visitorsMap {
+  width: 100%;
+  height: 460px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(60, 45, 30, 0.12);
+}
+
+.mapPopup {
+  min-width: 220px;
+  font-family: inherit;
+}
+
+.mapPopup strong,
+.mapPopup span {
+  display: block;
+}
+
+.mapPopup span {
+  margin-top: 4px;
+  color: #6f655c;
+  font-size: 0.85rem;
+}
+
+.mapPopup button {
+  margin-top: 10px;
+  width: 100%;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  background: #2f6f4e;
+  color: white;
+  font-size: 0.82rem;
+}
+
+.mapPopup details {
+  margin-top: 10px;
+}
+
+.mapPopup ul {
+  margin: 8px 0 0;
+  padding-left: 16px;
+}
+
+.mapPopup li {
+  margin-bottom: 6px;
+}
+
+.mapPopup a {
+  color: #2f6f4e;
+  text-decoration: none;
+}
+
+.mapPopup small {
+  display: block;
+  color: #9a8f84;
+}
+
+.visitorSessionCard.isHighlighted {
+  outline: 2px solid rgba(47, 111, 78, 0.35);
+  box-shadow: 0 0 0 6px rgba(47, 111, 78, 0.08);
+}

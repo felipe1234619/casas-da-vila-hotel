@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Casas da Vila — Intelligence Dashboard</title>
 <link rel="stylesheet" href="/assets/css/admin-analytics.css?v=expandable-20260523" /></head>
-
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <body>
   <div id="liveVisitorToast" class="liveVisitorToast"></div>
   <main class="dashboard">
@@ -69,6 +70,7 @@
 
         <div id="visitorSessions" class="sessions"></div>
       </div>
+
 <section class="panel">
   <div class="panelHeader">
     <h2>Visitantes ao vivo</h2>
@@ -88,7 +90,14 @@
         <h2>Origens / Referrers</h2>
         <div id="topReferrers" class="list"></div>
       </div>
+<section class="panel mapPanel">
+  <div class="panelHeader">
+    <h2>Mapa de visitantes</h2>
+    <span>origem dos acessos no período</span>
+  </div>
 
+  <div id="visitorsMap" class="visitorsMap"></div>
+</section>
       <div class="panel">
         <h2>Países</h2>
         <div id="topCountries" class="list"></div>
