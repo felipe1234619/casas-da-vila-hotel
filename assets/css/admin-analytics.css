@@ -907,3 +907,71 @@ h1 {
   outline: 2px solid rgba(47, 111, 78, 0.35);
   box-shadow: 0 0 0 6px rgba(47, 111, 78, 0.08);
 }
+.dashboardBrand{
+  display:flex;
+  align-items:flex-start;
+  gap:28px;
+}
+.dashboardLogo{
+  width: 140px;
+  height:auto;
+  object-fit:contain;
+  border-radius:10px;
+  margin-top:-10px;
+  flex-shrink:0;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+.dashboardLocation{
+  display:block;
+  margin-top:8px;
+  font-size:13px;
+  color:#8a8a8a;
+}
+
+@media (max-width:768px){
+
+  .dashboardBrand{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:16px;
+  }
+
+  .dashboardLogo{
+    width:96px;
+    height:auto;
+  }
+}
+.geoCounters{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.geoCounters div{
+  min-width:120px;
+  padding:14px 16px;
+  border:1px solid rgba(60,45,30,.12);
+  border-radius:18px;
+  background:rgba(255,255,255,.58);
+}
+
+.geoCounters strong{
+  display:block;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:28px;
+  line-height:1;
+}
+
+.geoCounters span{
+  display:block;
+  margin-top:6px;
+  font-size:12px;
+  color:#8a8a8a;
+}
+
+@media(max-width:900px){
+  .geoCounters{
+    width:100%;
+    justify-content:flex-start;
+  }
+}

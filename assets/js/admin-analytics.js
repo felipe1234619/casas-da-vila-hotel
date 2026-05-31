@@ -36,7 +36,16 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
+function countryFlag(countryCode) {
+  const code = String(countryCode || "").trim().toUpperCase();
 
+  if (!/^[A-Z]{2}$/.test(code)) return "🌐";
+
+  return code
+    .split("")
+    .map((char) => String.fromCodePoint(127397 + char.charCodeAt()))
+    .join("");
+}
 function renderList(id, items) {
   const el = $(id);
   if (!el) return;
@@ -47,17 +56,19 @@ function renderList(id, items) {
   }
 
   el.innerHTML = items
-    .map(
-      (item) => `
+    .map((item) => {
+      const label = item.label || "unknown";
+      const flag = id === "topCountries" ? `${countryFlag(label)} ` : "";
+
+      return `
         <div class="listRow">
-          <strong>${escapeHtml(item.label || "unknown")}</strong>
+          <strong>${flag}${escapeHtml(label)}</strong>
           <span>${item.value}</span>
         </div>
-      `
-    )
+      `;
+    })
     .join("");
 }
-
 function visitorStatus(session) {
   if (session.is_returning_visitor) return "Visitante recorrente";
   return "Novo visitante";
@@ -225,6 +236,13 @@ renderVisitorSessions(
   $("pageviews").textContent = dashboardData.summary?.pageviews ?? "0";
   $("sessions").textContent = dashboardData.summary?.sessions ?? "0";
   $("visitors").textContent = dashboardData.summary?.visitors ?? "0";
+  if ($("countriesReached")) {
+  $("countriesReached").textContent = dashboardData.top_countries?.length || 0;
+}
+
+if ($("citiesReached")) {
+  $("citiesReached").textContent = dashboardData.top_cities?.length || 0;
+}
   $("returningVisitors").textContent = dashboardData.summary?.returning_visitors ?? "0";
   $("bookingSearches").textContent = dashboardData.summary?.booking_searches ?? "0";
   $("bookingIntentRate").textContent = `${dashboardData.summary?.booking_intent_rate ?? 0}%`;

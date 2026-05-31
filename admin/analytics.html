@@ -11,15 +11,41 @@
   <div id="liveVisitorToast" class="liveVisitorToast"></div>
   <main class="dashboard">
     <section class="hero">
-      <div>
-        <p class="eyebrow">Casas da Vila</p>
-        <h1>Intelligence Dashboard</h1>
-        <p class="subtitle">
-          Leitura proprietária de tráfego, intenção de reserva, origem editorial,
-          comportamento de visitantes e receita potencial.
-        </p>
-      </div>
+<div class="dashboardBrand">
 
+  <img
+    src="/assets/img/logo.jpeg"
+    alt="Casas da Vila"
+    class="dashboardLogo"
+  >
+
+  <div>
+    <p class="eyebrow">Casas da Vila</p>
+
+    <h1>Intelligence Dashboard</h1>
+
+    <p class="subtitle">
+      Leitura proprietária de tráfego, intenção de reserva,
+      origem editorial, comportamento de visitantes e
+      receita potencial.
+    </p>
+
+    <span class="dashboardLocation">
+      Trancoso · Bahia
+    </span>
+  </div>
+<div class="geoCounters">
+  <div>
+    <strong id="countriesReached">0</strong>
+    <span>países alcançados</span>
+  </div>
+
+  <div>
+    <strong id="citiesReached">0</strong>
+    <span>cidades alcançadas</span>
+  </div>
+</div>
+</div>
       <div class="accessBox">
         <input id="adminToken" type="password" placeholder="Token de acesso" />
         <button id="loadDashboard">Acessar</button>
