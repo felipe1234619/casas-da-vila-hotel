@@ -28,11 +28,23 @@
       "destination": "https://casasdavila.com/pt/",
       "permanent": true
     },
+{
+  "source": "/",
+  "has": [
     {
-      "source": "/",
-      "destination": "/pt/",
-      "permanent": false
-    },
+      "type": "header",
+      "key": "x-vercel-ip-country",
+      "value": "BR|PT"
+    }
+  ],
+  "destination": "/pt/",
+  "permanent": false
+},
+{
+  "source": "/",
+  "destination": "/en/",
+  "permanent": false
+},
     {
       "source": "/:path*",
       "has": [
