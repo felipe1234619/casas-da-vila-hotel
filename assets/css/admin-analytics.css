@@ -976,3 +976,82 @@ padding: 30px 34px;
     justify-content:flex-start;
   }
 }
+@media (max-width: 900px){
+
+  .dashboard{
+    width: min(100%, calc(100% - 28px));
+    padding: 24px 0 40px;
+  }
+
+  .hero{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .dashboardBrand{
+    width: 100%;
+  }
+
+  .accessBox{
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
+  }
+
+  .cards{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .toolbar{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchBox input{
+    width: 100%;
+  }
+
+  .visitorsMap{
+    height: 420px;
+  }
+}
+
+@media (max-width: 520px){
+
+  .dashboard{
+    width: min(100%, calc(100% - 20px));
+  }
+
+  .dashboardBrand{
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .dashboardLogo{
+    width: 112px;
+    margin-top: 0;
+  }
+
+  .hero h1,
+  .dashboardBrand h1{
+    white-space: normal;
+    font-size: clamp(40px, 15vw, 58px);
+  }
+
+  .subtitle{
+    font-size: 15px;
+  }
+
+  .cards{
+    grid-template-columns: 1fr;
+  }
+
+  .visitorsMap{
+    height: 340px;
+  }
+
+  .panel{
+    padding: 22px;
+  }
+}

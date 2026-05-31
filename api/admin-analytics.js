@@ -188,23 +188,72 @@ function classifyLeadScore(score) {
   if (score >= 25) return "↗ Em consideração";
   return "Exploratório";
 }
-function buildIntelligenceAlerts(sessions = []) {
-  return sessions
-    .filter((session) => Number(session.lead_score || 0) >= 45)
-    .slice(0, 10)
-    .map((session) => ({
-      title:
-        Number(session.lead_score || 0) >= 70
-          ? "Alta intenção de reserva"
-          : "Visitante qualificado",
-      description: `${session.country || "Origem desconhecida"}${
-        session.city ? " · " + session.city : ""
-      } — ${session.page_count || 0} páginas, ${
-        session.booking_count || 0
-      } eventos de reserva.`,
-      score: session.lead_score,
-      created_at: session.last_seen_at
-    }));
+function buildIntelligenceAlerts(visitorSessions = [], pageViewEvents = []) {
+  const alerts = [];
+
+  const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const visitorVisits = new Map();
+
+  pageViewEvents.forEach((event) => {
+    if (!event.visitor_id || !event.created_at) return;
+
+    const createdAt = new Date(event.created_at).getTime();
+    if (!createdAt || createdAt < sevenDaysAgo) return;
+
+    if (!visitorVisits.has(event.visitor_id)) {
+      visitorVisits.set(event.visitor_id, {
+        visitor_id: event.visitor_id,
+        country: event.country || "Origem desconhecida",
+        city: event.city || "",
+        sessions: new Set(),
+        pages: new Set(),
+        last_seen_at: event.created_at
+      });
+    }
+
+    const visitor = visitorVisits.get(event.visitor_id);
+
+    if (event.session_id) {
+      visitor.sessions.add(event.session_id);
+    }
+
+    if (event.page_path) {
+      visitor.pages.add(event.page_path);
+    }
+
+    if (new Date(event.created_at) > new Date(visitor.last_seen_at)) {
+      visitor.last_seen_at = event.created_at;
+    }
+  });
+
+  visitorVisits.forEach((visitor) => {
+    if (visitor.sessions.size >= 3) {
+      alerts.push({
+        type: "returning_visitor_7d",
+        title: "Visitante recorrente em 7 dias",
+        message: `${visitor.country}${visitor.city ? " · " + visitor.city : ""} — ${visitor.sessions.size} sessões e ${visitor.pages.size} páginas visitadas nos últimos 7 dias.`,
+        score: 75,
+        created_at: visitor.last_seen_at
+      });
+    }
+  });
+
+  visitorSessions
+    .filter((session) => Number(session.lead_score || 0) >= 80)
+    .slice(0, 5)
+    .forEach((session) => {
+      alerts.push({
+        type: "high_intent",
+        title: "Alta intenção detectada",
+        message: `${session.country || "Origem desconhecida"}${session.city ? " · " + session.city : ""} — score ${session.lead_score}/100.`,
+        score: session.lead_score,
+        created_at: session.last_seen_at
+      });
+    });
+
+  return alerts
+    .sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0))
+    .slice(0, 10);
 }
 function buildLiveVisitors(siteEvents = []) {
   const now = Date.now();
@@ -350,7 +399,32 @@ const visitors = new Set(
 const bookingSearches = cleanBookingEvents.filter(
   (e) => e.event_type === "booking_search"
 );
+const visitorHistory = new Map();
 
+cleanSiteEvents
+  .filter((e) => e.event_type === "page_view" && e.visitor_id)
+  .forEach((event) => {
+    if (!visitorHistory.has(event.visitor_id)) {
+      visitorHistory.set(event.visitor_id, {
+        sessions: new Set(),
+        dates: new Set()
+      });
+    }
+
+    const item = visitorHistory.get(event.visitor_id);
+
+    if (event.session_id) {
+      item.sessions.add(event.session_id);
+    }
+
+    if (event.created_at) {
+      item.dates.add(new Date(event.created_at).toISOString().slice(0, 10));
+    }
+  });
+
+const returningVisitors = Array.from(visitorHistory.values()).filter(
+  (item) => item.sessions.size > 1 || item.dates.size > 1
+).length;
 const visitorSessionsById = new Map();
 
 pageViewEvents.forEach((event) => {
@@ -362,10 +436,7 @@ pageViewEvents.forEach((event) => {
 
   visitorSessionsById.get(event.visitor_id).add(event.session_id);
 });
-
-const returningVisitors = Array.from(visitorSessionsById.values()).filter(
-  (sessionsSet) => sessionsSet.size > 1
-).length;
+;
 
 const availabilityResults = cleanBookingEvents.filter(
   (e) => e.event_type === "booking_availability_result"
@@ -393,8 +464,7 @@ hot_leads: visitorSessions
   .filter((s) => s.lead_score >= 80)
   .sort((a, b) => b.lead_score - a.lead_score)
   .slice(0, 10),
-alerts: buildIntelligenceAlerts(visitorSessions),
-
+alerts: buildIntelligenceAlerts(visitorSessions, pageViewEvents),
 reservation_funnel: buildReservationFunnel(
   cleanSiteEvents,
   cleanBookingEvents
