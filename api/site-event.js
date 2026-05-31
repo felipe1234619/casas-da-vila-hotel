@@ -39,7 +39,12 @@ function isBot(userAgent = "") {
     userAgent
   );
 }
+function parseGeoNumber(value) {
+  if (value === undefined || value === null || value === "") return null;
 
+  const parsed = Number(String(value).replace(",", "."));
+  return Number.isFinite(parsed) ? parsed : null;
+}
 export default async function handler(req, res) {
   const origin = req.headers.origin || "";
 
@@ -77,15 +82,34 @@ res.setHeader("Access-Control-Allow-Credentials", "true");
       : null;
 
     const region = req.headers["x-vercel-ip-country-region"] || null;
+const latitude = parseGeoNumber(
+  req.headers["x-vercel-ip-latitude"] ||
+  req.headers["x-vercel-ip-lat"] ||
+  req.headers["x-geo-latitude"]
+);
 
+const longitude = parseGeoNumber(
+  req.headers["x-vercel-ip-longitude"] ||
+  req.headers["x-vercel-ip-lon"] ||
+  req.headers["x-geo-longitude"]
+);
+
+const geoSource =
+  latitude !== null && longitude !== null
+    ? "vercel_headers"
+    : "vercel_country_city_only";
     const body = req.body || {};
 
     const payload = {
       ...body,
-      country,
-      city,
-      region,
-      ip_hash: hashIp(ip),
+country,
+city,
+region,
+latitude,
+longitude,
+geo_source: geoSource,
+geo_accuracy: latitude !== null && longitude !== null ? "approximate" : "country_city",
+ip_hash: hashIp(ip),
       user_agent: body.user_agent || userAgent,
       is_bot_suspected:
         typeof body.is_bot_suspected === "boolean"
