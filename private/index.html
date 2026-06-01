@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casas da Vila | Confidential Opportunity</title>
+
+  <style>
+    @media print {
+      body { display: none !important; }
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #111;
+      color: #f4efe7;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 80px 8%;
+      background:
+        linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.78)),
+        url("/assets/img/hotel/casas-da-vila-hero.jpg") center/cover no-repeat;
+    }
+
+    .label {
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #c9b28a;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 86px);
+      line-height: .95;
+      margin: 0 0 24px;
+      max-width: 900px;
+    }
+
+    .subtitle {
+      font-size: 22px;
+      line-height: 1.45;
+      max-width: 760px;
+      color: #e8ded0;
+      margin-bottom: 48px;
+    }
+
+    .section {
+      max-width: 1050px;
+      margin: 0 auto 90px;
+    }
+
+    .cards, .structures {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.07);
+      padding: 28px;
+      backdrop-filter: blur(8px);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #d6bd8c;
+      font-size: 22px;
+    }
+
+    .card p, li {
+      color: #e8ded0;
+      line-height: 1.6;
+    }
+
+    .value {
+      font-size: 24px;
+      color: #fff;
+      margin: 18px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 15px 26px;
+      border: 1px solid #d6bd8c;
+      color: #111;
+      background: #d6bd8c;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 12px;
+    }
+  </style>
+
+  <script>
+    const ACCESS_PASSWORD = "Jujubi2026";
+    const granted = sessionStorage.getItem("cdv_private_access");
+
+    if (!granted) {
+      const pass = prompt("Confidential access code:");
+      if (pass === ACCESS_PASSWORD) {
+        sessionStorage.setItem("cdv_private_access", "true");
+      } else {
+        window.location.href = "/";
+      }
+    }
+
+    document.addEventListener("contextmenu", e => e.preventDefault());
+    document.addEventListener("keydown", e => {
+      if ((e.ctrlKey || e.metaKey) && ["p", "s"].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+        alert("Printing or saving this confidential page is disabled.");
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <main class="page">
+    <section class="section">
+      <div class="label">Confidential Acquisition Opportunity</div>
+      <h1>Casas da Vila</h1>
+      <p class="subtitle">
+        A rare hospitality asset in Trancoso, Brazil, combining an established boutique operation,
+        substantial urban landholding, brand equity and long-term real estate optionality.
+      </p>
+<a class="btn" href="/private/memorandum/">Access Investment Memorandum</a>
+    </section>
+
+    <section class="section">
+      <div class="cards">
+        <div class="card"><h3>15+ Years</h3><p>Established hospitality operation in Trancoso.</p></div>
+        <div class="card"><h3>4,423 m²</h3><p>Urban landholding in a strategic residential area.</p></div>
+        <div class="card"><h3>8 Guest Houses</h3><p>Independent accommodations with mature tropical gardens.</p></div>
+        <div class="card"><h3>Strategic Optionality</h3><p>Hospitality continuity, repositioning or future development.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="label">Transaction Structures</div>
+      <div class="structures">
+
+        <div class="card">
+          <h3>A. Full Platform Acquisition</h3>
+          <div class="value">R$ 21,000,000</div>
+          <p>Acquisition of Jujubi, including the hotel, land, brand, reservation systems, digital assets, intelligence tools, dashboard and Casas da Vila Homes development platform.</p>
+          <p><strong>Deposit:</strong> 20%</p>
+        </div>
+
+        <div class="card">
+          <h3>B. Operating Hospitality Platform</h3>
+          <div class="value">R$ 20,000,000</div>
+          <p>Hotel infrastructure, land, Casas da Vila brand, digital channels, reservation tools and operational know-how, excluding the real estate development project.</p>
+          <p><strong>Deposit:</strong> 20%</p>
+        </div>
+
+        <div class="card">
+          <h3>C. Real Estate & Infrastructure</h3>
+          <div class="value">R$ 18,000,000</div>
+          <p>Acquisition of the land and physical hospitality infrastructure only, excluding brand, intellectual property, digital assets and development platform.</p>
+          <p><strong>Deposit:</strong> 20%</p>
+        </div>
+
+        <div class="card">
+          <h3>D. Asset Acquisition + Brand License</h3>
+          <div class="value">R$ 18,000,000 + License</div>
+          <p>Acquisition of the physical asset combined with a long-term licensing arrangement for the Casas da Vila brand, subject to fixed fee, royalty or hybrid structure.</p>
+          <p><strong>Deposit:</strong> 20%</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <h3>Confidential Information</h3>
+        <p>
+          Detailed operational, legal, commercial and investment information may be made available
+          after qualification of the potential purchaser and execution of a confidentiality agreement.
+        </p>
+<a class="btn" href="/private/memorandum/">Access Memorandum</a>
+      </div>
+    </section>
+  </main>
+     <script src="/assets/js/site-analytics.js"></script>
+
+</body>
+</html>
