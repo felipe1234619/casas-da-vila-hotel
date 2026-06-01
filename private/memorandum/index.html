@@ -278,35 +278,153 @@
         font-size: 14px;
       }
     }
+    #gate{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+
+  background:
+    linear-gradient(
+      rgba(0,0,0,.70),
+      rgba(0,0,0,.82)
+    );
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  backdrop-filter: blur(8px);
+}
+
+.gate-box{
+  width:420px;
+  max-width:90%;
+
+  background:rgba(15,15,15,.95);
+
+  border:1px solid rgba(214,189,140,.35);
+
+  padding:48px;
+
+  text-align:center;
+}
+
+.gate-label{
+  color:var(--gold);
+
+  text-transform:uppercase;
+
+  letter-spacing:.22em;
+
+  font-size:11px;
+
+  margin-bottom:20px;
+}
+
+.gate-box h1{
+  font-size:42px;
+  margin-bottom:16px;
+}
+
+.gate-box p{
+  font-size:16px;
+  line-height:1.7;
+  margin-bottom:26px;
+}
+
+.gate-box input{
+  width:100%;
+
+  padding:15px;
+
+  margin-bottom:16px;
+
+  background:#1a1a1a;
+
+  border:1px solid rgba(255,255,255,.15);
+
+  color:#fff;
+
+  font-size:16px;
+}
+
+.gate-box button{
+  width:100%;
+
+  padding:16px;
+
+  border:none;
+
+  background:var(--gold);
+
+  color:#111;
+
+  font-weight:600;
+
+  letter-spacing:.14em;
+
+  text-transform:uppercase;
+
+  cursor:pointer;
+}
   </style>
 
-  <script>
-    const ACCESS_PASSWORD = "Jujubi2026";
+<script>
+  const ACCESS_PASSWORD = "Jujubi2026";
+
+  function checkAccess() {
+    const value = document.getElementById("accessCode").value;
+
+    if (value === ACCESS_PASSWORD) {
+      sessionStorage.setItem("cdv_private_access", "true");
+      document.getElementById("gate").style.display = "none";
+    } else {
+      alert("Invalid access code.");
+    }
+  }
+
+  window.addEventListener("load", () => {
     const granted = sessionStorage.getItem("cdv_private_access");
 
-    if (!granted) {
-      const pass = prompt("Confidential access code:");
-      if (pass === ACCESS_PASSWORD) {
-        sessionStorage.setItem("cdv_private_access", "true");
-      } else {
-        window.location.href = "/";
-      }
+    if (granted) {
+      document.getElementById("gate").style.display = "none";
     }
+  });
 
-    document.addEventListener("contextmenu", e => e.preventDefault());
+  document.addEventListener("contextmenu", e => e.preventDefault());
 
-    document.addEventListener("keydown", e => {
-      const key = e.key.toLowerCase();
-      if ((e.ctrlKey || e.metaKey) && ["p", "s", "u"].includes(key)) {
-        e.preventDefault();
-        alert("This confidential memorandum cannot be printed, saved or inspected from this page.");
-      }
-    });
-  </script>
+  document.addEventListener("keydown", e => {
+    const key = e.key.toLowerCase();
+    if ((e.ctrlKey || e.metaKey) && ["p", "s", "u"].includes(key)) {
+      e.preventDefault();
+      alert("This confidential memorandum cannot be printed, saved or inspected from this page.");
+    }
+  });
+</script>
 </head>
 
 <body>
+<div id="gate">
+  <div class="gate-box">
+    <div class="gate-label">Confidential Access</div>
 
+    <h1>Casas da Vila</h1>
+
+    <p>
+      Confidential information intended exclusively
+      for qualified investors, hospitality operators
+      and strategic partners.
+    </p>
+
+    <input
+      type="password"
+      id="accessCode"
+      placeholder="Access Code"
+    >
+
+    <button onclick="checkAccess()">Enter</button>
+  </div>
+</div>
   <header class="hero">
     <div class="hero-inner">
       <div class="eyebrow">Confidential Acquisition Memorandum</div>
