@@ -436,6 +436,9 @@ cleanSiteEvents
 
     if (event.created_at) {
 item.dates.add(getSaoPauloDateKey(event.created_at));
+  }
+      });
+
 const returningVisitors = Array.from(visitorHistory.values()).filter(
   (item) => item.sessions.size > 1 || item.dates.size > 1
 ).length;
