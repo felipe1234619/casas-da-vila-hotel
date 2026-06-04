@@ -325,37 +325,54 @@ function buildReservationFunnel(siteEvents = [], bookingEvents = []) {
     got_availability: gotAvailability.size
   };
 }
+function getSaoPauloDateKey(value) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Sao_Paulo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(new Date(value));
+}
+
+function getSaoPauloRange(range = "today") {
+  const now = new Date();
+
+  const todayKey = getSaoPauloDateKey(now);
+  const [year, month, day] = todayKey.split("-").map(Number);
+
+  // 00:00 em São Paulo = 03:00 UTC
+  const todayStartUtc = Date.UTC(year, month - 1, day, 3, 0, 0);
+
+  let start = todayStartUtc;
+  let end = todayStartUtc + 24 * 60 * 60 * 1000;
+
+  if (range === "yesterday") {
+    start = todayStartUtc - 24 * 60 * 60 * 1000;
+    end = todayStartUtc;
+  }
+
+  if (range === "5d") {
+    start = todayStartUtc - 4 * 24 * 60 * 60 * 1000;
+  }
+
+  if (range === "7d") {
+    start = todayStartUtc - 6 * 24 * 60 * 60 * 1000;
+  }
+
+  if (range === "30d") {
+    start = todayStartUtc - 29 * 24 * 60 * 60 * 1000;
+  }
+
+  return {
+    startDate: new Date(start),
+    endDate: new Date(end)
+  };
+}
 export default async function handler(req, res) {
   const token = req.headers["x-admin-token"];
 const range = req.query.range || "today";
 
-const now = new Date();
-let startDate = new Date();
-let endDate = new Date();
-
-if (range === "today") {
-  startDate.setHours(0, 0, 0, 0);
-}
-
-if (range === "yesterday") {
-  startDate.setDate(now.getDate() - 1);
-  startDate.setHours(0, 0, 0, 0);
-
-  endDate = new Date(startDate);
-  endDate.setDate(startDate.getDate() + 1);
-}
-
-if (range === "5d") {
-  startDate.setDate(now.getDate() - 5);
-}
-
-if (range === "7d") {
-  startDate.setDate(now.getDate() - 7);
-}
-
-if (range === "30d") {
-  startDate.setDate(now.getDate() - 30);
-}
+const { startDate, endDate } = getSaoPauloRange(range);
   if (!token || token !== process.env.ADMIN_ANALYTICS_TOKEN) {
     return res.status(401).json({ error: "Unauthorized" });
   }
@@ -418,10 +435,7 @@ cleanSiteEvents
     }
 
     if (event.created_at) {
-      item.dates.add(new Date(event.created_at).toISOString().slice(0, 10));
-    }
-  });
-
+item.dates.add(getSaoPauloDateKey(event.created_at));
 const returningVisitors = Array.from(visitorHistory.values()).filter(
   (item) => item.sessions.size > 1 || item.dates.size > 1
 ).length;
@@ -451,8 +465,11 @@ return res.status(200).json({
     visitors: visitors.size,
 returning_visitors: returningVisitors,
     booking_searches: bookingSearches.length,
-    booking_intent_rate: 0
-  },
+booking_intent_rate:
+  sessions.size > 0
+    ? Math.round((bookingSearches.length / sessions.size) * 100)
+    : 0
+    },
 
   top_pages: topEntries(countBy(pageViewEvents, "page_path")),
   top_referrers: topEntries(countBy(pageViewEvents, "referrer")),
@@ -474,18 +491,43 @@ recent_site_events: cleanSiteEvents.slice(0, 30),
 recent_booking_events: cleanBookingEvents.slice(0, 30),
       booking_availability_results: availabilityResults,
 
-      booking_summary: {
-        potential_revenue: availabilityResults.reduce(
-          (sum, e) => sum + Number(e.estimated_total || 0),
+booking_summary: {
+  potential_revenue: availabilityResults.reduce((sum, e) => {
+    const directTotal = Number(e.estimated_total || 0);
+
+    if (directTotal > 0) return sum + directTotal;
+
+    const units =
+      e.available_units ||
+      e.metadata?.available_units ||
+      [];
+
+    if (Array.isArray(units) && units.length) {
+      return sum + units.reduce((unitSum, unit) => {
+        return unitSum + Number(
+          unit.estimated_total ||
+          unit.total ||
+          unit.price ||
           0
-        ),
-        available_queries: availabilityResults.filter(
-          (e) => e.availability_status === "available"
-        ).length,
-        unavailable_queries: availabilityResults.filter(
-          (e) => e.availability_status === "unavailable"
-        ).length
-      }
+        );
+      }, 0);
+    }
+
+    return sum;
+  }, 0),
+
+  available_queries: availabilityResults.filter((e) =>
+    e.availability_status === "available" ||
+    Number(e.available_units_count || 0) > 0 ||
+    (Array.isArray(e.available_units) && e.available_units.length > 0) ||
+    (Array.isArray(e.metadata?.available_units) && e.metadata.available_units.length > 0)
+  ).length,
+
+  unavailable_queries: availabilityResults.filter((e) =>
+    e.availability_status === "unavailable" ||
+    e.unavailable_reason
+  ).length
+}
     });
   } catch (error) {
     return res.status(500).json({
