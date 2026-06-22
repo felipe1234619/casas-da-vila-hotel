@@ -143,7 +143,55 @@
     if (!ci || !co) return 0;
     return Math.round((co - ci) / 86400000);
   }
+function getDiscount(season, nights) {
+  if (season === "reveillon") {
 
+    if (nights >= 10) {
+      return {
+        percentage: 15,
+        label: "Réveillon Extended Stay"
+      };
+    }
+
+    if (nights >= 7) {
+      return {
+        percentage: 10,
+        label: "Réveillon Weekly Stay"
+      };
+    }
+
+    return {
+      percentage: 0,
+      label: null
+    };
+  }
+
+  if (nights >= 14) {
+    return {
+      percentage: 20,
+      label: "Extended Stay"
+    };
+  }
+
+  if (nights >= 7) {
+    return {
+      percentage: 15,
+      label: "Weekly Stay"
+    };
+  }
+
+  if (nights >= 4) {
+    return {
+      percentage: 10,
+      label: "Long Stay"
+    };
+  }
+
+  return {
+    percentage: 0,
+    label: null
+  };
+}
   function overlaps(checkin, checkout, from, to) {
     const ci = parseDateLocal(checkin);
     const co = parseDateLocal(checkout);
@@ -209,7 +257,15 @@
     const minNights = rule.minNights || (rule.minStay ? rule.minStay[normalizedHouse] : 1);
     const blocked = isBlocked(normalizedHouse, checkin, checkout);
     const meetsMinStay = nights >= minNights;
+const discount = getDiscount(rule.name, nights);
 
+const grossTotal = price * nights;
+
+const discountAmount =
+  grossTotal * (discount.percentage / 100);
+
+const finalTotal =
+  grossTotal - discountAmount;
     return {
       ok: meetsMinStay && !blocked,
       reason: blocked ? "blocked" : (!meetsMinStay ? "min_stay" : "ok"),
@@ -220,8 +276,11 @@
       nights,
       minNights,
       price,
-      total: price * nights,
-      blocked
+grossTotal,
+discountPercentage: discount.percentage,
+discountLabel: discount.label,
+discountAmount,
+total: finalTotal,      blocked
     };
   }
 
@@ -267,10 +326,23 @@ priceEl.textContent = `${t.from} ${formatCurrency(config.price)} ${t.perNight}`;
       minStayEl.textContent = `${t.minStay}: ${config.minNights} ${t.nights}`;
     }
 
-    if (totalEl && config.total) {
-totalEl.textContent = `${t.total}: ${formatCurrency(config.total)}`;
-    }
+if (totalEl && config.total) {
 
+  if (config.discountPercentage > 0) {
+
+    totalEl.innerHTML = `
+      <div>Tarifa base: ${formatCurrency(config.grossTotal)}</div>
+      <div>Desconto (${config.discountPercentage}%): -${formatCurrency(config.discountAmount)}</div>
+      <strong>${t.total}: ${formatCurrency(config.total)}</strong>
+    `;
+
+  } else {
+
+    totalEl.textContent =
+      `${t.total}: ${formatCurrency(config.total)}`;
+
+  }
+}
     if (statusEl) {
       if (config.reason === "blocked") {
         statusEl.textContent = t.unavailable;

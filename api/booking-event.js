@@ -43,10 +43,35 @@ export default async function handler(req, res) {
       guests: body.guests || null,
       guests_count: body.guests_count || body.guests || null,
 
-      currency: body.currency || "BRL",
-      estimated_total: body.estimated_total || null,
+currency: body.currency || "BRL",
 
-      availability_status: body.availability_status || null,
+estimated_total:
+  body.estimated_total ||
+  body.final_total ||
+  body.final_amount ||
+  null,
+
+gross_total:
+  body.gross_total ||
+  body.gross_amount ||
+  body.grossTotal ||
+  null,
+
+discount_amount:
+  body.discount_amount ||
+  body.discountAmount ||
+  null,
+
+discount_percentage:
+  body.discount_percentage ||
+  body.discountPercentage ||
+  null,
+
+discount_label:
+  body.discount_label ||
+  body.discountLabel ||
+  null,
+        availability_status: body.availability_status || null,
       available_units_count: body.available_units_count || null,
       available_units: body.available_units || null,
       unavailable_reason: body.unavailable_reason || null,

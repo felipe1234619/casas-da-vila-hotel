@@ -495,10 +495,16 @@ recent_booking_events: cleanBookingEvents.slice(0, 30),
       booking_availability_results: availabilityResults,
 
 booking_summary: {
-  potential_revenue: availabilityResults.reduce((sum, e) => {
-    const directTotal = Number(e.estimated_total || 0);
+  gross_revenue: availabilityResults.reduce((sum, e) => {
+    const directGross = Number(
+      e.gross_total ||
+      e.gross_amount ||
+      e.metadata?.gross_total ||
+      e.metadata?.gross_amount ||
+      0
+    );
 
-    if (directTotal > 0) return sum + directTotal;
+    if (directGross > 0) return sum + directGross;
 
     const units =
       e.available_units ||
@@ -508,6 +514,8 @@ booking_summary: {
     if (Array.isArray(units) && units.length) {
       return sum + units.reduce((unitSum, unit) => {
         return unitSum + Number(
+          unit.gross_total ||
+          unit.gross_amount ||
           unit.estimated_total ||
           unit.total ||
           unit.price ||
@@ -519,6 +527,66 @@ booking_summary: {
     return sum;
   }, 0),
 
+  discounts_granted: availabilityResults.reduce((sum, e) => {
+    const directDiscount = Number(
+      e.discount_amount ||
+      e.metadata?.discount_amount ||
+      0
+    );
+
+    if (directDiscount > 0) return sum + directDiscount;
+
+    const units =
+      e.available_units ||
+      e.metadata?.available_units ||
+      [];
+
+    if (Array.isArray(units) && units.length) {
+      return sum + units.reduce((unitSum, unit) => {
+        return unitSum + Number(
+          unit.discount_amount ||
+          unit.discount ||
+          0
+        );
+      }, 0);
+    }
+
+    return sum;
+  }, 0),
+
+  potential_revenue: availabilityResults.reduce((sum, e) => {
+    const directNet = Number(
+      e.final_total ||
+      e.final_amount ||
+      e.estimated_total ||
+      e.metadata?.final_total ||
+      e.metadata?.final_amount ||
+      e.metadata?.estimated_total ||
+      0
+    );
+
+    if (directNet > 0) return sum + directNet;
+
+    const units =
+      e.available_units ||
+      e.metadata?.available_units ||
+      [];
+
+    if (Array.isArray(units) && units.length) {
+      return sum + units.reduce((unitSum, unit) => {
+        return unitSum + Number(
+          unit.final_total ||
+          unit.final_amount ||
+          unit.estimated_total ||
+          unit.total ||
+          unit.price ||
+          0
+        );
+      }, 0);
+    }
+
+    return sum;
+  }, 0),
   available_queries: availabilityResults.filter((e) =>
     e.availability_status === "available" ||
     Number(e.available_units_count || 0) > 0 ||

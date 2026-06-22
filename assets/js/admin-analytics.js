@@ -247,10 +247,21 @@ if ($("citiesReached")) {
   $("bookingSearches").textContent = dashboardData.summary?.booking_searches ?? "0";
   $("bookingIntentRate").textContent = `${dashboardData.summary?.booking_intent_rate ?? 0}%`;
 
-  $("potentialRevenue").textContent = formatMoney(
-    dashboardData.booking_summary?.potential_revenue || 0
+if ($("grossRevenue")) {
+  $("grossRevenue").textContent = formatMoney(
+    dashboardData.booking_summary?.gross_revenue || 0
   );
+}
 
+if ($("discountsGranted")) {
+  $("discountsGranted").textContent = formatMoney(
+    dashboardData.booking_summary?.discounts_granted || 0
+  );
+}
+
+$("potentialRevenue").textContent = formatMoney(
+  dashboardData.booking_summary?.potential_revenue || 0
+);
   $("availableQueries").textContent =
     dashboardData.booking_summary?.available_queries || 0;
 
