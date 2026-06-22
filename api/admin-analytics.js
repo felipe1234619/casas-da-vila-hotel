@@ -108,11 +108,42 @@ house_name:
       String(p.path).includes("reservar")
     ) || session.bookings.length > 0,
 
+visitor_sessions_count: new Set(
+  siteEvents
+    .filter(
+      (e) =>
+        e.visitor_id &&
+        e.visitor_id === session.visitor_id
+    )
+    .map((e) => e.session_id)
+    .filter(Boolean)
+).size,
+
+visitor_events_count: siteEvents.filter(
+  (e) =>
+    e.visitor_id &&
+    e.visitor_id === session.visitor_id
+).length,
+
 is_returning_visitor:
-  siteEvents.filter(
-    (e) => e.visitor_id && e.visitor_id === session.visitor_id
-  ).some((e) => e.is_returning_visitor === true),
-  lead_score: calculateLeadScore(session),
+  new Set(
+    siteEvents
+      .filter(
+        (e) =>
+          e.visitor_id &&
+          e.visitor_id === session.visitor_id
+      )
+      .map((e) => e.session_id)
+      .filter(Boolean)
+  ).size > 1 ||
+  siteEvents
+    .filter(
+      (e) =>
+        e.visitor_id &&
+        e.visitor_id === session.visitor_id
+    )
+    .some((e) => e.is_returning_visitor === true),
+      lead_score: calculateLeadScore(session),
 
   lead_label: classifyLeadScore(
     calculateLeadScore(session)

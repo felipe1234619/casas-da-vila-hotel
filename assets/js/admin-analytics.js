@@ -365,11 +365,31 @@ function renderVisitorSessions(sessions) {
                 <small>${session.referrer || "Direct / unknown"}</small>
               </div>
 
-              <div class="sessionBadges">
-                <span>${session.page_count || 0} páginas</span>
-                <span>${session.has_booking_intent ? "Reserva" : "Explorando"}</span>
-                <span class="scoreBadge">${score}/100 · ${intentLabel}</span>
-              </div>
+<div class="sessionBadges">
+
+  <span>
+    ${session.page_count || 0} páginas
+  </span>
+
+  <span>
+    ${session.has_booking_intent ? "Reserva" : "Explorando"}
+  </span>
+
+  ${
+    session.is_returning_visitor
+      ? `<span class="returningBadge">
+           🔁 ${session.visitor_sessions_count || 2} sessões
+         </span>`
+      : `<span class="newVisitorBadge">
+           Novo
+         </span>`
+  }
+
+  <span class="scoreBadge">
+    ${score}/100 · ${intentLabel}
+  </span>
+
+</div>
             </div>
           </button>
 
