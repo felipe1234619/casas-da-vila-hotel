@@ -1055,3 +1055,36 @@ padding: 30px 34px;
     padding: 22px;
   }
 }
+.hasUnreadChat {
+  border: 1px solid rgba(201, 79, 50, .45);
+  box-shadow: 0 12px 36px rgba(201, 79, 50, .12);
+}
+
+.chatReplyForm {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.chatReplyForm input {
+  flex: 1;
+  border: 1px solid rgba(0,0,0,.16);
+  border-radius: 999px;
+  padding: 12px 14px;
+}
+
+.chatReplyForm button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: #1f3d35;
+  color: #fff;
+  cursor: pointer;
+}
+
+.timelineItem small {
+  display: block;
+  opacity: .55;
+  margin-top: 4px;
+  font-size: 12px;
+}

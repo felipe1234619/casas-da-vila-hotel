@@ -54,8 +54,10 @@
     const root = document.createElement("div");
     root.className = "casasLiveChat";
     root.innerHTML = `
-      <button class="chatBubble" type="button">💬</button>
-
+<button class="chatBubble" type="button">
+  <span>💬</span>
+  <small class="chatBubbleBadge">1</small>
+</button>
       <div class="chatPanel" aria-hidden="true">
         <div class="chatHeader">
           <strong>${t.title}</strong>
@@ -272,6 +274,24 @@
         color: #fff;
         cursor: pointer;
       }
+        .chatBubble {
+  position: relative;
+}
+
+.chatBubbleBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #c94f32;
+  color: #fff;
+  font-size: 12px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+}
     `;
     document.head.appendChild(style);
   }

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Casas da Vila — Live Chat</title>
+  <link rel="stylesheet" href="/assets/css/admin-analytics.css" />
+</head>
+<body>
+  <main class="dashboard">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Casas da Vila</p>
+<h1>Live Chat Concierge</h1>
+
+<p class="subtitle">
+  Conversas ao vivo com visitantes do site, leads recorrentes e oportunidades de reserva.
+</p>
+      </div>
+
+      <div class="accessBox">
+        <input id="adminToken" type="password" placeholder="Token de acesso" />
+        <button id="loadChats">Acessar chats</button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel wide">
+<div class="panelHeader">
+  <div>
+    <h2>Conversas ativas</h2>
+    <p class="panelLead">
+      Atualização automática a cada 5 segundos.
+    </p>
+  </div>
+  <span id="chatStatus" class="liveBadge">● aguardando</span>
+</div>
+        <div id="chatSessions" class="table"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/js/chat-admin.js"></script>
+</body>
+</html>
