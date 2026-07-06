@@ -38,14 +38,14 @@
       to: "2027-01-06",
       minNights: 7,
       prices: {
-        casa_rosada: 3980,
-        atelier_azul: 3750,
+        casa_rosada: 2980,
+        atelier_azul: 2750,
         casa_grande: 9980,
         casa_dende: 7580,
-        casa_oca: 3750,
+        casa_oca: 2750,
         casa_branca: 3880,
-        casa_manga: 3980,
-        casa_baloes: 4550
+        casa_manga: 3380,
+        casa_baloes: 3550
       }
     },
     {
@@ -53,11 +53,11 @@
       from: "2026-01-01",
       to: "2026-12-14",
       prices: {
-        casa_rosada: 2240,
-        atelier_azul: 1950,
-        casa_grande: 4950,
-        casa_dende: 3850,
-        casa_oca: 1959,
+        casa_rosada: 1880,
+        atelier_azul: 1350,
+        casa_grande: 3950,
+        casa_dende: 2850,
+        casa_oca: 1250,
         casa_branca: 1950,
         casa_manga: 1950,
         casa_baloes: 2950
