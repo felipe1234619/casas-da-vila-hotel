@@ -1,0 +1,197 @@
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 900;
+  height: var(--header-height);
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    backdrop-filter 0.35s ease;
+}
+
+.site-header.scrolled {
+  background: rgba(11, 11, 10, 0.92);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(18px);
+}
+
+.header-inner {
+  width: min(var(--max-width), calc(100% - 64px));
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.brand-main {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.03em;
+}
+
+.brand-sub {
+  color: var(--bronze-light);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navigation a {
+  color: rgba(247, 245, 240, 0.78);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+}
+
+.navigation a:hover {
+  color: var(--bronze-light);
+}
+
+.mobile-menu {
+  display: none;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--warm-white);
+  font-size: 24px;
+}
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  padding: 150px max(7vw, 30px) 80px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(6, 6, 5, 0.76) 0%,
+      rgba(6, 6, 5, 0.40) 55%,
+      rgba(6, 6, 5, 0.16) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(6, 6, 5, 0.10) 20%,
+      rgba(6, 6, 5, 0.93) 100%
+    ),
+    url("/assets/img/aerial.png") center / cover no-repeat;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/assets/img/aerial.png") center / cover no-repeat;
+  z-index: -1;
+  animation: heroZoom 18s ease-out forwards;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(1020px, 100%);
+}
+
+.section {
+  position: relative;
+  padding: 130px max(7vw, 30px);
+}
+
+.section-soft {
+  background: var(--bg-soft);
+}
+
+.section-inner {
+  width: min(var(--max-width), 100%);
+  margin: 0 auto;
+}
+
+.section-centered {
+  text-align: center;
+}
+
+.statement-section {
+  min-height: 78vh;
+  padding: 110px 30px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.split-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  gap: clamp(50px, 8vw, 120px);
+  align-items: center;
+}
+
+.visual-panel {
+  position: relative;
+  min-height: 680px;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.03),
+      rgba(0, 0, 0, 0.30)
+    ),
+    url("/assets/img/casa-grande/casagrande8.jpeg") center / cover no-repeat;
+}
+
+.visual-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+}
+
+.full-image-section {
+  min-height: 80vh;
+  padding: 90px max(7vw, 30px);
+  display: flex;
+  align-items: flex-end;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4, 4, 3, 0.12),
+      rgba(4, 4, 3, 0.90)
+    ),
+    url("/assets/img/casa-grande/casagrande8.jpeg") center / cover no-repeat;
+}
+
+.full-image-content {
+  width: min(760px, 100%);
+}
+
+.portal-footer {
+  padding: 52px max(7vw, 30px);
+  border-top: 1px solid var(--line);
+}
+
+.footer-inner {
+  width: min(var(--max-width), 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: end;
+}

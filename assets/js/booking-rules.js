@@ -148,14 +148,14 @@ function getDiscount(season, nights) {
 
     if (nights >= 10) {
       return {
-        percentage: 15,
+        percentage: 0,
         label: "Réveillon Extended Stay"
       };
     }
 
     if (nights >= 7) {
       return {
-        percentage: 10,
+        percentage: 0,
         label: "Réveillon Weekly Stay"
       };
     }
@@ -168,21 +168,21 @@ function getDiscount(season, nights) {
 
   if (nights >= 14) {
     return {
-      percentage: 20,
+      percentage: 0,
       label: "Extended Stay"
     };
   }
 
   if (nights >= 7) {
     return {
-      percentage: 15,
+      percentage: 0,
       label: "Weekly Stay"
     };
   }
 
   if (nights >= 4) {
     return {
-      percentage: 10,
+      percentage: 0,
       label: "Long Stay"
     };
   }

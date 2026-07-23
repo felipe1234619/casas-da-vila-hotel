@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request Access | Casas da Vila</title>
+
+  <style>
+    @media print { body { display: none !important; } }
+
+    body {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #111;
+      color: #f4efe7;
+    }
+
+    .wrap {
+      min-height: 100vh;
+      padding: 80px 8%;
+      max-width: 780px;
+      margin: auto;
+    }
+
+    .label {
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #c9b28a;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 52px;
+      margin: 0 0 20px;
+    }
+
+    p {
+      color: #e8ded0;
+      line-height: 1.6;
+      font-size: 18px;
+    }
+
+    form {
+      margin-top: 38px;
+      display: grid;
+      gap: 16px;
+    }
+
+    input, textarea {
+      padding: 15px;
+      background: #1c1c1c;
+      border: 1px solid rgba(255,255,255,.18);
+      color: #fff;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 130px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 16px 24px;
+      background: #d6bd8c;
+      color: #111;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      cursor: pointer;
+    }
+
+    a {
+      color: #d6bd8c;
+    }
+  </style>
+
+  <script>
+    const ACCESS_PASSWORD = "Jujubi2026";
+    const granted = sessionStorage.getItem("cdv_private_access");
+
+    if (!granted) {
+      const pass = prompt("Confidential access code:");
+      if (pass === ACCESS_PASSWORD) {
+        sessionStorage.setItem("cdv_private_access", "true");
+      } else {
+        window.location.href = "/";
+      }
+    }
+
+    function sendRequest(event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const data = new FormData(form);
+
+      const body = `
+Confidential Investment Memorandum Request
+
+Name: ${data.get("name")}
+Company: ${data.get("company")}
+Country: ${data.get("country")}
+Email: ${data.get("email")}
+Phone: ${data.get("phone")}
+
+Message:
+${data.get("message")}
+      `;
+
+      window.location.href =
+        "mailto:felipe.carvalho@mac.com?subject=Casas da Vila - Confidential Memorandum Request&body=" +
+        encodeURIComponent(body);
+    }
+  </script>
+</head>
+
+<body>
+  <main class="wrap">
+    <div class="label">Confidential Access</div>
+    <h1>Request Investment Memorandum</h1>
+
+    <p>
+      Access to detailed information regarding Casas da Vila is restricted to qualified potential purchasers,
+      operators, investors and representatives subject to confidentiality.
+    </p>
+
+    <form onsubmit="sendRequest(event)">
+      <input name="name" placeholder="Full name" required />
+      <input name="company" placeholder="Company / Investor Group" />
+      <input name="country" placeholder="Country" />
+      <input name="email" type="email" placeholder="Email" required />
+      <input name="phone" placeholder="Phone / WhatsApp" />
+      <textarea name="message" placeholder="Briefly describe your interest"></textarea>
+
+      <label>
+        <input type="checkbox" required />
+        I acknowledge that all information provided is confidential.
+      </label>
+
+      <button type="submit">Request Access</button>
+    </form>
+
+    <p style="margin-top:40px;">
+      <a href="/private/index.html">Return to confidential page</a>
+    </p>
+  </main>
+     <script src="/assets/js/site-analytics.js"></script>
+
+</body>
+</html>
