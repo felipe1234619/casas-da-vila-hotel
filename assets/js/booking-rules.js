@@ -53,11 +53,11 @@
       from: "2026-01-01",
       to: "2026-12-14",
       prices: {
-        casa_rosada: 1880,
-        atelier_azul: 1350,
+        casa_rosada: 2300,
+        atelier_azul: 1650,
         casa_grande: 3950,
-        casa_dende: 2850,
-        casa_oca: 1250,
+        casa_dende: 3550,
+        casa_oca: 1880,
         casa_branca: 1950,
         casa_manga: 1950,
         casa_baloes: 2950
