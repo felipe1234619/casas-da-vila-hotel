@@ -1,0 +1,219 @@
+
+
+{
+  "property": "Casas da Vila Trancoso",
+  "currency": "BRL",
+
+  "rate_policy": {
+    "rates_are_non_refundable": true,
+    "cancellation_allowed": false,
+    "modification_requests": true,
+    "modifications_subject_to_availability": true,
+
+    "guest_communication": {
+      "must_disclose_before_confirmation": true,
+      "preferred_phrase": "Please note that our rates are non-refundable after confirmation. I will be happy to assist you with all details before proceeding with your reservation."
+    }
+  },
+
+  "season_rules": [
+
+    {
+      "season_name": "standard_2026",
+
+      "period": {
+        "from": "2026-01-01",
+        "to": "2026-12-14"
+      },
+
+      "minimum_stay_rules": {
+        "Casa Rosada": 3,
+        "Atelier Azul": 3,
+        "Casa Grande": 3,
+        "Casa Dendê": 5,
+        "Casa Oca": 5,
+        "Casa Branca": 5,
+        "Casa Manga": 5,
+        "Casa Balões": 5
+      },
+
+      "rates": [
+
+        {
+          "villa": "Casa Rosada",
+          "nightly_rate": 2300,
+          "max_guests": 2
+        },
+        {
+          "villa": "Atelier Azul",
+          "nightly_rate": 1650,
+          "max_guests": 2
+        },
+        {
+          "villa": "Casa Grande",
+          "nightly_rate": 3950,
+          "max_guests": 4
+        },
+        {
+          "villa": "Casa Dendê",
+          "nightly_rate": 3550,
+          "max_guests": 4
+        },
+        {
+          "villa": "Casa Oca",
+          "nightly_rate": 1880,
+          "max_guests": 2
+        },
+        {
+          "villa": "Casa Branca",
+          "nightly_rate": 1950,
+          "max_guests": 2
+        },
+        {
+          "villa": "Casa Manga",
+          "nightly_rate": 1950,
+          "max_guests": 2
+        },
+        {
+          "villa": "Casa Balões",
+          "nightly_rate": 2950,
+          "max_guests": 2
+        }
+      ]
+    },
+
+
+    {
+      "season_name": "reveillon",
+
+      "period": {
+        "from": "2026-12-15",
+        "to": "2027-01-06"
+      },
+
+      "minimum_stay": 7,
+
+      "special_conditions": [
+        "minimum_stay_7_nights",
+        "non_refundable"
+      ],
+
+      "rates": [
+
+        {
+          "villa": "Casa Rosada",
+          "nightly_rate": 3380,
+          "max_guests": 2
+        },
+        {
+          "villa": "Atelier Azul",
+          "nightly_rate": 2850,
+          "max_guests": 2
+        },
+        {
+          "villa": "Casa Grande",
+          "nightly_rate": 9980,
+          "max_guests": 4
+        },
+        {
+          "villa": "Casa Dendê",
+          "nightly_rate": 7580,
+          "max_guests": 4
+        },
+        {
+          "villa": "Casa Oca",
+          "nightly_rate": 2980,
+          "max_guests": 2
+        },
+        {
+          "villa": "Casa Branca",
+          "nightly_rate": 3880,
+          "max_guests": 2
+        },
+        {
+          "villa": "Casa Manga",
+          "nightly_rate": 3880,
+          "max_guests": 2
+        },
+        {
+          "villa": "Casa Balões",
+          "nightly_rate": 3880,
+          "max_guests": 2
+        }
+      ]
+    },
+
+
+    {
+      "season_name": "standard_2027",
+
+      "period": {
+        "from": "2027-01-07",
+        "to": "2027-12-15"
+      },
+
+      "minimum_stay_rules": {
+        "Casa Rosada": 3,
+        "Atelier Azul": 3,
+        "Casa Grande": 3,
+        "Casa Dendê": 5,
+        "Casa Oca": 5,
+        "Casa Branca": 5,
+        "Casa Manga": 5,
+        "Casa Balões": 5
+      },
+
+      "rates": [
+
+        {
+          "villa": "Casa Rosada",
+          "nightly_rate": 2250,
+          "max_guests": 2
+        },
+        {
+          "villa": "Atelier Azul",
+          "nightly_rate": 1850,
+          "max_guests": 2
+        },
+        {
+          "villa": "Casa Grande",
+          "nightly_rate": 4950,
+          "max_guests": 4
+        },
+        {
+          "villa": "Casa Dendê",
+          "nightly_rate": 3850,
+          "max_guests": 4
+        },
+        {
+          "villa": "Casa Oca",
+          "nightly_rate": 1950,
+          "max_guests": 2
+        },
+        {
+          "villa": "Casa Branca",
+          "nightly_rate": 2050,
+          "max_guests": 2
+        },
+        {
+          "villa": "Casa Manga",
+          "nightly_rate": 2050,
+          "max_guests": 2
+        },
+        {
+          "villa": "Casa Balões",
+          "nightly_rate": 2550,
+          "max_guests": 2
+        }
+      ]
+    }
+  ],
+
+
+  "pricing_rules": {
+    "never_infer_rates": true,
+    "never_create_discounts": true,
+    "never_change_minimum_stay": true,
+    "never_confirm_availability_from_rates_only": true
+  }
+}

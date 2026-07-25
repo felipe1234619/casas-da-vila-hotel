@@ -1,0 +1,16 @@
+{
+  "knowledge_sources": {
+
+    "villa_information": "villa_inventory.json",
+
+    "pricing_information": "rate_rules.json",
+
+    "operational_policies": "policies.json",
+
+    "experiences_information": "experiences.json",
+
+    "faq": "faq.json"
+  },
+
+  "priority_rule": "Only information contained in approved knowledge sources may be presented as factual."
+}

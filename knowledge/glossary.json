@@ -1,0 +1,54 @@
+{
+  "version": "1.0",
+
+  "terms": {
+
+    "villa": {
+      "definition": "A private accommodation offered by Casas da Vila Trancoso."
+    },
+
+    "suite": {
+      "definition": "An accommodation category explicitly identified in the inventory database."
+    },
+
+    "reservation": {
+      "definition": "A booking request that becomes confirmed only after payment confirmation and availability verification."
+    },
+
+    "availability": {
+      "definition": "Current inventory status that may only be confirmed by the booking system."
+    },
+
+    "minimum_stay": {
+      "definition": "The minimum number of consecutive nights required for a reservation."
+    },
+
+    "nightly_rate": {
+      "definition": "The published price per night before taxes, fees or applicable rules."
+    },
+
+    "non_refundable": {
+      "definition": "A reservation that cannot be cancelled for a refund unless an officially approved exception exists."
+    },
+
+    "early_checkin": {
+      "definition": "Arrival before the standard check-in time, subject to availability."
+    },
+
+    "late_checkout": {
+      "definition": "Departure after the standard check-out time, subject to availability."
+    },
+
+    "concierge": {
+      "definition": "Personalized assistance provided before and during the guest's stay."
+    },
+
+    "experience": {
+      "definition": "An activity or service offered directly by Casas da Vila or through approved partners."
+    },
+
+    "reservations_team": {
+      "definition": "The human reservations specialists responsible for confirming bookings and handling exceptional requests."
+    }
+  }
+}

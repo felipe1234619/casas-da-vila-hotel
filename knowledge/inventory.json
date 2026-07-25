@@ -1,0 +1,232 @@
+
+{
+
+  "version": "1.0",
+  "last_updated": "2026-07-25",
+
+  "property": "Casas da Vila Trancoso",  "location": {
+    "city": "Trancoso",
+    "state": "Bahia",
+    "country": "Brazil"
+  },
+"currency": "BRL",
+
+"source_priority": {
+  "authority": "highest",
+  "rule": "All villa information must come exclusively from this database."
+},
+
+"villas": [
+        {
+      "id": "casa-rosada",
+      "name": "Casa Rosada",
+      "status": "available",
+      "max_guests": 2,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "bed_configuration": "1 king size bed",
+      "villa_type": "private villa",
+      "private_pool": false,
+      "ideal_for": [
+        "couples",
+        "romantic stays",
+        "short luxury stays"
+      ],
+      "not_suitable_for": [
+        "families",
+        "groups larger than 2 guests"
+      ],
+      "verified_features": [
+        "private residence",
+        "quiet and intimate atmosphere"
+      ]
+    },
+
+    {
+      "id": "atelie-azul",
+      "name": "Atelie Azul",
+      "status": "available",
+      "max_guests": 2,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "bed_configuration": "1 king size bed",
+      "villa_type": "private villa",
+      "private_pool": false,
+      "ideal_for": [
+        "couples",
+        "romantic stays",
+        "guests seeking privacy"
+      ],
+      "not_suitable_for": [
+        "families",
+        "groups larger than 2 guests"
+      ],
+      "verified_features": [
+        "private residence",
+        "intimate accommodation"
+      ]
+    },
+
+    {
+      "id": "casa-grande",
+      "name": "Casa Grande",
+      "status": "available",
+      "max_guests": 4,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "bed_configuration": "multiple beds",
+      "villa_type": "private villa",
+      "private_pool": true,
+      "ideal_for": [
+        "families",
+        "small groups",
+        "guests seeking maximum privacy",
+        "special celebrations"
+      ],
+      "not_suitable_for": [
+        "groups larger than 4 guests"
+      ],
+      "verified_features": [
+        "only villa with private pool",
+        "largest residence"
+      ]
+    },
+
+    {
+      "id": "casa-dende",
+      "name": "Casa Dendê",
+      "status": "available",
+      "max_guests": 4,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "bed_configuration": "multiple beds",
+      "villa_type": "private villa",
+      "private_pool": false,
+      "ideal_for": [
+        "families",
+        "small groups",
+        "guests seeking more space"
+      ],
+      "not_suitable_for": [
+        "groups larger than 4 guests"
+      ],
+      "verified_features": [
+        "larger accommodation",
+        "suitable for up to 4 guests"
+      ]
+    },
+
+    {
+      "id": "casa-oca",
+      "name": "Casa Oca",
+      "status": "available",
+      "max_guests": 2,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "bed_configuration": "1 king size bed",
+      "villa_type": "private villa",
+      "private_pool": false,
+      "ideal_for": [
+        "couples",
+        "romantic stays",
+        "guests seeking tranquility"
+      ],
+      "not_suitable_for": [
+        "families",
+        "groups larger than 2 guests"
+      ],
+      "verified_features": [
+        "private residence",
+        "intimate accommodation"
+      ]
+    },
+
+    {
+      "id": "casa-branca",
+      "name": "Casa Branca",
+      "status": "available",
+      "max_guests": 2,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "bed_configuration": "1 king size bed",
+      "villa_type": "private villa",
+      "private_pool": false,
+      "ideal_for": [
+        "couples",
+        "romantic stays"
+      ],
+      "not_suitable_for": [
+        "families",
+        "groups larger than 2 guests"
+      ],
+      "verified_features": [
+        "private residence"
+      ]
+    },
+
+    {
+      "id": "casa-manga",
+      "name": "Casa Manga",
+      "status": "available",
+      "max_guests": 2,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "bed_configuration": "1 king size bed",
+      "villa_type": "private villa",
+      "private_pool": false,
+      "ideal_for": [
+        "couples",
+        "romantic stays",
+        "guests seeking privacy"
+      ],
+      "not_suitable_for": [
+        "families",
+        "groups larger than 2 guests"
+      ],
+      "verified_features": [
+        "private residence"
+      ]
+    },
+
+    {
+      "id": "casa-baloes",
+      "name": "Casa Balões",
+      "status": "available",
+      "max_guests": 2,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "bed_configuration": "1 king size bed",
+      "villa_type": "private suite",
+      "private_pool": false,
+      "ideal_for": [
+        "couples",
+        "honeymoon stays",
+        "romantic stays"
+      ],
+      "not_suitable_for": [
+        "families",
+        "groups",
+        "more than 2 guests"
+      ],
+      "verified_features": [
+        "one king size suite",
+        "designed for two guests only"
+      ]
+    }
+  ],
+
+  "global_rules": {
+
+  "source_of_truth": true,
+
+  "max_guest_capacity_must_never_be_inferred": true,
+
+  "villa_features_must_only_come_from_this_database": true,
+
+  "villa_recommendation_requires_capacity_check": true,
+
+  "never_recommend_without_database_confirmation": true,
+
+  "if_information_is_missing": "Do not guess. Offer to confirm with the reservations team."
+  }
+}

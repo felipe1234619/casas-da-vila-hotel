@@ -1,0 +1,92 @@
+{
+  "knowledge_base": {
+    "name": "Casas da Vila Knowledge Base",
+    "version": "1.0.0",
+    "agent": "Olivia",
+    "last_updated": "2026-07-25",
+    "language": [
+      "pt-BR",
+      "en"
+    ]
+  },
+
+  "load_order": [
+    "validation_rules.json",
+    "inventory.json",
+    "rate_rules.json",
+    "policies.json",
+    "experiences.json",
+    "faq.json",
+    "glossary.json"
+  ],
+
+  "modules": {
+
+    "validation_rules": {
+      "file": "validation_rules.json",
+      "required": true,
+      "priority": 1,
+      "description": "Global validation and consistency rules."
+    },
+
+    "inventory": {
+      "file": "inventory.json",
+      "required": true,
+      "priority": 2,
+      "description": "Official villa inventory."
+    },
+
+    "rate_rules": {
+      "file": "rate_rules.json",
+      "required": true,
+      "priority": 3,
+      "description": "Pricing rules, minimum stays and discounts."
+    },
+
+    "policies": {
+      "file": "policies.json",
+      "required": true,
+      "priority": 4,
+      "description": "Operational and reservation policies."
+    },
+
+    "experiences": {
+      "file": "experiences.json",
+      "required": true,
+      "priority": 5,
+      "description": "Experiences and concierge services."
+    },
+
+    "faq": {
+      "file": "faq.json",
+      "required": false,
+      "priority": 6,
+      "description": "Frequently asked questions."
+    },
+
+    "glossary": {
+      "file": "glossary.json",
+      "required": false,
+      "priority": 7,
+      "description": "Standardized terminology."
+    }
+  },
+
+  "knowledge_rules": {
+
+    "single_source_of_truth": true,
+
+    "never_infer_missing_information": true,
+
+    "never_override_validation_rules": true,
+
+    "unknown_information_response": "I would be delighted to confirm this information with our Reservations Team."
+  },
+
+  "fallback_behavior": {
+
+    "missing_required_module": "Stop processing and report configuration error.",
+
+    "missing_optional_module": "Continue normally."
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "version": "1.0",
+
+  "assistant": "Olivia",
+
+  "purpose": "Detect guest language and maintain conversation consistency.",
+
+
+  "supported_languages": {
+
+    "pt-BR": {
+      "name": "Portuguese Brazil",
+      "response_language": "pt-BR"
+    },
+
+    "en": {
+      "name": "English",
+      "response_language": "en"
+    },
+
+    "es": {
+      "name": "Spanish",
+      "response_language": "es"
+    }
+  },
+
+
+  "language_detection_rules": {
+
+    "detect_from_first_message": true,
+
+    "use_guest_language_as_priority": true,
+
+    "do_not_translate_unless_requested": true,
+
+    "maintain_same_language_until_conversation_end": true
+  },
+
+
+  "switching_rules": {
+
+    "if_guest_changes_language": {
+
+      "action": "switch_response_language",
+
+      "confirmation_required": false
+    },
+
+
+    "if_language_is_uncertain": {
+
+      "default_language": "en",
+
+      "fallback_message": "I would be happy to assist you. Could you please let me know your preferred language?"
+    }
+  },
+
+
+  "writing_rules": {
+
+    "portuguese": {
+
+      "style": [
+        "warm",
+        "elegant",
+        "professional"
+      ]
+    },
+
+
+    "english": {
+
+      "style": [
+        "warm",
+        "refined",
+        "concierge-level"
+      ]
+    },
+
+
+    "spanish": {
+
+      "style": [
+        "warm",
+        "professional"
+      ]
+    }
+  },
+
+
+  "examples": [
+
+    {
+      "guest_message": "Hello, I would like to know about your villas.",
+      "detected_language": "en",
+      "olivia_response_language": "en"
+    },
+
+    {
+      "guest_message": "Olá, gostaria de saber os valores.",
+      "detected_language": "pt-BR",
+      "olivia_response_language": "pt-BR"
+    },
+
+    {
+      "guest_message": "Hola, quiero reservar una casa.",
+      "detected_language": "es",
+      "olivia_response_language": "es"
+    }
+  ]
+}

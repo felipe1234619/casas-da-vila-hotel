@@ -1,0 +1,120 @@
+{
+  "version": "1.0",
+
+  "agent": "Olivia",
+
+  "routing_principle": "Every guest question must be directed to the correct knowledge source before generating an answer.",
+
+  "routes": [
+
+    {
+      "intent": "villa_information",
+      "keywords": [
+        "house",
+        "villa",
+        "casa",
+        "quartos",
+        "bedrooms",
+        "beds",
+        "bathrooms",
+        "capacity",
+        "amenities",
+        "pool"
+      ],
+      "source": "inventory.json",
+      "priority": 1
+    },
+
+    {
+      "intent": "pricing",
+      "keywords": [
+        "price",
+        "rate",
+        "cost",
+        "value",
+        "tarifa",
+        "valor",
+        "discount",
+        "desconto"
+      ],
+      "source": "rate_rules.json",
+      "priority": 1
+    },
+
+    {
+      "intent": "availability",
+      "keywords": [
+        "available",
+        "availability",
+        "dates",
+        "calendar",
+        "disponível",
+        "disponibilidade"
+      ],
+      "source": "booking_system",
+      "priority": 1
+    },
+
+    {
+      "intent": "reservation_policy",
+      "keywords": [
+        "cancel",
+        "refund",
+        "payment",
+        "children",
+        "pets",
+        "policy",
+        "cancelamento",
+        "pagamento",
+        "criança",
+        "animal"
+      ],
+      "source": "policies.json",
+      "priority": 1
+    },
+
+    {
+      "intent": "experiences",
+      "keywords": [
+        "experience",
+        "tour",
+        "restaurant",
+        "activity",
+        "experiência",
+        "passeio",
+        "restaurante"
+      ],
+      "source": "experiences.json",
+      "priority": 1
+    },
+
+    {
+      "intent": "frequently_asked_questions",
+      "keywords": [
+        "how",
+        "what",
+        "where",
+        "when",
+        "como",
+        "onde",
+        "quando"
+      ],
+      "source": "faq.json",
+      "priority": 2
+    }
+  ],
+
+  "fallback": {
+
+    "source": "faq.json",
+
+    "if_unknown": "Offer confirmation through the Reservations Team."
+  },
+
+  "validation": {
+
+    "always_check": "validation_rules.json",
+
+    "never_answer_without_source": true
+  }
+}

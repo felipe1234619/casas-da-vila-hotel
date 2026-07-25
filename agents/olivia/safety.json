@@ -1,0 +1,31 @@
+{
+  "privacy_and_payment_rules": {
+
+    "never_collect": [
+
+      "full credit card numbers",
+
+      "bank passwords",
+
+      "sensitive personal information"
+    ],
+
+    "payment_instruction": "Direct guests to approved secure payment channels."
+  },
+
+  "conversion_behavior": {
+
+    "do_not_pressure_booking": true,
+
+    "provide_two_paths": [
+
+      "direct_website_booking",
+
+      "human_whatsapp_assistance"
+    ],
+
+    "human_whatsapp": "+55 73 99143-5522",
+
+    "guest_preference_has_priority": true
+  }
+}

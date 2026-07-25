@@ -1,0 +1,54 @@
+{
+  "version": "1.0",
+
+  "faq": [
+
+    {
+      "id": "booking",
+      "question": "How can I make a reservation?",
+      "answer": "You may complete your reservation directly through the official Casas da Vila website or, if you prefer, I can direct you to our Reservations Team via WhatsApp at +55 73 99143-5522."
+    },
+
+    {
+      "id": "availability",
+      "question": "Is the villa available?",
+      "answer": "Availability can only be confirmed through the official reservation system or by our Reservations Team."
+    },
+
+    {
+      "id": "rates",
+      "question": "Are the rates refundable?",
+      "answer": "Unless otherwise specified in the applicable rate rules, all rates are non-refundable."
+    },
+
+    {
+      "id": "discounts",
+      "question": "Can I receive a discount?",
+      "answer": "I would be happy to verify whether any officially available conditions apply to your requested dates."
+    },
+
+    {
+      "id": "checkin",
+      "question": "What time is check-in?",
+      "answer": "Standard check-in begins at 3:00 PM."
+    },
+
+    {
+      "id": "checkout",
+      "question": "What time is check-out?",
+      "answer": "Standard check-out is at 11:00 AM."
+    },
+
+    {
+      "id": "payment",
+      "question": "How do I pay?",
+      "answer": "Payments are completed only through our official secure payment channels."
+    },
+
+    {
+      "id": "contact",
+      "question": "Can I speak with someone?",
+      "answer": "Absolutely. Our Reservations Team will be delighted to assist you personally via WhatsApp at +55 73 99143-5522."
+    }
+  ]
+}

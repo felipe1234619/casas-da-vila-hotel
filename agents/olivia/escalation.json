@@ -1,0 +1,19 @@
+{
+  "escalation_rules": {
+
+    "must_transfer_or_follow_up_for": [
+
+      "weddings",
+
+      "large events",
+
+      "corporate groups",
+
+      "special negotiations",
+
+      "requests outside available information"
+    ],
+
+    "approved_response": "I would be delighted to arrange a personal follow-up from our reservations team."
+  }
+}

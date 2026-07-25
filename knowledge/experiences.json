@@ -1,0 +1,105 @@
+
+{
+  "property": "Casas da Vila Trancoso",
+
+  "guest_services": {
+
+    "concierge": {
+      "available": true,
+      "description": "Our concierge team is available to help guests before and during their stay."
+    },
+
+    "housekeeping": {
+      "available": true,
+      "description": "Housekeeping service is included according to the reservation conditions."
+    },
+
+    "breakfast": {
+      "available": true,
+      "description": "Breakfast is included in the daily rate."
+    }
+
+  },
+
+  "experiences": [
+
+    {
+      "name": "Private Chef",
+      "available": "upon_request",
+      "description": "A private chef may be arranged for special lunches, dinners or celebrations.",
+      "agent_instruction": "Never guarantee availability. Offer to arrange the request."
+    },
+
+    {
+      "name": "Airport Transfer",
+      "available": "upon_request",
+      "description": "Private airport transfers may be arranged.",
+      "agent_instruction": "Collect arrival details and offer assistance."
+    },
+
+    {
+      "name": "Restaurant Reservations",
+      "available": true,
+      "description": "The concierge may assist with restaurant recommendations and reservations."
+    },
+
+    {
+      "name": "Special Celebrations",
+      "available": true,
+      "description": "We can help organize birthdays, anniversaries, honeymoons and romantic surprises.",
+      "agent_instruction": "Collect the occasion and arrange personalized assistance."
+    },
+
+    {
+      "name": "Local Experiences",
+      "available": true,
+      "description": "The concierge can recommend beaches, cultural attractions and local experiences in Trancoso."
+    }
+
+  ],
+
+  "upselling_rules": {
+
+    "offer_only_when_relevant": true,
+
+    "never_push_services": true,
+
+    "examples": [
+
+      {
+        "guest_profile": "honeymoon",
+        "suggestions": [
+          "Private Chef",
+          "Special Celebrations"
+        ]
+      },
+
+      {
+        "guest_profile": "anniversary",
+        "suggestions": [
+          "Special Celebrations",
+          "Restaurant Reservations"
+        ]
+      },
+
+      {
+        "guest_profile": "family",
+        "suggestions": [
+          "Airport Transfer"
+        ]
+      }
+
+    ]
+
+  },
+
+  "agent_guardrails": {
+
+    "never_promise_service_availability": true,
+
+    "always_use": "upon_request",
+
+    "approved_phrase": "I would be delighted to help arrange this for you, subject to availability."
+  }
+}
+

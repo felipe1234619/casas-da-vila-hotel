@@ -1,0 +1,107 @@
+{
+  "property": "Casas da Vila Trancoso",
+
+  "general_policies": {
+    "check_in": {
+      "time": "15:00",
+      "notes": "Early check-in is subject to availability and cannot be guaranteed."
+    },
+
+    "check_out": {
+      "time": "11:00",
+      "notes": "Late check-out is subject to availability and may incur additional charges."
+    }
+  },
+
+  "reservation_policy": {
+    "confirmation": "Reservations are confirmed only after payment confirmation and availability verification.",
+
+    "availability_notice": "Availability may change until the reservation is confirmed.",
+
+    "agent_rule": "The agent must never state that a reservation is confirmed unless the booking system explicitly confirms it."
+  },
+
+  "payment_policy": {
+    "secure_payment_only": true,
+
+    "accepted_channels": [
+      "Official Website",
+      "Reservations Team"
+    ],
+
+    "agent_rule": "Never collect or request full credit card numbers during a conversation."
+  },
+
+  "cancellation_policy": {
+    "default_policy": "Non-refundable.",
+
+    "agent_rule": "Always inform guests that rates are non-refundable unless an officially approved exception exists in the rate rules database.",
+
+    "never_infer_exceptions": true
+  },
+
+  "modification_policy": {
+    "changes_subject_to": [
+      "availability",
+      "applicable rate differences",
+      "management approval when required"
+    ]
+  },
+
+  "children_policy": {
+    "agent_rule": "Only provide information explicitly available in the approved knowledge base."
+  },
+
+  "pet_policy": {
+    "agent_rule": "Only provide information explicitly available in the approved knowledge base."
+  },
+
+  "accessibility_policy": {
+    "agent_rule": "Never assume accessibility features. Confirm only information explicitly documented."
+  },
+
+  "housekeeping": {
+    "included": true,
+
+    "agent_rule": "Describe housekeeping services only if documented in the approved knowledge base."
+  },
+
+  "noise_policy": {
+    "description": "Casas da Vila is located in a residential area where respect for neighbors and quiet hours is essential.",
+
+    "events": "Private events may require prior approval.",
+
+    "agent_rule": "Do not authorize events or exceptions."
+  },
+
+  "guest_responsibility": {
+    "description": "Guests are expected to respect the property, neighboring residences, and local community."
+  },
+
+  "concierge_policy": {
+    "experiences": "Recommendations and reservations for experiences are subject to availability.",
+
+    "restaurants": "Restaurant reservations are subject to each venue's policies.",
+
+    "transportation": "Transportation services are subject to third-party availability."
+  },
+
+  "reservation_assistance": {
+    "website_booking": "Guests may complete their reservation directly through the official Casas da Vila website.",
+
+    "human_assistance": {
+      "available": true,
+      "whatsapp": "+55 73 99143-5522"
+    },
+
+    "agent_rule": "Always offer both options without pressuring the guest."
+  },
+
+  "communication_rules": {
+    "never_invent_policies": true,
+
+    "never_guess": true,
+
+    "when_unknown": "I would be delighted to confirm this information with our reservations team."
+  }
+}
