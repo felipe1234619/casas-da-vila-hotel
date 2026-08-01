@@ -1,0 +1,160 @@
+{
+  "session_1784997975295_biv1qskx": {
+    "profile": "couple",
+    "last_intent": "villa_recommendation",
+    "recommended_villas": [
+      "Casa Rosada"
+    ],
+    "travel_dates": null,
+    "guests": null,
+    "sales_stage": "discovery",
+    "updated_at": "2026-07-25T16:46:15.298Z"
+  },
+  "session_1784998227239_c7lvb8dv": {
+    "profile": "couple",
+    "last_intent": "villa_recommendation",
+    "recommended_villas": [
+      "Casa Rosada",
+      "Atelie Azul"
+    ],
+    "travel_dates": null,
+    "guests": null,
+    "sales_stage": "discovery",
+    "updated_at": "2026-07-25T16:50:27.240Z"
+  },
+  "session_1784998458247_jbn4zoka": {
+    "profile": "couple",
+    "last_intent": "villa_recommendation",
+    "recommended_villas": [
+      "Casa Rosada",
+      "Atelie Azul"
+    ],
+    "travel_dates": null,
+    "guests": null,
+    "sales_stage": "discovery",
+    "updated_at": "2026-07-25T16:54:18.248Z"
+  },
+  "SEU_ID": {
+    "profile": "couple",
+    "last_intent": "general_information",
+    "recommended_villas": [],
+    "travel_dates": null,
+    "guests": null,
+    "sales_stage": "new_lead",
+    "updated_at": "2026-07-25T16:54:50.559Z"
+  },
+  "session_1784999023526_ar0usjls": {
+    "profile": "couple",
+    "last_intent": "travel_information",
+    "recommended_villas": [],
+    "travel_dates": {
+      "checkin": "10/01",
+      "checkout": "15/01"
+    },
+    "guests": 2,
+    "trip_type": "relaxation",
+    "sales_stage": "qualification",
+    "updated_at": "2026-07-25T17:06:03.442Z"
+  },
+  "SEU_SESSION_ID": {
+    "profile": "couple",
+    "last_intent": "travel_information",
+    "recommended_villas": [],
+    "travel_dates": {
+      "checkin": "10/01",
+      "checkout": "15/01"
+    },
+    "guests": 2,
+    "trip_type": null,
+    "sales_stage": "qualification",
+    "updated_at": "2026-07-25T17:04:30.761Z"
+  },
+  "session_1784999756779_abt4gxgs": {
+    "profile": "couple",
+    "last_intent": "villa_recommendation",
+    "recommended_villas": [
+      "Casa Rosada",
+      "Atelie Azul"
+    ],
+    "travel_dates": null,
+    "guests": 2,
+    "trip_type": "relaxation",
+    "sales_stage": "qualification",
+    "updated_at": "2026-07-25T17:15:56.780Z"
+  },
+  "session_1785001696061_kk8vldb2": {
+    "profile": "couple",
+    "last_intent": "travel_information",
+    "recommended_villas": [
+      "Casa Rosada",
+      "Atelie Azul"
+    ],
+    "travel_dates": {
+      "checkin": "10/01",
+      "checkout": "15/01"
+    },
+    "guests": 2,
+    "trip_type": "relaxation",
+    "sales_stage": "qualification",
+    "updated_at": "2026-07-25T17:49:10.915Z"
+  },
+  "session_1785002125177_gqewffy0": {
+    "profile": "couple",
+    "last_intent": "availability_question",
+    "recommended_villas": [
+      "Casa Rosada",
+      "Atelie Azul"
+    ],
+    "travel_dates": {
+      "checkin": "10/01",
+      "checkout": "15/01"
+    },
+    "guests": 2,
+    "trip_type": "relaxation",
+    "sales_stage": "availability_checked",
+    "updated_at": "2026-07-25T18:33:22.076Z"
+  },
+  "session_1785007915605_gh614phi": {
+    "profile": "couple",
+    "last_intent": "availability_question",
+    "recommended_villas": [],
+    "travel_dates": null,
+    "guests": null,
+    "trip_type": null,
+    "sales_stage": "availability_checked",
+    "updated_at": "2026-07-25T19:31:55.609Z"
+  },
+  "session_1785008502512_q2k2w5a1": {
+    "profile": "couple",
+    "last_intent": "quotation_request",
+    "recommended_villas": [],
+    "travel_dates": null,
+    "guests": null,
+    "trip_type": null,
+    "sales_stage": "proposal_sent",
+    "updated_at": "2026-07-25T19:41:42.519Z"
+  },
+  "session_1785008568902_kblggv2s": {
+    "profile": "couple",
+    "last_intent": "travel_information",
+    "recommended_villas": [],
+    "travel_dates": null,
+    "guests": 2,
+    "trip_type": "relaxation",
+    "sales_stage": "qualification",
+    "updated_at": "2026-07-25T19:42:48.909Z"
+  },
+  "COLOQUE_A_SESSION_AQUI": {
+    "profile": "couple",
+    "last_intent": "quotation_request",
+    "recommended_villas": [],
+    "travel_dates": {
+      "checkin": "10/01",
+      "checkout": "15/01"
+    },
+    "guests": 2,
+    "trip_type": null,
+    "sales_stage": "proposal_sent",
+    "updated_at": "2026-07-25T19:43:41.498Z"
+  }
+}

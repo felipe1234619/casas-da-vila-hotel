@@ -1,0 +1,52 @@
+{
+  "commercial_strategy": {
+
+    "availability_priority": {
+
+      "first_offer_villas": [
+
+        "Casa Rosada",
+        "Casa Grande",
+        "Ateliê Azul"
+
+      ],
+
+      "reason": "Prioritize villas with stronger operational availability before suggesting restricted or premium inventory."
+
+    },
+
+
+    "premium_villas": {
+
+      "Casa Balões": {
+
+        "positioning": "Most exclusive romantic suite",
+
+        "recommend_when": [
+
+          "honeymoon",
+          "anniversary",
+          "special celebration",
+          "guest requests premium experience"
+
+        ]
+
+      }
+
+    },
+
+
+    "similar_villas": {
+
+      "couples": [
+
+        "Casa Rosada",
+        "Casa Manga",
+        "Casa Branca"
+
+      ]
+
+    }
+
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "ranking_engine": {
+
+    "default_behavior": {
+
+      "respect_priority_order": true,
+
+      "never_override_inventory_rules": true
+
+    },
+
+
+    "guest_profiles": {
+
+
+      "couple": {
+
+        "ranking": [
+
+          {
+            "villa": "Casa Rosada",
+            "score": 100,
+            "reason": "Best match for couples seeking privacy and tranquility"
+          },
+
+          {
+            "villa": "Atelie Azul",
+            "score": 95,
+            "reason": "Private and intimate accommodation"
+          },
+
+          {
+            "villa": "Casa Oca",
+            "score": 70,
+            "reason": "Quiet romantic stay"
+          },
+
+          {
+            "villa": "Casa Manga",
+            "score": 85,
+            "reason": "Similar intimate couple experience"
+          },
+
+          {
+            "villa": "Casa Branca",
+            "score": 70,
+            "reason": "Private romantic accommodation"
+          }
+
+        ]
+
+      },
+
+
+      "honeymoon": {
+
+        "ranking": [
+
+          {
+            "villa": "Casa Balões",
+            "score": 100,
+            "reason": "Most exclusive romantic experience"
+          },
+
+          {
+            "villa": "Casa Rosada",
+            "score": 95,
+            "reason": "Romantic and intimate"
+          },
+
+          {
+            "villa": "Atelie Azul",
+            "score": 90,
+            "reason": "Private romantic stay"
+          }
+
+        ]
+
+      },
+
+
+      "family_four_guests": {
+
+        "ranking": [
+
+          {
+            "villa": "Casa Grande",
+            "score": 100
+          },
+
+          {
+            "villa": "Casa Dendê",
+            "score": 85
+          }
+
+        ]
+
+      }
+
+    }
+
+  }
+}
