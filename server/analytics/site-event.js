@@ -27,9 +27,18 @@ function getRequestOrigin(req) {
 function isAllowedOrigin(req, origin) {
   if (!origin) return true;
 
+  const isOfficialOrigin = allowedOrigins.includes(origin);
+
+  const isSameOrigin =
+    origin === getRequestOrigin(req);
+
+  const isVercelPreview =
+    /^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin);
+
   return (
-    allowedOrigins.includes(origin) ||
-    origin === getRequestOrigin(req)
+    isOfficialOrigin ||
+    isSameOrigin ||
+    isVercelPreview
   );
 }
 function getClientIp(req) {
