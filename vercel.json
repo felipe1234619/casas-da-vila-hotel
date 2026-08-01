@@ -14,6 +14,22 @@
       "destination": "/api/analytics?action=site"
     },
     {
+  "source": "/api/chat-admin",
+  "destination": "/api/chat?action=admin"
+},
+{
+  "source": "/api/chat-message",
+  "destination": "/api/chat?action=message"
+},
+{
+  "source": "/api/chat-session",
+  "destination": "/api/chat?action=session"
+},
+{
+  "source": "/api/olivia-chat",
+  "destination": "/api/chat?action=assistant"
+},
+    {
       "source": "/voucher/:ref",
       "destination": "/voucher.html?ref=:ref"
     }
