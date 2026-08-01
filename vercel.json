@@ -1,11 +1,23 @@
 {
+
   "rewrites": [
+    {
+      "source": "/api/admin-analytics",
+      "destination": "/api/analytics?action=admin"
+    },
+    {
+      "source": "/api/booking-event",
+      "destination": "/api/analytics?action=booking"
+    },
+    {
+      "source": "/api/site-event",
+      "destination": "/api/analytics?action=site"
+    },
     {
       "source": "/voucher/:ref",
       "destination": "/voucher.html?ref=:ref"
     }
-  ],
-  "redirects": [
+  ],  "redirects": [
     {
       "source": "/:path*",
       "has": [
