@@ -12,7 +12,26 @@ const allowedOrigins = [
   "http://127.0.0.1:5500",
   "http://127.0.0.1:5501"
 ];
+function getRequestOrigin(req) {
+  const protocol =
+    req.headers["x-forwarded-proto"] ||
+    (req.headers.host?.includes("localhost") ? "http" : "https");
 
+  const host =
+    req.headers["x-forwarded-host"] ||
+    req.headers.host;
+
+  return host ? `${protocol}://${host}` : "";
+}
+
+function isAllowedOrigin(req, origin) {
+  if (!origin) return true;
+
+  return (
+    allowedOrigins.includes(origin) ||
+    origin === getRequestOrigin(req)
+  );
+}
 function getClientIp(req) {
   const forwarded = req.headers["x-forwarded-for"];
   if (forwarded) return forwarded.split(",")[0].trim();
@@ -47,10 +66,11 @@ function parseGeoNumber(value) {
 }
 export default async function handler(req, res) {
   const origin = req.headers.origin || "";
+const originAllowed = isAllowedOrigin(req, origin);
 
-  if (origin && allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
+if (origin && originAllowed) {
+  res.setHeader("Access-Control-Allow-Origin", origin);
+}
 
   res.setHeader("Vary", "Origin");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -64,10 +84,9 @@ res.setHeader("Access-Control-Allow-Credentials", "true");
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  if (origin && !allowedOrigins.includes(origin)) {
-    return res.status(403).json({ error: "Origin not allowed" });
-  }
-
+if (origin && !originAllowed) {
+  return res.status(403).json({ error: "Origin not allowed" });
+}
   try {
     const ip = getClientIp(req);
     const userAgent = req.headers["user-agent"] || "";
