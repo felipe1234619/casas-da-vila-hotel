@@ -21,11 +21,15 @@ export const oliviaAgent = Object.freeze({
     "./knowledge.json",
 
   buildSystemPrompt({
+    userMessage = "",
+    intent = "",
     conversationContext = {},
     operationalContext = {},
     additionalInstructions = ""
   } = {}) {
     return buildOliviaSystemPrompt({
+      userMessage,
+      intent,
       conversationContext,
       operationalContext,
       additionalInstructions

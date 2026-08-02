@@ -23,15 +23,22 @@ import {
   loadAgent
 } from "../agents/load-agent.js";
 
+import {
+  buildKnowledgeRuntime
+} from "../knowledge/runtime-builder.js";
+
+const MAX_MESSAGE_LENGTH = 4000;
+const MAX_HISTORY_MESSAGES = 6;
+const MAX_HISTORY_MESSAGE_LENGTH = 2000;
+
 function generateSessionId() {
-  return (
-    "session_" +
-    Date.now() +
-    "_" +
+  return [
+    "session",
+    Date.now(),
     Math.random()
       .toString(36)
       .slice(2, 10)
-  );
+  ].join("_");
 }
 
 function normalizeText(value) {
@@ -40,16 +47,24 @@ function normalizeText(value) {
     : "";
 }
 
-function extractVillaNames(text = "") {
-  const normalizedText = String(text)
+function normalizeForMatching(value) {
+  return String(value || "")
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
+    .toLowerCase()
+    .trim();
+}
+
+function extractVillaNames(text = "") {
+  const normalizedText =
+    normalizeForMatching(text);
 
   const villaAliases = [
     {
       canonical: "Casa Grande",
-      aliases: ["casa grande"]
+      aliases: [
+        "casa grande"
+      ]
     },
     {
       canonical: "Casa Rosada",
@@ -60,7 +75,9 @@ function extractVillaNames(text = "") {
     },
     {
       canonical: "Casa Manga",
-      aliases: ["casa manga"]
+      aliases: [
+        "casa manga"
+      ]
     },
     {
       canonical: "Ateliê Azul",
@@ -114,13 +131,35 @@ function inferIntent({
   message,
   extractedData
 }) {
-  const normalized = message
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
+  const normalized =
+    normalizeForMatching(message);
 
   if (
-    /reserv|book|confirm|deposit|sinal|payment|pagamento/.test(
+    /whatsapp|falar com alguem|atendente|equipe de reservas|reservations team|human assistance/.test(
+      normalized
+    )
+  ) {
+    return "human_handoff";
+  }
+
+  if (
+    /pet|cachorro|animal|crianca|children|politica|policy|cancel|reembolso|refund|evento|festa|silencio|barulho|smoking|fumar/.test(
+      normalized
+    )
+  ) {
+    return "policy_question";
+  }
+
+  if (
+    /transfer|transporte|chef|cozinheiro|jantar|restaurante|restaurant|experiencia|experience|passeio|atividade|massagem/.test(
+      normalized
+    )
+  ) {
+    return "services_question";
+  }
+
+  if (
+    /reserv|book|confirm|deposit|sinal|payment|pagamento|checkout|pix/.test(
       normalized
     )
   ) {
@@ -128,7 +167,7 @@ function inferIntent({
   }
 
   if (
-    /dispon|available|availability|vaga/.test(
+    /dispon|available|availability|vaga|calendar|calendario/.test(
       normalized
     )
   ) {
@@ -136,7 +175,7 @@ function inferIntent({
   }
 
   if (
-    /preco|price|rate|tarifa|valor|quanto/.test(
+    /preco|price|rate|tarifa|valor|quanto custa|desconto|discount/.test(
       normalized
     )
   ) {
@@ -144,64 +183,22 @@ function inferIntent({
   }
 
   if (
-    /qual casa|which villa|recommend|recomenda|melhor casa/.test(
+    /qual casa|which villa|recommend|recomenda|melhor casa|best villa|comparar|compare/.test(
       normalized
     )
   ) {
     return "villa_recommendation";
   }
 
-  if (
-    extractedData?.travel_dates
-  ) {
+  if (extractedData?.travel_dates) {
     return "date_information";
   }
 
-  if (
-    extractedData?.guests
-  ) {
+  if (extractedData?.guests) {
     return "guest_information";
   }
 
   return "general_conversation";
-}
-
-function buildOperationalContext(req) {
-  const body = req.body || {};
-
-  return {
-    source:
-      body.operational_context?.source ||
-      "casas_da_vila_chat",
-
-    inventory:
-      body.operational_context?.inventory ||
-      null,
-
-    availability:
-      body.operational_context?.availability ||
-      null,
-
-    pricing:
-      body.operational_context?.pricing ||
-      null,
-
-    policies:
-      body.operational_context?.policies ||
-      null,
-
-    included_services:
-      body.operational_context?.included_services ||
-      null,
-
-    reservation_status:
-      body.operational_context?.reservation_status ||
-      null,
-
-    human_contact: {
-      whatsapp: "+55 73 99143-5522"
-    }
-  };
 }
 
 function buildRecentMessages({
@@ -218,43 +215,116 @@ function buildRecentMessages({
             ) &&
             typeof item.content === "string"
         )
-        .slice(-8)
+        .slice(-MAX_HISTORY_MESSAGES)
         .map((item) => ({
           role: item.role,
-          content: item.content.slice(0, 3000)
+          content:
+            item.content
+              .trim()
+              .slice(
+                0,
+                MAX_HISTORY_MESSAGE_LENGTH
+              )
         }))
+        .filter((item) => item.content)
     : [];
 
-  safeHistory.push({
-    role: "user",
-    content: message
-  });
+  const lastHistoryMessage =
+    safeHistory[
+      safeHistory.length - 1
+    ];
+
+  const currentMessageAlreadyIncluded =
+    lastHistoryMessage?.role === "user" &&
+    lastHistoryMessage.content === message;
+
+  if (!currentMessageAlreadyIncluded) {
+    safeHistory.push({
+      role: "user",
+      content: message
+    });
+  }
 
   return safeHistory;
 }
 
-export default async function handler(req, res) {
+function getRuntimeContext(body) {
+  const operationalContext =
+    body?.operational_context;
+
+  return operationalContext &&
+    typeof operationalContext === "object"
+    ? operationalContext
+    : {};
+}
+
+function getPromptContent(promptResult) {
+  if (typeof promptResult === "string") {
+    return {
+      systemPrompt: promptResult,
+      selectedSections: []
+    };
+  }
+
+  const systemPrompt =
+    promptResult?.prompt;
+
+  if (
+    typeof systemPrompt !== "string" ||
+    !systemPrompt.trim()
+  ) {
+    throw new Error(
+      "Olivia agent returned an invalid system prompt."
+    );
+  }
+
+  return {
+    systemPrompt,
+    selectedSections:
+      Array.isArray(
+        promptResult.selectedSections
+      )
+        ? promptResult.selectedSections
+        : []
+  };
+}
+
+export default async function handler(
+  req,
+  res
+) {
   if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
+
     return res.status(405).json({
+      ok: false,
       error: "Method not allowed"
     });
   }
 
   try {
-    const body = req.body || {};
+    const body =
+      req.body &&
+      typeof req.body === "object"
+        ? req.body
+        : {};
 
-    const message = normalizeText(
-      body.message
-    );
+    const message =
+      normalizeText(body.message);
 
     if (!message) {
       return res.status(400).json({
+        ok: false,
         error: "Message required"
       });
     }
 
-    if (message.length > 4000) {
+    if (
+      message.length >
+      MAX_MESSAGE_LENGTH
+    ) {
       return res.status(400).json({
+        ok: false,
         error: "Message is too long"
       });
     }
@@ -274,10 +344,11 @@ export default async function handler(req, res) {
         message
       ) || {};
 
-    const intent = inferIntent({
-      message,
-      extractedData
-    });
+    const intent =
+      inferIntent({
+        message,
+        extractedData
+      });
 
     const enrichedMemory = {
       ...previousState,
@@ -290,18 +361,92 @@ export default async function handler(req, res) {
         enrichedMemory
       );
 
-    const operationalContext =
-      buildOperationalContext(req);
+    /*
+     * Carrega o agente solicitado.
+     * Olivia permanece como agente padrão.
+     */
+    const agent =
+      await loadAgent(
+        normalizeText(body.agent) ||
+          "olivia"
+      );
 
-    const agent = await loadAgent(
-  body.agent || "olivia"
-);
+    /*
+     * O Knowledge Runtime consulta:
+     *
+     * knowledge/index.json
+     * knowledge/router.json
+     *
+     * e carrega apenas os módulos factuais
+     * relevantes para a mensagem atual.
+     */
+    const knowledgeRuntime =
+      await buildKnowledgeRuntime({
+        userMessage: message,
+        intent,
+        runtimeContext:
+          getRuntimeContext(body)
+      });
 
-const systemPrompt =
-  agent.buildSystemPrompt({
-    conversationContext,
-    operationalContext
-  });
+    /*
+     * O Prompt Router seleciona apenas os
+     * módulos comportamentais necessários.
+     */
+    const promptResult =
+      agent.buildSystemPrompt({
+        userMessage: message,
+        intent,
+        conversationContext,
+        operationalContext:
+          knowledgeRuntime
+            .operationalContext
+      });
+
+    const {
+      systemPrompt,
+      selectedSections
+    } = getPromptContent(
+      promptResult
+    );
+
+    console.info(
+      "Olivia runtime:",
+      {
+        sessionId:
+          currentSessionId,
+
+        intent,
+
+        selectedPromptSections:
+          selectedSections,
+
+        selectedKnowledgeModules:
+          knowledgeRuntime
+            .selectedModules,
+
+        loadedKnowledgeModules:
+          knowledgeRuntime
+            .loadedModules,
+
+        missingKnowledgeModules:
+          knowledgeRuntime
+            .missingModules,
+
+        matchedRoutes:
+          knowledgeRuntime
+            .matchedRoutes,
+
+        requiresBookingSystem:
+          knowledgeRuntime
+            .requiresBookingSystem,
+
+        knowledgeFiles:
+          knowledgeRuntime.files,
+
+        promptCharacters:
+          systemPrompt.length
+      }
+    );
 
     const messages = [
       {
@@ -331,10 +476,11 @@ const systemPrompt =
 
     const newState = {
       ...previousState,
+      ...extractedData,
 
       profile:
-        previousState.profile ||
         extractedData.profile ||
+        previousState.profile ||
         null,
 
       last_intent: intent,
@@ -342,7 +488,8 @@ const systemPrompt =
       recommended_villas:
         recommendedVillas.length > 0
           ? recommendedVillas
-          : previousState.recommended_villas ||
+          : previousState
+              .recommended_villas ||
             [],
 
       travel_dates:
@@ -364,10 +511,12 @@ const systemPrompt =
         calculateSalesStage({
           ...previousState,
           ...extractedData,
+
           profile:
-            previousState.profile ||
             extractedData.profile ||
+            previousState.profile ||
             null,
+
           last_intent: intent
         }),
 
@@ -403,6 +552,19 @@ const systemPrompt =
       memory:
         newState,
 
+      routing: {
+        prompt_sections:
+          selectedSections,
+
+        knowledge_modules:
+          knowledgeRuntime
+            .loadedModules,
+
+        requires_booking_system:
+          knowledgeRuntime
+            .requiresBookingSystem
+      },
+
       model:
         completion.model,
 
@@ -412,29 +574,62 @@ const systemPrompt =
   } catch (error) {
     console.error(
       "OLIVIA LLM ERROR:",
-      error
+      {
+        message:
+          error?.message ||
+          String(error),
+
+        stack:
+          error?.stack ||
+          null
+      }
     );
 
+    const errorMessage =
+      String(
+        error?.message || ""
+      );
+
     const isConfigurationError =
-      String(error?.message || "").includes(
+      errorMessage.includes(
         "GROQ_API_KEY"
       );
 
-    return res.status(
-      isConfigurationError ? 503 : 500
-    ).json({
-      ok: false,
+    const isRateLimitError =
+      errorMessage.includes(
+        "tokens per minute"
+      ) ||
+      errorMessage.includes(
+        "Request too large"
+      ) ||
+      errorMessage.includes(
+        "rate limit"
+      );
 
-      error:
-        isConfigurationError
-          ? "Olivia is temporarily unavailable."
-          : "Unable to generate Olivia response.",
+    const statusCode =
+      isConfigurationError
+        ? 503
+        : isRateLimitError
+          ? 429
+          : 500;
 
-      message:
-        process.env.NODE_ENV ===
-        "development"
-          ? error?.message || String(error)
-          : undefined
-    });
+    return res
+      .status(statusCode)
+      .json({
+        ok: false,
+
+        error:
+          isConfigurationError
+            ? "Olivia is temporarily unavailable."
+            : isRateLimitError
+              ? "Olivia received more information than could be processed at once."
+              : "Unable to generate Olivia response.",
+
+        message:
+          process.env.NODE_ENV ===
+          "development"
+            ? errorMessage
+            : undefined
+      });
   }
 }
