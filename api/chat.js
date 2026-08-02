@@ -1,13 +1,8 @@
-import adminHandler from "../server/chat/admin-handler.js";
-import messageHandler from "../server/chat/message-handler.js";
-import sessionHandler from "../server/chat/session-handler.js";
-import assistantHandler from "../server/chat/assistant-handler.js";
-
-const handlers = {
-  admin: adminHandler,
-  message: messageHandler,
-  session: sessionHandler,
-  assistant: assistantHandler
+const handlerLoaders = {
+  admin: () => import("../server/chat/admin-handler.js"),
+  message: () => import("../server/chat/message-handler.js"),
+  session: () => import("../server/chat/session-handler.js"),
+  assistant: () => import("../server/chat/assistant-handler.js")
 };
 
 export default async function handler(req, res) {
@@ -15,17 +10,26 @@ export default async function handler(req, res) {
     .trim()
     .toLowerCase();
 
-  const selectedHandler = handlers[action];
+  const loadHandler = handlerLoaders[action];
 
-  if (!selectedHandler) {
+  if (!loadHandler) {
     return res.status(404).json({
       ok: false,
       error: "Unknown chat action",
-      available_actions: Object.keys(handlers)
+      available_actions: Object.keys(handlerLoaders)
     });
   }
 
   try {
+    const module = await loadHandler();
+    const selectedHandler = module.default;
+
+    if (typeof selectedHandler !== "function") {
+      throw new TypeError(
+        `Chat handler "${action}" does not export a default function`
+      );
+    }
+
     return await selectedHandler(req, res);
   } catch (error) {
     console.error(`Chat router error [${action}]:`, error);
@@ -33,6 +37,7 @@ export default async function handler(req, res) {
     return res.status(500).json({
       ok: false,
       error: "Internal chat error",
+      action,
       message:
         process.env.NODE_ENV === "development"
           ? error?.message || String(error)
