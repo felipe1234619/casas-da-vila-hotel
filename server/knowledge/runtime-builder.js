@@ -1,4 +1,8 @@
 import {
+  resolveKnowledgeContent
+} from "./content-resolver.js";
+
+import {
   loadCatalogModules
 } from "./catalog.js";
 
@@ -24,8 +28,10 @@ export async function buildKnowledgeRuntime({
 
   const operationalContext = {
     verified_knowledge:
-      loaded.knowledge,
-
+  resolveKnowledgeContent({
+    knowledge: loaded.knowledge,
+    userMessage
+  }),
     live_runtime: {
       availability:
         runtimeContext.availability ||
