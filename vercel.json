@@ -29,6 +29,22 @@
   "source": "/api/olivia-chat",
   "destination": "/api/chat?action=assistant"
 },
+{
+  "source": "/api/availability",
+  "destination": "/api/booking?action=availability"
+},
+{
+  "source": "/api/create-hold",
+  "destination": "/api/booking?action=hold"
+},
+{
+  "source": "/api/create-checkout-session",
+  "destination": "/api/booking?action=checkout"
+},
+{
+  "source": "/api/pre-booking",
+  "destination": "/api/booking?action=prebooking"
+},
     {
       "source": "/voucher/:ref",
       "destination": "/voucher.html?ref=:ref"
