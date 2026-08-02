@@ -524,10 +524,22 @@ export default async function handler(
         new Date().toISOString()
     };
 
-    updateConversationState(
-      currentSessionId,
-      newState
-    );
+    try {
+  updateConversationState(
+    currentSessionId,
+    newState
+  );
+} catch (stateError) {
+  console.warn(
+    "Olivia conversation state was not persisted:",
+    {
+      sessionId: currentSessionId,
+      message:
+        stateError?.message ||
+        String(stateError)
+    }
+  );
+}
 
     return res.status(200).json({
       ok: true,
