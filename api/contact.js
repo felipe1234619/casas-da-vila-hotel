@@ -18,7 +18,7 @@ const supabaseAdmin =
     : null;
 
 /* =========================================================
-   HELPERS
+   BASIC HELPERS
 ========================================================= */
 
 function clean(value, maxLength = 2000) {
@@ -42,11 +42,27 @@ function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+function parseGuests(value) {
+  if (!value) return null;
+
+  const parsed = Number.parseInt(String(value), 10);
+
+  if (!Number.isFinite(parsed)) {
+    return null;
+  }
+
+  if (parsed < 1 || parsed > 50) {
+    return null;
+  }
+
+  return parsed;
+}
+
 function formatDate(value) {
   if (!value) return "—";
 
   try {
-    const date = new Date(`${value}T12:00:00`);
+    const date = new Date(`${value}T12:00:00Z`);
 
     if (Number.isNaN(date.getTime())) {
       return value;
@@ -55,21 +71,231 @@ function formatDate(value) {
     return new Intl.DateTimeFormat("pt-BR", {
       day: "2-digit",
       month: "2-digit",
-      year: "numeric"
+      year: "numeric",
+      timeZone: "UTC"
     }).format(date);
   } catch {
     return value;
   }
 }
 
-function parseGuests(value) {
+/* =========================================================
+   DATE VALIDATION
+========================================================= */
+
+function parseISODate(value) {
   if (!value) return null;
 
-  const parsed = Number.parseInt(String(value), 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return null;
+  }
 
-  return Number.isFinite(parsed)
-    ? parsed
-    : null;
+  const [year, month, day] = value
+    .split("-")
+    .map(Number);
+
+  const currentYear = new Date().getUTCFullYear();
+
+  /*
+   * Evita datas absurdas como 51201-02-02
+   * sem limitar excessivamente reservas futuras.
+   */
+  if (
+    year < currentYear - 1 ||
+    year > currentYear + 10 ||
+    month < 1 ||
+    month > 12 ||
+    day < 1 ||
+    day > 31
+  ) {
+    return null;
+  }
+
+  const date = new Date(
+    Date.UTC(year, month - 1, day)
+  );
+
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  ) {
+    return null;
+  }
+
+  return date;
+}
+
+function validateStayPeriod(checkin, checkout) {
+  if (checkin && !parseISODate(checkin)) {
+    return {
+      ok: false,
+      code: "invalid_checkin",
+      error: "Invalid check-in date"
+    };
+  }
+
+  if (checkout && !parseISODate(checkout)) {
+    return {
+      ok: false,
+      code: "invalid_checkout",
+      error: "Invalid check-out date"
+    };
+  }
+
+  /*
+   * Se apenas uma das datas foi fornecida,
+   * não bloqueamos o contato.
+   */
+  if (!checkin || !checkout) {
+    return {
+      ok: true
+    };
+  }
+
+  const start = parseISODate(checkin);
+  const end = parseISODate(checkout);
+
+  if (!start || !end) {
+    return {
+      ok: false,
+      code: "invalid_dates",
+      error: "Invalid stay dates"
+    };
+  }
+
+  if (end <= start) {
+    return {
+      ok: false,
+      code: "checkout_before_checkin",
+      error: "Check-out must be after check-in"
+    };
+  }
+
+  const nights =
+    Math.round(
+      (end.getTime() - start.getTime()) /
+        86400000
+    );
+
+  if (nights > 180) {
+    return {
+      ok: false,
+      code: "stay_too_long",
+      error: "Stay period exceeds maximum allowed"
+    };
+  }
+
+  return {
+    ok: true,
+    nights
+  };
+}
+
+/* =========================================================
+   SPAM ANALYSIS
+========================================================= */
+
+function analyzeSpam(payload) {
+  const text = [
+    payload.name,
+    payload.email,
+    payload.interest,
+    payload.house_interest,
+    payload.message
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  const strongSignals = [
+    "seo services",
+    "seo service",
+    "search engine optimization",
+    "backlinks",
+    "backlink",
+    "rank your website",
+    "rank your site",
+    "website ranking",
+    "google ranking",
+    "increase traffic",
+    "drive traffic",
+    "drive visitors",
+    "get seen online",
+    "digital marketing services",
+    "marketing agency",
+    "lead generation",
+    "generate leads",
+    "web development services",
+    "website development services",
+    "guest post",
+    "guest posting"
+  ];
+
+  const mediumSignals = [
+    "keywords",
+    "website traffic",
+    "online visibility",
+    "first page google",
+    "social media marketing",
+    "business promotion",
+    "promote your website",
+    "organic traffic"
+  ];
+
+  let score = 0;
+  const reasons = [];
+
+  for (const signal of strongSignals) {
+    if (text.includes(signal)) {
+      score += 40;
+      reasons.push(signal);
+    }
+  }
+
+  for (const signal of mediumSignals) {
+    if (text.includes(signal)) {
+      score += 20;
+      reasons.push(signal);
+    }
+  }
+
+  /*
+   * Domínios/padrões comerciais conhecidos
+   * acrescentam evidência, mas não bastam sozinhos.
+   */
+
+  if (
+    payload.email &&
+    (
+      payload.email.endsWith("@jmailservice.com") ||
+      payload.email.includes("marketing")
+    )
+  ) {
+    score += 30;
+    reasons.push("commercial email pattern");
+  }
+
+  /*
+   * Limite conservador para evitar falso positivo.
+   * O contato nunca é apagado: apenas classificado.
+   */
+
+  const finalScore =
+    Math.min(score, 100);
+
+  return {
+    isSpam:
+      finalScore >= 60,
+
+    score:
+      finalScore,
+
+    reason:
+      reasons.length
+        ? [...new Set(reasons)].join(", ")
+        : null
+  };
 }
 
 /* =========================================================
@@ -83,7 +309,7 @@ function parseGuests(value) {
    CONTACT_NOTIFICATION_EMAILS=
    casasdavilatrancoso@hotmail.com,casasdavila@casasdavila.com
 
-   Também aceita, para compatibilidade:
+   Compatibilidade:
    CONTACT_NOTIFICATION_EMAIL
    BOOKING_NOTIFICATION_EMAIL
 ========================================================= */
@@ -102,14 +328,20 @@ function getNotificationEmails() {
   return [
     ...new Set(
       candidates
-        .map((email) => email.trim().toLowerCase())
-        .filter((email) => email && isValidEmail(email))
+        .map((email) =>
+          email.trim().toLowerCase()
+        )
+        .filter(
+          (email) =>
+            email &&
+            isValidEmail(email)
+        )
     )
   ];
 }
 
 /* =========================================================
-   CONTACT FORM EVENT AUDIT
+   CONTACT FORM AUDIT
 ========================================================= */
 
 async function saveContactEvent(
@@ -129,7 +361,8 @@ async function saveContactEvent(
   }
 
   const event = {
-    event_type: eventType,
+    event_type:
+      eventType,
 
     locale:
       payload.locale || null,
@@ -178,11 +411,12 @@ async function saveContactEvent(
       extra.metadata || {}
   };
 
-  const { data, error } = await supabaseAdmin
-    .from("contact_form_events")
-    .insert(event)
-    .select("id")
-    .single();
+  const { data, error } =
+    await supabaseAdmin
+      .from("contact_form_events")
+      .insert(event)
+      .select("id")
+      .single();
 
   if (error) {
     console.error(
@@ -213,32 +447,11 @@ async function saveLead(payload) {
     );
   }
 
-  /*
-   * A tabela public.leads possui atualmente:
-   *
-   * id
-   * name
-   * email
-   * phone
-   * message
-   * interest
-   * interest_type
-   * budget_range
-   * timeline
-   * score
-   * tier
-   * status
-   * source
-   * created_at
-   *
-   * Como check-in, checkout, hóspedes etc. ainda não possuem
-   * colunas próprias, preservamos tudo dentro de message.
-   */
+  const spam =
+    analyzeSpam(payload);
 
   const stayDetails = [
-    payload.message
-      ? payload.message
-      : null,
+    payload.message || null,
 
     payload.house_interest
       ? `Casa de interesse: ${payload.house_interest}`
@@ -290,17 +503,32 @@ async function saveLead(payload) {
       "hotel",
 
     status:
-      "new",
+      spam.isSpam
+        ? "spam"
+        : "new",
 
     source:
-      "website-contact"
+      "website-contact",
+
+    is_spam:
+      spam.isSpam,
+
+    spam_score:
+      spam.score,
+
+    spam_reason:
+      spam.reason,
+
+    updated_at:
+      new Date().toISOString()
   };
 
-  const { data, error } = await supabaseAdmin
-    .from("leads")
-    .insert(lead)
-    .select("id")
-    .single();
+  const { data, error } =
+    await supabaseAdmin
+      .from("leads")
+      .insert(lead)
+      .select("id")
+      .single();
 
   if (error) {
     throw new Error(
@@ -310,23 +538,21 @@ async function saveLead(payload) {
 
   return {
     saved: true,
-    id: data?.id || null
+    id: data?.id || null,
+    is_spam: spam.isSpam,
+    spam_score: spam.score,
+    spam_reason: spam.reason
   };
 }
 
 /* =========================================================
    EMAIL VIA RESEND
-   OPTIONAL — formulário NÃO depende dele
+
+   OPCIONAL:
+   formulário continua funcionando sem Resend.
 ========================================================= */
 
 async function sendContactEmail(payload) {
-  /*
-   * Se o Resend não estiver configurado,
-   * não existe erro fatal.
-   *
-   * O lead continua armazenado no Supabase.
-   */
-
   if (!process.env.RESEND_API_KEY) {
     console.warn(
       "RESEND_API_KEY not configured. Contact email skipped."
@@ -339,7 +565,8 @@ async function sendContactEmail(payload) {
     };
   }
 
-  const recipients = getNotificationEmails();
+  const recipients =
+    getNotificationEmails();
 
   if (!recipients.length) {
     console.warn(
@@ -352,13 +579,6 @@ async function sendContactEmail(payload) {
       reason: "recipient_not_configured"
     };
   }
-
-  /*
-   * CONTACT_FROM_EMAIL pode ser criado futuramente.
-   *
-   * Enquanto isso, reaproveitamos BOOKING_FROM_EMAIL,
-   * se ele já estiver validado no Resend.
-   */
 
   const fromEmail =
     process.env.CONTACT_FROM_EMAIL ||
@@ -441,14 +661,9 @@ async function sendContactEmail(payload) {
           >
 
             <tr>
-              <td style="
-                padding:9px 0;
-                color:#777;
-                width:180px;
-              ">
+              <td style="padding:9px 0;color:#777;width:180px;">
                 Nome / Name
               </td>
-
               <td style="padding:9px 0;">
                 <strong>
                   ${escapeHtml(payload.name || "—")}
@@ -457,91 +672,63 @@ async function sendContactEmail(payload) {
             </tr>
 
             <tr>
-              <td style="
-                padding:9px 0;
-                color:#777;
-              ">
+              <td style="padding:9px 0;color:#777;">
                 E-mail
               </td>
-
               <td style="padding:9px 0;">
                 ${escapeHtml(payload.email || "—")}
               </td>
             </tr>
 
             <tr>
-              <td style="
-                padding:9px 0;
-                color:#777;
-              ">
+              <td style="padding:9px 0;color:#777;">
                 Telefone / Phone
               </td>
-
               <td style="padding:9px 0;">
                 ${escapeHtml(payload.phone || "—")}
               </td>
             </tr>
 
             <tr>
-              <td style="
-                padding:9px 0;
-                color:#777;
-              ">
+              <td style="padding:9px 0;color:#777;">
                 Interesse / Interest
               </td>
-
               <td style="padding:9px 0;">
                 ${escapeHtml(payload.interest || "—")}
               </td>
             </tr>
 
             <tr>
-              <td style="
-                padding:9px 0;
-                color:#777;
-              ">
+              <td style="padding:9px 0;color:#777;">
                 Casa / House
               </td>
-
               <td style="padding:9px 0;">
                 ${escapeHtml(payload.house_interest || "—")}
               </td>
             </tr>
 
             <tr>
-              <td style="
-                padding:9px 0;
-                color:#777;
-              ">
+              <td style="padding:9px 0;color:#777;">
                 Check-in
               </td>
-
               <td style="padding:9px 0;">
                 ${escapeHtml(formatDate(payload.checkin))}
               </td>
             </tr>
 
             <tr>
-              <td style="
-                padding:9px 0;
-                color:#777;
-              ">
+              <td style="padding:9px 0;color:#777;">
                 Check-out
               </td>
-
               <td style="padding:9px 0;">
                 ${escapeHtml(formatDate(payload.checkout))}
               </td>
             </tr>
 
             <tr>
-              <td style="
-                padding:9px 0;
-                color:#777;
-              ">
+              <td style="padding:9px 0;color:#777;">
                 Hóspedes / Guests
               </td>
-
               <td style="padding:9px 0;">
                 ${escapeHtml(payload.guests || "—")}
               </td>
@@ -584,14 +771,12 @@ async function sendContactEmail(payload) {
             line-height:1.7;
             color:#777;
           ">
-
             Página:
             ${escapeHtml(payload.page || "—")}
             <br>
 
             Idioma:
             ${escapeHtml(payload.locale || "—")}
-
           </div>
 
         </div>
@@ -600,42 +785,44 @@ async function sendContactEmail(payload) {
     </html>
   `;
 
-  const body = {
-    from: fromEmail,
+  const emailBody = {
+    from:
+      fromEmail,
 
-    to: recipients,
+    to:
+      recipients,
 
     subject,
 
     html
   };
 
-  /*
-   * Quando clicarmos em "Responder",
-   * o cliente de e-mail deve responder diretamente ao hóspede.
-   */
-
-  if (payload.email && isValidEmail(payload.email)) {
-    body.reply_to = payload.email;
+  if (
+    payload.email &&
+    isValidEmail(payload.email)
+  ) {
+    emailBody.reply_to =
+      payload.email;
   }
 
-  const response = await fetch(
-    "https://api.resend.com/emails",
-    {
-      method: "POST",
+  const response =
+    await fetch(
+      "https://api.resend.com/emails",
+      {
+        method: "POST",
 
-      headers: {
-        Authorization:
-          `Bearer ${process.env.RESEND_API_KEY}`,
+        headers: {
+          Authorization:
+            `Bearer ${process.env.RESEND_API_KEY}`,
 
-        "Content-Type":
-          "application/json"
-      },
+          "Content-Type":
+            "application/json"
+        },
 
-      body:
-        JSON.stringify(body)
-    }
-  );
+        body:
+          JSON.stringify(emailBody)
+      }
+    );
 
   const responseText =
     await response.text();
@@ -684,16 +871,64 @@ export default async function handler(req, res) {
     });
   }
 
-  /*
-   * Mantemos uma referência para utilizar
-   * também no catch principal.
-   */
-
   let payload = null;
 
   try {
     const body =
       req.body || {};
+
+    /* =====================================================
+       CONTACT FORM STARTED
+
+       Esta chamada não é um lead.
+       Apenas registra que alguém começou a preencher.
+    ===================================================== */
+
+    if (
+      clean(body.action, 50) ===
+      "contact_form_started"
+    ) {
+      const startedPayload = {
+        locale:
+          clean(body.locale, 10)
+            .toLowerCase() === "en"
+            ? "en"
+            : "pt",
+
+        page:
+          clean(body.page, 500),
+
+        name: "",
+        email: "",
+        phone: "",
+        interest: "",
+        house_interest: "",
+        checkin: "",
+        checkout: "",
+        guests: "",
+
+        visitor_id:
+          clean(body.visitor_id, 200),
+
+        session_id:
+          clean(body.session_id, 200)
+      };
+
+      await saveContactEvent(
+        "contact_form_started",
+        startedPayload,
+        {
+          metadata: {
+            started_at:
+              new Date().toISOString()
+          }
+        }
+      );
+
+      return res.status(200).json({
+        ok: true
+      });
+    }
 
     /* =====================================================
        HONEYPOT ANTISPAM
@@ -703,11 +938,6 @@ export default async function handler(req, res) {
       clean(body.company, 200) ||
       clean(body.website, 500)
     ) {
-      /*
-       * Bots recebem 200 para não aprenderem
-       * que foram identificados.
-       */
-
       return res.status(200).json({
         ok: true
       });
@@ -771,11 +1001,6 @@ export default async function handler(req, res) {
       message:
         clean(body.message, 5000),
 
-      /*
-       * Estes dois já ficam disponíveis caso
-       * passemos a enviá-los pelo frontend.
-       */
-
       visitor_id:
         clean(body.visitor_id, 200),
 
@@ -784,7 +1009,7 @@ export default async function handler(req, res) {
     };
 
     /* =====================================================
-       VALIDATION
+       REQUIRED FIELDS
     ===================================================== */
 
     if (!payload.name) {
@@ -811,6 +1036,42 @@ export default async function handler(req, res) {
     }
 
     /* =====================================================
+       DATE VALIDATION
+    ===================================================== */
+
+    const stayValidation =
+      validateStayPeriod(
+        payload.checkin,
+        payload.checkout
+      );
+
+    if (!stayValidation.ok) {
+      await saveContactEvent(
+        "contact_form_error",
+        payload,
+        {
+          error_message:
+            stayValidation.error,
+
+          metadata: {
+            validation_error: true,
+            validation_code:
+              stayValidation.code || null
+          }
+        }
+      );
+
+      return res.status(400).json({
+        ok: false,
+
+        error:
+          payload.locale === "en"
+            ? "Please check your stay dates."
+            : "Por favor, verifique as datas da estadia."
+      });
+    }
+
+    /* =====================================================
        AUDIT — SUBMIT
     ===================================================== */
 
@@ -820,7 +1081,10 @@ export default async function handler(req, res) {
       {
         metadata: {
           received_at:
-            new Date().toISOString()
+            new Date().toISOString(),
+
+          nights:
+            stayValidation.nights || null
         }
       }
     );
@@ -846,6 +1110,9 @@ export default async function handler(req, res) {
 
     /* =====================================================
        OPTIONAL EMAIL
+
+       Spam é preservado no Supabase, mas não gera
+       notificação por e-mail.
     ===================================================== */
 
     let emailResult = {
@@ -855,32 +1122,31 @@ export default async function handler(req, res) {
 
     let emailError = null;
 
-    try {
-      emailResult =
-        await sendContactEmail(payload);
-    } catch (error) {
-      emailError = error;
+    if (leadResult?.is_spam) {
+      emailResult = {
+        attempted: false,
+        sent: false,
+        reason: "classified_as_spam"
+      };
+    } else {
+      try {
+        emailResult =
+          await sendContactEmail(payload);
+      } catch (error) {
+        emailError = error;
 
-      console.error(
-        "Contact email failed:",
-        error
-      );
-
-      /*
-       * IMPORTANTE:
-       * falha de Resend NÃO derruba o formulário
-       * se o lead já foi preservado no Supabase.
-       */
+        console.error(
+          "Contact email failed:",
+          error
+        );
+      }
     }
 
     /* =====================================================
        SUCCESS CONDITION
 
-       Basta termos preservado o lead no Supabase
-       OU enviado o e-mail.
-
-       Na arquitetura atual, o Supabase é o canal
-       principal e o e-mail é complementar.
+       Supabase é o canal principal.
+       E-mail é complementar.
     ===================================================== */
 
     const leadSaved =
@@ -906,10 +1172,13 @@ export default async function handler(req, res) {
             failureMessage,
 
           metadata: {
-            lead_saved: false,
+            lead_saved:
+              false,
 
             email_attempted:
-              Boolean(emailResult?.attempted),
+              Boolean(
+                emailResult?.attempted
+              ),
 
             email_sent:
               false
@@ -939,14 +1208,30 @@ export default async function handler(req, res) {
           lead_id:
             leadResult?.id || null,
 
+          is_spam:
+            Boolean(
+              leadResult?.is_spam
+            ),
+
+          spam_score:
+            leadResult?.spam_score || 0,
+
+          spam_reason:
+            leadResult?.spam_reason || null,
+
           email_attempted:
-            Boolean(emailResult?.attempted),
+            Boolean(
+              emailResult?.attempted
+            ),
 
           email_sent:
             emailSent,
 
           email_recipients:
             emailResult?.recipients || [],
+
+          email_skip_reason:
+            emailResult?.reason || null,
 
           resend_id:
             emailResult?.resend_id || null,
@@ -1015,7 +1300,8 @@ export default async function handler(req, res) {
 
       message:
         process.env.NODE_ENV === "development"
-          ? error?.message || String(error)
+          ? error?.message ||
+            String(error)
           : undefined
     });
   }
