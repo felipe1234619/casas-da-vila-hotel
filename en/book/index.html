@@ -1569,16 +1569,19 @@ window.trackBookingEvent?.("booking_search", {
   : [];
 
 const estimatedTotal = availableItems.reduce((sum, item) => {
-  return sum + Number(item.total || item.estimated_total || 0);
+  return sum + Number(
+    item.amount_total ||
+    item.total ||
+    item.estimated_total ||
+    0
+  );
 }, 0);
-
 window.trackBookingEvent?.("booking_availability_result", {
   house_name: "multi-house-search",
   checkin: checkIn,
   checkout: checkOut,
   guests: guestsCount,
-  nights: availableItems[0]?.nights || null,
-  currency: "BRL",
+nights: calcNights(checkIn, checkOut),  currency: "BRL",
   estimated_total: estimatedTotal,
   availability_status: availableItems.length > 0 ? "available" : "unavailable",
   available_units_count: availableItems.length,
