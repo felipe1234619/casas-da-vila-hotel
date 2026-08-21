@@ -76,43 +76,64 @@
     }
   </style>
 
-  <script>
-    const ACCESS_PASSWORD = "2027";
+<script>
+  const ACCESS_PASSWORD = "2027";
+
+  function trackPrivateAccess(eventType, metadata = {}) {
+    if (typeof window.trackSiteEvent === "function") {
+      window.trackSiteEvent(eventType, {
+        access_area: "private_acquisition",
+        ...metadata
+      });
+    }
+  }
+
+  function checkAccess() {
+    const value = document.getElementById("accessCode").value;
+
+    trackPrivateAccess("private_access_attempt");
+
+    if (value === ACCESS_PASSWORD) {
+      sessionStorage.setItem("cdv_private_access", "true");
+
+      trackPrivateAccess("private_access_success");
+
+      document.getElementById("gate").style.display = "none";
+    } else {
+      trackPrivateAccess("private_access_failed");
+
+      alert("Invalid access code.");
+    }
+  }
+
+  window.addEventListener("load", () => {
     const granted = sessionStorage.getItem("cdv_private_access");
 
-    if (!granted) {
-      const pass = prompt("Confidential access code:");
-      if (pass === ACCESS_PASSWORD) {
-        sessionStorage.setItem("cdv_private_access", "true");
-      } else {
-        window.location.href = "/";
-      }
+    if (granted) {
+      trackPrivateAccess("private_access_session_restored");
+
+      document.getElementById("gate").style.display = "none";
     }
+  });
 
-    function sendRequest(event) {
-      event.preventDefault();
+  document.addEventListener("contextmenu", e => e.preventDefault());
 
-      const form = event.target;
-      const data = new FormData(form);
+  document.addEventListener("keydown", e => {
+    const key = e.key.toLowerCase();
 
-      const body = `
-Confidential Investment Memorandum Request
+    if ((e.ctrlKey || e.metaKey) && ["p", "s", "u"].includes(key)) {
+      e.preventDefault();
 
-Name: ${data.get("name")}
-Company: ${data.get("company")}
-Country: ${data.get("country")}
-Email: ${data.get("email")}
-Phone: ${data.get("phone")}
+      trackPrivateAccess("private_document_protection_triggered", {
+        blocked_key: key
+      });
 
-Message:
-${data.get("message")}
-      `;
-
-      window.location.href =
-        "mailto:felipe.carvalho@mac.com?subject=Casas da Vila - Confidential Memorandum Request&body=" +
-        encodeURIComponent(body);
+      alert(
+        "This confidential memorandum cannot be printed, saved or inspected from this page."
+      );
     }
-  </script>
+  });
+</script>
 </head>
 
 <body>

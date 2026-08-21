@@ -76,26 +76,52 @@
     }
   </style>
 
-  <script>
-    const ACCESS_PASSWORD = "2027";
+<script>
+  const ACCESS_PASSWORD = "2027";
+
+  window.addEventListener("load", () => {
     const granted = sessionStorage.getItem("cdv_private_access");
 
-    if (!granted) {
-      const pass = prompt("Confidential access code:");
-      if (pass === ACCESS_PASSWORD) {
-        sessionStorage.setItem("cdv_private_access", "true");
-      } else {
-        window.location.href = "/";
-      }
+    if (granted) {
+      window.trackSiteEvent?.("private_access_session_restored", {
+        access_area: "private_contact"
+      });
+
+      return;
     }
 
-    function sendRequest(event) {
-      event.preventDefault();
+    window.trackSiteEvent?.("private_access_attempt", {
+      access_area: "private_contact"
+    });
 
-      const form = event.target;
-      const data = new FormData(form);
+    const pass = prompt("Confidential access code:");
 
-      const body = `
+    if (pass === ACCESS_PASSWORD) {
+      sessionStorage.setItem("cdv_private_access", "true");
+
+      window.trackSiteEvent?.("private_access_success", {
+        access_area: "private_contact"
+      });
+    } else {
+      window.trackSiteEvent?.("private_access_failed", {
+        access_area: "private_contact"
+      });
+
+      window.location.href = "/";
+    }
+  });
+
+  function sendRequest(event) {
+    event.preventDefault();
+
+    window.trackSiteEvent?.("private_meeting_request", {
+      access_area: "private_contact"
+    });
+
+    const form = event.target;
+    const data = new FormData(form);
+
+    const body = `
 Confidential Investment Memorandum Request
 
 Name: ${data.get("name")}
@@ -106,13 +132,13 @@ Phone: ${data.get("phone")}
 
 Message:
 ${data.get("message")}
-      `;
+    `;
 
-      window.location.href =
-        "mailto:felipe.carvalho@mac.com?subject=Casas da Vila - Confidential Memorandum Request&body=" +
-        encodeURIComponent(body);
-    }
-  </script>
+    window.location.href =
+      "mailto:felipe.carvalho@mac.com?subject=Casas da Vila - Confidential Memorandum Request&body=" +
+      encodeURIComponent(body);
+  }
+</script>
 </head>
 
 <body>
