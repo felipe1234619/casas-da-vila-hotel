@@ -303,7 +303,7 @@ function analyzeSpam(payload) {
 
    Hoje:
    CONTACT_NOTIFICATION_EMAILS=
-   casasdavilatrancoso@hotmail.com
+   casasdavila@casasdavila.com
 
    Futuramente:
    CONTACT_NOTIFICATION_EMAILS=
