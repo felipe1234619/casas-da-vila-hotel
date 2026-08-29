@@ -1,6 +1,17 @@
 import Stripe from 'stripe';
 import crypto from 'crypto';
+import { createClient } from '@supabase/supabase-js';
 
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY,
+  {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false
+    }
+  }
+);
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2025-03-31.basil'
 });
@@ -274,7 +285,46 @@ export default async function handler(req, res) {
         }
       ]
     });
+try {
+  const { error: trackingError } = await supabase
+    .from('booking_events')
+    .insert({
+      event_type: 'stripe_checkout_created',
+      house_slug: unitSlug,
+      house_name: finalUnitName,
+      checkin,
+      checkout,
+      nights,
+      guests: finalGuestsCount,
+      guests_count: finalGuestsCount,
+      currency: currency.toUpperCase(),
+      estimated_total: amountTotalCents / 100,
+      gross_total: amountTotalCents / 100,
+      stripe_session_id: session.id,
+      user_email: guestEmail,
+      user_name: guestName,
+      user_phone: guestPhone || null,
+      source: 'stripe_checkout',
+      language: isEN ? 'en' : 'pt',
+      metadata: {
+        booking_reference: bookingReference,
+        hold_id: holdId || null,
+        stripe_checkout_url_created: Boolean(session.url)
+      }
+    });
 
+  if (trackingError) {
+    console.error(
+      'Failed to track Stripe checkout creation:',
+      trackingError
+    );
+  }
+} catch (trackingException) {
+  console.error(
+    'Unexpected Stripe checkout tracking error:',
+    trackingException
+  );
+}
     return res.status(200).json({
       id: session.id,
       url: session.url,
