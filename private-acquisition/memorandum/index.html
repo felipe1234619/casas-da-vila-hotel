@@ -1497,7 +1497,7 @@ font-size:34px;
 
 <body>
 <div id="gate">
-  <div class="gate-box">
+  <form class="gate-box" onsubmit="event.preventDefault(); checkAccess();">
     <div class="gate-label">Confidential Access</div>
 
     <h1>Casas da Vila</h1>
@@ -1512,10 +1512,12 @@ font-size:34px;
       type="password"
       id="accessCode"
       placeholder="Access Code"
+      autocomplete="off"
+      required
     >
 
-    <button onclick="checkAccess()">Enter</button>
-  </div>
+    <button type="submit">Enter</button>
+  </form>
 </div>
   <header class="hero">
     <div class="hero-inner">
@@ -3123,7 +3125,7 @@ Time has become one of the platform's most valuable assets.
         may be made available to qualified parties following appropriate confidentiality procedures.
       </p>
 
-<a class="cta" href="/private-acquisition/contact/">
+<a class="cta" href="/private-acquisition/contact/">Request Access</a>
       </section>
 
     <section class="footer">
