@@ -7,6 +7,9 @@
   <title>Casas da Vila | Confidential Opportunity</title>
 
   <style>
+    :root {
+  --gold: #d6bd8c;
+}
     @media print {
       body { display: none !important; }
     }
@@ -188,8 +191,7 @@
   </style>
 
 <script>
-  const ACCESS_PASSWORD = "Jujubi2026";
-
+const ACCESS_PASSWORD = "2027";
   function checkAccess() {
     const value = document.getElementById("accessCode").value;
 
@@ -222,8 +224,8 @@
 </head>
 
 <body>
-    <div id="gate">
-  <div class="gate-box">
+<div id="gate">
+  <form class="gate-box" onsubmit="event.preventDefault(); checkAccess();">
     <div class="gate-label">Confidential Access</div>
 
     <h1>Investor Access</h1>
@@ -238,10 +240,12 @@
       type="password"
       id="accessCode"
       placeholder="Access Code"
+      autocomplete="off"
+      required
     >
 
-    <button onclick="checkAccess()">Enter</button>
-  </div>
+    <button type="submit">Enter</button>
+  </form>
 </div>
   <main class="page">
     <section class="section">
@@ -251,7 +255,7 @@
         A rare hospitality asset in Trancoso, Brazil, combining an established boutique operation,
         substantial urban landholding, brand equity and long-term real estate optionality.
       </p>
-<a class="btn" href="/private/memorandum/">Access Investment Memorandum</a>
+<a class="btn" href="/private-acquisition/memorandum/">Access Investment Memorandum</a>
     </section>
 
     <section class="section">
@@ -305,7 +309,7 @@
           Detailed operational, legal, commercial and investment information may be made available
           after qualification of the potential purchaser and execution of a confidentiality agreement.
         </p>
-<a class="btn" href="/private/memorandum/">Access Memorandum</a>
+<a class="btn" href="/private/acquisition/memorandum/">Access Memorandum</a>
       </div>
     </section>
   </main>
