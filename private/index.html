@@ -8,25 +8,57 @@
 
   <style>
     :root {
-  --gold: #d6bd8c;
-}
+      --gold: #d6bd8c;
+    }
+
     @media print {
-      body { display: none !important; }
+      body {
+        display: none !important;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: Georgia, "Times New Roman", serif;
       background: #111;
       color: #f4efe7;
     }
 
-    .page {
-      min-height: 100vh;
-      padding: 80px 8%;
+    /* ==============================
+       CINEMATIC HERO
+       ============================== */
+
+    .private-hero {
+      min-height: 92vh;
+      padding: 96px 8% 84px;
+
+      display: flex;
+      align-items: flex-end;
+
+      position: relative;
+      overflow: hidden;
+
       background:
-        linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.78)),
-        url("/assets/img/hotel/casas-da-vila-hero.jpg") center/cover no-repeat;
+        linear-gradient(
+          180deg,
+          rgba(0, 0, 0, .26) 0%,
+          rgba(0, 0, 0, .46) 46%,
+          rgba(0, 0, 0, .88) 100%
+        ),
+        url("/assets/img/aerial.png")
+        center / cover no-repeat;
+
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .private-hero-inner {
+      width: min(980px, 100%);
+      position: relative;
+      z-index: 2;
     }
 
     .label {
@@ -37,11 +69,27 @@
       margin-bottom: 24px;
     }
 
+    .private-hero .label {
+      margin-bottom: 22px;
+    }
+
     h1 {
       font-size: clamp(42px, 7vw, 86px);
       line-height: .95;
       margin: 0 0 24px;
       max-width: 900px;
+    }
+
+    .private-hero h1 {
+      max-width: 980px;
+      margin-bottom: 28px;
+
+      font-size: clamp(56px, 9vw, 108px);
+      line-height: .9;
+      font-weight: normal;
+      letter-spacing: -.025em;
+
+      text-shadow: 0 4px 32px rgba(0,0,0,.35);
     }
 
     .subtitle {
@@ -52,21 +100,56 @@
       margin-bottom: 48px;
     }
 
+    .private-hero .subtitle {
+      max-width: 790px;
+      margin-bottom: 0;
+
+      color: #f0e8dd;
+
+      font-size: clamp(19px, 2.2vw, 25px);
+      line-height: 1.5;
+    }
+
+    /* ==============================
+       MAIN CONTENT
+       ============================== */
+
+    .page {
+      min-height: 100vh;
+      padding: 88px 8%;
+
+      background:
+        radial-gradient(
+          circle at 80% 0%,
+          rgba(214,189,140,.055),
+          transparent 28%
+        ),
+        #111;
+    }
+
     .section {
       max-width: 1050px;
       margin: 0 auto 90px;
     }
 
-    .cards, .structures {
+    .cards,
+    .structures {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(240px, 1fr));
+
       gap: 22px;
     }
 
     .card {
       border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.07);
+
+      background:
+        rgba(255,255,255,.07);
+
       padding: 28px;
+
       backdrop-filter: blur(8px);
     }
 
@@ -76,7 +159,8 @@
       font-size: 22px;
     }
 
-    .card p, li {
+    .card p,
+    li {
       color: #e8ded0;
       line-height: 1.6;
     }
@@ -89,231 +173,538 @@
 
     .btn {
       display: inline-block;
+
       margin-top: 28px;
+
       padding: 15px 26px;
+
       border: 1px solid #d6bd8c;
+
       color: #111;
       background: #d6bd8c;
+
       text-decoration: none;
       text-transform: uppercase;
+
       letter-spacing: .12em;
       font-size: 12px;
     }
-    #gate{
-  position:fixed;
-  inset:0;
-  z-index:9999;
 
-  background:
-    linear-gradient(
-      rgba(0,0,0,.70),
-      rgba(0,0,0,.82)
-    );
+    .private-hero .btn {
+      margin-top: 34px;
+    }
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+    /* ==============================
+       PRIVATE ACCESS GATE
+       ============================== */
 
-  backdrop-filter: blur(8px);
-}
+    #gate {
+      position: fixed;
+      inset: 0;
 
-.gate-box{
-  width:420px;
-  max-width:90%;
+      z-index: 9999;
 
-  background:rgba(15,15,15,.95);
+      background:
+        linear-gradient(
+          rgba(0,0,0,.70),
+          rgba(0,0,0,.82)
+        );
 
-  border:1px solid rgba(214,189,140,.35);
+      display: flex;
 
-  padding:48px;
+      justify-content: center;
+      align-items: center;
 
-  text-align:center;
-}
+      backdrop-filter: blur(8px);
+    }
 
-.gate-label{
-  color:var(--gold);
+    .gate-box {
+      width: 420px;
+      max-width: 90%;
 
-  text-transform:uppercase;
+      background: rgba(15,15,15,.95);
 
-  letter-spacing:.22em;
+      border:
+        1px solid rgba(214,189,140,.35);
 
-  font-size:11px;
+      padding: 48px;
 
-  margin-bottom:20px;
-}
+      text-align: center;
+    }
 
-.gate-box h1{
-  font-size:42px;
-  margin-bottom:16px;
-}
+    .gate-label {
+      color: var(--gold);
 
-.gate-box p{
-  font-size:16px;
-  line-height:1.7;
-  margin-bottom:26px;
-}
+      text-transform: uppercase;
 
-.gate-box input{
-  width:100%;
+      letter-spacing: .22em;
 
-  padding:15px;
+      font-size: 11px;
 
-  margin-bottom:16px;
+      margin-bottom: 20px;
+    }
 
-  background:#1a1a1a;
+    .gate-box h1 {
+      font-size: 42px;
+      margin-bottom: 16px;
+    }
 
-  border:1px solid rgba(255,255,255,.15);
+    .gate-box p {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 26px;
+    }
 
-  color:#fff;
+    .gate-box input {
+      width: 100%;
 
-  font-size:16px;
-}
+      padding: 15px;
 
-.gate-box button{
-  width:100%;
+      margin-bottom: 16px;
 
-  padding:16px;
+      background: #1a1a1a;
 
-  border:none;
+      border:
+        1px solid rgba(255,255,255,.15);
 
-  background:var(--gold);
+      color: #fff;
 
-  color:#111;
+      font-size: 16px;
+    }
 
-  font-weight:600;
+    .gate-box button {
+      width: 100%;
 
-  letter-spacing:.14em;
+      padding: 16px;
 
-  text-transform:uppercase;
+      border: none;
 
-  cursor:pointer;
-}
+      background: var(--gold);
+
+      color: #111;
+
+      font-weight: 600;
+
+      letter-spacing: .14em;
+
+      text-transform: uppercase;
+
+      cursor: pointer;
+    }
+
+    /* ==============================
+       MOBILE / IPAD
+       ============================== */
+
+    @media (max-width: 700px) {
+
+      .private-hero {
+        min-height: 84vh;
+
+        padding:
+          72px 6% 60px;
+
+        background-position:
+          58% center;
+      }
+
+      .private-hero h1 {
+        font-size:
+          clamp(48px, 16vw, 76px);
+      }
+
+      .private-hero .subtitle {
+        font-size: 18px;
+      }
+
+      .page {
+        padding:
+          64px 6%;
+      }
+
+      .gate-box {
+        padding:
+          36px 26px;
+      }
+    }
   </style>
 
-<script>
-const ACCESS_PASSWORD = "2027";
-  function checkAccess() {
-    const value = document.getElementById("accessCode").value;
+  <script>
+    const ACCESS_PASSWORD = "2027";
 
-    if (value === ACCESS_PASSWORD) {
-      sessionStorage.setItem("cdv_private_access", "true");
-      document.getElementById("gate").style.display = "none";
-    } else {
-      alert("Invalid access code.");
+    function checkAccess() {
+      const value =
+        document.getElementById("accessCode").value;
+
+      if (value === ACCESS_PASSWORD) {
+
+        sessionStorage.setItem(
+          "cdv_private_access",
+          "true"
+        );
+
+        document.getElementById("gate")
+          .style.display = "none";
+
+      } else {
+
+        alert("Invalid access code.");
+
+      }
     }
-  }
 
-  window.addEventListener("load", () => {
-    const granted = sessionStorage.getItem("cdv_private_access");
+    window.addEventListener("load", () => {
 
-    if (granted) {
-      document.getElementById("gate").style.display = "none";
-    }
-  });
+      const granted =
+        sessionStorage.getItem(
+          "cdv_private_access"
+        );
 
-  document.addEventListener("contextmenu", e => e.preventDefault());
+      if (granted) {
+        document.getElementById("gate")
+          .style.display = "none";
+      }
 
-  document.addEventListener("keydown", e => {
-    const key = e.key.toLowerCase();
-    if ((e.ctrlKey || e.metaKey) && ["p", "s", "u"].includes(key)) {
-      e.preventDefault();
-      alert("This confidential memorandum cannot be printed, saved or inspected from this page.");
-    }
-  });
-</script>
+    });
+
+    document.addEventListener(
+      "contextmenu",
+      e => e.preventDefault()
+    );
+
+    document.addEventListener(
+      "keydown",
+      e => {
+
+        const key =
+          e.key.toLowerCase();
+
+        if (
+          (e.ctrlKey || e.metaKey) &&
+          ["p", "s", "u"].includes(key)
+        ) {
+
+          e.preventDefault();
+
+          alert(
+            "This confidential memorandum cannot be printed, saved or inspected from this page."
+          );
+        }
+      }
+    );
+  </script>
 </head>
 
 <body>
-<div id="gate">
-  <form class="gate-box" onsubmit="event.preventDefault(); checkAccess();">
-    <div class="gate-label">Confidential Access</div>
 
-    <h1>Investor Access</h1>
+  <!-- ============================
+       ACCESS GATE
+       ============================ -->
 
-    <p>
-      Confidential information intended exclusively
-      for qualified investors, hospitality operators
-      and strategic partners involving Casas da Vila.
-    </p>
+  <div id="gate">
 
-    <input
-      type="password"
-      id="accessCode"
-      placeholder="Access Code"
-      autocomplete="off"
-      required
+    <form
+      class="gate-box"
+      onsubmit="
+        event.preventDefault();
+        checkAccess();
+      "
     >
 
-    <button type="submit">Enter</button>
-  </form>
-</div>
-  <main class="page">
-    <section class="section">
-      <div class="label">Confidential Acquisition Opportunity</div>
-      <h1>Casas da Vila</h1>
-      <p class="subtitle">
-        A rare hospitality asset in Trancoso, Brazil, combining an established boutique operation,
-        substantial urban landholding, brand equity and long-term real estate optionality.
-      </p>
-<a class="btn" href="/private/memorandum/">Access Investment Memorandum</a>
-    </section>
-
-    <section class="section">
-      <div class="cards">
-        <div class="card"><h3>15+ Years</h3><p>Established hospitality operation in Trancoso.</p></div>
-        <div class="card"><h3>4,423 m²</h3><p>Urban landholding in a strategic residential area.</p></div>
-        <div class="card"><h3>8 Guest Houses</h3><p>Independent accommodations with mature tropical gardens.</p></div>
-        <div class="card"><h3>Strategic Optionality</h3><p>Hospitality continuity, repositioning or future development.</p></div>
+      <div class="gate-label">
+        Confidential Access
       </div>
-    </section>
+
+      <h1>Investor Access</h1>
+
+      <p>
+        Confidential information intended
+        exclusively for qualified investors,
+        hospitality operators and strategic
+        partners involving Casas da Vila.
+      </p>
+
+      <input
+        type="password"
+        id="accessCode"
+        placeholder="Access Code"
+        autocomplete="off"
+        required
+      >
+
+      <button type="submit">
+        Enter
+      </button>
+
+    </form>
+
+  </div>
+
+
+  <!-- ============================
+       CINEMATIC HERO
+       ============================ -->
+
+  <section class="private-hero">
+
+    <div class="private-hero-inner">
+
+      <div class="label">
+        Confidential Acquisition Opportunity
+      </div>
+
+      <h1>
+        Casas da Vila
+      </h1>
+
+      <p class="subtitle">
+        A rare hospitality asset in Trancoso,
+        Brazil, combining an established
+        boutique operation, substantial urban
+        landholding, brand equity and long-term
+        real estate optionality.
+      </p>
+
+      <a
+        class="btn"
+        href="/private/memorandum/"
+      >
+        Access Investment Memorandum
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ============================
+       INVESTMENT INFORMATION
+       ============================ -->
+
+  <main class="page">
 
     <section class="section">
-      <div class="label">Transaction Structures</div>
+
+      <div class="cards">
+
+        <div class="card">
+
+          <h3>
+            15+ Years
+          </h3>
+
+          <p>
+            Established hospitality operation
+            in Trancoso.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>
+            4,423 m²
+          </h3>
+
+          <p>
+            Urban landholding in a strategic
+            residential area.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>
+            8 Guest Houses
+          </h3>
+
+          <p>
+            Independent accommodations with
+            mature tropical gardens.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>
+            Strategic Optionality
+          </h3>
+
+          <p>
+            Hospitality continuity,
+            repositioning or future
+            development.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ============================
+         TRANSACTION STRUCTURES
+         ============================ -->
+
+    <section class="section">
+
+      <div class="label">
+        Transaction Structures
+      </div>
+
       <div class="structures">
 
-        <div class="card">
-          <h3>A. Full Platform Acquisition</h3>
-          <div class="value">R$ 21,000,000</div>
-          <p>Acquisition of Jujubi, including the hotel, land, brand, reservation systems, digital assets, intelligence tools, dashboard and Casas da Vila Homes development platform.</p>
-          <p><strong>Deposit:</strong> 20%</p>
-        </div>
 
         <div class="card">
-          <h3>B. Operating Hospitality Platform</h3>
-          <div class="value">R$ 20,000,000</div>
-          <p>Hotel infrastructure, land, Casas da Vila brand, digital channels, reservation tools and operational know-how, excluding the real estate development project.</p>
-          <p><strong>Deposit:</strong> 20%</p>
+
+          <h3>
+            A. Full Platform Acquisition
+          </h3>
+
+          <div class="value">
+            R$ 21,000,000
+          </div>
+
+          <p>
+            Acquisition of Jujubi, including
+            the hotel, land, brand,
+            reservation systems, digital
+            assets, intelligence tools,
+            dashboard and Casas da Vila Homes
+            development platform.
+          </p>
+
+          <p>
+            <strong>Deposit:</strong> 20%
+          </p>
+
         </div>
 
-        <div class="card">
-          <h3>C. Real Estate & Infrastructure</h3>
-          <div class="value">R$ 18,000,000</div>
-          <p>Acquisition of the land and physical hospitality infrastructure only, excluding brand, intellectual property, digital assets and development platform.</p>
-          <p><strong>Deposit:</strong> 20%</p>
-        </div>
 
         <div class="card">
-          <h3>D. Asset Acquisition + Brand License</h3>
-          <div class="value">R$ 18,000,000 + License</div>
-          <p>Acquisition of the physical asset combined with a long-term licensing arrangement for the Casas da Vila brand, subject to fixed fee, royalty or hybrid structure.</p>
-          <p><strong>Deposit:</strong> 20%</p>
+
+          <h3>
+            B. Operating Hospitality Platform
+          </h3>
+
+          <div class="value">
+            R$ 20,000,000
+          </div>
+
+          <p>
+            Hotel infrastructure, land,
+            Casas da Vila brand, digital
+            channels, reservation tools and
+            operational know-how, excluding
+            the real estate development
+            project.
+          </p>
+
+          <p>
+            <strong>Deposit:</strong> 20%
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>
+            C. Real Estate & Infrastructure
+          </h3>
+
+          <div class="value">
+            R$ 18,000,000
+          </div>
+
+          <p>
+            Acquisition of the land and
+            physical hospitality
+            infrastructure only, excluding
+            brand, intellectual property,
+            digital assets and development
+            platform.
+          </p>
+
+          <p>
+            <strong>Deposit:</strong> 20%
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>
+            D. Asset Acquisition + Brand License
+          </h3>
+
+          <div class="value">
+            R$ 18,000,000 + License
+          </div>
+
+          <p>
+            Acquisition of the physical asset
+            combined with a long-term
+            licensing arrangement for the
+            Casas da Vila brand, subject to
+            fixed fee, royalty or hybrid
+            structure.
+          </p>
+
+          <p>
+            <strong>Deposit:</strong> 20%
+          </p>
+
         </div>
 
       </div>
+
     </section>
+
+
+    <!-- ============================
+         CONFIDENTIAL INFORMATION
+         ============================ -->
 
     <section class="section">
+
       <div class="card">
-        <h3>Confidential Information</h3>
+
+        <h3>
+          Confidential Information
+        </h3>
+
         <p>
-          Detailed operational, legal, commercial and investment information may be made available
-          after qualification of the potential purchaser and execution of a confidentiality agreement.
+          Detailed operational, legal,
+          commercial and investment
+          information may be made available
+          after qualification of the
+          potential purchaser and execution
+          of a confidentiality agreement.
         </p>
-<a class="btn" href="/private/memorandum/">Access Memorandum</a>
+
+        <a
+          class="btn"
+          href="/private/memorandum/"
+        >
+          Access Memorandum
+        </a>
+
       </div>
+
     </section>
+
   </main>
-     <script src="/assets/js/site-analytics.js"></script>
+
+
+  <script src="/assets/js/site-analytics.js"></script>
 
 </body>
 </html>
