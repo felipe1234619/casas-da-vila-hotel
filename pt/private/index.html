@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="robots" content="noindex,nofollow,noarchive" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Casas da Vila | Confidential Opportunity</title>
+
+  <title>Casas da Vila | Oportunidade Confidencial</title>
 
   <style>
     :root {
@@ -28,28 +29,22 @@
       color: #f4efe7;
     }
 
-    /* ==============================
-       CINEMATIC HERO
-       ============================== */
-
     .private-hero {
       min-height: 92vh;
       padding: 96px 8% 84px;
-
       display: flex;
       align-items: flex-end;
-
       position: relative;
       overflow: hidden;
 
       background:
         linear-gradient(
           180deg,
-          rgba(0, 0, 0, .26) 0%,
-          rgba(0, 0, 0, .46) 46%,
-          rgba(0, 0, 0, .88) 100%
+          rgba(0,0,0,.26) 0%,
+          rgba(0,0,0,.46) 46%,
+          rgba(0,0,0,.88) 100%
         ),
-        url("/assets/img/aerial.png")
+        url("/assets/img/hotel/casas-da-vila-hero.jpg")
         center / cover no-repeat;
 
       border-bottom: 1px solid rgba(255,255,255,.12);
@@ -61,6 +56,26 @@
       z-index: 2;
     }
 
+    .language-switch {
+      position: absolute;
+      top: 34px;
+      right: 8%;
+      z-index: 3;
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .language-switch a {
+      color: #f4efe7;
+      text-decoration: none;
+      opacity: .8;
+    }
+
+    .language-switch a:hover {
+      opacity: 1;
+    }
+
     .label {
       letter-spacing: .18em;
       text-transform: uppercase;
@@ -69,26 +84,20 @@
       margin-bottom: 24px;
     }
 
-    .private-hero .label {
-      margin-bottom: 22px;
-    }
-
     h1 {
       font-size: clamp(42px, 7vw, 86px);
       line-height: .95;
       margin: 0 0 24px;
       max-width: 900px;
+      font-weight: normal;
     }
 
     .private-hero h1 {
       max-width: 980px;
       margin-bottom: 28px;
-
       font-size: clamp(56px, 9vw, 108px);
       line-height: .9;
-      font-weight: normal;
       letter-spacing: -.025em;
-
       text-shadow: 0 4px 32px rgba(0,0,0,.35);
     }
 
@@ -103,16 +112,10 @@
     .private-hero .subtitle {
       max-width: 790px;
       margin-bottom: 0;
-
       color: #f0e8dd;
-
       font-size: clamp(19px, 2.2vw, 25px);
       line-height: 1.5;
     }
-
-    /* ==============================
-       MAIN CONTENT
-       ============================== */
 
     .page {
       min-height: 100vh;
@@ -135,21 +138,15 @@
     .cards,
     .structures {
       display: grid;
-
       grid-template-columns:
         repeat(auto-fit, minmax(240px, 1fr));
-
       gap: 22px;
     }
 
     .card {
       border: 1px solid rgba(255,255,255,.18);
-
-      background:
-        rgba(255,255,255,.07);
-
+      background: rgba(255,255,255,.07);
       padding: 28px;
-
       backdrop-filter: blur(8px);
     }
 
@@ -157,6 +154,7 @@
       margin-top: 0;
       color: #d6bd8c;
       font-size: 22px;
+      font-weight: normal;
     }
 
     .card p,
@@ -173,9 +171,7 @@
 
     .btn {
       display: inline-block;
-
       margin-top: 28px;
-
       padding: 15px 26px;
 
       border: 1px solid #d6bd8c;
@@ -194,14 +190,9 @@
       margin-top: 34px;
     }
 
-    /* ==============================
-       PRIVATE ACCESS GATE
-       ============================== */
-
     #gate {
       position: fixed;
       inset: 0;
-
       z-index: 9999;
 
       background:
@@ -211,7 +202,6 @@
         );
 
       display: flex;
-
       justify-content: center;
       align-items: center;
 
@@ -221,26 +211,17 @@
     .gate-box {
       width: 420px;
       max-width: 90%;
-
       background: rgba(15,15,15,.95);
-
-      border:
-        1px solid rgba(214,189,140,.35);
-
+      border: 1px solid rgba(214,189,140,.35);
       padding: 48px;
-
       text-align: center;
     }
 
     .gate-label {
       color: var(--gold);
-
       text-transform: uppercase;
-
       letter-spacing: .22em;
-
       font-size: 11px;
-
       margin-bottom: 20px;
     }
 
@@ -253,64 +234,45 @@
       font-size: 16px;
       line-height: 1.7;
       margin-bottom: 26px;
+      color: #e8ded0;
     }
 
     .gate-box input {
       width: 100%;
-
       padding: 15px;
-
       margin-bottom: 16px;
-
       background: #1a1a1a;
-
-      border:
-        1px solid rgba(255,255,255,.15);
-
+      border: 1px solid rgba(255,255,255,.15);
       color: #fff;
-
       font-size: 16px;
     }
 
     .gate-box button {
       width: 100%;
-
       padding: 16px;
-
       border: none;
-
       background: var(--gold);
-
       color: #111;
-
       font-weight: 600;
-
       letter-spacing: .14em;
-
       text-transform: uppercase;
-
       cursor: pointer;
     }
 
-    /* ==============================
-       MOBILE / IPAD
-       ============================== */
-
     @media (max-width: 700px) {
-
       .private-hero {
         min-height: 84vh;
+        padding: 72px 6% 60px;
+        background-position: 58% center;
+      }
 
-        padding:
-          72px 6% 60px;
-
-        background-position:
-          58% center;
+      .language-switch {
+        top: 24px;
+        right: 6%;
       }
 
       .private-hero h1 {
-        font-size:
-          clamp(48px, 16vw, 76px);
+        font-size: clamp(48px, 16vw, 76px);
       }
 
       .private-hero .subtitle {
@@ -318,33 +280,12 @@
       }
 
       .page {
-        padding:
-          64px 6%;
+        padding: 64px 6%;
       }
 
       .gate-box {
-        padding:
-          36px 26px;
+        padding: 36px 26px;
       }
-      .language-switch {
-  position: absolute;
-  top: 34px;
-  right: 8%;
-  z-index: 3;
-  font-size: 11px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-}
-
-.language-switch a {
-  color: #f4efe7;
-  text-decoration: none;
-  opacity: .8;
-}
-
-.language-switch a:hover {
-  opacity: 1;
-}
     }
   </style>
 
@@ -356,7 +297,6 @@
         document.getElementById("accessCode").value;
 
       if (value === ACCESS_PASSWORD) {
-
         sessionStorage.setItem(
           "cdv_private_access",
           "true"
@@ -364,26 +304,19 @@
 
         document.getElementById("gate")
           .style.display = "none";
-
       } else {
-
-        alert("Invalid access code.");
-
+        alert("Código de acesso inválido.");
       }
     }
 
     window.addEventListener("load", () => {
-
       const granted =
-        sessionStorage.getItem(
-          "cdv_private_access"
-        );
+        sessionStorage.getItem("cdv_private_access");
 
       if (granted) {
         document.getElementById("gate")
           .style.display = "none";
       }
-
     });
 
     document.addEventListener(
@@ -394,19 +327,16 @@
     document.addEventListener(
       "keydown",
       e => {
-
-        const key =
-          e.key.toLowerCase();
+        const key = e.key.toLowerCase();
 
         if (
           (e.ctrlKey || e.metaKey) &&
           ["p", "s", "u"].includes(key)
         ) {
-
           e.preventDefault();
 
           alert(
-            "This confidential memorandum cannot be printed, saved or inspected from this page."
+            "Este material confidencial não pode ser impresso, salvo ou inspecionado a partir desta página."
           );
         }
       }
@@ -416,43 +346,35 @@
 
 <body>
 
-  <!-- ============================
-       ACCESS GATE
-       ============================ -->
-
   <div id="gate">
 
     <form
       class="gate-box"
-      onsubmit="
-        event.preventDefault();
-        checkAccess();
-      "
+      onsubmit="event.preventDefault(); checkAccess();"
     >
 
       <div class="gate-label">
-        Confidential Access
+        Acesso Confidencial
       </div>
 
-      <h1>Investor Access</h1>
+      <h1>Acesso do Investidor</h1>
 
       <p>
-        Confidential information intended
-        exclusively for qualified investors,
-        hospitality operators and strategic
-        partners involving Casas da Vila.
+        Informações confidenciais destinadas exclusivamente
+        a investidores qualificados, operadores hoteleiros
+        e parceiros estratégicos interessados em Casas da Vila.
       </p>
 
       <input
         type="password"
         id="accessCode"
-        placeholder="Access Code"
+        placeholder="Código de Acesso"
         autocomplete="off"
         required
       >
 
       <button type="submit">
-        Enter
+        Entrar
       </button>
 
     </form>
@@ -460,50 +382,40 @@
   </div>
 
 
-  <!-- ============================
-       CINEMATIC HERO
-       ============================ -->
+  <section class="private-hero">
 
-<section class="private-hero">
-
-  <div class="language-switch">
-    <a href="/private/">EN</a>
-    <span>•</span>
-    <a href="/pt/private/">PT</a>
-  </div>
-
-  <div class="private-hero-inner">
-
-    <div class="label">
-      Confidential Acquisition Opportunity
+    <div class="language-switch">
+      <a href="/private/">EN</a>
     </div>
 
-    <h1>
-      Casas da Vila
-    </h1>
+    <div class="private-hero-inner">
 
-    <p class="subtitle">
-      A rare hospitality asset in Trancoso,
-      Brazil, combining an established
-      boutique operation, substantial urban
-      landholding, brand equity and long-term
-      real estate optionality.
-    </p>
+      <div class="label">
+        Oportunidade Confidencial de Aquisição
+      </div>
 
-    <a
-      class="btn"
-      href="/private/memorandum/"
-    >
-      Access Investment Memorandum
-    </a>
+      <h1>
+        Casas da Vila
+      </h1>
 
-  </div>
+      <p class="subtitle">
+        Um ativo hoteleiro singular em Trancoso, reunindo
+        uma operação boutique consolidada, expressiva área
+        urbana, valor de marca e opcionalidade imobiliária
+        de longo prazo.
+      </p>
 
-</section>
+      <a
+        class="btn"
+        href="/pt/private/memorandum/"
+      >
+        Acessar Memorando de Investimento
+      </a>
 
-  <!-- ============================
-       INVESTMENT INFORMATION
-       ============================ -->
+    </div>
+
+  </section>
+
 
   <main class="page">
 
@@ -512,100 +424,68 @@
       <div class="cards">
 
         <div class="card">
-
-          <h3>
-            15+ Years
-          </h3>
-
+          <h3>Mais de 15 anos</h3>
           <p>
-            Established hospitality operation
-            in Trancoso.
+            Operação hoteleira consolidada em Trancoso.
           </p>
-
         </div>
 
-
         <div class="card">
-
-          <h3>
-            4,423 m²
-          </h3>
-
+          <h3>4.423 m²</h3>
           <p>
-            Urban landholding in a strategic
-            residential area.
+            Área urbana em localização residencial
+            estratégica.
           </p>
-
         </div>
 
-
         <div class="card">
-
-          <h3>
-            8 Guest Houses
-          </h3>
-
+          <h3>8 Casas</h3>
           <p>
-            Independent accommodations with
-            mature tropical gardens.
+            Unidades independentes integradas a jardins
+            tropicais maduros.
           </p>
-
         </div>
 
-
         <div class="card">
-
-          <h3>
-            Strategic Optionality
-          </h3>
-
+          <h3>Opcionalidade Estratégica</h3>
           <p>
-            Hospitality continuity,
-            repositioning or future
-            development.
+            Continuidade da operação, reposicionamento
+            ou desenvolvimento futuro.
           </p>
-
         </div>
 
       </div>
 
     </section>
 
-
-    <!-- ============================
-         TRANSACTION STRUCTURES
-         ============================ -->
 
     <section class="section">
 
       <div class="label">
-        Transaction Structures
+        Estruturas da Transação
       </div>
 
       <div class="structures">
 
-
         <div class="card">
 
           <h3>
-            A. Full Platform Acquisition
+            A. Aquisição Integral da Plataforma
           </h3>
 
           <div class="value">
-            R$ 21,000,000
+            R$ 21.000.000
           </div>
 
           <p>
-            Acquisition of Jujubi, including
-            the hotel, land, brand,
-            reservation systems, digital
-            assets, intelligence tools,
-            dashboard and Casas da Vila Homes
-            development platform.
+            Aquisição da Jujubi, incluindo hotel, terreno,
+            marca, sistemas de reservas, ativos digitais,
+            ferramentas de inteligência, dashboard e a
+            plataforma de desenvolvimento Casas da Vila Homes.
           </p>
 
           <p>
-            <strong>Deposit:</strong> 20%
+            <strong>Sinal:</strong> 20%
           </p>
 
         </div>
@@ -614,24 +494,22 @@
         <div class="card">
 
           <h3>
-            B. Operating Hospitality Platform
+            B. Plataforma Hoteleira Operacional
           </h3>
 
           <div class="value">
-            R$ 20,000,000
+            R$ 20.000.000
           </div>
 
           <p>
-            Hotel infrastructure, land,
-            Casas da Vila brand, digital
-            channels, reservation tools and
-            operational know-how, excluding
-            the real estate development
-            project.
+            Infraestrutura hoteleira, terreno, marca Casas da Vila,
+            canais digitais, ferramentas de reserva e know-how
+            operacional, excluído o projeto de desenvolvimento
+            imobiliário.
           </p>
 
           <p>
-            <strong>Deposit:</strong> 20%
+            <strong>Sinal:</strong> 20%
           </p>
 
         </div>
@@ -640,24 +518,21 @@
         <div class="card">
 
           <h3>
-            C. Real Estate & Infrastructure
+            C. Imóvel e Infraestrutura
           </h3>
 
           <div class="value">
-            R$ 18,000,000
+            R$ 18.000.000
           </div>
 
           <p>
-            Acquisition of the land and
-            physical hospitality
-            infrastructure only, excluding
-            brand, intellectual property,
-            digital assets and development
-            platform.
+            Aquisição do terreno e da infraestrutura física
+            hoteleira, excluídos marca, propriedade intelectual,
+            ativos digitais e plataforma de desenvolvimento.
           </p>
 
           <p>
-            <strong>Deposit:</strong> 20%
+            <strong>Sinal:</strong> 20%
           </p>
 
         </div>
@@ -666,24 +541,22 @@
         <div class="card">
 
           <h3>
-            D. Asset Acquisition + Brand License
+            D. Aquisição do Ativo + Licença da Marca
           </h3>
 
           <div class="value">
-            R$ 18,000,000 + License
+            R$ 18.000.000 + Licença
           </div>
 
           <p>
-            Acquisition of the physical asset
-            combined with a long-term
-            licensing arrangement for the
-            Casas da Vila brand, subject to
-            fixed fee, royalty or hybrid
-            structure.
+            Aquisição do ativo físico combinada com licença
+            de longo prazo para utilização da marca Casas da Vila,
+            sujeita a remuneração fixa, royalties ou estrutura
+            híbrida.
           </p>
 
           <p>
-            <strong>Deposit:</strong> 20%
+            <strong>Sinal:</strong> 20%
           </p>
 
         </div>
@@ -692,33 +565,28 @@
 
     </section>
 
-
-    <!-- ============================
-         CONFIDENTIAL INFORMATION
-         ============================ -->
 
     <section class="section">
 
       <div class="card">
 
         <h3>
-          Confidential Information
+          Informações Confidenciais
         </h3>
 
         <p>
-          Detailed operational, legal,
-          commercial and investment
-          information may be made available
-          after qualification of the
-          potential purchaser and execution
-          of a confidentiality agreement.
+          Informações operacionais, jurídicas, comerciais
+          e de investimento mais detalhadas poderão ser
+          disponibilizadas após a qualificação do potencial
+          adquirente e a formalização de compromisso de
+          confidencialidade.
         </p>
 
         <a
           class="btn"
-          href="/private/memorandum/"
+          href="/pt/private/memorandum/"
         >
-          Access Memorandum
+          Acessar Memorando
         </a>
 
       </div>
@@ -726,7 +594,6 @@
     </section>
 
   </main>
-
 
   <script src="/assets/js/site-analytics.js"></script>
 

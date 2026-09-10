@@ -261,6 +261,32 @@
   padding-left: 34px;
   opacity: .8;
 }
+.language-switch {
+  position: absolute;
+  top: 34px;
+  right: 8%;
+  z-index: 3;
+
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.language-switch a {
+  color: #f4efe7;
+  text-decoration: none;
+  opacity: .8;
+}
+
+.language-switch a:hover {
+  opacity: 1;
+}
+
+.language-switch span {
+  margin: 0 8px;
+  color: #d6bd8c;
+  opacity: .7;
+}
     @media (max-width: 800px) {
       .split {
         grid-template-columns: 1fr;
@@ -277,6 +303,10 @@
       .table {
         font-size: 14px;
       }
+      .language-switch {
+  top: 24px;
+  right: 6%;
+
     }
     #gate{
   position:fixed;
@@ -367,6 +397,25 @@
 
   cursor:pointer;
 }
+.language-switch {
+  position: absolute;
+  top: 34px;
+  right: 8%;
+  z-index: 3;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.language-switch a {
+  color: #f4efe7;
+  text-decoration: none;
+  opacity: .8;
+}
+
+.language-switch a:hover {
+  opacity: 1;
+}
   </style>
 
 <script>
@@ -451,19 +500,37 @@
     <button onclick="checkAccess()">Enter</button>
   </div>
 </div>
-  <header class="hero">
-    <div class="hero-inner">
-      <div class="eyebrow">Confidential Acquisition Memorandum</div>
-      <h1>Casas da Vila</h1>
-      <p>
-        A rare hospitality and real estate platform in Trancoso, Brazil,
-        combining an established boutique operation, substantial urban landholding,
-        brand equity and long-term development optionality.
-      </p>
-      <div class="confidential">Private & Confidential</div>
-    </div>
-  </header>
+<header class="hero">
 
+  <div class="language-switch">
+    <a href="/private/memorandum/">EN</a>
+    <span>•</span>
+    <a href="/pt/private/memorandum/">PT</a>
+  </div>
+
+  <div class="hero-inner">
+
+    <div class="eyebrow">
+      Confidential Acquisition Memorandum
+    </div>
+
+    <h1>
+      Casas da Vila
+    </h1>
+
+    <p>
+      A rare hospitality and real estate platform in Trancoso,
+      combining an established boutique operation, substantial
+      urban landholding, brand equity and long-term development optionality.
+    </p>
+
+    <div class="confidential">
+      Private & Confidential
+    </div>
+
+  </div>
+
+</header>
   <main>
 
     <section>

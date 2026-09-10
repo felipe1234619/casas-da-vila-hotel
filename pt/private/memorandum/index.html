@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="robots"
+    content="noindex,nofollow,noarchive"
+  />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    Casas da Vila | Memorando Confidencial de Aquisição
+  </title>
+
+
+  <style>
+
+    @media print {
+      body {
+        display: none !important;
+      }
+    }
+
+    :root {
+      --bg: #0f0f0d;
+      --panel: #181714;
+      --gold: #d6bd8c;
+      --text: #f4efe7;
+      --muted: #cfc4b4;
+      --line: rgba(255,255,255,.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    body::selection {
+      background: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      padding: 80px 8%;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+
+      background:
+        linear-gradient(
+          rgba(0,0,0,.45),
+          rgba(0,0,0,.90)
+        ),
+        url("/assets/img/aerial.png")
+        center / cover no-repeat;
+    }
+
+    .hero-inner {
+      max-width: 980px;
+    }
+
+    .language-switch {
+      position: absolute;
+      top: 34px;
+      right: 8%;
+      z-index: 3;
+
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .language-switch a {
+      opacity: .8;
+    }
+
+    .language-switch a:hover {
+      opacity: 1;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .2em;
+      font-size: 12px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(46px, 8vw, 96px);
+      line-height: .94;
+      margin: 0 0 28px;
+      font-weight: normal;
+    }
+
+    .hero p {
+      max-width: 760px;
+      font-size: 22px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .confidential {
+      margin-top: 36px;
+      display: inline-block;
+
+      border: 1px solid var(--gold);
+      color: var(--gold);
+
+      padding: 12px 18px;
+
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+
+
+    /* GENERAL */
+
+    main {
+      padding: 90px 8%;
+    }
+
+    section {
+      max-width: 1120px;
+      margin: 0 auto 110px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 58px);
+      font-weight: normal;
+      margin: 0 0 28px;
+    }
+
+    h3 {
+      color: var(--gold);
+      font-size: 24px;
+      font-weight: normal;
+      margin-top: 0;
+    }
+
+    p,
+    li {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.72;
+    }
+
+    .lead {
+      font-size: 23px;
+      max-width: 880px;
+    }
+
+    .grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(240px,1fr));
+
+      gap: 22px;
+      margin-top: 36px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 30px;
+      min-height: 220px;
+    }
+
+    .metric {
+      font-size: 42px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .small {
+      font-size: 14px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .image-box {
+      min-height: 420px;
+
+      background:
+        linear-gradient(
+          rgba(0,0,0,.1),
+          rgba(0,0,0,.35)
+        ),
+        url("/assets/img/casa-grande/casagrande8.jpeg")
+        center / cover no-repeat;
+
+      border: 1px solid var(--line);
+    }
+
+
+    /* PLATFORM */
+
+    .platform-flow {
+      max-width: 900px;
+      margin-top: 60px;
+    }
+
+    .platform-flow-item {
+      padding: 30px;
+      margin-bottom: 16px;
+
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 25px;
+
+      border: 1px solid var(--line);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(214,189,140,.07),
+          rgba(255,255,255,.02)
+        );
+    }
+
+    .platform-flow-index {
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: .16em;
+    }
+
+    .platform-flow-content small {
+      display: block;
+      margin-bottom: 14px;
+
+      color: var(--gold);
+
+      font-size: 9px;
+      letter-spacing: .17em;
+      text-transform: uppercase;
+    }
+
+    .platform-flow-content h3 {
+      color: var(--text);
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .platform-flow-content p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .platform-flow-arrow {
+      color: var(--gold);
+      font-size: 28px;
+      padding: 2px 0 18px 34px;
+    }
+
+
+    /* HISTORY */
+
+    .history-line {
+      margin-top: 70px;
+
+      border-left:
+        1px solid var(--gold);
+
+      padding-left: 54px;
+    }
+
+    .history-item {
+      position: relative;
+      padding-bottom: 72px;
+    }
+
+    .history-item::before {
+      content: "";
+
+      position: absolute;
+      left: -61px;
+      top: 10px;
+
+      width: 14px;
+      height: 14px;
+
+      border-radius: 50%;
+
+      background: var(--bg);
+
+      border:
+        2px solid var(--gold);
+    }
+
+    .history-year {
+      color: var(--gold);
+
+      font-size: 12px;
+      letter-spacing: .18em;
+
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .history-content h3 {
+      color: var(--text);
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+
+    /* REPLACEMENT */
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+    }
+
+    .comparison th,
+    .comparison td {
+      border-bottom:
+        1px solid var(--line);
+
+      padding: 20px 12px;
+      text-align: left;
+      vertical-align: top;
+
+      color: var(--muted);
+
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .comparison th {
+      color: var(--gold);
+
+      text-transform: uppercase;
+
+      letter-spacing: .12em;
+      font-size: 11px;
+      font-weight: normal;
+    }
+
+    .comparison td:first-child {
+      color: var(--text);
+    }
+
+
+    /* TRANSACTION TABLE */
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 28px;
+    }
+
+    .table th,
+    .table td {
+      border-bottom:
+        1px solid var(--line);
+
+      padding: 18px 10px;
+
+      text-align: left;
+      color: var(--muted);
+      vertical-align: top;
+
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .table th {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 12px;
+      font-weight: normal;
+    }
+
+    .value {
+      color: var(--text);
+      font-size: 22px;
+      white-space: nowrap;
+    }
+
+    .notice {
+      border: 1px solid var(--gold);
+      padding: 34px;
+      background: rgba(214,189,140,.06);
+    }
+
+    .cta {
+      background: var(--gold);
+      color: #111;
+
+      display: inline-block;
+
+      padding: 16px 26px;
+      margin-top: 28px;
+
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-size: 12px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+
+    /* GATE */
+
+    #gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+
+      background:
+        linear-gradient(
+          rgba(0,0,0,.70),
+          rgba(0,0,0,.82)
+        );
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      backdrop-filter: blur(8px);
+    }
+
+    .gate-box {
+      width: 420px;
+      max-width: 90%;
+
+      background:
+        rgba(15,15,15,.95);
+
+      border:
+        1px solid rgba(214,189,140,.35);
+
+      padding: 48px;
+      text-align: center;
+    }
+
+    .gate-label {
+      color: var(--gold);
+
+      text-transform: uppercase;
+      letter-spacing: .22em;
+
+      font-size: 11px;
+      margin-bottom: 20px;
+    }
+
+    .gate-box h1 {
+      font-size: 42px;
+      margin-bottom: 16px;
+    }
+
+    .gate-box p {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 26px;
+    }
+
+    .gate-box input {
+      width: 100%;
+
+      padding: 15px;
+      margin-bottom: 16px;
+
+      background: #1a1a1a;
+
+      border:
+        1px solid rgba(255,255,255,.15);
+
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .gate-box button {
+      width: 100%;
+      padding: 16px;
+
+      border: none;
+      background: var(--gold);
+
+      color: #111;
+
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+
+      cursor: pointer;
+    }
+
+
+    @media(max-width:800px) {
+
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 60px 6%;
+      }
+
+      main {
+        padding: 70px 6%;
+      }
+
+      .language-switch {
+        top: 24px;
+        right: 6%;
+      }
+
+      .platform-flow-item {
+        grid-template-columns: 1fr;
+      }
+
+      .history-line {
+        padding-left: 32px;
+      }
+
+      .history-item::before {
+        left: -39px;
+      }
+
+      .history-content h3 {
+        font-size: 30px;
+      }
+
+      .comparison {
+        display: block;
+        overflow-x: auto;
+      }
+
+    }
+
+  </style>
+
+
+  <script>
+
+    const ACCESS_PASSWORD = "2027";
+
+    function checkAccess() {
+
+      const value =
+        document.getElementById("accessCode").value;
+
+      if (value === ACCESS_PASSWORD) {
+
+        sessionStorage.setItem(
+          "cdv_private_access",
+          "true"
+        );
+
+        document.getElementById("gate")
+          .style.display = "none";
+
+      } else {
+
+        alert("Código de acesso inválido.");
+
+      }
+
+    }
+
+
+    window.addEventListener(
+      "load",
+      () => {
+
+        const granted =
+          sessionStorage.getItem(
+            "cdv_private_access"
+          );
+
+        if (granted) {
+          document.getElementById("gate")
+            .style.display = "none";
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "contextmenu",
+      e => e.preventDefault()
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      e => {
+
+        const key =
+          e.key.toLowerCase();
+
+        if (
+          (e.ctrlKey || e.metaKey) &&
+          ["p","s","u"].includes(key)
+        ) {
+
+          e.preventDefault();
+
+          alert(
+            "Este memorando confidencial não pode ser impresso, salvo ou inspecionado a partir desta página."
+          );
+
+        }
+
+      }
+    );
+
+  </script>
+
+</head>
+
+
+<body>
+
+
+  <div id="gate">
+
+    <form
+      class="gate-box"
+      onsubmit="event.preventDefault(); checkAccess();"
+    >
+
+      <div class="gate-label">
+        Acesso Confidencial
+      </div>
+
+      <h1>
+        Casas da Vila
+      </h1>
+
+      <p>
+        Informações confidenciais destinadas
+        exclusivamente a investidores qualificados,
+        operadores hoteleiros e parceiros estratégicos.
+      </p>
+
+      <input
+        type="password"
+        id="accessCode"
+        placeholder="Código de Acesso"
+        autocomplete="off"
+        required
+      >
+
+      <button type="submit">
+        Entrar
+      </button>
+
+    </form>
+
+  </div>
+
+
+
+  <header class="hero">
+
+    <div class="language-switch">
+      <a href="/private/memorandum/">EN</a>
+    </div>
+
+    <div class="hero-inner">
+
+      <div class="eyebrow">
+        Memorando Confidencial de Aquisição
+      </div>
+
+      <h1>
+        Casas da Vila
+      </h1>
+
+      <p>
+        Uma plataforma hoteleira e imobiliária singular
+        em Trancoso, reunindo uma operação boutique
+        consolidada, expressiva área urbana, valor de marca
+        e opcionalidade de desenvolvimento de longo prazo.
+      </p>
+
+      <div class="confidential">
+        Privado & Confidencial
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <main>
+
+
+    <!-- CAPÍTULO I -->
+
+    <section>
+
+      <div class="eyebrow">
+        Capítulo I
+      </div>
+
+      <h2>
+        A Oportunidade
+      </h2>
+
+      <p class="lead">
+        Uma plataforma hoteleira consolidada situada na
+        convergência entre continuidade operacional,
+        escassez de terrenos urbanos, valor de marca
+        e opcionalidade estratégica de longo prazo.
+      </p>
+
+      <div class="notice">
+
+        <div class="eyebrow">
+          A tese central
+        </div>
+
+        <p class="lead">
+          Seu valor decorre do fato de ter se transformado
+          em uma plataforma que exigiria de outro proprietário
+          muitos anos para ser recriada.
+        </p>
+
+      </div>
+
+
+      <p>
+        Desenvolvida ao longo de mais de quinze anos em
+        Trancoso, Casas da Vila reúne uma expressiva área
+        urbana, oito casas independentes, paisagismo tropical
+        maduro, infraestrutura operacional e uma identidade
+        hoteleira consolidada.
+      </p>
+
+      <p>
+        A oportunidade pode ir além do imóvel físico,
+        abrangendo propriedade intelectual, capacidade
+        de reservas diretas, distribuição digital,
+        inteligência comercial, know-how operacional
+        e a plataforma de desenvolvimento Casas da Vila Homes.
+      </p>
+
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>I. Continuidade Operacional</h3>
+
+          <p>
+            Uma plataforma hoteleira em funcionamento,
+            capaz de manter suas operações sem o período
+            de implantação associado a um projeto
+            desenvolvido do zero.
+          </p>
+        </div>
+
+
+        <div class="card">
+          <h3>II. Escassez Incorporada</h3>
+
+          <p>
+            Aproximadamente 4.423 m² de área urbana em
+            região consolidada de Trancoso, onde terrenos
+            com escala comparável e flexibilidade estratégica
+            são cada vez mais difíceis de reunir.
+          </p>
+        </div>
+
+
+        <div class="card">
+          <h3>III. Capacidades Acumuladas</h3>
+
+          <p>
+            Reconhecimento de marca, relacionamento com
+            hóspedes, sistemas comerciais, canais digitais
+            e conhecimento operacional desenvolvidos
+            gradualmente ao longo do tempo.
+          </p>
+        </div>
+
+
+        <div class="card">
+          <h3>IV. Múltiplos Futuros</h3>
+
+          <p>
+            A plataforma pode sustentar a continuidade
+            da operação hoteleira, reposicionamento,
+            desenvolvimento residencial ou uma estrutura
+            separada de licenciamento da marca.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="grid">
+
+        <div class="card">
+          <div class="metric">15+</div>
+          <div class="small">Anos de Operação</div>
+        </div>
+
+        <div class="card">
+          <div class="metric">4.423 m²</div>
+          <div class="small">Área Urbana</div>
+        </div>
+
+        <div class="card">
+          <div class="metric">8</div>
+          <div class="small">Casas Independentes</div>
+        </div>
+
+        <div class="card">
+          <div class="metric">4</div>
+          <div class="small">Estruturas de Aquisição</div>
+        </div>
+
+      </div>
+
+
+      <p class="lead">
+        A oportunidade representa, portanto, mais do que
+        a transferência de um imóvel hoteleiro.
+      </p>
+
+      <h2>
+        Representa a transferência de tempo acumulado,
+        capacidade operacional e liberdade estratégica futura.
+      </h2>
+
+    </section>
+
+
+
+    <!-- RESUMO EXECUTIVO -->
+
+    <section>
+
+      <div class="eyebrow">
+        Resumo Executivo
+      </div>
+
+      <h2>
+        Uma oportunidade singular de aquisição em Trancoso.
+      </h2>
+
+      <p class="lead">
+        Casas da Vila representa a oportunidade de adquirir
+        um ativo hoteleiro reconhecido, localizado em um dos
+        destinos de lifestyle mais desejados do Brasil.
+        A propriedade combina mais de quinze anos de histórico
+        operacional com uma expressiva área urbana e múltiplos
+        caminhos estratégicos para criação futura de valor.
+      </p>
+
+      <div class="grid">
+
+        <div class="card">
+          <div class="metric">
+            15+
+          </div>
+
+          <div class="small">
+            Anos de Operação
+          </div>
+
+          <p>
+            Presença hoteleira boutique consolidada
+            em Trancoso.
+          </p>
+        </div>
+
+
+        <div class="card">
+
+          <div class="metric">
+            4.423 m²
+          </div>
+
+          <div class="small">
+            Área Urbana
+          </div>
+
+          <p>
+            Escala territorial rara em área residencial
+            consolidada próxima ao Quadrado.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="metric">
+            8
+          </div>
+
+          <div class="small">
+            Casas
+          </div>
+
+          <p>
+            Unidades hoteleiras independentes apoiadas
+            por infraestrutura compartilhada e jardins.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="metric">
+            4
+          </div>
+
+          <div class="small">
+            Estruturas de Transação
+          </div>
+
+          <p>
+            Alternativas flexíveis para investidores,
+            operadores e family offices.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- CAPÍTULO II -->
+
+    <section>
+
+      <div class="eyebrow">
+        Capítulo II
+      </div>
+
+      <h2>
+        A Plataforma
+      </h2>
+
+      <p class="lead">
+        Casas da Vila reúne ativos físicos, capacidades
+        operacionais, propriedade intelectual,
+        infraestrutura comercial e opcionalidade futura
+        de desenvolvimento em um único ecossistema integrado.
+      </p>
+
+
+      <div class="notice">
+
+        <div class="eyebrow">
+          Lógica da Plataforma
+        </div>
+
+        <p class="lead">
+          O imóvel físico é apenas a fundação.
+          O valor mais amplo reside em tudo aquilo
+          que foi desenvolvido ao seu redor.
+        </p>
+
+      </div>
+
+
+      <p>
+        Uma transação imobiliária convencional transfere
+        terreno e edificações. O Projeto Vila pode
+        transferir uma plataforma substancialmente mais ampla.
+      </p>
+
+      <p>
+        Dependendo da estrutura de aquisição escolhida,
+        essa plataforma poderá incluir a operação hoteleira,
+        a marca Casas da Vila, capacidade de reservas diretas,
+        distribuição internacional, dashboards,
+        inteligência comercial e a oportunidade de
+        desenvolvimento Casas da Vila Homes.
+      </p>
+
+
+      <div class="platform-flow">
+
+        <div class="platform-flow-item">
+
+          <span class="platform-flow-index">
+            01
+          </span>
+
+          <div class="platform-flow-content">
+
+            <small>
+              Fundação
+            </small>
+
+            <h3>
+              Terreno Urbano
+            </h3>
+
+            <p>
+              Aproximadamente 4.423 m² em área residencial
+              consolidada de Trancoso.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="platform-flow-arrow">
+          ↓
+        </div>
+
+
+        <div class="platform-flow-item">
+
+          <span class="platform-flow-index">
+            02
+          </span>
+
+          <div class="platform-flow-content">
+
+            <small>
+              Infraestrutura Física
+            </small>
+
+            <h3>
+              Ativo Hoteleiro
+            </h3>
+
+            <p>
+              Oito casas independentes, piscina, recepção,
+              áreas de apoio, jardins e infraestrutura
+              operacional.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="platform-flow-arrow">
+          ↓
+        </div>
+
+
+        <div class="platform-flow-item">
+
+          <span class="platform-flow-index">
+            03
+          </span>
+
+          <div class="platform-flow-content">
+
+            <small>
+              Capacidade Operacional
+            </small>
+
+            <h3>
+              Negócio Consolidado
+            </h3>
+
+            <p>
+              Mais de quinze anos de histórico operacional,
+              processos hoteleiros, relacionamento com hóspedes
+              e know-how acumulado.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="platform-flow-arrow">
+          ↓
+        </div>
+
+
+        <div class="platform-flow-item">
+
+          <span class="platform-flow-index">
+            04
+          </span>
+
+          <div class="platform-flow-content">
+
+            <small>
+              Propriedade Intelectual
+            </small>
+
+            <h3>
+              Valor de Marca
+            </h3>
+
+            <p>
+              O nome Casas da Vila, sua reputação,
+              presença digital e potencial de transferência
+              ou licenciamento de longo prazo.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="platform-flow-arrow">
+          ↓
+        </div>
+
+
+        <div class="platform-flow-item">
+
+          <span class="platform-flow-index">
+            05
+          </span>
+
+          <div class="platform-flow-content">
+
+            <small>
+              Tecnologia & Inteligência
+            </small>
+
+            <h3>
+              Infraestrutura Digital
+            </h3>
+
+            <p>
+              Ferramentas de reserva direta, analytics
+              comerciais, dashboards, canais de distribuição
+              e inteligência operacional.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="platform-flow-arrow">
+          ↓
+        </div>
+
+
+        <div class="platform-flow-item">
+
+          <span class="platform-flow-index">
+            06
+          </span>
+
+          <div class="platform-flow-content">
+
+            <small>
+              Opcionalidade Futura
+            </small>
+
+            <h3>
+              Casas da Vila Homes
+            </h3>
+
+            <p>
+              Plataforma complementar de desenvolvimento
+              residencial e hoteleiro com marca, incluída
+              exclusivamente na aquisição integral do
+              ecossistema.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- O ATIVO -->
+
+    <section class="split">
+
+      <div>
+
+        <div class="eyebrow">
+          O Ativo
+        </div>
+
+        <h2>
+          Hotelaria, terreno e opcionalidade.
+        </h2>
+
+        <p>
+          A propriedade ocupa aproximadamente 4.423 m²
+          de área urbana em Trancoso, com infraestrutura
+          hoteleira desenvolvida ao longo de mais de uma década.
+        </p>
+
+        <p>
+          O ativo inclui casas independentes, recepção,
+          áreas de apoio, piscina, jardins tropicais,
+          infraestrutura operacional e canais digitais
+          de distribuição.
+        </p>
+
+      </div>
+
+      <div class="image-box"></div>
+
+    </section>
+
+
+
+    <!-- CAPÍTULO III -->
+
+    <section>
+
+      <div class="eyebrow">
+        Capítulo III
+      </div>
+
+      <h2>
+        Histórico Operacional
+      </h2>
+
+      <p class="lead">
+        O valor de Casas da Vila foi acumulado progressivamente
+        por meio da experiência operacional, e não construído
+        em um único momento.
+      </p>
+
+
+      <div class="history-line">
+
+
+        <div class="history-item">
+
+          <div class="history-year">
+            2009
+          </div>
+
+          <div class="history-content">
+
+            <h3>
+              Fundação
+            </h3>
+
+            <p>
+              Casas da Vila inicia suas operações em Trancoso
+              com base em casas independentes de hospedagem
+              integradas ao paisagismo tropical.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="history-item">
+
+          <div class="history-year">
+            2010–2015
+          </div>
+
+          <div class="history-content">
+
+            <h3>
+              Consolidação Operacional
+            </h3>
+
+            <p>
+              A experiência dos hóspedes, as rotinas
+              operacionais e a identidade comercial
+              consolidam-se através da operação contínua.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="history-item">
+
+          <div class="history-year">
+            2016–2022
+          </div>
+
+          <div class="history-content">
+
+            <h3>
+              Desenvolvimento da Marca
+            </h3>
+
+            <p>
+              O reconhecimento se expande por meio
+              de hóspedes internacionais, canais digitais
+              e clientela recorrente.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="history-item">
+
+          <div class="history-year">
+            2023–2026
+          </div>
+
+          <div class="history-content">
+
+            <h3>
+              Infraestrutura Digital
+            </h3>
+
+            <p>
+              Inteligência de reservas, dashboards operacionais,
+              analytics e ferramentas comerciais passam a
+              integrar a plataforma operacional.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="history-item">
+
+          <div class="history-year">
+            2026
+          </div>
+
+          <div class="history-content">
+
+            <h3>
+              Projeto Vila
+            </h3>
+
+            <p>
+              A plataforma alcança nível de maturidade
+              que permite avaliar seu desenvolvimento futuro
+              no contexto de um processo controlado
+              de aquisição.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="notice">
+
+        <p>
+          Cada ano representado acima acrescentou capacidades
+          que não podem ser recriadas imediatamente por um
+          novo projeto hoteleiro.
+        </p>
+
+        <h2>
+          O tempo tornou-se um dos ativos mais valiosos
+          da plataforma.
+        </h2>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- CAPÍTULO IV -->
+
+    <section>
+
+      <div class="eyebrow">
+        Capítulo IV
+      </div>
+
+      <h2>
+        Custo de Reposição
+      </h2>
+
+      <p class="lead">
+        A questão relevante não é apenas quanto custaria
+        construir hoje edificações comparáveis.
+        É saber se a plataforma completa poderia ser
+        recriada dentro de um período razoável.
+      </p>
+
+
+      <div class="notice">
+
+        <div class="eyebrow">
+          Princípio Subjacente
+        </div>
+
+        <h2>
+          Capital pode ser reposto.
+          Tempo acumulado, não.
+        </h2>
+
+      </div>
+
+
+      <p>
+        Uma análise convencional de custo de reposição
+        mensura terreno, construção e equipamentos.
+      </p>
+
+      <p>
+        O Projeto Vila exige análise mais ampla porque
+        vários de seus componentes mais valiosos foram
+        acumulados progressivamente: maturidade do paisagismo,
+        reputação, relacionamento com hóspedes, conhecimento
+        operacional, sistemas comerciais e reconhecimento
+        da marca.
+      </p>
+
+
+      <table class="comparison">
+
+        <thead>
+
+          <tr>
+            <th>Componente</th>
+            <th>Adquirido Hoje</th>
+            <th>Recriado do Zero</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr>
+            <td>
+              01. Área Urbana
+            </td>
+
+            <td>
+              Aproximadamente 4.423 m² em área consolidada
+              de Trancoso, incluídos conforme a estrutura
+              de aquisição escolhida.
+            </td>
+
+            <td>
+              Incerto. Escala e localização comparáveis
+              podem simplesmente não estar disponíveis.
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              02. Paisagismo Maduro
+            </td>
+
+            <td>
+              Jardins tropicais estabelecidos e integrados
+              ao ambiente hoteleiro.
+            </td>
+
+            <td>
+              10–15 anos. A maturidade biológica não pode
+              ser materialmente acelerada.
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              03. Histórico Operacional
+            </td>
+
+            <td>
+              Mais de quinze anos de atividade hoteleira
+              contínua.
+            </td>
+
+            <td>
+              15+ anos. Histórico operacional não pode
+              ser adquirido retroativamente.
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              04. Reputação da Marca
+            </td>
+
+            <td>
+              Reconhecimento, posicionamento e identidade
+              hoteleira desenvolvidos em torno da marca
+              Casas da Vila.
+            </td>
+
+            <td>
+              Muitos anos. Reputação depende de entrega
+              reiterada e memória do mercado.
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              05. Relacionamento com Hóspedes
+            </td>
+
+            <td>
+              Clientela recorrente, familiaridade comercial
+              e confiança acumulada.
+            </td>
+
+            <td>
+              Progressivo. Relacionamentos precisam
+              ser conquistados ao longo de interações
+              repetidas.
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              06. Infraestrutura de Reservas
+            </td>
+
+            <td>
+              Ferramentas de reservas diretas,
+              distribuição digital e processos
+              comerciais de suporte.
+            </td>
+
+            <td>
+              Vários anos. A tecnologia isoladamente
+              não recria o desempenho dos canais.
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              07. Inteligência Comercial
+            </td>
+
+            <td>
+              Dashboards, analytics, sinais operacionais
+              e infraestrutura decisória acumulada.
+            </td>
+
+            <td>
+              Vários anos. Inteligência útil exige
+              sistemas e dados históricos.
+            </td>
+          </tr>
+
+
+          <tr>
+            <td>
+              08. Plataforma de Desenvolvimento
+            </td>
+
+            <td>
+              Casas da Vila Homes e seu potencial
+              estratégico complementar.
+            </td>
+
+            <td>
+              Novo ciclo de desenvolvimento.
+              Conceito, projeto, aprovações e posicionamento
+              precisam ser reconstruídos.
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+
+      <div class="notice">
+
+        <div class="eyebrow">
+          Análise de Reposição
+        </div>
+
+        <p>
+          O valor de reposição do Projeto Vila não pode
+          ser compreendido exclusivamente pelo custo
+          do terreno e das construções.
+        </p>
+
+        <h2>
+          A transação transfere tempo acumulado.
+        </h2>
+
+        <p>
+          Um novo proprietário poderia construir edificações,
+          criar sistemas e lançar uma marca hoteleira.
+        </p>
+
+        <p>
+          O que não pode ser recriado imediatamente é
+          a combinação de terreno, maturidade, reputação,
+          memória operacional e opcionalidade estratégica
+          já reunidas dentro da plataforma.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- CAPÍTULO V -->
+
+    <section>
+
+      <div class="eyebrow">
+        Capítulo V
+      </div>
+
+      <h2>
+        Opcionalidade Estratégica
+      </h2>
+
+      <p class="lead">
+        O Projeto Vila não depende de uma única tese
+        operacional. Seu valor também deriva da capacidade
+        de um futuro proprietário escolher entre diversos
+        caminhos estratégicos plausíveis.
+      </p>
+
+
+      <div class="notice">
+
+        <div class="eyebrow">
+          Princípio Estratégico
+        </div>
+
+        <h2>
+          A opcionalidade preserva valor enquanto
+          as prioridades do proprietário evoluem.
+        </h2>
+
+      </div>
+
+
+      <p>
+        A operação hoteleira existente proporciona
+        continuidade imediata. O ativo imobiliário,
+        a marca, a infraestrutura comercial e a plataforma
+        de desenvolvimento criam alternativas adicionais.
+      </p>
+
+      <p>
+        Um futuro proprietário pode preservar o modelo
+        atual, reposicionar a operação, buscar desenvolvimento
+        futuro ou separar a propriedade do ativo físico
+        da utilização da marca Casas da Vila.
+      </p>
+
+
+      <div class="grid">
+
+        <div class="card">
+
+          <div class="small">
+            01 · Continuidade Operacional
+          </div>
+
+          <h3>
+            Continuar
+          </h3>
+
+          <p>
+            Preservar o modelo atual de hospedagem em
+            casas independentes, mantendo sua privacidade,
+            caráter, histórico operacional e posição
+            de mercado estabelecida.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="small">
+            02 · Evolução Hoteleira
+          </div>
+
+          <h3>
+            Reposicionar
+          </h3>
+
+          <p>
+            Aprimorar a plataforma através de design,
+            wellness, gastronomia, experiências selecionadas
+            ou posicionamento hoteleiro internacional
+            de maior rendimento.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="small">
+            03 · Estratégia de Desenvolvimento
+          </div>
+
+          <h3>
+            Desenvolver
+          </h3>
+
+          <p>
+            Avaliar estratégias futuras de residências
+            com marca, hotelaria ou uso misto por meio
+            da plataforma Casas da Vila Homes,
+            sujeitas às aprovações aplicáveis.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="small">
+            04 · Propriedade Intelectual
+          </div>
+
+          <h3>
+            Licenciar
+          </h3>
+
+          <p>
+            Adquirir o ativo hoteleiro físico e utilizar
+            a marca Casas da Vila e determinados sistemas
+            comerciais através de contrato de licença
+            de longo prazo negociado separadamente.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="notice">
+
+        <div class="eyebrow">
+          Consequência Estratégica
+        </div>
+
+        <p>
+          Os quatro caminhos não são necessariamente
+          excludentes.
+        </p>
+
+        <p>
+          Um futuro proprietário pode operar a plataforma
+          hoje enquanto preserva o direito de reposicioná-la,
+          desenvolvê-la ou reestruturá-la amanhã.
+        </p>
+
+        <p>
+          A opcionalidade reduz a dependência de um único
+          modelo de negócios e permite que a estratégia
+          patrimonial evolua ao longo do tempo.
+        </p>
+
+        <h2>
+          O comprador não está escolhendo apenas um ativo.
+          Está adquirindo liberdade estratégica.
+        </h2>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- INVESTMENT HIGHLIGHTS -->
+
+    <section>
+
+      <div class="eyebrow">
+        Destaques do Investimento
+      </div>
+
+      <h2>
+        Por que esta oportunidade é difícil de replicar.
+      </h2>
+
+
+      <div class="grid">
+
+        <div class="card">
+
+          <h3>
+            Operação Consolidada
+          </h3>
+
+          <p>
+            Casas da Vila não é um projeto greenfield.
+            É um ativo hoteleiro em operação, com histórico,
+            sistemas e presença de mercado.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>
+            Posição Fundiária Escassa
+          </h3>
+
+          <p>
+            Grandes áreas urbanas em Trancoso com utilização
+            hoteleira existente e paisagismo maduro são
+            cada vez mais raras.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>
+            Valor de Marca
+          </h3>
+
+          <p>
+            O nome Casas da Vila reúne reconhecimento,
+            memória operacional, relacionamento com hóspedes
+            e potencial futuro de licenciamento.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>
+            Desenvolvimento Futuro
+          </h3>
+
+          <p>
+            O ativo pode sustentar continuidade hoteleira,
+            reposicionamento, expansão ou futuras estratégias
+            de hospitalidade residencial.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- BRAND -->
+
+    <section>
+
+      <div class="eyebrow">
+        Marca Casas da Vila
+      </div>
+
+      <h2>
+        Um ativo intangível construído ao longo do tempo.
+      </h2>
+
+      <p class="lead">
+        A marca Casas da Vila não é simplesmente um nome
+        comercial associado ao hotel. Ela reflete histórico
+        operacional, reputação hoteleira, presença digital,
+        relacionamento com hóspedes, canais de reservas,
+        inteligência comercial e opcionalidade futura
+        de licenciamento.
+      </p>
+
+
+      <div class="notice">
+
+        <p>
+          Dependendo da estrutura de aquisição,
+          a marca poderá ser transferida, licenciada
+          através de contrato de longo prazo ou excluída
+          da transação.
+        </p>
+
+        <p>
+          Essa flexibilidade permite acomodar diferentes
+          perfis de compradores sem diluir o valor
+          estratégico da propriedade intelectual.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- TRANSACTION STRUCTURES -->
+
+    <section>
+
+      <div class="eyebrow">
+        Estruturas da Transação
+      </div>
+
+      <h2>
+        Estruturas indicativas para discussão.
+      </h2>
+
+      <p>
+        As alternativas abaixo são apresentadas apenas
+        para fins de discussão e permanecem sujeitas
+        a due diligence, documentação definitiva,
+        estruturação tributária e aprovação mútua.
+      </p>
+
+
+      <table class="table">
+
+        <thead>
+
+          <tr>
+            <th>Estrutura</th>
+            <th>Escopo</th>
+            <th>Valor Indicativo</th>
+            <th>Sinal</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          <tr>
+
+            <td>
+              A. Aquisição Integral da Plataforma
+            </td>
+
+            <td>
+              Aquisição da Jujubi, incluindo hotel,
+              terreno, marca, ativos digitais,
+              sistemas de reservas, inteligência operacional,
+              dashboards e plataforma Casas da Vila Homes.
+            </td>
+
+            <td class="value">
+              R$ 21M
+            </td>
+
+            <td>
+              20%
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              B. Plataforma Hoteleira Operacional
+            </td>
+
+            <td>
+              Infraestrutura hoteleira, terreno,
+              marca Casas da Vila, canais digitais,
+              ferramentas de reserva e know-how operacional,
+              excluído o projeto imobiliário.
+            </td>
+
+            <td class="value">
+              R$ 20M
+            </td>
+
+            <td>
+              20%
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              C. Imóvel e Infraestrutura
+            </td>
+
+            <td>
+              Terreno e infraestrutura física hoteleira,
+              excluídos marca, propriedade intelectual,
+              ativos digitais e plataforma de desenvolvimento.
+            </td>
+
+            <td class="value">
+              R$ 18M
+            </td>
+
+            <td>
+              20%
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              D. Aquisição do Ativo + Licença da Marca
+            </td>
+
+            <td>
+              Aquisição do ativo físico combinada
+              com contrato de licença de longo prazo
+              para utilização da marca Casas da Vila,
+              sujeito a remuneração fixa, royalties
+              ou estrutura híbrida.
+            </td>
+
+            <td class="value">
+              R$ 18M + Licença
+            </td>
+
+            <td>
+              20%
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </section>
+
+
+
+    <!-- PROCESS -->
+
+    <section>
+
+      <div class="eyebrow">
+        Processo Indicativo
+      </div>
+
+      <h2>
+        Acesso controlado e due diligence por etapas.
+      </h2>
+
+
+      <div class="grid">
+
+        <div class="card">
+
+          <div class="small">
+            Etapa 1
+          </div>
+
+          <h3>
+            Qualificação
+          </h3>
+
+          <p>
+            Qualificação inicial do potencial comprador
+            ou representante do investidor.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="small">
+            Etapa 2
+          </div>
+
+          <h3>
+            Confidencialidade
+          </h3>
+
+          <p>
+            Assinatura de compromisso de confidencialidade
+            ou NDA antes da divulgação de informações sensíveis.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="small">
+            Etapa 3
+          </div>
+
+          <h3>
+            Análise Inicial
+          </h3>
+
+          <p>
+            Conversa com a administração, due diligence
+            preliminar e acesso a materiais selecionados.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="small">
+            Etapa 4
+          </div>
+
+          <h3>
+            Proposta
+          </h3>
+
+          <p>
+            Proposta indicativa, due diligence,
+            estruturação da transação e instrumentos
+            definitivos.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- NEXT STEP -->
+
+    <section>
+
+      <div class="notice">
+
+        <div class="eyebrow">
+          Próximo Passo
+        </div>
+
+        <h2>
+          Solicitar acesso a informações adicionais.
+        </h2>
+
+        <p>
+          Materiais adicionais, incluindo documentação
+          jurídica, operacional, de marca e imobiliária,
+          poderão ser disponibilizados a partes qualificadas
+          mediante os procedimentos adequados
+          de confidencialidade.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- DISCLAIMER -->
+
+    <section>
+
+      <div class="footer">
+
+        <p>
+          Este Memorando Confidencial de Aquisição
+          é disponibilizado exclusivamente para fins
+          de discussão preliminar.
+        </p>
+
+        <p>
+          Não constitui oferta, solicitação,
+          compromisso vinculante ou declaração quanto
+          aos termos finais de qualquer transação.
+          Qualquer operação permanece sujeita a
+          due diligence, contratos definitivos
+          e análises jurídicas, tributárias e societárias.
+        </p>
+
+        <p>
+          Casas da Vila • Trancoso • Bahia • Brasil
+        </p>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <script src="/assets/js/site-analytics.js"></script>
+
+</body>
+
+</html>
