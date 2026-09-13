@@ -1,119 +1,179 @@
 (function () {
-  const STORAGE = {
-    visitorId: "cdv_visitor_id",
-    visitCount: "cdv_visit_count",
-    sessionId: "cdv_session_id",
-    sessionInitialized: "cdv_session_initialized",
-    sessionLandingPage: "cdv_session_landing_page",
-    sessionStartedAt: "cdv_session_started_at",
-    sessionUtm: "cdv_session_utm"
+const SESSION_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutos
+
+const STORAGE = {
+  visitorId: "cdv_visitor_id",
+  visitCount: "cdv_visit_count",
+
+  sessionId: "cdv_session_id",
+  sessionLandingPage: "cdv_session_landing_page",
+  sessionStartedAt: "cdv_session_started_at",
+  sessionLastActivity: "cdv_session_last_activity",
+  sessionFirstPageRecorded: "cdv_session_first_page_recorded",
+
+  sessionUtm: "cdv_session_utm"
+};
+
+function createId() {
+  return typeof crypto !== "undefined" && crypto.randomUUID
+    ? crypto.randomUUID()
+    : String(Date.now()) + Math.random().toString(16).slice(2);
+}
+
+function getVisitorId() {
+  let value = localStorage.getItem(STORAGE.visitorId);
+
+  if (!value) {
+    value = createId();
+    localStorage.setItem(STORAGE.visitorId, value);
+  }
+
+  return value;
+}
+
+function getVisitNumber() {
+  return Number(
+    localStorage.getItem(STORAGE.visitCount) || 0
+  );
+}
+
+function sessionHasExpired() {
+  const lastActivity = Number(
+    localStorage.getItem(STORAGE.sessionLastActivity) || 0
+  );
+
+  if (!lastActivity) {
+    return true;
+  }
+
+  return Date.now() - lastActivity > SESSION_TIMEOUT_MS;
+}
+
+function createNewSession() {
+  const sessionId = createId();
+
+  const previousVisits = Number(
+    localStorage.getItem(STORAGE.visitCount) || 0
+  );
+
+  const visitNumber = previousVisits + 1;
+
+  localStorage.setItem(
+    STORAGE.visitCount,
+    String(visitNumber)
+  );
+
+  localStorage.setItem(
+    STORAGE.sessionId,
+    sessionId
+  );
+
+  localStorage.setItem(
+    STORAGE.sessionLandingPage,
+    window.location.pathname
+  );
+
+  localStorage.setItem(
+    STORAGE.sessionStartedAt,
+    new Date().toISOString()
+  );
+
+  localStorage.setItem(
+    STORAGE.sessionLastActivity,
+    String(Date.now())
+  );
+
+  localStorage.removeItem(
+    STORAGE.sessionFirstPageRecorded
+  );
+
+  /*
+    A nova sessão também deve começar com
+    sua própria atribuição UTM.
+  */
+  localStorage.removeItem(
+    STORAGE.sessionUtm
+  );
+
+  return {
+    sessionId,
+    visitNumber,
+    isNewSession: true
   };
+}
 
-  function createId() {
-    return typeof crypto !== "undefined" && crypto.randomUUID
-      ? crypto.randomUUID()
-      : String(Date.now()) + Math.random().toString(16).slice(2);
+function ensureSession() {
+  const existingSessionId =
+    localStorage.getItem(STORAGE.sessionId);
+
+  if (
+    !existingSessionId ||
+    sessionHasExpired()
+  ) {
+    return createNewSession();
   }
 
-  function getOrCreateId(key, storage) {
-    let value = storage.getItem(key);
-
-    if (!value) {
-      value = createId();
-      storage.setItem(key, value);
-    }
-
-    return value;
-  }
-
-  function getVisitorId() {
-    return getOrCreateId(STORAGE.visitorId, localStorage);
-  }
-
-  function getSessionId() {
-    return getOrCreateId(STORAGE.sessionId, sessionStorage);
-  }
-
-  function initializeSession() {
-    const alreadyInitialized =
-      sessionStorage.getItem(STORAGE.sessionInitialized) === "true";
-
-    if (alreadyInitialized) {
-      return {
-        isNewSession: false,
-        visitNumber: Number(
-          localStorage.getItem(STORAGE.visitCount) || 1
-        )
-      };
-    }
-
-    const previousVisits = Number(
-      localStorage.getItem(STORAGE.visitCount) || 0
-    );
-
-    const visitNumber = previousVisits + 1;
-
-    localStorage.setItem(
-      STORAGE.visitCount,
-      String(visitNumber)
-    );
-
-    sessionStorage.setItem(
-      STORAGE.sessionInitialized,
-      "true"
-    );
-
-    sessionStorage.setItem(
-      STORAGE.sessionLandingPage,
-      window.location.pathname
-    );
-
-    sessionStorage.setItem(
-      STORAGE.sessionStartedAt,
-      new Date().toISOString()
-    );
-
-    return {
-      isNewSession: true,
-      visitNumber
-    };
-  }
-
-  const sessionState = initializeSession();
-
-  function getVisitNumber() {
-    return Number(
+  return {
+    sessionId: existingSessionId,
+    visitNumber: Number(
       localStorage.getItem(STORAGE.visitCount) || 1
+    ),
+    isNewSession: false
+  };
+}
+
+function getSessionId() {
+  return ensureSession().sessionId;
+}
+
+function getLandingPage() {
+  ensureSession();
+
+  return (
+    localStorage.getItem(
+      STORAGE.sessionLandingPage
+    ) || window.location.pathname
+  );
+}
+
+function getSessionStartedAt() {
+  ensureSession();
+
+  return (
+    localStorage.getItem(
+      STORAGE.sessionStartedAt
+    ) || new Date().toISOString()
+  );
+}
+
+function isReturningVisitor() {
+  return getVisitNumber() > 1;
+}
+
+function isFirstPageOfSession() {
+  const sessionId = getSessionId();
+
+  const recordedSession =
+    localStorage.getItem(
+      STORAGE.sessionFirstPageRecorded
     );
-  }
 
-  function isReturningVisitor() {
-    return getVisitNumber() > 1;
-  }
+  return recordedSession !== sessionId;
+}
 
-  function getLandingPage() {
-    return (
-      sessionStorage.getItem(
-        STORAGE.sessionLandingPage
-      ) || window.location.pathname
-    );
-  }
+function markFirstPageRecorded() {
+  localStorage.setItem(
+    STORAGE.sessionFirstPageRecorded,
+    getSessionId()
+  );
+}
 
-  function getSessionStartedAt() {
-    return (
-      sessionStorage.getItem(
-        STORAGE.sessionStartedAt
-      ) || new Date().toISOString()
-    );
-  }
-
-  function isFirstPageOfSession() {
-    return (
-      sessionState.isNewSession === true &&
-      window.location.pathname === getLandingPage()
-    );
-  }
-
+function touchSession() {
+  localStorage.setItem(
+    STORAGE.sessionLastActivity,
+    String(Date.now())
+  );
+}
   function getCurrentUtm() {
     const params = new URLSearchParams(
       window.location.search
@@ -130,17 +190,17 @@
     const hasUtm = Object.values(utm).some(Boolean);
 
     if (hasUtm) {
-      sessionStorage.setItem(
-        STORAGE.sessionUtm,
-        JSON.stringify(utm)
+localStorage.setItem(
+  STORAGE.sessionUtm,
+          JSON.stringify(utm)
       );
 
       return utm;
     }
 
     try {
-      const stored = sessionStorage.getItem(
-        STORAGE.sessionUtm
+localStorage.getItem(
+  STORAGE.sessionUtm
       );
 
       return stored
@@ -451,6 +511,7 @@
     metadata = {}
   ) {
     try {
+      const session = ensureSession();
       const bot = getBotAssessment();
       const referrer = getReferrerData();
       const utm = getCurrentUtm();
@@ -494,9 +555,8 @@
         screen_height:
           window.innerHeight || null,
 
-        visitor_id: getVisitorId(),
-        session_id: getSessionId(),
-
+visitor_id: getVisitorId(),
+session_id: session.sessionId,
         landing_page: getLandingPage(),
         first_page_of_session:
           isFirstPageOfSession(),
@@ -549,6 +609,13 @@
           response.status,
           await response.text()
         );
+        if (response.ok) {
+  touchSession();
+
+  if (eventType === "page_view") {
+    markFirstPageRecorded();
+  }
+}
       }
     } catch (err) {
       console.warn(
