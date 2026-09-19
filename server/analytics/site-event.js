@@ -717,6 +717,16 @@ export default async function handler(
           1000000
         ),
 
+      /*
+        Tráfego interno:
+        vem do marcador persistente do navegador
+        definido pelo site-analytics.js.
+      */
+      is_internal_traffic:
+        cleanBoolean(
+          body.is_internal_traffic
+        ) === true,
+
       session_started_at:
         cleanTimestamp(
           body.session_started_at
@@ -830,6 +840,7 @@ export default async function handler(
           "first_page_of_session",
           "is_returning_visitor",
           "visitor_visit_number",
+          "is_internal_traffic",
           "referrer_source",
           "device_type",
           "browser_name",

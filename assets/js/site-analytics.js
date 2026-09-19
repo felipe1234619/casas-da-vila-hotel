@@ -1,179 +1,202 @@
 (function () {
-const SESSION_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutos
+  const SESSION_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutos
 
-const STORAGE = {
-  visitorId: "cdv_visitor_id",
-  visitCount: "cdv_visit_count",
+  const STORAGE = {
+    visitorId: "cdv_visitor_id",
+    visitCount: "cdv_visit_count",
+    internalTraffic: "cdv_internal_traffic",
 
-  sessionId: "cdv_session_id",
-  sessionLandingPage: "cdv_session_landing_page",
-  sessionStartedAt: "cdv_session_started_at",
-  sessionLastActivity: "cdv_session_last_activity",
-  sessionFirstPageRecorded: "cdv_session_first_page_recorded",
+    sessionId: "cdv_session_id",
+    sessionLandingPage: "cdv_session_landing_page",
+    sessionStartedAt: "cdv_session_started_at",
+    sessionLastActivity: "cdv_session_last_activity",
+    sessionFirstPageRecorded: "cdv_session_first_page_recorded",
 
-  sessionUtm: "cdv_session_utm"
-};
-
-function createId() {
-  return typeof crypto !== "undefined" && crypto.randomUUID
-    ? crypto.randomUUID()
-    : String(Date.now()) + Math.random().toString(16).slice(2);
-}
-
-function getVisitorId() {
-  let value = localStorage.getItem(STORAGE.visitorId);
-
-  if (!value) {
-    value = createId();
-    localStorage.setItem(STORAGE.visitorId, value);
-  }
-
-  return value;
-}
-
-function getVisitNumber() {
-  return Number(
-    localStorage.getItem(STORAGE.visitCount) || 0
-  );
-}
-
-function sessionHasExpired() {
-  const lastActivity = Number(
-    localStorage.getItem(STORAGE.sessionLastActivity) || 0
-  );
-
-  if (!lastActivity) {
-    return true;
-  }
-
-  return Date.now() - lastActivity > SESSION_TIMEOUT_MS;
-}
-
-function createNewSession() {
-  const sessionId = createId();
-
-  const previousVisits = Number(
-    localStorage.getItem(STORAGE.visitCount) || 0
-  );
-
-  const visitNumber = previousVisits + 1;
-
-  localStorage.setItem(
-    STORAGE.visitCount,
-    String(visitNumber)
-  );
-
-  localStorage.setItem(
-    STORAGE.sessionId,
-    sessionId
-  );
-
-  localStorage.setItem(
-    STORAGE.sessionLandingPage,
-    window.location.pathname
-  );
-
-  localStorage.setItem(
-    STORAGE.sessionStartedAt,
-    new Date().toISOString()
-  );
-
-  localStorage.setItem(
-    STORAGE.sessionLastActivity,
-    String(Date.now())
-  );
-
-  localStorage.removeItem(
-    STORAGE.sessionFirstPageRecorded
-  );
-
-  /*
-    A nova sessão também deve começar com
-    sua própria atribuição UTM.
-  */
-  localStorage.removeItem(
-    STORAGE.sessionUtm
-  );
-
-  return {
-    sessionId,
-    visitNumber,
-    isNewSession: true
+    sessionUtm: "cdv_session_utm"
   };
-}
 
-function ensureSession() {
-  const existingSessionId =
-    localStorage.getItem(STORAGE.sessionId);
-
-  if (
-    !existingSessionId ||
-    sessionHasExpired()
-  ) {
-    return createNewSession();
+  function createId() {
+    return typeof crypto !== "undefined" && crypto.randomUUID
+      ? crypto.randomUUID()
+      : String(Date.now()) + Math.random().toString(16).slice(2);
   }
 
-  return {
-    sessionId: existingSessionId,
-    visitNumber: Number(
-      localStorage.getItem(STORAGE.visitCount) || 1
-    ),
-    isNewSession: false
-  };
-}
+  function getVisitorId() {
+    let value = localStorage.getItem(STORAGE.visitorId);
 
-function getSessionId() {
-  return ensureSession().sessionId;
-}
+    if (!value) {
+      value = createId();
+      localStorage.setItem(STORAGE.visitorId, value);
+    }
 
-function getLandingPage() {
-  ensureSession();
+    return value;
+  }
 
-  return (
-    localStorage.getItem(
-      STORAGE.sessionLandingPage
-    ) || window.location.pathname
-  );
-}
+  function getVisitNumber() {
+    return Number(
+      localStorage.getItem(STORAGE.visitCount) || 0
+    );
+  }
 
-function getSessionStartedAt() {
-  ensureSession();
+  function isInternalTraffic() {
+    return (
+      localStorage.getItem(STORAGE.internalTraffic) === "true"
+    );
+  }
 
-  return (
-    localStorage.getItem(
-      STORAGE.sessionStartedAt
-    ) || new Date().toISOString()
-  );
-}
+  function setInternalTraffic(enabled = true) {
+    if (enabled) {
+      localStorage.setItem(
+        STORAGE.internalTraffic,
+        "true"
+      );
+    } else {
+      localStorage.removeItem(
+        STORAGE.internalTraffic
+      );
+    }
 
-function isReturningVisitor() {
-  return getVisitNumber() > 1;
-}
+    return isInternalTraffic();
+  }
 
-function isFirstPageOfSession() {
-  const sessionId = getSessionId();
+  function sessionHasExpired() {
+    const lastActivity = Number(
+      localStorage.getItem(STORAGE.sessionLastActivity) || 0
+    );
 
-  const recordedSession =
-    localStorage.getItem(
+    if (!lastActivity) {
+      return true;
+    }
+
+    return Date.now() - lastActivity > SESSION_TIMEOUT_MS;
+  }
+
+  function createNewSession() {
+    const sessionId = createId();
+
+    const previousVisits = Number(
+      localStorage.getItem(STORAGE.visitCount) || 0
+    );
+
+    const visitNumber = previousVisits + 1;
+
+    localStorage.setItem(
+      STORAGE.visitCount,
+      String(visitNumber)
+    );
+
+    localStorage.setItem(
+      STORAGE.sessionId,
+      sessionId
+    );
+
+    localStorage.setItem(
+      STORAGE.sessionLandingPage,
+      window.location.pathname
+    );
+
+    localStorage.setItem(
+      STORAGE.sessionStartedAt,
+      new Date().toISOString()
+    );
+
+    localStorage.setItem(
+      STORAGE.sessionLastActivity,
+      String(Date.now())
+    );
+
+    localStorage.removeItem(
       STORAGE.sessionFirstPageRecorded
     );
 
-  return recordedSession !== sessionId;
-}
+    /*
+      A nova sessão também deve começar com
+      sua própria atribuição UTM.
+    */
+    localStorage.removeItem(
+      STORAGE.sessionUtm
+    );
 
-function markFirstPageRecorded() {
-  localStorage.setItem(
-    STORAGE.sessionFirstPageRecorded,
-    getSessionId()
-  );
-}
+    return {
+      sessionId,
+      visitNumber,
+      isNewSession: true
+    };
+  }
 
-function touchSession() {
-  localStorage.setItem(
-    STORAGE.sessionLastActivity,
-    String(Date.now())
-  );
-}
+  function ensureSession() {
+    const existingSessionId =
+      localStorage.getItem(STORAGE.sessionId);
+
+    if (
+      !existingSessionId ||
+      sessionHasExpired()
+    ) {
+      return createNewSession();
+    }
+
+    return {
+      sessionId: existingSessionId,
+      visitNumber: Number(
+        localStorage.getItem(STORAGE.visitCount) || 1
+      ),
+      isNewSession: false
+    };
+  }
+
+  function getSessionId() {
+    return ensureSession().sessionId;
+  }
+
+  function getLandingPage() {
+    ensureSession();
+
+    return (
+      localStorage.getItem(
+        STORAGE.sessionLandingPage
+      ) || window.location.pathname
+    );
+  }
+
+  function getSessionStartedAt() {
+    ensureSession();
+
+    return (
+      localStorage.getItem(
+        STORAGE.sessionStartedAt
+      ) || new Date().toISOString()
+    );
+  }
+
+  function isReturningVisitor() {
+    return getVisitNumber() > 1;
+  }
+
+  function isFirstPageOfSession() {
+    const sessionId = getSessionId();
+
+    const recordedSession =
+      localStorage.getItem(
+        STORAGE.sessionFirstPageRecorded
+      );
+
+    return recordedSession !== sessionId;
+  }
+
+  function markFirstPageRecorded() {
+    localStorage.setItem(
+      STORAGE.sessionFirstPageRecorded,
+      getSessionId()
+    );
+  }
+
+  function touchSession() {
+    localStorage.setItem(
+      STORAGE.sessionLastActivity,
+      String(Date.now())
+    );
+  }
+
   function getCurrentUtm() {
     const params = new URLSearchParams(
       window.location.search
@@ -190,17 +213,17 @@ function touchSession() {
     const hasUtm = Object.values(utm).some(Boolean);
 
     if (hasUtm) {
-localStorage.setItem(
-  STORAGE.sessionUtm,
-          JSON.stringify(utm)
+      localStorage.setItem(
+        STORAGE.sessionUtm,
+        JSON.stringify(utm)
       );
 
       return utm;
     }
 
     try {
-localStorage.getItem(
-  STORAGE.sessionUtm
+      const stored = localStorage.getItem(
+        STORAGE.sessionUtm
       );
 
       return stored
@@ -555,9 +578,11 @@ localStorage.getItem(
         screen_height:
           window.innerHeight || null,
 
-visitor_id: getVisitorId(),
-session_id: session.sessionId,
+        visitor_id: getVisitorId(),
+        session_id: session.sessionId,
+
         landing_page: getLandingPage(),
+
         first_page_of_session:
           isFirstPageOfSession(),
 
@@ -566,6 +591,9 @@ session_id: session.sessionId,
 
         visitor_visit_number:
           getVisitNumber(),
+
+        is_internal_traffic:
+          isInternalTraffic(),
 
         session_started_at:
           getSessionStartedAt(),
@@ -609,13 +637,13 @@ session_id: session.sessionId,
           response.status,
           await response.text()
         );
-        if (response.ok) {
-  touchSession();
+        return;
+      }
 
-  if (eventType === "page_view") {
-    markFirstPageRecorded();
-  }
-}
+      touchSession();
+
+      if (eventType === "page_view") {
+        markFirstPageRecorded();
       }
     } catch (err) {
       console.warn(
@@ -784,7 +812,9 @@ session_id: session.sessionId,
     getSessionId,
     getVisitNumber,
     isReturningVisitor,
-    getLandingPage
+    getLandingPage,
+    isInternalTraffic,
+    setInternalTraffic
   };
 
   if (
