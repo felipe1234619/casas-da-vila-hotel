@@ -27,38 +27,6 @@ async function readRawBody(readable) {
   return Buffer.concat(chunks);
 }
 
-async function supabaseInsert(table, payload) {
-  const url = `${process.env.SUPABASE_URL}/rest/v1/${table}`;
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
-      Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
-      'Content-Type': 'application/json',
-      Prefer: 'return=representation'
-    },
-    body: JSON.stringify(payload)
-  });
-
-  const text = await response.text();
-  let data = null;
-
-  try {
-    data = text ? JSON.parse(text) : null;
-  } catch {
-    data = text;
-  }
-
-  if (!response.ok) {
-    throw new Error(
-      `Supabase insert error on ${table}: ${response.status} ${JSON.stringify(data)}`
-    );
-  }
-
-  return data;
-}
-
 async function supabaseUpsert(table, payload, onConflict) {
   const url =
     `${process.env.SUPABASE_URL}/rest/v1/${table}` +
@@ -91,29 +59,6 @@ async function supabaseUpsert(table, payload, onConflict) {
   }
 
   return data;
-}
-
-async function supabaseSelectReservationBySession(sessionId) {
-  const url =
-    `${process.env.SUPABASE_URL}/rest/v1/reservations` +
-    `?stripe_session_id=eq.${encodeURIComponent(sessionId)}` +
-    `&select=id,stripe_session_id`;
-
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: {
-      apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
-      Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`
-    }
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(`Supabase select error: ${response.status} ${JSON.stringify(data)}`);
-  }
-
-  return Array.isArray(data) ? data[0] : null;
 }
 
 function escapeHtml(value = '') {
@@ -682,88 +627,58 @@ export default async function handler(req, res) {
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
-    if (event.type !== 'checkout.session.completed') {
+    if (!['checkout.session.completed', 'checkout.session.async_payment_succeeded'].includes(event.type)) {
       return res.status(200).json({ received: true, ignored: event.type });
     }
 
     const session = event.data.object;
+    if (session.payment_status !== 'paid') {
+      return res.status(200).json({ received: true, ignored: 'payment_not_paid' });
+    }
     const metadata = session.metadata || {};
-
-    if (!session.id) {
-      return res.status(400).send('Missing session id');
+    const holdId = metadata.hold_id;
+    const paymentIntent = typeof session.payment_intent === 'string'
+      ? session.payment_intent : session.payment_intent?.id;
+    if (session.mode !== 'payment' || !/^cs_[A-Za-z0-9_]+$/.test(session.id || '') ||
+        !/^pi_[A-Za-z0-9_]+$/.test(paymentIntent || '') ||
+        !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(holdId || '') ||
+        (session.client_reference_id != null && session.client_reference_id !== holdId) ||
+        !Number.isSafeInteger(session.amount_total) || session.amount_total <= 0 ||
+        typeof session.currency !== 'string' || !/^[a-z]{3}$/.test(session.currency) ||
+        !Number.isSafeInteger(session.created) || session.created <= 0 ||
+        !Number.isFinite(new Date(session.created * 1000).getTime()) ||
+        typeof metadata.booking_reference !== 'string' || !/^CDV-[A-Z0-9]+$/.test(metadata.booking_reference)) {
+      return res.status(400).json({ error: 'Invalid paid checkout session' });
     }
 
-    const existing = await supabaseSelectReservationBySession(session.id);
-    if (existing) {
-      return res.status(200).json({ received: true, duplicate: true });
+    // Only values from the signed Stripe session are financial evidence. The RPC
+    // locks and reads the hold, compares cents/currency, and commits all three writes.
+    const { data: confirmation, error: confirmationError } = await supabaseAdmin.rpc(
+      'confirm_paid_reservation_from_hold', {
+        p_hold_id: holdId,
+        p_stripe_session_id: session.id,
+        p_stripe_payment_intent: paymentIntent,
+        p_paid_amount_cents: session.amount_total,
+        p_currency: session.currency,
+        p_payment_status: session.payment_status,
+        p_booking_reference: metadata.booking_reference,
+        p_session_created_at: new Date(session.created * 1000).toISOString()
+      }
+    );
+    if (confirmationError || !confirmation?.reservation?.id) {
+      // Non-2xx keeps delivery eligible for retry. Persistent conflicts require
+      // operator reconciliation; never acknowledge an unrecorded paid booking.
+      throw new Error(`Paid booking requires reconciliation: ${confirmationError?.message || 'invalid confirmation'}`);
     }
-
-    const amountTotalCents =
-      Number(session.amount_total || 0) ||
-      Number(metadata.amount_total_cents || 0) ||
-      0;
-
-    const nights =
-      Number(metadata.nights || 0) ||
-      Math.max(
-        1,
-        Math.round(
-          (new Date(`${metadata.checkout}T12:00:00`).getTime() -
-            new Date(`${metadata.checkin}T12:00:00`).getTime()) / 86400000
-        )
-      );
-
-    const reservationPayload = {
-      booking_reference: metadata.booking_reference || null,
-      stripe_session_id: session.id,
-      stripe_payment_intent: session.payment_intent || null,
-      status: 'confirmed',
-      unit_slug: metadata.unit_slug,
-      unit_name: metadata.unit_name || null,
-      guest_name: metadata.guest_name,
-      guest_email: metadata.guest_email,
-      guest_phone: metadata.guest_phone || null,
-      checkin: metadata.checkin,
-      checkout: metadata.checkout,
-      guests_count: Number(metadata.guests_count || 1),
-      amount_total: amountTotalCents,
-      currency: session.currency || 'brl',
-      special_requests: metadata.special_requests || null,
-      source: 'stripe'
-    };
-
-    const insertedReservation = await supabaseInsert('reservations', reservationPayload);
-    const reservation = Array.isArray(insertedReservation)
-      ? insertedReservation[0]
-      : insertedReservation;
-
-    await supabaseInsert('availability_blocks', {
-      reservation_id: reservation.id,
-      unit_slug: reservationPayload.unit_slug,
-      start_date: reservationPayload.checkin,
-      end_date: reservationPayload.checkout,
-      block_type: 'reservation',
-      status: 'active'
-    });
-
+    const reservation = confirmation.reservation;
+    if (confirmation.duplicate) {
+      return res.status(200).json({ received: true, duplicate: true, reservation_id: reservation.id });
+    }
     const voucherPayload = {
-      booking_reference:
-        reservationPayload.booking_reference || `CDV-${session.id.slice(-8).toUpperCase()}`,
-      stripe_session_id: session.id,
-      hold_id: metadata.hold_id || null,
-      guest_name: reservationPayload.guest_name,
-      guest_email: reservationPayload.guest_email,
-      guest_phone: reservationPayload.guest_phone,
-      unit_name: reservationPayload.unit_name,
-      unit_slug: reservationPayload.unit_slug,
-      checkin: reservationPayload.checkin,
-      checkout: reservationPayload.checkout,
-      guests_count: reservationPayload.guests_count,
-      nights,
-      amount_total: amountTotalCents,
-      payment_status: session.payment_status || 'paid',
-      locale: metadata.locale || 'pt',
-      special_requests: reservationPayload.special_requests
+      ...reservation,
+      nights: confirmation.nights,
+      payment_status: 'paid',
+      locale: metadata.locale === 'en' ? 'en' : 'pt'
     };
 
     try {

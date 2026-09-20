@@ -1,5 +1,4 @@
 import Stripe from 'stripe';
-import crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -40,23 +39,16 @@ function normalizeUnitName(unitSlug) {
 }
 
 function diffNights(checkin, checkout) {
-  if (!checkin || !checkout) return 1;
+  if (!checkin || !checkout) return NaN;
 
   const [y1, m1, d1] = String(checkin).split('-').map(Number);
   const [y2, m2, d2] = String(checkout).split('-').map(Number);
 
-  const start = new Date(y1, m1 - 1, d1);
-  const end = new Date(y2, m2 - 1, d2);
+  const start = new Date(Date.UTC(y1, m1 - 1, d1));
+  const end = new Date(Date.UTC(y2, m2 - 1, d2));
   const ms = end.getTime() - start.getTime();
 
-  return Math.max(1, Math.round(ms / (1000 * 60 * 60 * 24)));
-}
-
-function sanitizePath(path, fallback) {
-  if (!path || typeof path !== 'string') return fallback;
-  if (!path.startsWith('/')) return fallback;
-  if (path.startsWith('//')) return fallback;
-  return path;
+  return Math.round(ms / (1000 * 60 * 60 * 24));
 }
 
 function buildDefaultSuccessPath({
@@ -104,53 +96,19 @@ function buildDefaultCancelPath({
   return query ? `${base}?${query}` : base;
 }
 
-/**
- * Recebe preço em vários formatos comuns e devolve centavos para o Stripe.
- * Exemplos aceitos:
- * 1759
- * "1759"
- * "1759.00"
- * "1.759"
- * "1.759,00"
- * "R$ 1.759,00"
- */
+// Accept only the decimal representation returned by Postgres / current frontend.
+// Never infer thousands separators, round sub-cent values, or parse currency text.
 function parseAmountToCents(input) {
-  if (input === null || input === undefined || input === '') return 0;
-
-  if (typeof input === 'number') {
-    if (!Number.isFinite(input) || input <= 0) return 0;
-    return Math.round(input * 100);
-  }
-
-  let raw = String(input).trim();
-  if (!raw) return 0;
-
-  raw = raw.replace(/[^\d.,-]/g, '');
-
-  const hasComma = raw.includes(',');
-  const hasDot = raw.includes('.');
-
-  if (hasComma && hasDot) {
-    raw = raw.replace(/\./g, '').replace(',', '.');
-  } else if (hasDot && !hasComma) {
-    const parts = raw.split('.');
-    if (parts.length > 1 && parts[parts.length - 1].length === 3) {
-      raw = raw.replace(/\./g, '');
-    }
-  } else if (hasComma && !hasDot) {
-    raw = raw.replace(',', '.');
-  }
-
-  const value = Number(raw);
-
-  if (!Number.isFinite(value) || value <= 0) return 0;
-
-  return Math.round(value * 100);
+  if (typeof input !== 'string' && typeof input !== 'number') return null;
+  if (String(input).length > 16) return null;
+  const match = /^(0|[1-9]\d*)(?:\.(\d{1,2}))?$/.exec(String(input));
+  if (!match) return null;
+  const cents = BigInt(match[1]) * 100n + BigInt((match[2] || '').padEnd(2, '0'));
+  // reservations.amount_total is int4 in the audited production schema.
+  return cents > 0n && cents <= 2147483647n ? Number(cents) : null;
 }
 
-function makeBookingReference() {
-  return `CDV-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
-}
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -164,51 +122,60 @@ export default async function handler(req, res) {
 
     const body = req.body || {};
 
-    const unitSlug = body.unitSlug || body.unit_slug || '';
-    const unitName = body.unitName || body.unit_name || '';
-    const checkin = body.checkin || body.checkIn || '';
-    const checkout = body.checkout || body.checkOut || '';
-    const guestsCount = Number(body.guestsCount || body.guests_count || body.guests || 1);
-    const guestName = body.guestName || body.guest_name || '';
-    const guestEmail = body.guestEmail || body.guest_email || '';
-    const guestPhone = body.guestPhone || body.guest_phone || '';
-    const specialRequests = body.specialRequests || body.special_requests || '';
-    const amountInput = body.amountTotal ?? body.amount_total ?? 0;
-    const amountTotalCents = parseAmountToCents(amountInput);
-    const currency = (body.currency || 'brl').toLowerCase();
     const holdId = body.holdId || body.hold_id || '';
+    if (typeof holdId !== 'string' || !UUID.test(holdId)) {
+      return res.status(400).json({ error: 'Invalid holdId' });
+    }
+    const { data: hold, error: holdError } = await supabase
+      .from('reservation_holds')
+      .select(`id, unit_id, guest_name, guest_email, guest_phone, check_in, check_out,
+        guests_count, amount_total, currency, status, expires_at, special_requests,
+        unit:units!reservation_holds_unit_id_fkey!inner(id, slug, name, active)`)
+      .eq('id', holdId)
+      .maybeSingle();
+    if (holdError) throw new Error('Unable to validate reservation hold');
+    if (!hold || hold.status !== 'held' || !hold.unit?.active ||
+        !Number.isFinite(Date.parse(hold.expires_at)) || Date.parse(hold.expires_at) <= Date.now()) {
+      return res.status(409).json({ error: 'Hold unavailable or expired' });
+    }
+
+    const requestedGuests = Number(body.guestsCount ?? body.guests_count ?? body.guests);
+    const requestedEmail = String(body.guestEmail || body.guest_email || '').trim().toLowerCase();
+    if ((body.unitSlug || body.unit_slug) !== hold.unit.slug ||
+        (body.checkin || body.checkIn) !== hold.check_in ||
+        (body.checkout || body.checkOut) !== hold.check_out ||
+        !Number.isInteger(requestedGuests) || requestedGuests !== hold.guests_count ||
+        requestedEmail !== hold.guest_email) {
+      return res.status(409).json({ error: 'Booking details do not match hold' });
+    }
+    const amountTotalCents = parseAmountToCents(hold.amount_total);
+    const currency = String(hold.currency || '').toLowerCase();
+    if (amountTotalCents === null || currency !== 'brl') {
+      return res.status(409).json({ error: 'Invalid canonical hold price or currency' });
+    }
+    if (parseAmountToCents(body.amountTotal ?? body.amount_total) !== amountTotalCents ||
+        (body.currency !== undefined && String(body.currency).toLowerCase() !== currency)) {
+      return res.status(409).json({ error: 'Price or currency does not match hold' });
+    }
+
+    const unitSlug = hold.unit.slug;
+    const finalUnitName = hold.unit.name;
+    const checkin = hold.check_in;
+    const checkout = hold.check_out;
+    const finalGuestsCount = hold.guests_count;
+    const guestName = hold.guest_name;
+    const guestEmail = hold.guest_email;
+    const guestPhone = hold.guest_phone || '';
+    const specialRequests = hold.special_requests || '';
+    const nights = diffNights(checkin, checkout);
+    if (!Number.isInteger(nights) || nights < 1) {
+      return res.status(409).json({ error: 'Invalid hold period' });
+    }
     const successPathInput = body.successPath || body.success_path || '';
     const cancelPathInput = body.cancelPath || body.cancel_path || '';
-    const pendingBooking = body.pendingBooking || body.pending_booking || {};
-
-    const isEN =
-      String(successPathInput).startsWith('/en/') ||
-      String(cancelPathInput).startsWith('/en/') ||
-      req.headers.referer?.includes('/en/') ||
-      false;
-
-    if (!unitSlug || !checkin || !checkout || !guestName || !guestEmail || !amountTotalCents) {
-      return res.status(400).json({
-        error: 'Missing required fields',
-        required: [
-          'unitSlug',
-          'checkin',
-          'checkout',
-          'guestName',
-          'guestEmail',
-          'amountTotal'
-        ]
-      });
-    }
-
-    if (!Number.isFinite(amountTotalCents) || amountTotalCents <= 0) {
-      return res.status(400).json({ error: 'Invalid amountTotal' });
-    }
-
-    const finalUnitName = unitName || normalizeUnitName(unitSlug);
-    const finalGuestsCount = Number.isFinite(guestsCount) && guestsCount > 0 ? guestsCount : 1;
-    const nights = diffNights(checkin, checkout);
-    const bookingReference = makeBookingReference();
+    const isEN = String(successPathInput).startsWith('/en/') ||
+      String(cancelPathInput).startsWith('/en/') || req.headers.referer?.includes('/en/') || false;
+    const bookingReference = `CDV-${hold.id.replaceAll('-', '').toUpperCase()}`;
 
     const defaultSuccessPath = buildDefaultSuccessPath({
       isEN,
@@ -229,8 +196,8 @@ export default async function handler(req, res) {
       guestsCount: finalGuestsCount
     });
 
-    const sanitizedSuccessPath = sanitizePath(successPathInput, defaultSuccessPath);
-    const sanitizedCancelPath = sanitizePath(cancelPathInput, defaultCancelPath);
+    const sanitizedSuccessPath = defaultSuccessPath;
+    const sanitizedCancelPath = defaultCancelPath;
 
     const successUrl = absoluteUrl(req, sanitizedSuccessPath);
     const cancelUrl = absoluteUrl(req, sanitizedCancelPath);
@@ -247,24 +214,16 @@ export default async function handler(req, res) {
       guests_count: String(finalGuestsCount),
       nights: String(nights),
       special_requests: specialRequests || '',
-      amount_total_raw: String(amountInput),
+      amount_total_raw: String(hold.amount_total),
       amount_total_cents: String(amountTotalCents),
-      hold_id: holdId || '',
+      hold_id: hold.id,
       success_path: sanitizedSuccessPath,
       locale: isEN ? 'en' : 'pt'
     };
 
-    if (pendingBooking && typeof pendingBooking === 'object') {
-      if (pendingBooking.house) metadata.pending_house = String(pendingBooking.house).slice(0, 500);
-      if (pendingBooking.checkin) metadata.pending_checkin = String(pendingBooking.checkin).slice(0, 100);
-      if (pendingBooking.checkout) metadata.pending_checkout = String(pendingBooking.checkout).slice(0, 100);
-      if (pendingBooking.guests) metadata.pending_guests = String(pendingBooking.guests).slice(0, 100);
-      if (pendingBooking.email) metadata.pending_email = String(pendingBooking.email).slice(0, 500);
-      if (pendingBooking.phone) metadata.pending_phone = String(pendingBooking.phone).slice(0, 100);
-    }
-
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
+      client_reference_id: hold.id,
       customer_email: guestEmail,
       success_url: successUrl,
       cancel_url: cancelUrl,
@@ -284,7 +243,7 @@ export default async function handler(req, res) {
           }
         }
       ]
-    });
+    }, { idempotencyKey: `cdv-checkout-v1-${hold.id}` });
 try {
   const { error: trackingError } = await supabase
     .from('booking_events')
