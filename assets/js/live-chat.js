@@ -1,32 +1,55 @@
 (function () {
-  const CHAT_KEY =
-    "casas_live_chat_session_id";
-
+  const CHAT_KEY = "casas_live_chat_v2";
   const MAX_HISTORY_MESSAGES = 8;
   const POLLING_INTERVAL_MS = 5000;
+  let handoffState = "bot";
+  let storedMessageId = null;
+  let pendingRequest = null;
+  let memorySession = null;
+  const credentials = new Map();
 
-  function getVisitorId() {
-    return (
-      localStorage.getItem(
-        "casas_visitor_id"
-      ) ||
-      localStorage.getItem(
-        "visitor_id"
-      ) ||
-      null
-    );
+  function storageRead(storage, key) {
+    try { return window[storage].getItem(key); } catch { return null; }
   }
-
-  function getSiteSessionId() {
-    return (
-      sessionStorage.getItem(
-        "casas_session_id"
-      ) ||
-      sessionStorage.getItem(
-        "session_id"
-      ) ||
-      null
-    );
+  function storageWrite(storage, key, value) {
+    try { window[storage].setItem(key, value); } catch { /* In-memory chat still works. */ }
+  }
+  const fallbackIdentity = { visitor_id: crypto.randomUUID(), session_id: crypto.randomUUID(), identity_source: "chat" };
+  function identity() {
+    // Read the existing analytics identity without writing/rotating analytics keys.
+    const visitor = storageRead("localStorage", "cdv_visitor_id");
+    const session = storageRead("localStorage", "cdv_session_id");
+    if (visitor && session) return { visitor_id: visitor, session_id: session, identity_source: "analytics" };
+    for (const [storage, key, field] of [["localStorage", "cdv_chat_visitor_id", "visitor_id"], ["sessionStorage", "cdv_chat_session_id", "session_id"]]) {
+      fallbackIdentity[field] = storageRead(storage, key) || fallbackIdentity[field];
+      storageWrite(storage, key, fallbackIdentity[field]);
+    }
+    return fallbackIdentity;
+  }
+  function getVisitorId() { return identity().visitor_id; }
+  function getSiteSessionId() { return identity().session_id; }
+  function getSessionRecord() {
+    let record = memorySession;
+    try { record = JSON.parse(storageRead("localStorage", CHAT_KEY)) || record; } catch { /* Ignore obsolete data. */ }
+    const current = identity();
+    if (record?.id && record?.token) credentials.set(record.id, record);
+    return record?.visitor_id === current.visitor_id && record?.session_id === current.session_id ? record : null;
+  }
+  function chatHeaders(chatId) {
+    const record = chatId ? credentials.get(chatId) : getSessionRecord();
+    return { "Content-Type": "application/json", "x-chat-token": record?.token || "" };
+  }
+  function showHandoff(messagesElement) {
+    const existing = messagesElement.querySelector('[data-handoff-status]');
+    if (existing) existing.remove();
+    if (handoffState === "bot") return;
+    const status = document.createElement("p");
+    status.setAttribute("data-handoff-status", "");
+    status.setAttribute("role", "status");
+    status.textContent = getChatLanguage() === "en"
+      ? (handoffState === "human_active" ? "Our team has taken over this conversation." : "Your request is in the priority queue for our team. This does not guarantee an immediate reply. You can also contact us via WhatsApp.")
+      : (handoffState === "human_active" ? "Nossa equipe assumiu esta conversa." : "Seu pedido está na fila prioritária da equipe. Isso não garante resposta imediata. Você também pode falar conosco pelo WhatsApp.");
+    messagesElement.appendChild(status);
   }
 
   function getChatLanguage() {
@@ -253,97 +276,46 @@
   }
 
   async function createSession() {
-    const existingSessionId =
-      localStorage.getItem(
-        CHAT_KEY
-      );
-
-    if (existingSessionId) {
-      return existingSessionId;
+    let record = getSessionRecord();
+    if (record?.id) { credentials.set(record.id, record); return record.id; }
+    if (!record) {
+      const token = Array.from(crypto.getRandomValues(new Uint8Array(32)), b => b.toString(16).padStart(2, "0")).join("");
+      record = { ...identity(), token };
+      memorySession = record;
+      storageWrite("localStorage", CHAT_KEY, JSON.stringify(record));
     }
-
-    const response =
-      await fetch(
-        "/api/chat-session",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body: JSON.stringify({
-            visitor_id:
-              getVisitorId(),
-
-            session_id:
-              getSiteSessionId(),
-
-            page_path:
-              window.location.pathname,
-
-            page_url:
-              window.location.href,
-
-            language:
-              getChatLanguage()
-          })
-        }
-      );
-
-    const data =
-      await parseJsonResponse(
-        response
-      );
-
-    const chatSessionId =
-      data?.chat_session?.id;
-
-    if (!chatSessionId) {
-      throw new Error(
-        "Chat session ID missing"
-      );
-    }
-
-    localStorage.setItem(
-      CHAT_KEY,
-      chatSessionId
-    );
-
-    return chatSessionId;
+    const response = await fetch("/api/chat-session", {
+      method: "POST", headers: { "Content-Type": "application/json", "x-chat-token": record.token },
+      body: JSON.stringify({ visitor_id: record.visitor_id, session_id: record.session_id, identity_source: record.identity_source, page_path: window.location.pathname })
+    });
+    const data = await parseJsonResponse(response);
+    if (!data?.chat_session?.id) throw new Error("Chat session ID missing");
+    record.id = data.chat_session.id;
+    credentials.set(record.id, record);
+    memorySession = record;
+    storageWrite("localStorage", CHAT_KEY, JSON.stringify(record));
+    return record.id;
   }
 
-  async function saveMessage(
-    chatSessionId,
-    message,
-    sender
-  ) {
-    const response =
-      await fetch(
-        "/api/chat-message",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body: JSON.stringify({
-            chat_session_id:
-              chatSessionId,
-
-            sender,
-
-            message
-          })
-        }
-      );
-
-    return parseJsonResponse(
-      response
-    );
+  async function saveMessage(chatSessionId, message) {
+    // Preserve this key on transport failure so retry cannot duplicate message/alerts.
+    if (!pendingRequest || pendingRequest.message !== message || pendingRequest.chatId !== chatSessionId) {
+      pendingRequest = { message, chatId: chatSessionId, id: crypto.randomUUID() };
+    }
+    const response = await fetch("/api/chat-message", {
+      method: "POST", headers: chatHeaders(chatSessionId),
+      body: JSON.stringify({ chat_session_id: chatSessionId, sender: "visitor", message, request_id: pendingRequest.id })
+    });
+    const data = await parseJsonResponse(response);
+    storedMessageId = data.message.id;
+    handoffState = data.handoff_state;
+    pendingRequest = null;
+    const boundIdentity = credentials.get(chatSessionId);
+    const eventIdentity = { chat_session_id: chatSessionId, visitor_id: boundIdentity?.visitor_id, session_id: boundIdentity?.session_id };
+    if (!data.duplicate) trackChatEvent("chat_message_sent", eventIdentity);
+    if (data.conversation_started) trackChatEvent("chat_conversation_started", eventIdentity);
+    if (data.handoff_requested) trackChatEvent("chat_handoff_requested", eventIdentity);
+    return data;
   }
 
   async function fetchMessages(
@@ -356,6 +328,7 @@
         )}`,
         {
           method: "GET",
+          headers: chatHeaders(chatSessionId),
           cache: "no-store"
         }
       );
@@ -364,6 +337,8 @@
       await parseJsonResponse(
         response
       );
+
+    handoffState = data.handoff_state || "bot";
 
     return Array.isArray(
       data.messages
@@ -401,7 +376,7 @@
             item.sender ===
             "visitor"
               ? ""
-              : `<small class="chatMsgAuthor">Olivia</small>`;
+              : `<small class="chatMsgAuthor">${item.sender === "admin" ? "Casas da Vila" : "Olivia"}</small>`;
 
           return `
             <div class="chatMsg ${cssClass}">
@@ -412,6 +387,7 @@
         })
         .join("");
 
+    showHandoff(messagesElement);
     messagesElement.scrollTop =
       messagesElement.scrollHeight;
   }
@@ -498,41 +474,6 @@
     return wrapper;
   }
 
-  async function ensureWelcomeMessage(
-    chatSessionId,
-    messagesElement
-  ) {
-    const messages =
-      await loadMessages(
-        chatSessionId,
-        messagesElement
-      );
-
-    const hasConciergeMessage =
-      messages.some(
-        (item) =>
-          item.sender ===
-            "admin" ||
-          item.sender ===
-            "assistant"
-      );
-
-    if (hasConciergeMessage) {
-      return messages;
-    }
-
-    await saveMessage(
-      chatSessionId,
-      getChatTexts().welcome,
-      "admin"
-    );
-
-    return loadMessages(
-      chatSessionId,
-      messagesElement
-    );
-  }
-
   function buildOliviaHistory(
     messages
   ) {
@@ -572,10 +513,7 @@
         {
           method: "POST",
 
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
+          headers: chatHeaders(chatSessionId),
 
           body: JSON.stringify({
             sessionId:
@@ -585,6 +523,7 @@
               chatSessionId,
 
             message,
+            message_id: storedMessageId,
 
             history,
 
@@ -613,6 +552,8 @@
       await parseJsonResponse(
         response
       );
+
+    if (data.suppressed) { handoffState = data.handoff_state; return data; }
 
     const answer =
       data?.response ||
@@ -1027,10 +968,7 @@
           ".chatTyping"
         );
 
-      let chatSessionId =
-        localStorage.getItem(
-          CHAT_KEY
-        );
+      let chatSessionId = getSessionRecord()?.id || null;
 
       let poller = null;
       let requestInProgress =
@@ -1068,13 +1006,12 @@
         badge.hidden = true;
 
         try {
-          chatSessionId =
-            await createSession();
-
-          await ensureWelcomeMessage(
-            chatSessionId,
-            messagesElement
-          );
+          chatSessionId = getSessionRecord()?.id || null;
+          if (chatSessionId) await loadMessages(chatSessionId, messagesElement);
+          else {
+            handoffState = "bot";
+            renderMessages([{ sender: "assistant", message: getChatTexts().welcome }], messagesElement);
+          }
 
           clearInterval(poller);
 
@@ -1196,6 +1133,10 @@
               messagesElement
             );
 
+            if (handoffState !== "bot") {
+              showHandoff(messagesElement);
+              return;
+            }
             setTyping(
               typingElement,
               true
@@ -1216,18 +1157,12 @@
                 history
               });
 
-            await saveMessage(
-              chatSessionId,
-              olivia.answer,
-              "admin"
-            );
-
             await loadMessages(
               chatSessionId,
               messagesElement
             );
 
-            trackChatEvent(
+            if (!olivia.suppressed) trackChatEvent(
               "olivia_response",
               {
                 chat_session_id:
@@ -1253,47 +1188,9 @@
               getChatTexts()
                 .unavailable;
 
-            try {
-              if (
-                chatSessionId
-              ) {
-                await saveMessage(
-                  chatSessionId,
-                  fallback,
-                  "admin"
-                );
-
-                await loadMessages(
-                  chatSessionId,
-                  messagesElement
-                );
-              } else {
-                appendTemporaryMessage({
-                  messagesElement,
-                  message:
-                    fallback,
-                  sender: "admin",
-                  temporaryId:
-                    "olivia-error"
-                });
-              }
-            } catch (
-              persistenceError
-            ) {
-              console.warn(
-                "Unable to persist chat fallback:",
-                persistenceError
-              );
-
-              appendTemporaryMessage({
-                messagesElement,
-                message:
-                  fallback,
-                sender: "admin",
-                temporaryId:
-                  "olivia-error"
-              });
-            }
+            // Errors/welcome are UI notices, never persisted as human messages.
+            appendTemporaryMessage({ messagesElement, message: fallback, sender: "admin", temporaryId: "olivia-error" });
+            if (pendingRequest) input.value = message;
 
             trackChatEvent(
               "olivia_error",

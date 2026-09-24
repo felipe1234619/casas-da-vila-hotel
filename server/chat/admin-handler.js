@@ -1,97 +1,37 @@
-import { createClient } from "@supabase/supabase-js";
-
-function getSupabaseClient() {
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!supabaseUrl || !serviceRoleKey) {
-    throw new Error(
-      "Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY"
-    );
-  }
-
-  return createClient(
-    supabaseUrl,
-    serviceRoleKey,
-    {
-      auth: {
-        persistSession: false
-      }
-    }
-  );
-}
+import { db, allMessages, requireAdmin, uuid, fail, safeSession, recordMessage, respondError } from './chat-store.js';
+import { tryAlerts } from './alerts.js';
 
 export default async function handler(req, res) {
-  const token = req.headers["x-admin-token"];
-
-  if (!token || token !== process.env.ADMIN_ANALYTICS_TOKEN) {
-    return res.status(401).json({
-      error: "Unauthorized"
-    });
-  }
-
+  res.setHeader('Cache-Control', 'no-store');
   try {
-    const supabase = getSupabaseClient();
-
-    const {
-      data: sessions,
-      error: sessionsError
-    } = await supabase
-      .from("chat_sessions")
-      .select("*")
-      .order("updated_at", {
-        ascending: false
-      })
-      .limit(50);
-
-    if (sessionsError) {
-      throw sessionsError;
+    requireAdmin(req);
+    const client = db();
+    if (req.method === 'POST') {
+      const body = req.body || {};
+      if (!uuid(body.chat_session_id)) throw fail(400, 'Invalid chat ID');
+      if (body.action === 'reply') {
+        const result = await recordMessage(client, { chatId: body.chat_session_id, requestId: body.request_id, sender: 'admin', message: body.message });
+        return res.status(200).json({ ok: true, ...result });
+      }
+      if (body.action === 'retry_alerts') return res.status(200).json({ ok: true, alerts: await tryAlerts(client, body.chat_session_id) });
+      if (!['claim', 'resume_bot'].includes(body.action)) throw fail(400, 'Invalid action');
+      const { error } = await client.rpc('chat_set_handoff', { p_chat_id: body.chat_session_id, p_state: body.action === 'claim' ? 'human_active' : 'bot' });
+      if (error) throw error;
+      return res.status(200).json({ ok: true });
     }
-
-    const sessionIds = (sessions || []).map(
-      (session) => session.id
-    );
-
-    const fallbackSessionId =
-      "00000000-0000-0000-0000-000000000000";
-
-    const {
-      data: messages,
-      error: messagesError
-    } = await supabase
-      .from("chat_messages")
-      .select("*")
-      .in(
-        "chat_session_id",
-        sessionIds.length
-          ? sessionIds
-          : [fallbackSessionId]
-      )
-      .order("created_at", {
-        ascending: true
-      });
-
-    if (messagesError) {
-      throw messagesError;
-    }
-
-    return res.status(200).json({
-      ok: true,
-      sessions: sessions || [],
-      messages: messages || []
-    });
-  } catch (error) {
-    console.error(
-      "chat-admin error:",
-      error
-    );
-
-    return res.status(500).json({
-      error: "Internal chat admin error",
-      message:
-        process.env.NODE_ENV === "development"
-          ? error?.message || String(error)
-          : undefined
-    });
-  }
+    if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
+    const { data: sessions, error } = await client.from('chat_sessions').select('*').order('updated_at', { ascending: false }).limit(100);
+    if (error) throw error;
+    const ids = sessions.map(s => s.id);
+    if (!ids.length) return res.status(200).json({ ok: true, sessions: [], messages: [], alerts: [] });
+    const [messages, alerts] = await Promise.all([
+      allMessages(client, query => query.in('chat_session_id', ids)),
+      client.from('chat_alerts').select('id,chat_session_id,kind,state,attempts,sent_at,last_error').in('chat_session_id', ids)
+    ]);
+    if (alerts.error) throw alerts.error;
+    // Include legacy conversations only when a visitor actually wrote; never backfill alerts.
+    const real = sessions.filter(s => s.first_visitor_message_at || messages.some(m => m.chat_session_id === s.id && m.sender === 'visitor'));
+    real.sort((a,b) => Number(b.handoff_state === 'requested') - Number(a.handoff_state === 'requested'));
+    return res.status(200).json({ ok: true, sessions: real.map(safeSession), messages: messages.filter(m => real.some(s => s.id === m.chat_session_id)), alerts: alerts.data });
+  } catch (error) { return respondError(res, error); }
 }

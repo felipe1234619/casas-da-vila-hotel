@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+import { db, ownedChat, uuid, fail, recordMessage, respondError } from './chat-store.js';
 import {
   buildConversationContext
 } from "../../engine/state/conversation-context.js";
@@ -30,16 +32,6 @@ import {
 const MAX_MESSAGE_LENGTH = 4000;
 const MAX_HISTORY_MESSAGES = 6;
 const MAX_HISTORY_MESSAGE_LENGTH = 2000;
-
-function generateSessionId() {
-  return [
-    "session",
-    Date.now(),
-    Math.random()
-      .toString(36)
-      .slice(2, 10)
-  ].join("_");
-}
 
 function normalizeText(value) {
   return typeof value === "string"
@@ -332,7 +324,19 @@ export default async function handler(
     const currentSessionId =
       normalizeText(body.sessionId) ||
       normalizeText(body.session_id) ||
-      generateSessionId();
+      "";
+
+    const client = db();
+    const chat = await ownedChat(client, req, currentSessionId);
+    if (!uuid(body.message_id)) throw fail(400, 'Stored visitor message required');
+    const original = await client.from('chat_messages').select('*').eq('id', body.message_id)
+      .eq('chat_session_id', currentSessionId).eq('sender', 'visitor').maybeSingle();
+    if (original.error) throw original.error;
+    if (!original.data || original.data.message !== message) throw fail(400, 'Visitor message mismatch');
+    if (chat.handoff_state !== 'bot') return res.status(200).json({ ok: true, suppressed: true, handoff_state: chat.handoff_state });
+    const priorReply = await client.from('chat_messages').select('*').eq('reply_to', body.message_id).eq('sender', 'assistant').maybeSingle();
+    if (priorReply.error) throw priorReply.error;
+    if (priorReply.data) return res.status(200).json({ ok: true, response: priorReply.data.message, duplicate: true });
 
     const previousState =
       getConversationState(
@@ -541,6 +545,10 @@ export default async function handler(
   );
 }
 
+    const persisted = await recordMessage(client, { chatId: currentSessionId, requestId: randomUUID(),
+      sender: 'assistant', message: completion.text, replyTo: body.message_id });
+    if (persisted.suppressed) return res.status(200).json({ ok: true, ...persisted });
+
     return res.status(200).json({
       ok: true,
 
@@ -551,10 +559,10 @@ export default async function handler(
         currentSessionId,
 
       response:
-        completion.text,
+        persisted.message.message,
 
       message:
-        completion.text,
+        persisted.message.message,
 
       intent,
 
@@ -584,6 +592,7 @@ export default async function handler(
         completion.usage
     });
   } catch (error) {
+    if (error.status) return respondError(res, error);
     console.error(
       "OLIVIA LLM ERROR:",
       {

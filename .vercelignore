@@ -1,3 +1,17 @@
-node_modules/
+node_modules
 .DS_Store
 .vercel/
+# Keep verification code and internal material out of deployment uploads.
+/tests/
+/sql/
+/docs/
+/.live-chat-preview/
+/test-results/
+/playwright-report/
+/.vscode/
+*.dump
+*.backup
+*.log
+*.diff
+*.patch
+.env*

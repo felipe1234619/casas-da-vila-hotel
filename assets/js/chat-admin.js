@@ -1,175 +1,101 @@
 (function () {
-  const $ = (id) => document.getElementById(id);
-
-  let currentToken = "";
-  let lastMessageCount = 0;
-  let poller = null;
-
-  function escapeHtml(str) {
-    return String(str || "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-  function formatTime(value) {
-    if (!value) return "";
-    return new Date(value).toLocaleString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit"
+  const $ = id => document.getElementById(id);
+  let poller;
+  let loading = false;
+  const drafts = new Map();
+  const pendingReplies = new Map();
+  const escapeHtml = value => String(value ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
+  const time = value => value ? new Date(value).toLocaleString('pt-BR') : '—';
+  async function api(body) {
+    const response = await fetch('/api/chat-admin', {
+      method: body ? 'POST' : 'GET', cache: 'no-store',
+      headers: { 'Content-Type': 'application/json', 'x-admin-token': $('adminToken').value.trim() },
+      ...(body ? { body: JSON.stringify(body) } : {})
     });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Falha no atendimento');
+    return data;
   }
-
-  async function loadChats(silent = false) {
-    currentToken = $("adminToken").value.trim();
-
-    if (!currentToken) return;
-
-    const res = await fetch("/api/chat-admin", {
-      headers: { "x-admin-token": currentToken }
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      $("chatSessions").innerHTML =
-        `<p class="empty">Erro: ${escapeHtml(data.error)}</p>`;
-      return;
-    }
-
-    const messages = data.messages || [];
-
-    if (lastMessageCount && messages.length > lastMessageCount && !silent) {
-      document.title = "🔔 Novo chat — Casas da Vila";
-    }
-
-    lastMessageCount = messages.length;
-
-    renderChats(data.sessions || [], messages);
-
-    if ($("chatStatus")) {
-      $("chatStatus").textContent =
-        `● atualizado ${new Date().toLocaleTimeString("pt-BR", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit"
-        })}`;
-    }
+  function errorNotice(error) { $('chatStatus').textContent = `Falha: ${error.message}`; }
+  async function loadChats() {
+    if (loading || !$('adminToken').value.trim()) return;
+    loading = true;
+    try {
+      const data = await api();
+      $('chatStatus').textContent = `● atualizado ${new Date().toLocaleTimeString('pt-BR')}`;
+      render(data);
+    } catch (error) { errorNotice(error); }
+    finally { loading = false; }
   }
-
-  function renderChats(sessions, messages) {
-    const container = $("chatSessions");
-
-    if (!sessions.length) {
-      container.innerHTML =
-        `<p class="empty">Nenhuma conversa encontrada.</p>`;
-      return;
-    }
-
-    container.innerHTML = sessions.map((session) => {
-      const sessionMessages = messages.filter(
-        (m) => m.chat_session_id === session.id
-      );
-
-      const lastMessage = sessionMessages[sessionMessages.length - 1];
-
-      const unreadVisitorMessages = sessionMessages.filter(
-        (m) => m.sender === "visitor" && !m.is_read
-      ).length;
-
-      return `
-        <div class="visitorSessionCard ${unreadVisitorMessages ? "hasUnreadChat" : ""}">
-          <div class="visitorSessionTop">
-            <div>
-              <strong>
-                ${escapeHtml(session.country || "Origem desconhecida")}
-                ${session.city ? " · " + escapeHtml(session.city) : ""}
-              </strong>
-              <small>${escapeHtml(session.page_path || "")}</small>
-            </div>
-
-            <div class="sessionBadges">
-              ${
-                unreadVisitorMessages
-                  ? `<span class="returningBadge">🔔 ${unreadVisitorMessages} nova(s)</span>`
-                  : `<span class="newVisitorBadge">Sem novas</span>`
-              }
-              <span class="scoreBadge">${escapeHtml(session.status || "open")}</span>
-            </div>
-          </div>
-
-          ${
-            lastMessage
-              ? `<p class="panelLead">
-                   Última mensagem: ${formatTime(lastMessage.created_at)}
-                 </p>`
-              : ""
-          }
-
-          <div class="sessionTimeline">
-            ${sessionMessages.map((m) => `
-              <div class="timelineItem">
-                <strong>${m.sender === "admin" ? "Casas da Vila" : "Visitante"}</strong>
-                <span>${escapeHtml(m.message)}</span>
-                <small>${formatTime(m.created_at)}</small>
-              </div>
-            `).join("")}
-          </div>
-
-          <form class="chatReplyForm" data-chat-session-id="${session.id}">
-            <input type="text" placeholder="Responder ao visitante..." required />
-            <button type="submit">Enviar</button>
-          </form>
-        </div>
-      `;
-    }).join("");
-
-    document.querySelectorAll(".chatReplyForm").forEach((form) => {
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const input = form.querySelector("input");
-        const message = input.value.trim();
-        const chatSessionId = form.getAttribute("data-chat-session-id");
-
-        if (!message) return;
-
-        input.value = "";
-
-        await fetch("/api/chat-message", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_session_id: chatSessionId,
-            sender: "admin",
-            message
-          })
-        });
-
-        await loadChats(true);
+  function render({ sessions = [], messages = [], alerts = [] }) {
+    // Keep the actual form node (focus, caret, listeners and pending
+    // request) while replacing only surrounding conversation content.
+    const forms = new Map([...document.querySelectorAll('.chatReplyForm')].map(form => [form.dataset.chat, form]));
+    const active = document.activeElement;
+    const selection = active?.matches('.chatReplyForm input') ? [active.selectionStart, active.selectionEnd] : null;
+    const scroll = [window.scrollX, window.scrollY];
+    $('chatSessions').innerHTML = sessions.length ? sessions.map(session => {
+      const rows = messages.filter(m => m.chat_session_id === session.id);
+      const pending = alerts.filter(a => a.chat_session_id === session.id && a.state !== 'sent');
+      const unread = rows.filter(m => m.sender === 'visitor' && !m.is_read).length;
+      const state = { bot: 'Olivia', requested: 'PRIORIDADE — atendimento solicitado', human_active: 'Atendimento humano' }[session.handoff_state] || 'Legado';
+      return `<div class="visitorSessionCard">
+        <div class="visitorSessionTop"><strong>${escapeHtml(state)}${unread ? ` · ${unread} nova(s)` : ''}</strong><small>${escapeHtml(session.page_path)}</small></div>
+        <p>Visitante: ${escapeHtml(session.visitor_id || 'não registrado')}<br>Sessão: ${escapeHtml(session.session_id || 'não registrada')}</p>
+        <small>Conversa: ${escapeHtml(session.id)} · Primeira mensagem: ${time(session.first_visitor_message_at || rows.find(m => m.sender === 'visitor')?.created_at)}</small>
+        ${pending.length ? `<p role="status">Alertas pendentes: ${pending.map(a => `${escapeHtml(a.kind)} (${escapeHtml(a.state)})`).join(', ')}. “needs_review” exige conferência no Resend antes de qualquer reenvio.</p><button type="button" data-chat="${session.id}" data-action="retry_alerts">Tentar alertas pendentes</button>` : ''}
+        <div class="sessionTimeline">${rows.map(m => `<div class="timelineItem"><strong>${m.sender === 'visitor' ? 'Visitante' : m.sender === 'assistant' ? 'Olivia' : m.request_id ? 'Equipe Casas da Vila' : 'Concierge / legado'}</strong><span>${escapeHtml(m.message)}</span><small>${time(m.created_at)}</small></div>`).join('')}</div>
+        <button type="button" data-chat="${session.id}" data-action="claim">Assumir atendimento</button>
+        <button type="button" data-chat="${session.id}" data-action="resume_bot">Devolver à Olivia</button>
+        <form class="chatReplyForm" data-chat="${session.id}"><input type="text" maxlength="4000" value="${escapeHtml(drafts.get(session.id) || '')}" placeholder="Responder como equipe Casas da Vila" aria-label="Resposta da equipe" required><button type="submit">Enviar e assumir</button></form>
+      </div>`;
+    }).join('') : '<p class="empty">Nenhuma conversa com mensagem de visitante encontrada.</p>';
+    document.querySelectorAll('[data-action]').forEach(button => button.addEventListener('click', async () => {
+      button.disabled = true;
+      try {
+        const data = await api({ action: button.dataset.action, chat_session_id: button.dataset.chat });
+        await loadChats();
+        if (data.alerts?.pending) $('chatStatus').textContent = 'Alerta mantido na fila. Verifique configuração/conectividade de e-mail.';
+      } catch (error) { errorNotice(error); }
+      finally { button.disabled = false; }
+    }));
+    document.querySelectorAll('.chatReplyForm').forEach(form => {
+      const existing = forms.get(form.dataset.chat);
+      if (existing) { form.replaceWith(existing); return; }
+      form.querySelector('input').addEventListener('input', event => drafts.set(form.dataset.chat, event.target.value));
+      form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (form.dataset.busy) return;
+      const input = form.querySelector('input');
+      const message = input.value.trim();
+      if (!message) return;
+      let pending = pendingReplies.get(form.dataset.chat);
+      if (pending?.message !== message) { pending = { id: crypto.randomUUID(), message }; pendingReplies.set(form.dataset.chat, pending); }
+      form.dataset.busy = 'true';
+      form.querySelector('button').disabled = true;
+      let sent = false;
+      try {
+        await api({ action: 'reply', chat_session_id: form.dataset.chat, request_id: pending.id, message });
+        drafts.delete(form.dataset.chat); pendingReplies.delete(form.dataset.chat);
+        input.value = ''; input.blur(); sent = true;
+      } catch (error) { errorNotice(error); }
+      finally { delete form.dataset.busy; form.querySelector('button').disabled = false; }
+      if (sent) await loadChats();
       });
     });
+    if (selection && active.isConnected) {
+      active.focus({ preventScroll: true });
+      active.setSelectionRange(...selection);
+      window.scrollTo(...scroll);
+    }
   }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const savedToken = localStorage.getItem("casas_admin_token");
-    if (savedToken) $("adminToken").value = savedToken;
-
-    $("adminToken").addEventListener("change", () => {
-      localStorage.setItem("casas_admin_token", $("adminToken").value.trim());
-    });
-
-    $("loadChats").addEventListener("click", async () => {
-      localStorage.setItem("casas_admin_token", $("adminToken").value.trim());
-
-      await loadChats(true);
-
-      clearInterval(poller);
-      poller = setInterval(() => loadChats(false), 5000);
+  document.addEventListener('DOMContentLoaded', () => {
+    // Keep the existing admin access convention; never put the token in requests' URLs.
+    $('adminToken').value = localStorage.getItem('casas_admin_token') || '';
+    $('loadChats').addEventListener('click', async () => {
+      localStorage.setItem('casas_admin_token', $('adminToken').value.trim());
+      await loadChats();
+      clearInterval(poller); poller = setInterval(loadChats, 5000);
     });
   });
 })();

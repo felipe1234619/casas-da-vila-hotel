@@ -1,7 +1,15 @@
-node_modules/
+node_modules
 .env
 .env.local
 .env.*
 .DS_Store
 .vercel
 .env*.local
+
+# Local Live Chat preview state and generated test artifacts
+.live-chat-preview/
+/test-results/
+/playwright-report/
+*.dump
+*.backup
+*.log
